@@ -1,0 +1,55 @@
+Asterisk puppet module
+######################
+
+Variants
+########
+
+Multiple variants exist:
+
+  * include asterisk::voip-only
+  
+    VoIP only setup which does not require any specific hardware such as Zaptel card
+  
+  * include asterisk::with-zaptel
+
+    Full setup including Zaptel kernel modules
+
+Types
+#####
+
+  * asterisk::account::sip
+
+    asterisk::account::sip {"1234":
+      ensure  => present,
+      secret  => "blah",
+      context => "incoming"
+    }
+
+    asterisk::account::sip {"1234":
+      ensure => absent
+    }
+
+  * asterisk::context
+
+    asterisk::context {"incoming":
+      ensure => present,
+      source => ...
+    }
+
+    asterisk::context {"incoming":
+      ensure  => present,
+      content => template(...)
+    }
+
+    asterisk::context {"incoming":
+      ensure => absent
+    }
+
+Still not implemented !
+#######################
+
+Types:
+  * asterisk::account::iax
+  * asterisk::account::manager
+  * asterisk::queue
+

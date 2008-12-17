@@ -1,0 +1,34 @@
+[<%= name %>]
+type=<%= account_type %>
+username=<%= name %>
+<% if secret != false %>
+secret=<%= secret %>
+<% end %>
+<% if context != false %>
+context=<%= context %>
+<% end %>
+canreinvite=<%= canreinvite %>
+host=<%= host %>
+insecure=<%= insecure %>
+language=<%= language %>
+nat=<%= nat %>
+qualify=<%= qualify %>
+vmexten=<%= vmexten %>
+<% if callerid != false %>
+callerid=<%= callerid %>
+<% end %>
+<% if calllimit != false %>
+call-limit=<%= calllimit %>
+<% end %>
+<% if callgroup != false %>
+callgroup=<%= callgroup %>
+<% end %>
+<% if mailbox != false %>
+mailbox=<%= mailbox %>
+<% end %>
+<% if md5secret != false %>
+md5secret=<%= md5secret %>
+<% end %>
+<% if pickupgroup != false %>
+pickupgroup=<%= pickupgroup %>
+<% end %>

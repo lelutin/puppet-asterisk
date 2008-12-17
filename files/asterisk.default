@@ -1,0 +1,25 @@
+# This file allows you to alter the configuration of the Asterisk
+# init.d script
+#
+# RUNASTERISK: run asterisk upon boot. Should be set to "yes" once you have
+#              setup your configuration.
+RUNASTERISK=yes
+#
+#
+# AST_REALTIME: if set to anything other than "no", asterisk will run in
+#               real-time priority (pass '-p' to asterisk). un-rem the
+#               following line to disable asterisk from running in real-time
+#               priority
+#AST_REALTIME=yes
+#
+# PARAMS: extra parameters to pass to asterisk
+#         The example here may help you in debugging, but is
+#         *not**intended**for**production**use*.
+#         When you give -G *only* that group will be used,
+#         else all groups of the asterisk user.
+#PARAMS="-D -g -vvv"
+#
+#
+# RUNASTSAFE: run safe_asterisk rather than asterisk (will auto-restart upon
+#             crash)
+#RUNASTSAFE=yes
