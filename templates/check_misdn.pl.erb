@@ -1,0 +1,72 @@
+#!/usr/bin/env perl
+use Net::Telnet;
+use lib "/usr/lib/nagios/plugins";
+use utils qw(%ERRORS);
+use strict;
+
+sub max_status($$){
+  my ($current, $compare) = @_;
+
+  if (($compare eq 'CRITICAL') || ($compare eq 'CRITICAL')) {
+    return 'CRITICAL';
+  } elsif ($compare eq 'OK') {
+    return $current;
+  } elsif ($compare eq 'WARNING') {
+    return 'WARNING';
+  } elsif (($compare eq 'UNKNOWN') && ($current eq 'OK')) {
+    return 'UNKNOWN';
+  } else {
+    return $current;
+  }
+}
+
+my $status = 'OK';
+my $comment;
+my @adapters;
+my $re_l1 = 'Port [0-9]+.*L2Link ([a-z]+) L1Link:([a-z]+) Blocked';
+my $tn = new Net::Telnet(Port => 5038, 
+  Prompt => '/.*[\$%#>] $/',
+  Output_record_separator => '', 
+  Errmode => 'return');
+
+$tn->input_log("/tmp/toto.log");
+$tn->open('127.0.0.1');
+$tn->waitfor('/0\n$/');
+$tn->print("action: login\nusername: nagios\nsecret: <%= password %>\n\n");
+$tn->waitfor("/Authentication accept*/");
+$tn->print("action: command\ncommand: misdn show stacks\n\n");
+$tn->waitfor("/BEGIN STACK_LIST:\n/");
+
+while (my $line = $tn->getline()) {
+  chomp($line);
+  last if $line =~ m/END COMMAND/;
+  push(@adapters, $line);
+}
+$tn->print("action: logoff\n\n");
+
+if (@adapters == 0) {
+  print "WARNING: NO adapters were found!\n";
+  exit $ERRORS{'WARNING'};
+}
+
+for(my $i=0; $i < @adapters; $i++) {
+  my $line = $adapters[$i];
+  if ($line =~ m/$re_l1/i ) {
+    if ($1 == 'UP' and $2 == 'UP') {
+      $status = &max_status($status,'OK');
+      $comment .= "Adapter $i is Ok; ";
+    } elsif($1 != 'UP' and $2 == 'UP') {
+      $status = &max_status($status,'WARNING');
+      $comment .= "L2Link on adapter $i is down; ";
+    } elsif($2 != 'UP' and $1 == 'UP') {
+      $status = &max_status($status,'WARNING');
+      $comment .= "L1Link on adapter $i is down; ";
+    } else {
+      $status = &max_status($status,'CRITICAL');
+      $comment .= "L2Link and L1Link on adapter $i are down; ";
+    }
+  }
+}
+
+print "$status: $comment\n";
+exit $ERRORS{$status};
