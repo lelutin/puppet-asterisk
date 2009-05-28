@@ -33,7 +33,7 @@ class asterisk::with-zaptel inherits asterisk::voip-only {
 
   exec {"m-a-install-zaptel":
     command  => "module-assistant -i -q a-i zaptel",
-    creates  => "/lib/modules/${operatingsystemrelease}/misc/zaptel.ko",
+    creates  => "/lib/modules/${kernelrelease}/misc/zaptel.ko",
     require  => Exec["m-a-update"]
   }
 
