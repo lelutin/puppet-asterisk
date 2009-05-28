@@ -30,11 +30,24 @@ class asterisk::voip-only {
     require  => Package["asterisk"],
   }
 
-
-  file {"/etc/default/asterisk":
-    source => "puppet:///asterisk/asterisk.default",
+  line {"remove RUNASTERISK=no":
+    file => "/etc/default/asterisk",
+    line => "RUNASTERISK=no",
     require => Package["asterisk"],
+    ensure => absent,
   }
+
+  line {"asterisk on boot YES":
+    file => "/etc/default/asterisk",
+    line => "RUNASTERISK=yes",
+    require => [Package["asterisk"], Line["remove RUNASTERISK=no"]],
+    notify => Exec["asterisk-reload"],
+  }
+
+#  file {"/etc/default/asterisk":
+#    source => "puppet:///asterisk/asterisk.default",
+#    require => Package["asterisk"],
+#  }
 
   # Generic .d configuration directory
   define config-dotd () {
