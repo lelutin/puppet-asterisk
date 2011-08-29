@@ -1,6 +1,10 @@
 define asterisk::account::sip (
   $ensure = 'present',
 
+  $username = true,
+  $defaultuser = true,
+  $template_name = false,
+
   $secret  = false,
   $context = false,
 
@@ -18,7 +22,11 @@ define asterisk::account::sip (
   $callgroup = false,
   $mailbox = false,
   $md5secret = false,
-  $pickupgroup = false) {
+  $pickupgroup = false,
+
+  $disallow = [],
+  $allow = [],
+  $dtmfmode = false) {
 
   file {"/etc/asterisk/sip.conf.d/${name}.conf":
     ensure  => $ensure,

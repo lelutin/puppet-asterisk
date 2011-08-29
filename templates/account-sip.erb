@@ -1,19 +1,20 @@
-[<%= name %>]
-type=<%= account_type %>
-username=<%= name %>
+[<%= name %>]<% if template_name != false %>(<%= template_name %>)<% end %>
+<% if account_type != false %>type=<%= account_type %><% end %>
+<% if username != false %>username=<%= name %><% end %>
+<% if defaultuser != false %>defaultuser=<%= defaultuser %><% end %>
 <% if secret != false %>
 secret=<%= secret %>
 <% end %>
 <% if context != false %>
 context=<%= context %>
 <% end %>
-canreinvite=<%= canreinvite %>
-host=<%= host %>
-insecure=<%= insecure %>
-language=<%= language %>
-nat=<%= nat %>
-qualify=<%= qualify %>
-vmexten=<%= vmexten %>
+<% if canreinvite != false %>canreinvite=<%= canreinvite %><% end %>
+<% if host != false %>host=<%= host %><% end%>
+<% if insecure != false %>insecure=<%= insecure %><% end %>
+<% if language != false %>language=<%= language %><% end %>
+<% if nat != false %>nat=<%= nat %><% end %>
+<% if qualify != false %>qualify=<%= qualify %><% end %>
+<% if vmexten != false %>vmexten=<%= vmexten %><% end %>
 <% if callerid != false %>
 callerid=<%= callerid %>
 <% end %>
@@ -32,3 +33,10 @@ md5secret=<%= md5secret %>
 <% if pickupgroup != false %>
 pickupgroup=<%= pickupgroup %>
 <% end %>
+<% for dproto in disallow %>
+allow <%= dproto %>
+<% end %>
+<% for aproto in allow %>
+allow <%= aproto %>
+<% end %>
+<% if dtmfmode != false %>dtmfmode=<%= dtmfmode %><% end %>
