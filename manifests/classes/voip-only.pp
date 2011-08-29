@@ -2,7 +2,6 @@ class asterisk::voip-only {
   package {
     ["asterisk",
 #    "asterisk-app-dtmftotext",
-    "asterisk-prompt-fr",
     "asterisk-sounds-extra",
     "asterisk-dev",
     "asterisk-sounds-main",
@@ -88,3 +87,16 @@ class asterisk::voip-only {
   config-dotd {"/etc/asterisk/queues.conf":}
   config-dotd {"/etc/asterisk/extensions.conf":}
 }
+
+class asterisk::voip-only::french inherits asterisk::voip-only {
+
+  package { "asterisk-prompt-fr": ensure => installed; }
+
+  if ( $operatingsystem == 'debian' ) and ( $lsbdistcodename == 'squeeze' ) {
+    Package["asterisk-prompt-fr"] {
+      name => "asterisk-prompt-fr-armelle",
+    }
+  }
+
+}
+
