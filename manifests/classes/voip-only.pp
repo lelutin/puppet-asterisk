@@ -1,7 +1,7 @@
 class asterisk::voip-only {
   package {
     ["asterisk",
-    "asterisk-app-dtmftotext",
+#    "asterisk-app-dtmftotext",
     "asterisk-prompt-fr",
     "asterisk-sounds-extra",
     "asterisk-dev",
