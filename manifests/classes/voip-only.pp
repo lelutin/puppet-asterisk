@@ -86,6 +86,7 @@ class asterisk::voip-only {
   config-dotd {"/etc/asterisk/manager.conf":}
   config-dotd {"/etc/asterisk/queues.conf":}
   config-dotd {"/etc/asterisk/extensions.conf":}
+  config-dotd {"/etc/asterisk/voicemail.conf":}
 }
 
 class asterisk::voip-only::french inherits asterisk::voip-only {
