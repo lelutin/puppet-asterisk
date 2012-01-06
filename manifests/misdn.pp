@@ -1,5 +1,6 @@
-class asterisk::with-misdn inherits asterisk::voip-only {
+class asterisk::misdn inherits asterisk {
 
+  # ?? forgot to remove a password?
   $password = "Zi2dae9a"
 
   file {"/etc/asterisk/manager.conf.d/nagios.conf":

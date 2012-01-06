@@ -1,4 +1,4 @@
-define asterisk::context (
+define asterisk::extensions::context (
   $ensure  = 'present',
   $source  = false,
   $content = false) {

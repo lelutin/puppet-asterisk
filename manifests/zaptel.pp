@@ -1,4 +1,4 @@
-class asterisk::with-zaptel inherits asterisk::voip-only {
+class asterisk::zaptel inherits asterisk {
   package {
     ["zaptel",
     "zaptel-source",
