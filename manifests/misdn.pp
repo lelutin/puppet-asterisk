@@ -16,7 +16,7 @@ class asterisk::misdn inherits asterisk {
     ensure => present,
     mode => '0755',
     owner => root,
-    group => root,
+    group => 0,
     content => template('asterisk/check_misdn.pl.erb'),
     require => File['/etc/asterisk/manager.conf.d/nagios.conf'],
   }
