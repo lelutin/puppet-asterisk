@@ -17,6 +17,8 @@ define asterisk::account::voicemail (
   }
 
   $real_options = inline_template('<% if options.length -%>|<%= options.keys.collect {|key| value = options[key]; "#{key}=#{value}"}.join(",") -%><% end -%>')
+  # XXX when the line changes, the box definition is duplicated. I need to find
+  # a way to delete the old line first.
   line{"${context}-${name}":
     ensure  => present,
     line    => "${name} => ${password},${user_name},${email},${pager_email}${real_options}",
