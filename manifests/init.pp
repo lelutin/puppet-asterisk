@@ -1,46 +1,45 @@
 class asterisk {
   package {
-    ["asterisk",
-#    "asterisk-app-dtmftotext",
-    "asterisk-sounds-extra",
-    "asterisk-dev",
-    "asterisk-sounds-main",
-    "asterisk-doc"]:
+    ['asterisk',
+    'asterisk-sounds-extra',
+    'asterisk-dev',
+    'asterisk-sounds-main',
+    'asterisk-doc']:
     ensure => installed,
   }
 
-  service {"asterisk":
+  service {'asterisk':
     ensure  => running,
-    require => [Package["asterisk"], User["asterisk"], Group["asterisk"]],
+    require => [Package['asterisk'], User['asterisk'], Group['asterisk']],
   }
 
-  exec {"asterisk-reload":
-    command     => "/etc/init.d/asterisk reload",
+  exec {'asterisk-reload':
+    command     => '/etc/init.d/asterisk reload',
     refreshonly => true,
   }
 
-  user {"asterisk":
+  user {'asterisk':
     ensure   => present,
-    require  => Package["asterisk"],
+    require  => Package['asterisk'],
   }
 
-  group {"asterisk":
+  group {'asterisk':
     ensure   => present,
-    require  => Package["asterisk"],
+    require  => Package['asterisk'],
   }
 
-  line {"remove RUNASTERISK=no":
-    file => "/etc/default/asterisk",
-    line => "RUNASTERISK=no",
-    require => Package["asterisk"],
+  line {'remove RUNASTERISK=no':
     ensure => absent,
+    file => '/etc/default/asterisk',
+    line => 'RUNASTERISK=no',
+    require => Package['asterisk'],
   }
 
-  line {"asterisk on boot YES":
-    file => "/etc/default/asterisk",
-    line => "RUNASTERISK=yes",
-    require => [Package["asterisk"], Line["remove RUNASTERISK=no"]],
-    notify => Exec["asterisk-reload"],
+  line {'asterisk on boot YES':
+    file => '/etc/default/asterisk',
+    line => 'RUNASTERISK=yes',
+    require => [Package['asterisk'], Line['remove RUNASTERISK=no']],
+    notify => Exec['asterisk-reload'],
   }
 
 #  file {"/etc/default/asterisk":

@@ -30,11 +30,11 @@ define asterisk::account::sip (
 
   file {"/etc/asterisk/sip.conf.d/${name}.conf":
     ensure  => $ensure,
-    content => template("asterisk/account-sip.erb"),
-    notify  => Exec["asterisk-reload"],
-    owner   => "root",
-    group   => "asterisk",
-    mode    => "640",
-    require => File["/etc/asterisk/sip.conf.d"],
+    content => template('asterisk/account-sip.erb'),
+    notify  => Exec['asterisk-reload'],
+    owner   => 'root',
+    group   => 'asterisk',
+    mode    => '0640',
+    require => File['/etc/asterisk/sip.conf.d'],
   }
 }
