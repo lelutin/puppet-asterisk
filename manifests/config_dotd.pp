@@ -1,6 +1,7 @@
 # Generic .d configuration directory
-define asterisk::config_dotd () {
-  $dirname = "${name}.d"
+define asterisk::config_dotd (
+  $content = '',
+  $source = '') {
 
   file { $dirname :
     ensure  => directory,
@@ -22,10 +23,23 @@ define asterisk::config_dotd () {
     require => [Package['asterisk'], Group['asterisk']],
   }
 
-  line{"Include ${dirname}":
-    ensure  => present,
-    line    => "#include <${dirname}/*.conf>",
-    file    => $name,
-    require => File[$dirname],
+  if $content != '' {
+    if $source != '' {
+      fail('Please define only one of $content and $source')
+    }
+
+    File[$name] {
+      content => $content,
+    }
+  } else {
+    $filename = inline_template('<%= File.basename(name) -%>')
+    File[$name] {
+      source => $source ? {
+        '' => [ "puppet:///modules/site-asterisk/${filename}.${::fqdn}",
+                "puppet:///modules/site-asterisk/${filename}",
+                "puppet:///modules/asterisk/${filename}"],
+        default => $source,
+      },
+    }
   }
 }
