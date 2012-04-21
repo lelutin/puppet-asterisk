@@ -1,0 +1,1 @@
+register => <%= user -%><%- if ! password.empty? -%>:<%= password -%><%- if ! authuser.empty? -%>:<%= authuser -%><%- end; end -%>@<%= server -%><%- if ! port.empty? -%>:<%= port -%><%- end; if ! extension.empty? -%>/<%= extension -%><%- end -%>
