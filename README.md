@@ -17,20 +17,20 @@ To include french sounds, you can use the following:
 Types
 -----
 
-  * asterisk::extensions::context
+  * asterisk::context::extensions
 
     ```puppet
-    asterisk::extensions::context { "incoming":
+    asterisk::context::extensions { "incoming":
       ensure => present,
       source => "...",
     }
 
-    asterisk::extensions::context { "incoming":
+    asterisk::context::extensions { "incoming":
       ensure  => present,
       content => template(...),
     }
 
-    asterisk::extensions::context { "incoming":
+    asterisk::context::extensions { "incoming":
       ensure => absent,
     }
     ```
@@ -65,6 +65,49 @@ Types
     }
     ```
 
+  * asterisk::registry::sip
+
+    ```puppet
+    asterisk::registry::sip { 'providerX':
+      server => 'sip.providerX.com',
+      user => 'doyoufindme',
+    }
+    ```
+
+    Password, authuser, port number and extension are optional parameters. If
+    you define authuser, you must specify a password.
+
+    ```puppet
+    asterisk::registry::sip { 'friends_home':
+      server => 'home.friend.com',
+      port => '8888',
+      user => 'me',
+      password => 'myselfandI',
+      authuser => 'you',
+      extension => 'whatsupfriend',
+    }
+    ```
+
+  * asterisk::context::iax
+
+    This class works similarly to the asterisk::context::extensions class.
+
+    ```puppet
+    asterisk::context::iax { '5551234567':
+      source => 'puppet:///modules/site-asterisk/5551234567',
+    }
+    ```
+
+  * asterisk::registry::iax
+
+    ```puppet
+    asterisk::registry::iax { 'providerX':
+      server => 'iax.providerX.com',
+      user => 'doyoufindme',
+      pass => 'attractive?',
+    }
+    ```
+
   * asterisk::context::voicemail
 
     ```puppet
@@ -95,7 +138,6 @@ Still not implemented !
 
 Types:
 
-  * `asterisk::context::iax`
   * `asterisk::context::manager`
   * `asterisk::queue`
 
