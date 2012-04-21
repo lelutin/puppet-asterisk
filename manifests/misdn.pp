@@ -1,7 +1,4 @@
-class asterisk::misdn inherits asterisk {
-
-  # ?? forgot to remove a password?
-  $password = 'Zi2dae9a'
+class asterisk::misdn ($password) inherits asterisk {
 
   file {'/etc/asterisk/manager.conf.d/nagios.conf':
     ensure => present,
