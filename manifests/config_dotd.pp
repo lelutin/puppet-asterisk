@@ -27,6 +27,7 @@ define asterisk::config_dotd (
     group => 'asterisk',
     mode => '0640',
     require => [Package['asterisk'], Group['asterisk']],
+    notify => Exec['asterisk-reload'],
   }
 
   if $content != '' {
