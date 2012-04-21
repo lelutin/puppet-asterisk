@@ -28,13 +28,10 @@ define asterisk::account::sip (
   $allow = [],
   $dtmfmode = false) {
 
-  file {"/etc/asterisk/sip.conf.d/${name}.conf":
+  asterisk::dotd_file {"sip_${name}.conf":
     ensure  => $ensure,
+    dotd_dir => 'sip.conf.d',
     content => template('asterisk/account-sip.erb'),
-    notify  => Exec['asterisk-reload'],
-    owner   => 'root',
-    group   => 'asterisk',
-    mode    => '0640',
-    require => File['/etc/asterisk/sip.conf.d'],
+    filename => "${name}.conf",
   }
 }

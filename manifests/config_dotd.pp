@@ -1,9 +1,13 @@
 # Generic .d configuration directory
 define asterisk::config_dotd (
+  $additional_paths = [],
   $content = '',
   $source = '') {
 
-  file { $dirname :
+  $dirname = ["${name}.d"]
+  $paths = [$dirname, $additional_paths]
+
+  file { $paths :
     ensure  => directory,
     owner   => 'root',
     group   => 'asterisk',
@@ -15,11 +19,13 @@ define asterisk::config_dotd (
   # [Nov 19 16:09:48] ERROR[3364] config.c: *********************************************************
   # [Nov 19 16:09:48] ERROR[3364] config.c: *********** YOU SHOULD REALLY READ THIS ERROR ***********
   # [Nov 19 16:09:48] ERROR[3364] config.c: Future versions of Asterisk will treat a #include of a file that does not exist as an error, and will fail to load that configuration file.  Please ensure that the file '/etc/asterisk/iax.conf.d/*.conf' exists, even if it is empty.
-  file {"${dirname}/null.conf":
+  asterisk::config_dotd::nullfile{ $paths : }
+
+  file { $name :
     ensure  => present,
-    owner   => 'root',
-    group   => 'asterisk',
-    mode    => '0640',
+    owner => 'root',
+    group => 'asterisk',
+    mode => '0640',
     require => [Package['asterisk'], Group['asterisk']],
   }
 
