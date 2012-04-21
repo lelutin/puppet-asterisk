@@ -35,16 +35,16 @@ Types
     }
     ```
 
-  * asterisk::account::sip
+  * asterisk::context::sip
 
     ```puppet
-    asterisk::account::sip { "1234":
+    asterisk::context::sip { "1234":
       ensure  => present,
       secret  => 'blah',
       context => 'incoming',
     }
 
-    asterisk::account::sip { "1234":
+    asterisk::context::sip { "1234":
       ensure => absent,
     }
     ```
@@ -53,22 +53,22 @@ Types
     by giving it a value of '!', or inherit from a template:
 
     ```puppet
-    asterisk::account::sip { "corporate_user":
+    asterisk::context::sip { "corporate_user":
       context => 'corporate',
       type => 'friend',
       # ...
       template_name => '!',
     }
-    asterisk::account::sip { "hakim":
+    asterisk::context::sip { "hakim":
       secret => 'ohnoes!',
       template_name => 'corporate_user',
     }
     ```
 
-  * asterisk::account::voicemail
+  * asterisk::context::voicemail
 
     ```puppet
-    asterisk::account::voicemail { "3000":
+    asterisk::context::voicemail { "3000":
       context => 'some_context',
       password => '5555',
       user_name => 'Bob Bobby',
@@ -83,7 +83,7 @@ Types
     like the following:
 
     ```puppet
-    asterisk::account::voicemail { "3001":
+    asterisk::context::voicemail { "3001":
       context => 'blah',
       password => '112233',
       options => { 'attach' => 'yes', 'delete' => 'yes' },
@@ -95,7 +95,7 @@ Still not implemented !
 
 Types:
 
-  * `asterisk::account::iax`
-  * `asterisk::account::manager`
+  * `asterisk::context::iax`
+  * `asterisk::context::manager`
   * `asterisk::queue`
 

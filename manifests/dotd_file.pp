@@ -1,8 +1,16 @@
 define asterisk::dotd_file (
   $dotd_dir,
-  $content,
+  $source = '',
+  $content = '',
   $ensure = 'present',
   $filename = '') {
+
+  if ($source == '') and ($content == '') {
+    fail('You must supply a value for either one of $source or $content.')
+  }
+  if ($source != '') and ($content != '') {
+    fail('Please provide either a $source or a $content, but not both.')
+  }
 
   $conffile = $filename ? {
     '' => $name,
@@ -11,11 +19,20 @@ define asterisk::dotd_file (
 
   file {"/etc/asterisk/${dotd_dir}/${conffile}":
     ensure  => $ensure,
-    content => $content,
-    notify  => Exec['asterisk-reload'],
     owner   => 'root',
     group   => 'asterisk',
     mode    => '0640',
     require => File["/etc/asterisk/${dotd_dir}"],
+    notify  => Exec['asterisk-reload'],
+  }
+
+  if $content != '' {
+    File["/etc/asterisk/${dotd_dir}/${conffile}"] {
+      content => $content,
+    }
+  } else {
+    File["/etc/asterisk/${dotd_dir}/${conffile}"] {
+      source => $source,
+    }
   }
 }

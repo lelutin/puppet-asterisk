@@ -1,21 +1,21 @@
-define asterisk::extensions::context (
+define asterisk::context::extensions (
   $ensure  = 'present',
   $source  = false,
   $content = false) {
 
   if $source {
-    file {"/etc/asterisk/extensions.conf.d/${name}.conf":
+    asterisk::dotd_file {"${name}.conf":
       ensure  => $ensure,
+      dotd_dir => 'extensions.conf.d',
       source  => $source,
-      require => File['/etc/asterisk/extensions.conf.d'],
       notify  => Exec['asterisk-reload'],
     }
   } else {
     if $content {
-      file {"/etc/asterisk/extensions.conf.d/${name}.conf":
+      asterisk::dotd_file {"${name}.conf":
         ensure  => $ensure,
+        dotd_dir => 'extensions.conf.d',
         content => "[${name}]\n${content}",
-        require => File['/etc/asterisk/extensions.conf.d'],
         notify  => Exec['asterisk-reload'],
       }
     } else {
