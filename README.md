@@ -14,6 +14,18 @@ To include french sounds, you can use the following:
 
   include asterisk::french
 
+Requirements
+------------
+
+In order to use this module, you need to also have the following module:
+
+common : https://labs.riseup.net/code/projects/shared-common
+
+Once that module is placed in your module path, add the following to your
+site.pp (or main manifest) in order to make all the definitions available:
+
+    import 'common'
+
 Types
 -----
 
