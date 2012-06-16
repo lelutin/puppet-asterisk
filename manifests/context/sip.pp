@@ -31,7 +31,7 @@ define asterisk::context::sip (
   asterisk::dotd_file {"sip_${name}.conf":
     ensure  => $ensure,
     dotd_dir => 'sip.conf.d',
-    content => template('asterisk/account/sip.erb'),
+    content => template('asterisk/context/sip.erb'),
     filename => "${name}.conf",
   }
 }
