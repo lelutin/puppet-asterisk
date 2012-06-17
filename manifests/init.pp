@@ -1,4 +1,20 @@
-class asterisk {
+# If you specify $iax_options you lose all default values, so make sure to set
+# them in your hash.
+class asterisk (
+  $iax_options = {
+    disallow => ['lpc10'],
+    allow => ['gsm'],
+    delayreject => 'yes',
+    bandwidth => 'high',
+    jitterbuffer => 'yes',
+    forcejitterbuffer => 'yes',
+    maxjitterbuffer => '1000',
+    maxjitterinterps => '10',
+    resyncthreshold => '1000',
+    trunktimestamps => 'yes',
+    autokill => 'yes',
+  } )
+{
   package {
     ['asterisk',
     'asterisk-sounds-extra',
@@ -42,17 +58,13 @@ class asterisk {
     notify => Exec['asterisk-reload'],
   }
 
-#  file {"/etc/default/asterisk":
-#    source => "puppet:///asterisk/asterisk.default",
-#    require => Package["asterisk"],
-#  }
-
   # Configuration directories
   asterisk::config_dotd {'/etc/asterisk/sip.conf':
     additional_paths => ['/etc/asterisk/sip.registry.d'],
   }
   asterisk::config_dotd {'/etc/asterisk/iax.conf':
     additional_paths => ['/etc/asterisk/iax.registry.d'],
+    content => template('asterisk/iax.conf.erb'),
   }
   asterisk::config_dotd {'/etc/asterisk/manager.conf':}
   asterisk::config_dotd {'/etc/asterisk/queues.conf':}

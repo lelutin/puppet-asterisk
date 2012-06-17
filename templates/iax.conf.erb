@@ -9,15 +9,20 @@
 ; local addresses).
 ;
 [general]
-;bindport=4569			; bindport and bindaddr may be specified
-;                               ; NOTE: bindport must be specified BEFORE
+<% if iax_options.has_key?("bindport") -%>
+bindport=<%= iax_options["bindport"] -%>			; bindport and bindaddr may be specified
+                                ; NOTE: bindport must be specified BEFORE
 				; bindaddr or may be specified on a specific
 				; bindaddr if followed by colon and port
 				;  (e.g. bindaddr=192.168.0.1:4569)
-;bindaddr=192.168.0.1		; more than once to bind to multiple
-;                               ; addresses, but the first will be the 
-;                               ; default
-;
+<% end
+if iax_options.has_key?("bindaddr") -%>
+; more than once to bind to multiple addresses, but the first will be the default
+<%  iax_options["bindaddr"].cycle(1) {|x| -%>
+bindaddr=<%= x %>
+<% }
+end -%>
+<%- if iax_options.has_key?("iaxcompat") -%>
 ; Set iaxcompat to yes if you plan to use layered switches or
 ; some other scenario which may cause some delay when doing a
 ; lookup in the dialplan. It incurs a small performance hit to
@@ -25,46 +30,53 @@
 ; when it receives an IAX DPREQ (Dialplan Request) instead of
 ; blocking while it waits for a response.
 ;
-;iaxcompat=yes
-;
+iaxcompat=<%= iax_options["iaxcompat"] %>
+<% end -%>
+<% if iax_options.has_key?("nochecksums") -%>
 ; Disable UDP checksums (if nochecksums is set, then no checkums will
 ; be calculated/checked on systems supporting this feature)
 ;
-;nochecksums=no
-;
-;
+nochecksums=<%= iax_options["nochecksums"] %>
+<% end -%>
+<% if iax_options.has_key?("delayreject") -%>
 ; For increased security against brute force password attacks
 ; enable "delayreject" which will delay the sending of authentication
-; reject for REGREQ or AUTHREP if there is a password.  
+; reject for REGREQ or AUTHREP if there is a password.
 ;
-delayreject=yes
-;
+delayreject=<%= iax_options["delayreject"] %>
+<% end -%>
+<% if iax_options.has_key?("amaflags") -%>
 ; You may specify a global default AMA flag for iaxtel calls.  It must be
 ; one of 'default', 'omit', 'billing', or 'documentation'.  These flags
 ; are used in the generation of call detail records.
 ;
-;amaflags=default
-;
+amaflags=<%= iax_options["amaflags"] %>
+<% end -%>
+<% if iax_options.has_key?("adsi") -%>
 ; ADSI (Analog Display Services Interface) can be enabled if you have
 ; (or may have) ADSI compatible CPE equipment
 ;
-;adsi=no
-;
+adsi=<%= iax_options["adsi"] %>
+<% end -%>
+<% if iax_options.has_key?("srvlookup") -%>
 ; Perform an SRV lookup on outbound calls
 ;
-;srvlookup=yes
-;
+srvlookup=<%= iax_options["srvlookup"] %>
+<% end -%>
+<% if iax_options.has_key?("accountcode") -%>
 ; You may specify a default account for Call Detail Records in addition
 ; to specifying on a per-user basis
 ;
-;accountcode=lss0101
-;
+accountcode=<%= iax_options["accountcode"] %>
+<% end -%>
+<% if iax_options.has_key?("language") -%>
 ; You may specify a global default language for users. 
 ; Can be specified also on a per-user basis
 ; If omitted, will fallback to english
 ;
-;language=en
-;
+language=<%= iax_options["language"] %>
+<% end -%>
+<% if iax_options.has_key?("mohinterpret") -%>
 ; This option specifies a preference for which music on hold class this channel
 ; should listen to when put on hold if the music class has not been set on the
 ; channel with Set(CHANNEL(musicclass)=whatever) in the dialplan, and the peer
@@ -75,26 +87,34 @@ delayreject=yes
 ;
 ; This option may be specified globally, or on a per-user or per-peer basis.
 ;
-;mohinterpret=default
-;
+mohinterpret=<%= iax_options["mohinterpret"] %>
+<% end -%>
+<% if iax_options.has_key?("mohsuggest") -%>
 ; This option specifies which music on hold class to suggest to the peer channel
 ; when this channel places the peer on hold. It may be specified globally or on
 ; a per-user or per-peer basis.
 ;
-;mohsuggest=default
-;
+mohsuggest=<%= iax_options["mohsuggest"] %>
+<% end -%>
+<% if iax_options.has_key?("bandwidth") %>
 ; Specify bandwidth of low, medium, or high to control which codecs are used
 ; in general.
 ;
-bandwidth=high
-;
+bandwidth=<%= iax_options["bandwidth"] %>
+<% end -%>
 ; You can also fine tune codecs here using "allow" and "disallow" clauses
 ; with specific codecs.  Use "all" to represent all formats.
 ;
-;allow=all          ; same as bandwidth=high
-;disallow=g723.1        ; Hm...  Proprietary, don't use it...
-disallow=lpc10          ; Icky sound quality...  Mr. Roboto.
-;allow=gsm          ; Always allow GSM, it's cool :)
+<% if iax_options.has_key?("disallow")
+  iax_options["disallow"].cycle(1) {|x| -%>
+disallow=<%= x %>
+<% }
+end
+if iax_options.has_key?("allow")
+  iax_options["allow"].cycle(1) {|x| -%>
+allow=<%= x %>
+<% }
+end -%>
 
 ; You can adjust several parameters relating to the jitter buffer.
 ; The jitter buffer's function is to compensate for varying
@@ -163,31 +183,48 @@ disallow=lpc10          ; Icky sound quality...  Mr. Roboto.
 ; size will change by 100 millisecs per second.
 ; [This option is not applicable to, and ignored by the new jitterbuffer implementation]
 
-jitterbuffer=yes
-forcejitterbuffer=yes
-maxjitterbuffer=1000
-maxjitterinterps=10
-resyncthreshold=1000
-;jittertargetextra=40
-;dropcount=2
-;maxexcessbuffer=80
-;minexcessbuffer=10
-;jittershrinkrate=1
+jitterbuffer=<%= iax_options["jitterbuffer"] %>
+forcejitterbuffer=<%= iax_options["forcejitterbuffer"] %>
+maxjitterbuffer=<%= iax_options["maxjitterbuffer"] %>
+maxjitterinterps=<%= iax_options["maxjitterinterps"] %>
+resyncthreshold=<%= iax_options["resyncthreshold"] %>
+<% if iax_options.has_key?("jittertargetextra") -%>
+jittertargetextra=<%= iax_options["jittertargetextra"] %>
+<% end
+if iax_options.has_key?("dropcount") -%>
+dropcount=<%= iax_options["dropcount"] %>
+<% end
+if iax_options.has_key?("maxexcessbuffer") -%>
+maxexcessbuffer=<%= iax_options["maxexcessbuffer"] %>
+<% end
+if iax_options.has_key?("minexcessbuffer") -%>
+minexcessbuffer=<%= iax_options["minexcessbuffer"] %>
+<% end
+if iax_options.has_key?("jittershrinkrate") -%>
+jittershrinkrate=<%= iax_options["jittershrinkrate"] %>
+<% end -%>
 
 ; Minimum and maximum amounts of time that IAX peers can request as
 ; a registration expiration interval (in seconds).
-; minregexpire = 60
-; maxregexpire = 60
-;
+<% if iax_options.has_key?("minregexpire") -%>
+minregexpire=<%= iax_options["minregexpire"] %>
+<% end
+if iax_options.has_key?("maxregexpire") -%>
+maxregexpire=<%= iax_options["minregexpire"] %>
+<% end -%>
+<% if iax_options.has_key?("encryption") -%>
 ; Enable IAX2 encryption.  The default is no.
 ;
-; encryption = yes
-;
+encryption=<%= iax_options["encryption"] %>
+<% end
+if iax_options.has_key?("forceencryption") -%>
 ; Force encryption insures no connection is established unless both sides support
 ; encryption.  By turning this option on, encryption is automatically turned on as well.  
 ;
-; forceencryption = yes
+forceencryption=<%= iax_options["forceencryption"] %>
+<% end -%>
 
+<% if iax_options.has_key?("trunkmaxsize") -%>
 ; This option defines the maximum payload in bytes an IAX2 trunk can support at a given time.
 ; The best way to explain this is to provide an example.  If the maximum number of calls
 ; to be supported is 800, and each call transmits 20ms frames of audio using ulaw
@@ -197,9 +234,11 @@ resyncthreshold=1000
 ; number of channels to be supported this value may need to be raised, but in most cases the
 ; default value is large enough.
 ;
-; trunkmaxsize = 128000 ; defaults to 128000 bytes, which supports up to 800 calls of ulaw
-;                       ; at 20ms a frame.
+trunkmaxsize=<%= iax_options["trunkmaxsize"] -%> ; defaults to 128000 bytes, which supports up to 800 calls of ulaw
+                    ; at 20ms a frame.
+<% end -%>
 
+<% if iax_options.has_key?("trunkmtu") -%>
 ; With a large amount of traffic on IAX2 trunks, there is a risk of bad voice quality when
 ; allowing the Linux system to handle fragmentation of UDP packets. Depending on the size of
 ; each payload, allowing the O/S to handle fragmentation may not be very efficient. This
@@ -208,8 +247,10 @@ resyncthreshold=1000
 ; multiple 1240 byte messages.  Zero disables this functionality and let's the O/S handle
 ; fragmentation.
 ;
-; trunkmtu = 1240 ; trunk data will be sent in 1240 byte messages.
+trunkmtu=<%= iax_options["trunkmtu"] %>
+<% end -%>
 
+<% if iax_options.has_key?("trunkfreq") -%>
 ; trunkfreq sets how frequently trunk messages are sent in milliseconds. This value is 20ms by
 ; default, which means the trunk will send all the date queued to it in the past 20ms.  By
 ; increasing the time between sending trunk messages, the trunk's payload size will increase as
@@ -217,8 +258,10 @@ resyncthreshold=1000
 ; specified.  For example if a trunk's message size grows to the trunkmtu size before 20ms is
 ; reached that message will be sent immediately.
 ;
-; trunkfreq=20     ; How frequently to send trunk msgs (in ms). This is 20ms by default.
+trunkfreq=<%= iax_options["trunkfreq"] -%>     ; How frequently to send trunk msgs (in ms). This is 20ms by default.
+<% end -%>
 
+<% if iax_options.has_key?("trunktimestamps") -%>
 ; Should we send timestamps for the individual sub-frames within trunk frames?
 ; There is a small bandwidth use for these (less than 1kbps/call), but they
 ; ensure that frame timestamps get sent end-to-end properly.  If both ends of
@@ -226,25 +269,35 @@ resyncthreshold=1000
 ; length for your codecs, you can probably suppress these.  The receiver must
 ; also support this feature, although they do not also need to have it enabled.
 ;
-trunktimestamps=yes
+trunktimestamps=<%= iax_options["trunktimestamps"] %>
+<% end -%>
 
 ; IAX helper threads
 
+<% if iax_options.has_key?("iaxthreadcount") -%>
 ; Establishes the number of iax helper threads to handle I/O.
-; iaxthreadcount = 10
+iaxthreadcount==<%= iax_options["iaxthreadcount"] %>
+<% end
+if iax_options.has_key?("iaxmaxthreadcount") -%>
 ; Establishes the number of extra dynamic threads that may be spawned to handle I/O
-; iaxmaxthreadcount = 100
+iaxmaxthreadcount=<%= iax_options["iaxmaxthreadcount"] %>
+<% end -%>
 
-;
+<% if iax_options.has_key?("authdebug") -%>
 ; You can disable authentication debugging to reduce the amount of 
 ; debugging traffic.
 ;
-;authdebug=no
-;
+authdebug=<%= iax_options["authdebug"] %>
+<% end -%>
 ; See qos.tex or Quality of Service section of asterisk.pdf for a description of these parameters.
-;tos=ef
-;cos=5
-;
+<% if iax_options.has_key?("tos") -%>
+tos=<%= iax_options["tos"] %>
+<% end
+if iax_options.has_key?("cos") -%>
+cos=<%= iax_options["cos"] %>
+<% end -%>
+
+<% if iax_options.has_key?("regcontext") -%>
 ; If regcontext is specified, Asterisk will dynamically create and destroy
 ; a NoOp priority 1 extension for a given peer who registers or unregisters
 ; with us.  The actual extension is the 'regexten' parameter of the registering
@@ -252,8 +305,9 @@ trunktimestamps=yes
 ; may be supplied if they are separated by '&'.  Patterns may be used in
 ; regexten.
 ;
-;regcontext=iaxregistrations
-;
+regcontext=<%= iax_options["regcontext"] %>
+<% end -%>
+<% if iax_options.has_key?("autokill") -%>
 ; If we don't get ACK to our NEW within 2000ms, and autokill is set to yes,
 ; then we cancel the whole thing (that's enough time for one retransmission
 ; only).  This is used to keep things from stalling for a long time for a host
@@ -261,9 +315,10 @@ trunktimestamps=yes
 ; addition to 'yes' or 'no' you can also specify a number of milliseconds.
 ; See 'qualify' for individual peers to turn on for just a specific peer.
 ;
-autokill=yes
+autokill=<%= iax_options["autokill"] %>
+<% end -%>
 
-;
+<% if iax_options.has_key?("codecpriority") -%>
 ; codecpriority controls the codec negotiation of an inbound IAX call.
 ; This option is inherited to all user entities.  It can also be defined 
 ; in each user entity separately which will override the setting in general.
@@ -280,8 +335,9 @@ autokill=yes
 ;
 ; The default value is 'host'
 ;
-;codecpriority=host
-;
+codecpriority=<%= iax_options["codecpriority"] %>
+<% end -%>
+<% if iax_options.has_key?("allowfwdownload") -%>
 ; allowfwdownload controls whether this host will serve out firmware to
 ; IAX clients which request it.  This has only been used for the IAXy,
 ; and it has been recently proven that this firmware distribution method
@@ -290,43 +346,55 @@ autokill=yes
 ; you are provisioning IAXys in a secure network, we recommend that you
 ; leave this option to the default, off.
 ;
-;allowfwdownload=yes
+allowfwdownload=<%= iax_options["allowfwdownload"] %>
+<% end -%>
 
-;rtcachefriends=yes	; Cache realtime friends by adding them to the internal list
+<% if iax_options.has_key?("rtcachefriends") -%>
+rtcachefriends=<%= iax_options["rtcachefriends"] -%>	; Cache realtime friends by adding them to the internal list
 			; just like friends added from the config file only on a
 			; as-needed basis? (yes|no)
+<% end -%>
 
-;rtupdate=yes		; Send registry updates to database using realtime? (yes|no)
+<% if iax_options.has_key?("rtupdate") -%>
+rtupdate=<%= iax_options["rtupdate"] -%>		; Send registry updates to database using realtime? (yes|no)
 			; If set to yes, when a IAX2 peer registers successfully,
 			; the ip address, the origination port, the registration period,
 			; and the username of the peer will be set to database via realtime.
 			; If not present, defaults to 'yes'.
+<% end -%>
 
-;rtautoclear=yes	; Auto-Expire friends created on the fly on the same schedule
+<% if iax_options.has_key?("rtautoclear") -%>
+rtautoclear=<%= iax_options["rtautoclear"] -%>	; Auto-Expire friends created on the fly on the same schedule
 			; as if it had just registered? (yes|no|<seconds>)
 			; If set to yes, when the registration expires, the friend will
 			; vanish from the configuration until requested again.
 			; If set to an integer, friends expire within this number of
 			; seconds instead of the registration interval.
+<% end -%>
 
-;rtignoreregexpire=yes	; When reading a peer from Realtime, if the peer's registration
+<% if iax_options.has_key?("rtignoreregexpire") -%>
+rtignoreregexpire=<%= iax_options["rtignoreregexpire"] -%>	; When reading a peer from Realtime, if the peer's registration
 			; has expired based on its registration interval, used the stored
 			; address information regardless. (yes|no)
+<% end -%>
 
-;parkinglot=edvina		; Default parkinglot for IAX peers and users
+<% if iax_options.has_key?("parkinglot") -%>
+parkinglot=<%= iax_options["parkinglot"] -%>		; Default parkinglot for IAX peers and users
 				; This can also be configured per device
 				; Parkinglots are defined in features.conf
+<% end -%>
 
-;
 ; The following two options are used to disable call token validation for the
 ; purposes of interoperability with IAX2 endpoints that do not yet support it.
 ;
+<% if iax_options.has_key?("calltokenoptional") -%>
 ; Call token validation can be set as optional for a single IP address or IP
 ; address range by using the 'calltokenoptional' option. 'calltokenoptional' is
-; only a global option.  
+; only a global option.
 ;
-;calltokenoptional=209.16.236.73/255.255.255.0
-;
+calltokenoptional=<%= iax_options["calltokenoptional"] %>
+<% end
+if iax_options.has_key?("requirecalltoken")-%>
 ; By setting 'requirecalltoken=no', call token validation becomes optional for
 ; that peer/user.  By setting 'requirecalltoken=auto', call token validation 
 ; is optional until a call token supporting peer registers successfully using
@@ -336,8 +404,8 @@ autokill=yes
 ; not in the global scope.
 ; By default, 'requirecalltoken=yes'.
 ;
-;requirecalltoken=no
-;
+requirecalltoken=<%= iax_options["requirecalltoken"] %>
+<% end -%>
 
 ;
 ; These options are used to limit the amount of call numbers allocated to a
@@ -345,14 +413,16 @@ autokill=yes
 ; to read the user guide associated with these options first.  In most cases, the
 ; default values for these options are sufficient.
 ;
+<% if iax_options.has_key?("maxcallnumbers") -%>
 ; The 'maxcallnumbers' option limits the amount of call numbers allowed for each
 ; individual remote IP address.  Once an IP address reaches it's call number
 ; limit, no more new connections are allowed until the previous ones close.  This
 ; option can be used in a peer definition as well, but only takes effect for
 ; the IP of a dynamic peer after it completes registration.
 ;
-;maxcallnumbers=512
-;
+maxcallnumbers=<%= iax_options["maxcallnumbers"] %>
+<% end
+if iax_options.has_key?("maxcallnumbers_nonvalidated")-%>
 ; The 'maxcallnumbers_nonvalidated' is used to set the combined number of call
 ; numbers that can be allocated for connections where call token  validation
 ; has been disabled.  Unlike the 'maxcallnumbers' option, this limit is not
@@ -361,7 +431,8 @@ autokill=yes
 ; limit.  For use cases, see the call token user guide.  This option's 
 ; default value of 8192 should be sufficient in most cases.
 ;
-;maxcallnumbers_nonvalidated=1024
+maxcallnumbers_nonvalidated=<%= iax_options["maxcallnumbers_nonvalidated"] %>
+<% end -%>
 ;
 ; The [callnumberlimits] section allows custom call number limits to be set
 ; for specific IP addresses and IP address ranges.  These limits take precedence
