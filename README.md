@@ -143,6 +143,27 @@ Types
       password => '112233',
       options => { 'attach' => 'yes', 'delete' => 'yes' },
     }
+
+  * `asterisk::context::manager`
+    
+    ```puppet
+    asterisk::context::manager { "nagios":
+      permit => '127.0.0.1/255.255.255.255',
+      secret => 'topsecret1234',
+      read => 'all',
+      write => 'system, call, log, verbose, command, agent, user',
+    }
+    ```
+
+    paranoid configuration, with minimal network access, but the option to run system commands and trigger calls
+
+    ```puppet
+    asterisk::context::manager { "nagios":
+      permit => '127.0.0.1/255.255.255.255',
+      secret => 'topsecret1234',
+      read => 'system,call',
+      write => 'system,call',
+    }
     ```
 
 IAX2 Options
