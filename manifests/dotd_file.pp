@@ -23,7 +23,7 @@ define asterisk::dotd_file (
     group   => 'asterisk',
     mode    => '0640',
     require => File["/etc/asterisk/${dotd_dir}"],
-    notify  => Exec['asterisk-reload'],
+    notify  => Service['asterisk'],
   }
 
   if $content != '' {

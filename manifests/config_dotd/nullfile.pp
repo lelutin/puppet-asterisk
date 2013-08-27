@@ -7,6 +7,6 @@ define asterisk::config_dotd::nullfile () {
     group   => 'asterisk',
     mode    => '0640',
     require => [Package['asterisk'], Group['asterisk'], File[$name]],
-    notify  => Exec['asterisk-reload'],
+    notify  => Service['asterisk'],
   }
 }

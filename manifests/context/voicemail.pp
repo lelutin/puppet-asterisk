@@ -13,7 +13,7 @@ define asterisk::context::voicemail (
     line    => "[${context}]",
     file    => "/etc/asterisk/voicemail.conf.d/${context}.conf",
     require => File['/etc/asterisk/voicemail.conf.d'],
-    notify  => Exec['asterisk-reload'],
+    notify  => Service['asterisk'],
   }
 
   $real_options = inline_template('<% if options.length -%>|<%= options.keys.collect {|key| value = options[key]; "#{key}=#{value}"}.join(",") -%><% end -%>')
@@ -25,6 +25,6 @@ define asterisk::context::voicemail (
     file    => "/etc/asterisk/voicemail.conf.d/${context}.conf",
     require => [File['/etc/asterisk/voicemail.conf.d'],
                 Line["${name}-context-${context}"]],
-    notify  => Exec['asterisk-reload'],
+    notify  => Service['asterisk'],
   }
 }
