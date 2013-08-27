@@ -17,10 +17,8 @@ class asterisk (
 {
   package {
     ['asterisk',
-    'asterisk-sounds-extra',
-    'asterisk-dev',
-    'asterisk-sounds-main',
-    'asterisk-doc']:
+    'asterisk-core-sounds-en-alaw',
+    'asterisk-core-sounds-en-gsm']:
     ensure => installed,
   }
 
