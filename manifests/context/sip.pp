@@ -13,9 +13,9 @@ define asterisk::context::sip (
   $host = 'dynamic',
   $insecure = 'no',
   $language = 'en',
-  $nat = 'no',
-  $qualify = '1000',
-  $vmexten = '*97',
+  $nat = false,
+  $qualify = no,
+  $vmexten = false,
 
   $callerid = false,
   $calllimit = false,
@@ -23,6 +23,9 @@ define asterisk::context::sip (
   $mailbox = false,
   $md5secret = false,
   $pickupgroup = false,
+  
+  $fromdomain = false,
+  $outboundproxy = flase,
 
   $disallow = [],
   $allow = [],

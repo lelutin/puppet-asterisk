@@ -1,13 +1,10 @@
-[<%= name %>]<% if template_name != false %>(<%= template_name %>)<% end %>
+[<%= name %>]
+<% if template_name != false %>(<%= template_name %>)<% end %>
 <% if account_type != false %>type=<%= account_type %><% end %>
 <% if username != false %>username=<%= name %><% end %>
 <% if defaultuser != false %>defaultuser=<%= defaultuser %><% end %>
-<% if secret != false %>
-secret=<%= secret %>
-<% end %>
-<% if context != false %>
-context=<%= context %>
-<% end %>
+<% if secret != false %>secret=<%= secret %><% end %>
+<% if context != false %>context=<%= context %><% end %>
 <% if canreinvite != false %>canreinvite=<%= canreinvite %><% end %>
 <% if host != false %>host=<%= host %><% end%>
 <% if insecure != false %>insecure=<%= insecure %><% end %>
@@ -15,28 +12,14 @@ context=<%= context %>
 <% if nat != false %>nat=<%= nat %><% end %>
 <% if qualify != false %>qualify=<%= qualify %><% end %>
 <% if vmexten != false %>vmexten=<%= vmexten %><% end %>
-<% if callerid != false %>
-callerid=<%= callerid %>
-<% end %>
-<% if calllimit != false %>
-call-limit=<%= calllimit %>
-<% end %>
-<% if callgroup != false %>
-callgroup=<%= callgroup %>
-<% end %>
-<% if mailbox != false %>
-mailbox=<%= mailbox %>
-<% end %>
-<% if md5secret != false %>
-md5secret=<%= md5secret %>
-<% end %>
-<% if pickupgroup != false %>
-pickupgroup=<%= pickupgroup %>
-<% end %>
-<% for dproto in disallow %>
-disallow=<%= dproto %>
-<% end %>
-<% for aproto in allow %>
-allow=<%= aproto %>
-<% end %>
+<% if fromdomain != false %>fromdomain=<%= fromdomain %><% end %>
+<% if account_type == 'peer' and outboundproxy != false %>outboundproxy=<%= outboundproxy %><% end %>
+<% if callerid != false %>callerid=<%= callerid %><% end %>
+<% if calllimit != false %>call-limit=<%= calllimit %><% end %>
+<% if callgroup != false %>callgroup=<%= callgroup %><% end %>
+<% if mailbox != false %>mailbox=<%= mailbox %><% end %>
+<% if md5secret != false %>md5secret=<%= md5secret %><% end %>
+<% if pickupgroup != false %>pickupgroup=<%= pickupgroup %><% end %>
+<% for dproto in disallow %>disallow=<%= dproto %><% end %>
+<% for aproto in allow %>allow=<%= aproto %><% end %>
 <% if dtmfmode != false %>dtmfmode=<%= dtmfmode %><% end %>
