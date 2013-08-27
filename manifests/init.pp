@@ -2,8 +2,7 @@
 # them in your hash.
 class asterisk (
   $iax_options = $asterisk::params::iax_options,
-  )
-{
+) inherits asterisk::params {
   package {
     [$package,
     'asterisk-core-sounds-en-alaw',
@@ -18,7 +17,7 @@ class asterisk (
 
   shellvar {'RUNASTERISK':
     ensure  => present,
-    file    => '/etc/default/asterisk',
+    target  => '/etc/default/asterisk',
     value   => 'yes',
     require => Package['asterisk'],
     notify  => Service['asterisk'],
