@@ -2,7 +2,7 @@ define asterisk::context::sip (
   $ensure = 'present',
 
   $username = true,
-  $defaultuser = true,
+  $defaultuser = false,
   $template_name = false,
 
   $secret  = false,
