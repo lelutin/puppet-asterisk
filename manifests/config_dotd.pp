@@ -23,11 +23,11 @@ define asterisk::config_dotd (
 
   file { $name :
     ensure  => present,
-    owner => 'root',
-    group => 'asterisk',
-    mode => '0640',
+    owner   => 'root',
+    group   => 'asterisk',
+    mode    => '0640',
     require => [Package['asterisk'], Group['asterisk']],
-    notify => Exec['asterisk-reload'],
+    notify  => Service['asterisk'],
   }
 
   if $content != '' {
