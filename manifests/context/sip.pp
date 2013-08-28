@@ -25,7 +25,7 @@ define asterisk::context::sip (
   $pickupgroup = false,
   
   $fromdomain = false,
-  $outboundproxy = flase,
+  $outboundproxy = false,
 
   $disallow = [],
   $allow = [],

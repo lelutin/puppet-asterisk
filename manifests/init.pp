@@ -1,6 +1,12 @@
 # If you specify $iax_options you lose all default values, so make sure to set
 # them in your hash.
 class asterisk (
+  $iax = $asterisk::params::iax,
+  $sip = $asterisk::params::sip,
+  $voicemail = $asterisk::params::voicemail,
+  $extentions = $asterisk::params::extentions,
+  $queues = $asterisk::params::queues,
+  $manager = $asterisk::params::manager,
   $iax_options = $asterisk::params::iax_options,
 ) inherits asterisk::params {
   package {
@@ -24,16 +30,28 @@ class asterisk (
   }
 
   # Configuration directories
-  asterisk::config_dotd {'/etc/asterisk/sip.conf':
-    additional_paths => ['/etc/asterisk/sip.registry.d'],
+  if $sip {
+    asterisk::config_dotd {'/etc/asterisk/sip.conf':
+      additional_paths => ['/etc/asterisk/sip.registry.d'],
+    }
   }
-  asterisk::config_dotd {'/etc/asterisk/iax.conf':
-    additional_paths => ['/etc/asterisk/iax.registry.d'],
-    content          => template('asterisk/iax.conf.erb'),
+  if $iax {
+    asterisk::config_dotd {'/etc/asterisk/iax.conf':
+      additional_paths => ['/etc/asterisk/iax.registry.d'],
+      content          => template('asterisk/iax.conf.erb'),
+    }
   }
-  asterisk::config_dotd {'/etc/asterisk/manager.conf':}
-  asterisk::config_dotd {'/etc/asterisk/queues.conf':}
-  asterisk::config_dotd {'/etc/asterisk/extensions.conf':}
-  asterisk::config_dotd {'/etc/asterisk/voicemail.conf':}
+  if $manager {
+    asterisk::config_dotd {'/etc/asterisk/manager.conf':}
+  }
+  if $queues {
+    asterisk::config_dotd {'/etc/asterisk/queues.conf':}
+  }
+  if $extensions {
+    asterisk::config_dotd {'/etc/asterisk/extensions.conf':}
+  }
+  if $voicemail {
+    asterisk::config_dotd {'/etc/asterisk/voicemail.conf':}
+  }
 }
 
