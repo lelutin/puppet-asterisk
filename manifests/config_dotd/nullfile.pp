@@ -6,7 +6,7 @@ define asterisk::config_dotd::nullfile () {
     owner   => 'root',
     group   => 'asterisk',
     mode    => '0640',
-    require => [Package['asterisk'], Group['asterisk'], File[$name]],
+    require => Package['asterisk'],
     notify  => Service['asterisk'],
   }
 }
