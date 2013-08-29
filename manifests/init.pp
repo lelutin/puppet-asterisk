@@ -4,7 +4,7 @@ class asterisk (
   $iax = $asterisk::params::iax,
   $sip = $asterisk::params::sip,
   $voicemail = $asterisk::params::voicemail,
-  $extentions = $asterisk::params::extentions,
+  $extensions = $asterisk::params::extensions,
   $queues = $asterisk::params::queues,
   $manager = $asterisk::params::manager,
   $iax_options = $asterisk::params::iax_options,
@@ -30,27 +30,27 @@ class asterisk (
   }
 
   # Configuration directories
-  if $sip {
+  if $sip == 'enable'{
     asterisk::config_dotd {'/etc/asterisk/sip.conf':
       additional_paths => ['/etc/asterisk/sip.registry.d'],
     }
   }
-  if $iax {
+  if $iax =='enable'{
     asterisk::config_dotd {'/etc/asterisk/iax.conf':
       additional_paths => ['/etc/asterisk/iax.registry.d'],
       content          => template('asterisk/iax.conf.erb'),
     }
   }
-  if $manager {
+  if $manager == 'enable'{
     asterisk::config_dotd {'/etc/asterisk/manager.conf':}
   }
-  if $queues {
+  if $queues == 'enable' {
     asterisk::config_dotd {'/etc/asterisk/queues.conf':}
   }
-  if $extensions {
+  if $extensions == 'enable'{
     asterisk::config_dotd {'/etc/asterisk/extensions.conf':}
   }
-  if $voicemail {
+  if $voicemail == 'enable'{
     asterisk::config_dotd {'/etc/asterisk/voicemail.conf':}
   }
 }
