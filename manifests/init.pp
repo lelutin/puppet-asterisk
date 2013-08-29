@@ -7,10 +7,11 @@ class asterisk (
   $extensions = $asterisk::params::extensions,
   $queues = $asterisk::params::queues,
   $manager = $asterisk::params::manager,
+  $dahdi = $asterisk::params::dahdi,
   $iax_options = $asterisk::params::iax_options,
 ) inherits asterisk::params {
   package {
-    [$package,
+    [$asterisk::params::package,
     'asterisk-core-sounds-en-alaw',
     'asterisk-core-sounds-en-gsm']:
     ensure => installed,
@@ -30,6 +31,9 @@ class asterisk (
   }
 
   # Configuration directories
+  if $dahdi == 'enable'{
+    asterisk::dahdi {}
+  }
   if $sip == 'enable'{
     asterisk::config_dotd {'/etc/asterisk/sip.conf':
       additional_paths => ['/etc/asterisk/sip.registry.d'],

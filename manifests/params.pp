@@ -53,6 +53,7 @@ class asterisk::params {
   $extentions = flase
   $queues = flase
   $manager = flase
+  $dahdi = flase
 
   # iax reasonable defaults
   $iax_options = {

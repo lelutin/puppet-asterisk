@@ -1,4 +1,5 @@
-class asterisk::dahdi inherits asterisk {
+# This Class descripes requirments for the asterisk dahdi module to work
+class asterisk::dahdi {
 
   package {
     ['asterisk-dahdi',
