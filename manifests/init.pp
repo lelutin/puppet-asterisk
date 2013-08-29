@@ -32,7 +32,7 @@ class asterisk (
 
   # Configuration directories
   if $dahdi == 'enable'{
-    asterisk::dahdi {}
+    class { 'asterisk::dahdi':}
   }
   if $sip == 'enable'{
     asterisk::config_dotd {'/etc/asterisk/sip.conf':
