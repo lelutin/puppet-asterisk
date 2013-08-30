@@ -24,7 +24,7 @@ To include french sounds, you can use the following:
     sip        => enable,
     manager    => enable,
     extentions => enable,
-    languages      => ['french','german'],
+    languages      => ['fr','de'],
   }
 ```
 

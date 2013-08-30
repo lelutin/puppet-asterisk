@@ -8,6 +8,7 @@ class asterisk (
   $queues = $asterisk::params::queues,
   $manager = $asterisk::params::manager,
   $dahdi = $asterisk::params::dahdi,
+  $languages = $asterisk::params::languages,
   $iax_options = $asterisk::params::iax_options,
 ) inherits asterisk::params {
   package {
@@ -33,6 +34,9 @@ class asterisk (
   # Configuration directories
   if $dahdi == 'enable'{
     class { 'asterisk::dahdi':}
+  }
+  if $languages != false{
+    asterisk::language {$languages:}
   }
   if $sip == 'enable'{
     asterisk::config_dotd {'/etc/asterisk/sip.conf':
