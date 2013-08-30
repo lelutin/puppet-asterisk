@@ -6,6 +6,7 @@ define asterisk::context::voicemail (
   $email = '',
   $pager_email = '',
   $options = {}) {
+  require asterisk::voicemail
 
   # This is sort of hackish, but without this we'll have collisions.
   line{"${name}-context-${context}":

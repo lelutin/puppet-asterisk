@@ -11,7 +11,7 @@ class asterisk::dahdi {
     ensure => installed
   }
 
-#  User['asterisk'] {
-#    groups => 'dialout',
-#  }
+  User['asterisk'] {
+    groups => 'dialout',
+  }
 }

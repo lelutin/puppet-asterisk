@@ -46,15 +46,6 @@ class asterisk::params {
   # configuration directory
   $confdir = '/etc/asterisk'
 
-  # default futures to enable 
-  $sip = false
-  $iax = false
-  $voicemail = flase
-  $extentions = flase
-  $queues = flase
-  $manager = flase
-  $dahdi = flase
-
   # iax reasonable defaults
   $iax_options = {
     disallow          => ['lpc10'],
@@ -68,7 +59,7 @@ class asterisk::params {
     resyncthreshold   => '1000',
     trunktimestamps   => 'yes',
     autokill          => 'yes',
-  } 
+  }
 
   #### Internal module values
 

@@ -2,6 +2,7 @@ define asterisk::context::iax (
   $ensure  = 'present',
   $source  = false,
   $content = false) {
+  require asterisk::iax
 
   if $source {
     asterisk::dotd_file {"${name}.conf":

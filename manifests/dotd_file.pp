@@ -1,3 +1,4 @@
+# create include files and set thair permissions.
 define asterisk::dotd_file (
   $dotd_dir,
   $source = '',
