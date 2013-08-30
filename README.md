@@ -5,29 +5,40 @@ To install Asterisk on a server, simply use the following:
 
   include asterisk
 
-To install Asterisk and Zaptel kernel modules (NOTE: This is deprecated, Zaptel
-is now DAHDI and we should implement setting up DAHDI instead of Zaptel now):
+This will install a plain version of Asterisk without any extra 
+Futures enabled. To enable any of the extra futures do the following:
 
-  include asterisk::zaptel
+```puppet
+  class { 'asterisk':
+    sip        => enable,
+    manager    => enable,
+    extentions => enable,
+    dahdi      => enable,
+  }
+```
 
 To include french sounds, you can use the following:
 
-  include asterisk::french
+```puppet
+  class { 'asterisk':
+    sip        => enable,
+    manager    => enable,
+    extentions => enable,
+    languages      => ['french','german'],
+  }
+```
 
 Requirements
 ------------
 
-In order to use this module, you need to also have the following module:
+In order to use this module, you need the augeasprovider for shellvar.
 
-common : https://labs.riseup.net/code/projects/shared-common
-
-Once that module is placed in your module path, add the following to your
-site.pp (or main manifest) in order to make all the definitions available:
-
-    import 'common'
+see https://github.com/hercules-team/augeasproviders for details.
 
 Types
 -----
+    Note: The following Types only work when they have been enabled
+          at the invocation of the asterisk module.
 
   * asterisk::context::extensions
 
@@ -337,6 +348,6 @@ Still not implemented !
 
 Types:
 
-  * `asterisk::context::manager`
   * `asterisk::queue`
+  * `asterisk::sip`
 
