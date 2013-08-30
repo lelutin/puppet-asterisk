@@ -1,6 +1,8 @@
 # If you specify $iax_options you lose all default values, so make sure to set
 # them in your hash.
 class asterisk {
+  require asterisk::params
+
   package {
     [$asterisk::params::package,
     'asterisk-core-sounds-en-alaw',
