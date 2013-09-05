@@ -9,22 +9,15 @@ This will install a plain version of Asterisk without any extra
 Futures enabled. To enable any of the extra futures do the following:
 
 ```puppet
-  class { 'asterisk':
-    sip        => enable,
-    manager    => enable,
-    extentions => enable,
-    dahdi      => enable,
-  }
+  include 'asterisk'
+  include 'asterisk::dahdi'
 ```
 
 To include french sounds, you can use the following:
 
 ```puppet
-  class { 'asterisk':
-    sip        => enable,
-    manager    => enable,
-    extentions => enable,
-    languages      => ['fr','de'],
+  class { 'asterisk::language':
+    language      => 'fr',
   }
 ```
 
@@ -37,8 +30,7 @@ see https://github.com/hercules-team/augeasproviders for details.
 
 Types
 -----
-    Note: The following Types only work when they have been enabled
-          at the invocation of the asterisk module.
+    Note: The loading of the folloging types will also create the corresponding config Files.
 
   * asterisk::context::extensions
 
@@ -184,7 +176,7 @@ If you are using the IAX2 protocol, you'll want to set some global
 configuration options. The default values are taken from Debian's default
 iax.conf file.
 
-For passing in settings, you need to send a hash to the `asterisk` class with
+For passing in settings, you need to send a hash to the `asterisk::iax` class with
 the `iax_options` parameter:
 
     $iax_options = {
@@ -192,14 +184,14 @@ the `iax_options` parameter:
         jitterbuffer => 'no',
         forcejitterbuffer => 'no',
     }
-    class { 'asterisk':
+    class { 'asterisk::iax':
         iax_options => $iax_options,
     }
 
 One thing to watch out for, is that when you are giving a hash to the
-`asterisk` class, all the default values are not present anymore! So, you need
+`asterisk::iax` class, all the default values are not present anymore! So, you need
 to define values for all of those that you are not overriding. Here is the
-default hash with the default values:
+default hash with the default values, as defined in params.pp:
 
     $iax_options = {
       disallow => ['lpc10'],
@@ -343,6 +335,48 @@ Here is a complete list of all available options:
   * maxcallnumbers\_nonvalidated: Global maximum amount of call numbers before
     refusing new connections.
 
+SIP Options
+------------
+
+If you are using the SIP protocol, you'll want to set some global
+configuration options. The default values are taken from Debian's default
+sip.conf file.
+
+For passing in settings, you need to send a hash to the `asterisk::sip` class with
+the `sip_options` parameter:
+
+    $sip_options = {
+   	  disallow => ['all'],
+      allow => ['alaw'],
+      udpbindaddr => '10.1.1.30',
+      nat => 'yes',
+      language => 'fr',
+      t38pt_udptl => 'yes',
+    }
+    class { 'asterisk::sip':
+        sip_options => $sip_options,
+    }
+
+One thing to watch out for, is that when you are giving a hash to the
+`asterisk::sip` class, all the default values are not present anymore! So, you need
+to define values for all of those that you are not overriding. Here is the
+default hash with the default values, as defined in params.pp:
+
+  $sip_options = {
+    disallow          => ['all'],
+    allow             => ['alaw'],
+    context           => 'inbound',
+    allowguest        => 'no',
+    allowoverlap      => 'no',
+    udpbindaddr       => '0.0.0.0',
+    tcpenable         => 'no',
+    tcpbindaddr       => '0.0.0.0',
+    srvlookup         => 'yes',
+  }
+
+Here a complete list of all available options, could be added.
+
+
 Still not implemented !
 -----------------------
 
@@ -350,4 +384,5 @@ Types:
 
   * `asterisk::queue`
   * `asterisk::sip`
+  * `asterisk::mwi`  
 
