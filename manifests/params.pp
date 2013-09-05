@@ -61,6 +61,19 @@ class asterisk::params {
     autokill          => 'yes',
   }
 
+  # sip reasonable minimal defaults
+  $sip_options = {
+    disallow          => ['all'],
+    allow             => ['alaw'],
+    context           => 'inbound',
+    allowguest        => 'no',
+    allowoverlap      => 'no',
+    udpbindaddr       => '0.0.0.0',
+    tcpenable         => 'no',
+    tcpbindaddr       => '0.0.0.0',
+    srvlookup         => 'yes',
+  }
+
   #### Internal module values
 
   # packages
