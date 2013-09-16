@@ -1,15 +1,15 @@
 define asterisk::context::voicemail (
-  $ensure = 'present',
+  $ensure      = 'present',
   $context,
   $password,
-  $user_name = '',
-  $email = '',
+  $user_name   = '',
+  $email       = '',
   $pager_email = '',
-  $options = {}) {
+  $options     = {}) {
   require asterisk::voicemail
 
   # This is sort of hackish, but without this we'll have collisions.
-  line{"${name}-context-${context}":
+  file_line{"${name}-context-${context}":
     ensure  => present,
     line    => "[${context}]",
     file    => "/etc/asterisk/voicemail.conf.d/${context}.conf",
@@ -20,7 +20,7 @@ define asterisk::context::voicemail (
   $real_options = inline_template('<% if options.length -%>|<%= options.keys.collect {|key| value = options[key]; "#{key}=#{value}"}.join(",") -%><% end -%>')
   # XXX when the line changes, the box definition is duplicated. I need to find
   # a way to delete the old line first.
-  line{"${context}-${name}":
+  file_line{"${context}-${name}":
     ensure  => present,
     line    => "${name} => ${password},${user_name},${email},${pager_email}${real_options}",
     file    => "/etc/asterisk/voicemail.conf.d/${context}.conf",
