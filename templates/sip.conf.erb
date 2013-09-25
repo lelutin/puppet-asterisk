@@ -87,31 +87,31 @@
 [general]
 <% if @sip_options.has_key?("context") -%>
 context=<%= @sip_options["context"] -%>                 ; Default context for incoming calls
-<% end
-if @sip_options.has_key?("allowguest") -%>
+<% end -%>
+<% if @sip_options.has_key?("allowguest") -%>
 allowguest=<%= @sip_options["allowguest"] -%>              ; Allow or reject guest calls (default is yes)
-<% end
-if @sip_options.has_key?("match_auth_username") -%>
+<% end -%>
+<% if @sip_options.has_key?("match_auth_username") -%>
 match_auth_username=<%= @sip_options["match_auth_username"] -%>        ; if available, match user entry using the
                                 ; 'username' field from the authentication line
                                 ; instead of the From: field.
-<% end
-if @sip_options.has_key?("allowoverlap") -%>
+<% end -%>
+<% if @sip_options.has_key?("allowoverlap") -%>
 allowoverlap=<%= @sip_options["allowoverlap"] -%>                 ; Disable overlap dialing support. (Default is yes)
-<% end
-if @sip_options.has_key?("allowtransfer") -%>
+<% end -%>
+<% if @sip_options.has_key?("allowtransfer") -%>
 allowtransfer=<%= @sip_options["allowtransfer"] -%>               ; Disable all transfers (unless enabled in peers or users)
                                 ; Default is enabled. The Dial() options 't' and 'T' are not
                                 ; related as to whether SIP transfers are allowed or not.
-<% end
-if @sip_options.has_key?("realm") -%>
+<% end -%>
+<% if @sip_options.has_key?("realm") -%>
 realm=<%= @sip_options["realm"] -%>             ; Realm for digest authentication
                                 ; defaults to "asterisk". If you set a system name in
                                 ; asterisk.conf, it defaults to that system name
                                 ; Realms MUST be globally unique according to RFC 3261
                                 ; Set this to your host name or domain name
-<% end
-if @sip_options.has_key?("udpbindaddr") -%>
+<% end -%>
+<% if @sip_options.has_key?("udpbindaddr") -%>
 udpbindaddr=<%= @sip_options["udpbindaddr"] -%>             ; IP address to bind UDP listen socket to (0.0.0.0 binds to all)
                                 ; Optionally add a port number, 192.168.1.1:5062 (default is port 5060)
 <% end -%>
@@ -125,66 +125,66 @@ udpbindaddr=<%= @sip_options["udpbindaddr"] -%>             ; IP address to bind
 ; be reflected in this sample configuration file, as well as in the UPGRADE.txt file.
 ;
 tcpenable=<%= @sip_options["tcpenable"] -%>                    ; Enable server for incoming TCP connections (default is no)
-<% end
-if @sip_options.has_key?("tcpbindaddr") -%>
+<% end -%>
+<% if @sip_options.has_key?("tcpbindaddr") -%>
 tcpbindaddr=<%= @sip_options["tcpbindaddr"] -%>             ; IP address for TCP server to bind to (0.0.0.0 binds to all interfaces)
                                 ; Optionally add a port number, 192.168.1.1:5062 (default is port 5060)
 
-<% end
-if @sip_options.has_key?("tlsenable") -%>
+<% end -%>
+<% if @sip_options.has_key?("tlsenable") -%>
 tlsenable=<%= @sip_options["tlsenable"] -%>                   ; Enable server for incoming TLS (secure) connections (default is no)
-<% end
-if @sip_options.has_key?("tlsbindaddr") -%>
+<% end -%>
+<% if @sip_options.has_key?("tlsbindaddr") -%>
 tlsbindaddr=<%= @sip_options["tlsbindaddr"] -%>            ; IP address for TLS server to bind to (0.0.0.0) binds to all interfaces)
                                 ; Optionally add a port number, 192.168.1.1:5063 (default is port 5061)
                                 ; Remember that the IP address must match the common name (hostname) in the
                                 ; certificate, so you don't want to bind a TLS socket to multiple IP addresses.
                                 ; For details how to construct a certificate for SIP see 
                                 ; http://tools.ietf.org/html/draft-ietf-sip-domain-certs
-<% end
-if @sip_options.has_key?("tlscertfile") -%>
+<% end -%>
+<% if @sip_options.has_key?("tlscertfile") -%>
 tlscertfile=<%= @sip_options["tlscertfile"] -%>       ; Certificate file (*.pem only) to use for TLS connections 
                                 ; default is to look for "asterisk.pem" in current directory
-<% end
-if @sip_options.has_key?("tlscafile") -%>
+<% end -%>
+<% if @sip_options.has_key?("tlscafile") -%>
 
 tlscafile=<%= @sip_options["tlscafile"] -%>
 ;        If the server your connecting to uses a self signed certificate
 ;        you should have their certificate installed here so the code can 
 ;        verify the authenticity of their certificate.
-<% end
-if @sip_options.has_key?("tlscadir") -%>
+<% end -%>
+<% if @sip_options.has_key?("tlscadir") -%>
 tlscadir=<%= @sip_options["tlscadir"] -%>
 ;        A directory full of CA certificates.  The files must be named with 
 ;        the CA subject name hash value. 
 ;        (see man SSL_CTX_load_verify_locations for more info) 
-<% end
-if @sip_options.has_key?("tlsdontverifyserver") -%>
+<% end -%>
+<% if @sip_options.has_key?("tlsdontverifyserver") -%>
 tlsdontverifyserver=<%= @sip_options["tlsdontverifyserver"] -%>
 ;        If set to yes, don't verify the servers certificate when acting as 
 ;        a client.  If you don't have the server's CA certificate you can
 ;        set this and it will connect without requiring tlscafile to be set.
 ;        Default is no.
-<% end
-if @sip_options.has_key?("tlscipher") -%>
+<% end -%>
+<% if @sip_options.has_key?("tlscipher") -%>
 tlscipher=<%= @sip_options["tlscipher"] -%>
 ;        A string specifying which SSL ciphers to use or not use
 ;        A list of valid SSL cipher strings can be found at: 
 ;                http://www.openssl.org/docs/apps/ciphers.html#CIPHER_STRINGS
-<% end
-if @sip_options.has_key?("tcpauthtimeout") -%>
+<% end -%>
+<% if @sip_options.has_key?("tcpauthtimeout") -%>
 tcpauthtimeout=<%= @sip_options["tcpauthtimeout"] -%>            ; tcpauthtimeout specifies the maximum number
 				; of seconds a client has to authenticate.  If
 				; the client does not authenticate beofre this
 				; timeout expires, the client will be
                                 ; disconnected. (default: 30 seconds)
-<% end
-if @sip_options.has_key?("tcpauthlimit") -%>
+<% end -%>
+<% if @sip_options.has_key?("tcpauthlimit") -%>
 tcpauthlimit =<%= @sip_options["tcpauthlimit"] -%>             ; tcpauthlimit specifies the maximum number of
 				; unauthenticated sessions that will be allowed
                                 ; to connect at any given time. (default: 100)
-<% end
-if @sip_options.has_key?("srvlookup") -%>
+<% end -%>
+<% if @sip_options.has_key?("srvlookup") -%>
 srvlookup=<%= @sip_options["srvlookup"] -%>                   ; Enable DNS SRV lookups on outbound calls
                                 ; Note: Asterisk only uses the first host 
                                 ; in SRV records
@@ -194,87 +194,87 @@ srvlookup=<%= @sip_options["srvlookup"] -%>                   ; Enable DNS SRV l
                                 ; Specifying a port in a SIP peer definition or
                                 ; when dialing outbound calls will supress SRV
                                 ; lookups for that peer or call.
-<% end
-if @sip_options.has_key?("pedantic") -%>
+<% end -%>
+<% if @sip_options.has_key?("pedantic") -%>
 pedantic=<%= @sip_options["pedantic"] -%>                   ; Enable checking of tags in headers, 
                                 ; international character conversions in URIs
                                 ; and multiline formatted headers for strict
                                 ; SIP compatibility (defaults to "no")
-<% end
-if @sip_options.has_key?("tos_sip") -%>
+<% end -%>
+<% if @sip_options.has_key?("tos_sip") -%>
 ; See qos.tex or Quality of Service section of asterisk.pdf for a description of these parameters.
 tos_sip=<%= @sip_options["tos_sip"] -%>                    ; Sets TOS for SIP packets.
-<% end
-if @sip_options.has_key?("tos_audio") -%>
+<% end -%>
+<% if @sip_options.has_key?("tos_audio") -%>
 tos_audio=<%= @sip_options["tos_audio"] -%>                   ; Sets TOS for RTP audio packets.
-<% end
-if @sip_options.has_key?("tos_video") -%>
+<% end -%>
+<% if @sip_options.has_key?("tos_video") -%>
 tos_video=<%= @sip_options["tos_video"] -%>                 ; Sets TOS for RTP video packets.
-<% end
-if @sip_options.has_key?("tos_text") -%>
+<% end -%>
+<% if @sip_options.has_key?("tos_text") -%>
 tos_text=<%= @sip_options["tos_text"] -%>                  ; Sets TOS for RTP text packets.
-<% end
-if @sip_options.has_key?("cos_sip") -%>
+<% end -%>
+<% if @sip_options.has_key?("cos_sip") -%>
 cos_sip=<%= @sip_options["cos_sip"] -%>                      ; Sets 802.1p priority for SIP packets.
-<% end
-if @sip_options.has_key?("cos_audio") -%>
+<% end -%>
+<% if @sip_options.has_key?("cos_audio") -%>
 cos_audio=<%= @sip_options["cos_audio"] -%>                    ; Sets 802.1p priority for RTP audio packets.
-<% end
-if @sip_options.has_key?("cos_video") -%>
+<% end -%>
+<% if @sip_options.has_key?("cos_video") -%>
 cos_video=<%= @sip_options["cos_video"] -%>                    ; Sets 802.1p priority for RTP video packets.
-<% end
-if @sip_options.has_key?("cos_text") -%>
+<% end -%>
+<% if @sip_options.has_key?("cos_text") -%>
 cos_text=<%= @sip_options["cos_text"] -%>                     ; Sets 802.1p priority for RTP text packets.
-<% end
-if @sip_options.has_key?("maxexpiry") -%>
+<% end -%>
+<% if @sip_options.has_key?("maxexpiry") -%>
 maxexpiry=<%= @sip_options["maxexpiry"] -%>                 ; Maximum allowed time of incoming registrations
                                 ; and subscriptions (seconds)
-<% end
-if @sip_options.has_key?("minexpiry") -%>
+<% end -%>
+<% if @sip_options.has_key?("minexpiry") -%>
 minexpiry=<%= @sip_options["minexpiry"] -%>                   ; Minimum length of registrations/subscriptions (default 60)
-<% end
-if @sip_options.has_key?("defaultexpiry") -%>
+<% end -%>
+<% if @sip_options.has_key?("defaultexpiry") -%>
 defaultexpiry=<%= @sip_options["defaultexpiry"] -%>              ; Default length of incoming/outgoing registration
-<% end
-if @sip_options.has_key?("mwiexpiry") -%>
+<% end -%>
+<% if @sip_options.has_key?("mwiexpiry") -%>
 mwiexpiry=<%= @sip_options["mwiexpiry"] -%>                 ; Expiry time for outgoing MWI subscriptions
-<% end
-if @sip_options.has_key?("qualifyfreq") -%>
+<% end -%>
+<% if @sip_options.has_key?("qualifyfreq") -%>
 qualifyfreq=<%= @sip_options["qualifyfreq"] -%>                 ; Qualification: How often to check for the 
                                 ; host to be up in seconds
                                 ; Set to low value if you use low timeout for
                                 ; NAT of UDP sessions
-<% end
-if @sip_options.has_key?("qualifygap") -%>
+<% end -%>
+<% if @sip_options.has_key?("qualifygap") -%>
 qualifygap=<%= @sip_options["qualifygap"] -%>			; Number of milliseconds between each group of peers being qualified
-<% end
-if @sip_options.has_key?("qualifypeers") -%>
+<% end -%>
+<% if @sip_options.has_key?("qualifypeers") -%>
 qualifypeers=<%= @sip_options["qualifypeers"] -%>			; Number of peers in a group to be qualified at the same time
-<% end
-if @sip_options.has_key?("notifymimetype") -%>
+<% end -%>
+<% if @sip_options.has_key?("notifymimetype") -%>
 notifymimetype=<%= @sip_options["notifymimetype"] -%>      ; Allow overriding of mime type in MWI NOTIFY
-<% end
-if @sip_options.has_key?("buggymwi") -%>
+<% end -%>
+<% if @sip_options.has_key?("buggymwi") -%>
 buggymwi=<%= @sip_options["buggymwi"] -%>                    ; Cisco SIP firmware doesn't support the MWI RFC
                                 ; fully. Enable this option to not get error messages
                                 ; when sending MWI to phones with this bug.
-<% end
-if @sip_options.has_key?("vmexten") -%>
+<% end -%>
+<% if @sip_options.has_key?("vmexten") -%>
 vmexten=<%= @sip_options["vmexten"] -%>              ; dialplan extension to reach mailbox sets the 
                                 ; Message-Account in the MWI notify message 
                                 ; defaults to "asterisk"
 <% end -%>
 
-<% if @sip_options.has_key?("disallow")
-  @sip_options["disallow"].cycle(1) {|x| -%>
+<% if @sip_options.has_key?("disallow") -%>
+<%   @sip_options["disallow"].each do |x| -%>
 disallow=<%= x %>
-<% }
-end -%>
-<% if @sip_options.has_key?("allow")
-  @sip_options["allow"].cycle(1) {|x| -%>
+<%   end -%>
+<% end -%>
+<% if @sip_options.has_key?("allow") -%>
+<%-  @sip_options["allow"].each do |x| -%>
 allow=<%= x %>
-<% }
-end -%>
+<%   end -%>
+<% end -%>
 
 
 <% if @sip_options.has_key?("mohinterpret") -%>
@@ -286,34 +286,34 @@ end -%>
 ; This option may be specified globally, or on a per-user or per-peer basis.
 ;
 mohinterpret=<%= @sip_options["mohinterpret"] -%>
-<% end
-if @sip_options.has_key?("mohsuggest") -%>
+<% end -%>
+<% if @sip_options.has_key?("mohsuggest") -%>
 ;
 ; This option specifies which music on hold class to suggest to the peer channel
 ; when this channel places the peer on hold. It may be specified globally or on
 ; a per-user or per-peer basis.
 ;
 mohsuggest=<%= @sip_options["mohsuggest"] -%>
-<% end
-if @sip_options.has_key?("parkinglot") -%>
+<% end -%>
+<% if @sip_options.has_key?("parkinglot") -%>
 parkinglot=<%= @sip_options["parkinglot"] -%>               ; Sets the default parking lot for call parking
                                 ; This may also be set for individual users/peers
                                 ; Parkinglots are configured in features.conf
-<% end
-if @sip_options.has_key?("language") -%>
+<% end -%>
+<% if @sip_options.has_key?("language") -%>
 language=<%= @sip_options["language"] -%>                    ; Default language setting for all users/peers
                                 ; This may also be set for individual users/peers
-<% end
-if @sip_options.has_key?("relaxdtmf") -%>
+<% end -%>
+<% if @sip_options.has_key?("relaxdtmf") -%>
 relaxdtmf=<%= @sip_options["relaxdtmf"] -%>                  ; Relax dtmf handling
-<% end
-if @sip_options.has_key?("trustrpid") -%>
+<% end -%>
+<% if @sip_options.has_key?("trustrpid") -%>
 trustrpid = <%= @sip_options["trustrpid"] -%>                 ; If Remote-Party-ID should be trusted
-<% end
-if @sip_options.has_key?("sendrpid") -%>
+<% end -%>
+<% if @sip_options.has_key?("sendrpid") -%>
 sendrpid = <%= @sip_options["sendrpid"] -%>                 ; If Remote-Party-ID should be sent
-<% end
-if @sip_options.has_key?("prematuremedia") -%>
+<% end -%>
+<% if @sip_options.has_key?("prematuremedia") -%>
 prematuremedia=<%= @sip_options["prematuremedia"] -%>		; Some ISDN links send empty media frames before 
 				; the call is in ringing or progress state. The SIP 
 				; channel will then send 183 indicating early media
@@ -321,39 +321,39 @@ prematuremedia=<%= @sip_options["prematuremedia"] -%>		; Some ISDN links send em
 				; Setting this to "no" will stop any media before we have
 				; call progress. Default is "yes".
 
-<% end
-if @sip_options.has_key?("progressinband") -%>
+<% end -%>
+<% if @sip_options.has_key?("progressinband") -%>
 progressinband=<%= @sip_options["progressinband"] -%>           ; If we should generate in-band ringing always
                                 ; use 'never' to never use in-band signalling, even in cases
                                 ; where some buggy devices might not render it
                                 ; Valid values: yes, no, never Default: never
-<% end
-if @sip_options.has_key?("useragent") -%>
+<% end -%>
+<% if @sip_options.has_key?("useragent") -%>
 useragent=<%= @sip_options["useragent"] -%>         ; Allows you to change the user agent string
                                 ; The default user agent string also contains the Asterisk
                                 ; version. If you don't want to expose this, change the
                                 ; useragent string.
-<% end
-if @sip_options.has_key?("sdpsession") -%>
+<% end -%>
+<% if @sip_options.has_key?("sdpsession") -%>
 sdpsession=<%= @sip_options["sdpsession"] -%>        ; Allows you to change the SDP session name string, (s=)
                                 ; Like the useragent parameter, the default user agent string
                                 ; also contains the Asterisk version.
-<% end
-if @sip_options.has_key?("sdpowner") -%>
+<% end -%>
+<% if @sip_options.has_key?("sdpowner") -%>
 sdpowner=<%= @sip_options["sdpowner"] -%>                  ; Allows you to change the username field in the SDP owner string, (o=)
                                 ; This field MUST NOT contain spaces
-<% end
-if @sip_options.has_key?("promiscredir") -%>
+<% end -%>
+<% if @sip_options.has_key?("promiscredir") -%>
 promiscredir = <%= @sip_options["promiscredir"] -%>              ; If yes, allows 302 or REDIR to non-local SIP address
                                 ; Note that promiscredir when redirects are made to the
                                 ; local system will cause loops since Asterisk is incapable
                                 ; of performing a "hairpin" call.
-<% end
-if @sip_options.has_key?("usereqphone") -%>
+<% end -%>
+<% if @sip_options.has_key?("usereqphone") -%>
 usereqphone = <%= @sip_options["usereqphone"] -%>               ; If yes, ";user=phone" is added to uri that contains
                                 ; a valid phone number
-<% end
-if @sip_options.has_key?("dtmfmode") -%>
+<% end -%>
+<% if @sip_options.has_key?("dtmfmode") -%>
 dtmfmode = <%= @sip_options["dtmfmode"] -%>             ; Set default dtmfmode for sending DTMF. Default: rfc2833
                                 ; Other options: 
                                 ; info : SIP INFO messages (application/dtmf-relay)
@@ -361,11 +361,11 @@ dtmfmode = <%= @sip_options["dtmfmode"] -%>             ; Set default dtmfmode f
                                 ; inband : Inband audio (requires 64 kbit codec -alaw, ulaw)
                                 ; auto : Use rfc2833 if offered, inband otherwise
 
-<% end
-if @sip_options.has_key?("compactheaders") -%>
+<% end -%>
+<% if @sip_options.has_key?("compactheaders") -%>
 compactheaders = <%= @sip_options["compactheaders"] -%>           ; send compact sip headers.
-<% end
-if @sip_options.has_key?("videosupport") -%>
+<% end -%>
+<% if @sip_options.has_key?("videosupport") -%>
 videosupport=<%= @sip_options["videosupport"] -%>               ; Turn on support for SIP video. You need to turn this
                                 ; on in this section to get any video support at all.
                                 ; You can turn it off on a per peer basis if the general
@@ -377,21 +377,21 @@ videosupport=<%= @sip_options["videosupport"] -%>               ; Turn on suppor
                                 ; certain transferred calls to use always use video when
                                 ; available. [yes|NO|always]
 
-<% end
-if @sip_options.has_key?("maxcallbitrate") -%>
+<% end -%>
+<% if @sip_options.has_key?("maxcallbitrate") -%>
 maxcallbitrate=<%= @sip_options["maxcallbitrate"] -%>             ; Maximum bitrate for video calls (default 384 kb/s)
                                 ; Videosupport and maxcallbitrate is settable
                                 ; for peers and users as well
-<% end
-if @sip_options.has_key?("callevents") -%>
+<% end -%>
+<% if @sip_options.has_key?("callevents") -%>
 callevents=<%= @sip_options["callevents"] -%>                  ; generate manager events when sip ua 
                                 ; performs events (e.g. hold)
-<% end
-if @sip_options.has_key?("authfailureevents") -%>
+<% end -%>
+<% if @sip_options.has_key?("authfailureevents") -%>
 authfailureevents=<%= @sip_options["authfailureevents"] -%>           ; generate manager "peerstatus" events when peer can't
                                 ; authenticate with Asterisk. Peerstatus will be "rejected".
-<% end
-if @sip_options.has_key?("alwaysauthreject") -%>
+<% end -%>
+<% if @sip_options.has_key?("alwaysauthreject") -%>
 alwaysauthreject = <%= @sip_options["alwaysauthreject"] -%>         ; When an incoming INVITE or REGISTER is to be rejected,
                                 ; for any reason, always reject with an identical response
                                 ; equivalent to valid username and invalid password/hash
@@ -399,15 +399,15 @@ alwaysauthreject = <%= @sip_options["alwaysauthreject"] -%>         ; When an in
                                 ; a matching user or peer for their request.  This reduces
                                 ; the ability of an attacker to scan for valid SIP usernames.
 
-<% end
-if @sip_options.has_key?("g726nonstandard") -%>
+<% end -%>
+<% if @sip_options.has_key?("g726nonstandard") -%>
 g726nonstandard = <%= @sip_options["g726nonstandard"] -%>          ; If the peer negotiates G726-32 audio, use AAL2 packing
                                 ; order instead of RFC3551 packing order (this is required
                                 ; for Sipura and Grandstream ATAs, among others). This is
                                 ; contrary to the RFC3551 specification, the peer _should_
                                 ; be negotiating AAL2-G726-32 instead :-(
-<% end
-if @sip_options.has_key?("outboundproxy") -%>
+<% end -%>
+<% if @sip_options.has_key?("outboundproxy") -%>
 ;outboundproxy=proxy.provider.domain            ; send outbound signaling to this proxy, not directly to the devices
 ;outboundproxy=proxy.provider.domain:8080       ; send outbound signaling to this proxy, not directly to the devices
 ;outboundproxy=proxy.provider.domain,force      ; Send ALL outbound signalling to proxy, ignoring route: headers
@@ -415,30 +415,30 @@ if @sip_options.has_key?("outboundproxy") -%>
 ;                                               ; (could also be tcp,udp) - defining transports on the proxy line only
 ;                                               ; applies for the global proxy, otherwise use the transport= option
 outboundproxy=<%= @sip_options["outboundproxy"] -%>
-<% end
-if @sip_options.has_key?("matchexterniplocally") -%>
+<% end -%>
+<% if @sip_options.has_key?("matchexterniplocally") -%>
 matchexterniplocally = <%= @sip_options["matchexterniplocally"] -%>     ; Only substitute the externip or externhost setting if it matches
                                 ; your localnet setting. Unless you have some sort of strange network
                                 ; setup you will not need to enable this.
 
-<% end
-if @sip_options.has_key?("dynamic_exclude_static") -%>
+<% end -%>
+<% if @sip_options.has_key?("dynamic_exclude_static") -%>
 dynamic_exclude_static = <%= @sip_options["dynamic_exclude_static"] -%>   ; Disallow all dynamic hosts from registering
                                 ; as any IP address used for staticly defined
                                 ; hosts.  This helps avoid the configuration
                                 ; error of allowing your users to register at
                                 ; the same address as a SIP provider.
 
-<% end
-if @sip_options.has_key?("contactdeny") -%>
+<% end -%>
+<% if @sip_options.has_key?("contactdeny") -%>
 contactdeny=<%= @sip_options["contactdeny"] -%>           ; Use contactpermit and contactdeny to
-<% end
-if @sip_options.has_key?("contactpermit") -%>
+<% end -%>
+<% if @sip_options.has_key?("contactpermit") -%>
 contactpermit=<%= @sip_options["contactpermit"] -%>  ; restrict at what IPs your users may
                                        ; register their phones.
 
-<% end
-if @sip_options.has_key?("shrinkcallerid") -%>
+<% end -%>
+<% if @sip_options.has_key?("shrinkcallerid") -%>
 ; The shrinkcallerid function removes '(', ' ', ')', non-trailing '.', and '-' not
 ; in square brackets.  For example, the caller id value 555.5555 becomes 5555555
 ; when this option is enabled.  Disabling this option results in no modification
@@ -448,8 +448,8 @@ if @sip_options.has_key?("shrinkcallerid") -%>
 ;
 shrinkcallerid=<%= @sip_options["shrinkcallerid"] -%>     ; on by default
 
-<% end
-if @sip_options.has_key?("regcontext") -%>
+<% end -%>
+<% if @sip_options.has_key?("regcontext") -%>
 ;
 ; If regcontext is specified, Asterisk will dynamically create and destroy a
 ; NoOp priority 1 extension for a given peer who registers or unregisters with
@@ -462,8 +462,8 @@ if @sip_options.has_key?("regcontext") -%>
 ; separated by '&'.  Patterns may be used in regexten.
 ;
 regcontext=<%= @sip_options["regcontext"] -%>
-<% end
-if @sip_options.has_key?("regextenonqualify") -%>
+<% end -%>
+<% if @sip_options.has_key?("regextenonqualify") -%>
 regextenonqualify=<%= @sip_options["regextenonqualify"] -%>          ; Default "no"
                                 ; If you have qualify on and the peer becomes unreachable
                                 ; this setting will enforce inactivation of the regexten
@@ -479,13 +479,13 @@ regextenonqualify=<%= @sip_options["regextenonqualify"] -%>          ; Default "
 ;
 t1min=<%= @sip_options["t1min"] -%>                      ; Minimum roundtrip time for messages to monitored hosts
                                 ; Defaults to 100 ms
-<% end
-if @sip_options.has_key?("timert1") -%>
+<% end -%>
+<% if @sip_options.has_key?("timert1") -%>
 timert1=<%= @sip_options["timert1"] -%>                    ; Default T1 timer
                                 ; Defaults to 500 ms or the measured round-trip
                                 ; time to a peer (qualify=yes).
-<% end
-if @sip_options.has_key?("timerb") -%>
+<% end -%>
+<% if @sip_options.has_key?("timerb") -%>
 timerb=<%= @sip_options["timerb"] -%>                   ; Call setup timer. If a provisional response is not received
                                 ; in this amount of time, the call will autocongest
                                 ; Defaults to 64*timert1
@@ -497,20 +497,20 @@ timerb=<%= @sip_options["timerb"] -%>                   ; Call setup timer. If a
 ; are only applied to the audio channel.
 ; The settings are settable in the global section as well as per device
 ;
-<% end
-if @sip_options.has_key?("rtptimeout") -%>
+<% end -%>
+<% if @sip_options.has_key?("rtptimeout") -%>
 rtptimeout=<%= @sip_options["rtptimeout"] -%>                  ; Terminate call if 60 seconds of no RTP or RTCP activity
                                 ; on the audio channel
                                 ; when we're not on hold. This is to be able to hangup
                                 ; a call in the case of a phone disappearing from the net,
                                 ; like a powerloss or grandma tripping over a cable.
-<% end
-if @sip_options.has_key?("rtpholdtimeout") -%>
+<% end -%>
+<% if @sip_options.has_key?("rtpholdtimeout") -%>
 rtpholdtimeout=<%= @sip_options["rtpholdtimeout"] -%>             ; Terminate call if 300 seconds of no RTP or RTCP activity
                                 ; on the audio channel
                                 ; when we're on hold (must be > rtptimeout)
-<% end
-if @sip_options.has_key?("rtpkeepalive") -%>
+<% end -%>
+<% if @sip_options.has_key?("rtpkeepalive") -%>
 rtpkeepalive=<%= @sip_options["rtpkeepalive"] -%>            ; Send keepalives in the RTP stream to keep NAT open
                                 ; (default is off - zero)
 
@@ -533,14 +533,14 @@ rtpkeepalive=<%= @sip_options["rtpkeepalive"] -%>            ; Send keepalives i
 ; * session-refresher - The session refresher (uac|uas). Defaults to 'uas'.
 ;
 session-timers=<%= @sip_options["session-timers"] -%>
-<% end
-if @sip_options.has_key?("session-expires") -%>
+<% end -%>
+<% if @sip_options.has_key?("session-expires") -%>
 session-expires=<%= @sip_options["session-expires"] -%>
-<% end
-if @sip_options.has_key?("session-minse") -%>
+<% end -%>
+<% if @sip_options.has_key?("session-minse") -%>
 session-minse=<%= @sip_options["session-minse"] -%>
-<% end
-if @sip_options.has_key?("session-refresher") -%>
+<% end -%>
+<% if @sip_options.has_key?("session-refresher") -%>
 session-refresher=<%= @sip_options["session-refresher"] -%>
 <% end -%>
 
@@ -559,11 +559,11 @@ session-refresher=<%= @sip_options["session-refresher"] -%>
 ; in which case, they default to 17. You can override this by uncommenting
 ; the following, and changing the values.
 hash_users=<%= @sip_options["hash_users"] -%>
-<% end
-if @sip_options.has_key?("hash_peers") -%>
+<% end -%>
+<% if @sip_options.has_key?("hash_peers") -%>
 hash_peers=<%= @sip_options["hash_peers"] -%>
-<% end
-if @sip_options.has_key?("hash_dialogs") -%>
+<% end -%>
+<% if @sip_options.has_key?("hash_dialogs") -%>
 hash_dialogs=<%= @sip_options["hash_dialogs"] -%>
 <% end -%>
 
@@ -571,12 +571,12 @@ hash_dialogs=<%= @sip_options["hash_dialogs"] -%>
 ;--------------------------- SIP DEBUGGING ---------------------------------------------------
 sipdebug=<%= @sip_options["sipdebug"] -%>                 ; Turn on SIP debugging by default, from
                                 ; the moment the channel loads this configuration
-<% end
-if @sip_options.has_key?("recordhistory") -%>
+<% end -%>
+<% if @sip_options.has_key?("recordhistory") -%>
 recordhistory=<%= @sip_options["recordhistory"] -%>              ; Record SIP history by default 
                                 ; (see sip history / sip no history)
-<% end
-if @sip_options.has_key?("dumphistory") -%>
+<% end -%>
+<% if @sip_options.has_key?("dumphistory") -%>
 dumphistory=<%= @sip_options["dumphistory"] -%>                ; Dump SIP history at end of SIP dialogue
                                 ; SIP history is output to the DEBUG logging channel
 
@@ -602,22 +602,22 @@ dumphistory=<%= @sip_options["dumphistory"] -%>                ; Dump SIP histor
 ; realtime switch.
 ;
 allowsubscribe=<%= @sip_options["allowsubscribe"] -%>              ; Disable support for subscriptions. (Default is yes)
-<% end
-if @sip_options.has_key?("subscribecontext") -%>
+<% end -%>
+<% if @sip_options.has_key?("subscribecontext") -%>
 subscribecontext = <%= @sip_options["subscribecontext"] -%>     ; Set a specific context for SUBSCRIBE requests
                                 ; Useful to limit subscriptions to local extensions
                                 ; Settable per peer/user also
-<% end
-if @sip_options.has_key?("notifyringing") -%>
+<% end -%>
+<% if @sip_options.has_key?("notifyringing") -%>
 notifyringing = <%= @sip_options["notifyringing"] -%>             ; Control whether subscriptions already INUSE get sent
                                 ; RINGING when another call is sent (default: yes)
-<% end
-if @sip_options.has_key?("notifyhold") -%>
+<% end -%>
+<% if @sip_options.has_key?("notifyhold") -%>
 notifyhold = <%= @sip_options["notifyhold"] -%>               ; Notify subscriptions on HOLD state (default: no)
                                 ; Turning on notifyringing and notifyhold will add a lot
                                 ; more database transactions if you are using realtime.
-<% end
-if @sip_options.has_key?("notifycid") -%>
+<% end -%>
+<% if @sip_options.has_key?("notifycid") -%>
 notifycid = <%= @sip_options["notifycid"] -%>                ; Control whether caller ID information is sent along with
                                 ; dialog-info+xml notifications (supported by snom phones).
                                 ; Note that this feature will only work properly when the
@@ -633,8 +633,8 @@ notifycid = <%= @sip_options["notifycid"] -%>                ; Control whether c
                                 ; notifycid to 'ignore-context' also causes call-pickups attempted
                                 ; via SNOM's NOTIFY mechanism to set the context for the call pickup
                                 ; to PICKUPMARK.
-<% end
-if @sip_options.has_key?("callcounter") -%>
+<% end -%>
+<% if @sip_options.has_key?("callcounter") -%>
 callcounter = <%= @sip_options["callcounter"] -%>              ; Enable call counters on devices. This can be set per
                                 ; device too.
 
@@ -667,8 +667,8 @@ callcounter = <%= @sip_options["callcounter"] -%>              ; Enable call cou
 ;                                       ; the other endpoint's provided value to assume we can
 ;                                       ; send 400 byte T.38 FAX packets to it.
 t38pt_udptl =<%= @sip_options["t38pt_udptl"] -%>
-<% end
-if @sip_options.has_key?("faxdetect") -%>
+<% end -%>
+<% if @sip_options.has_key?("faxdetect") -%>
 ; FAX detection will cause the SIP channel to jump to the 'fax' extension (if it exists)
 ; based one or more events being detected. The events that can be detected are an incoming
 ; CNG tone or an incoming T.38 re-INVITE request.
@@ -721,12 +721,10 @@ faxdetect =<%= @sip_options["faxdetect"] -%>
 ;      localnet=10.0.0.0/255.0.0.0      ; Also RFC1918
 ;      localnet=172.16.0.0/12           ; Another RFC1918 with CIDR notation
 ;      localnet=169.254.0.0/255.255.0.0 ; Zero conf local network
-<% end -%>
-<% if @sip_options.has_key?("localnet")
-  @sip_options["localnet"].cycle(1) {|x| -%>
+<%   @sip_options["localnet"].each do |x| -%>
 localnet=<%= x %>
-<% }
-end -%>
+<%   end -%>
+<% end -%>
 
 <% if ( @sip_options.has_key?("externip") or  @sip_options.has_key?("externhost") or  @sip_options.has_key?("stunaddr") ) -%>
 ; + the "externally visible" address and port number to be used when talking
@@ -747,8 +745,8 @@ end -%>
 ;        externip = 12.34.56.78:9900     ; use this address and port.
 ;        externip = mynat.my.org:12600   ; Public address of my nat box.
 externip=<%= @sip_options["externip"] -%>
-<% end 
-if @sip_options.has_key?("externhost") -%>
+<% end -%>
+<% if @sip_options.has_key?("externhost") -%>
 ;   b. "externhost = hostname[:port]" is similar to "externip" except
 ;      that the hostname is looked up every "externrefresh" seconds
 ;      (default 10s). This can be useful when your NAT device lets you choose
@@ -759,8 +757,8 @@ if @sip_options.has_key?("externhost") -%>
 ;        externhost=foo.dyndns.net       ; refreshed periodically
 ;        externrefresh=180               ; change the refresh interval
 externhost=<%= @sip_options["externhost"] -%>
-<% end
-if @sip_options.has_key?("stunaddr") -%>
+<% end -%>
+<% if @sip_options.has_key?("stunaddr") -%>
 ;   c. "stunaddr = stun.server[:port]" queries the STUN server specified
 ;      as an argument to obtain the external address/port.
 ;      Queries are also sent periodically every "externrefresh" seconds
@@ -831,8 +829,8 @@ directmedia=<%= @sip_options["directmedia"] -%>                ; Asterisk by def
                                 ; at call setup (a new feature in 1.4 - setting up the
                                 ; call directly between the endpoints instead of sending
                                 ; a re-INVITE).
-<% end
-if @sip_options.has_key?("directrtpsetup") -%>
+<% end -%>
+<% if @sip_options.has_key?("directrtpsetup") -%>
 directrtpsetup=<%= @sip_options["directrtpsetup"] -%>             ; Enable the new experimental direct RTP setup. This sets up
                                 ; the call directly with media peer-2-peer without re-invites.
                                 ; Will not work for video and cases where the callee sends 
@@ -847,22 +845,22 @@ directrtpsetup=<%= @sip_options["directrtpsetup"] -%>             ; Enable the n
                                 ; hold) or to T.38, it will still be done, regardless of this 
                                 ; setting. Note that direct T.38 is not supported.
 
-<% end
-if @sip_options.has_key?("directmedia") -%>
+<% end -%>
+<% if @sip_options.has_key?("directmedia") -%>
 directmedia=<%= @sip_options["directmedia"] -%>              ; An additional option is to allow media path redirection
                                 ; (reinvite) but only when the peer where the media is being
                                 ; sent is known to not be behind a NAT (as the RTP core can
                                 ; determine it based on the apparent IP address the media
                                 ; arrives from).
 
-<% end
-if @sip_options.has_key?("directmedia") -%>
+<% end -%>
+<% if @sip_options.has_key?("directmedia") -%>
 directmedia=<%= @sip_options["directmedia"] -%>             ; Yet a third option... use UPDATE for media path redirection,
                                 ; instead of INVITE. This can be combined with 'nonat', as
                                 ; 'directmedia=update,nonat'. It implies 'yes'.
 
-<% end
-if @sip_options.has_key?("ignoresdpversion") -%>
+<% end -%>
+<% if @sip_options.has_key?("ignoresdpversion") -%>
 ignoresdpversion=<%= @sip_options["ignoresdpversion"] -%>           ; By default, Asterisk will honor the session version
                                 ; number in SDP packets and will only modify the SDP
                                 ; session if the version number changes. This option will
@@ -884,13 +882,13 @@ rtcachefriends=<%= @sip_options["rtcachefriends"] -%>             ; Cache realti
                                 ; just like friends added from the config file only on a
                                 ; as-needed basis? (yes|no)
 
-<% end
-if @sip_options.has_key?("rtsavesysname") -%>
+<% end -%>
+<% if @sip_options.has_key?("rtsavesysname") -%>
 rtsavesysname=<%= @sip_options["rtsavesysname"] -%>              ; Save systemname in realtime database at registration
                                 ; Default= no
 
-<% end
-if @sip_options.has_key?("rtupdate") -%>
+<% end -%>
+<% if @sip_options.has_key?("rtupdate") -%>
 rtupdate=<%= @sip_options["rtupdate"] -%>                   ; Send registry updates to database using realtime? (yes|no)
                                 ; If set to yes, when a SIP UA registers successfully, the ip address,
                                 ; the origination port, the registration period, and the username of
@@ -898,8 +896,8 @@ rtupdate=<%= @sip_options["rtupdate"] -%>                   ; Send registry upda
                                 ; If not present, defaults to 'yes'. Note: realtime peers will
                                 ; probably not function across reloads in the way that you expect, if
                                 ; you turn this option off.
-<% end
-if @sip_options.has_key?("rtautoclear") -%>
+<% end -%>
+<% if @sip_options.has_key?("rtautoclear") -%>
 rtautoclear=<%= @sip_options["rtautoclear"] -%>                ; Auto-Expire friends created on the fly on the same schedule
                                 ; as if it had just registered? (yes|no|<seconds>)
                                 ; If set to yes, when the registration expires, the friend will
@@ -907,8 +905,8 @@ rtautoclear=<%= @sip_options["rtautoclear"] -%>                ; Auto-Expire fri
                                 ; to an integer, friends expire within this number of seconds
                                 ; instead of the registration interval.
 
-<% end
-if @sip_options.has_key?("ignoreregexpire") -%>
+<% end -%>
+<% if @sip_options.has_key?("ignoreregexpire") -%>
 ignoreregexpire=<%= @sip_options["ignoreregexpire"] -%>            ; Enabling this setting has two functions:
                                 ;
                                 ; For non-realtime peers, when their registration expires, the
@@ -953,21 +951,21 @@ ignoreregexpire=<%= @sip_options["ignoreregexpire"] -%>            ; Enabling th
 ;domain=1.2.3.4                 ; Add IP address as local domain
                                 ; You can have several "domain" settings
 <% end -%>
-<% if @sip_options.has_key?("domain")
-  @sip_options["domain"].cycle(1) {|x| -%>
+<% if @sip_options.has_key?("domain") -%>
+<%   @sip_options["domain"].each do |x| -%>
 domain=<%= x %>
-<% }
-end
-if @sip_options.has_key?("allowexternaldomains") -%>
+<%   end -%>
+<% end -%>
+<% if @sip_options.has_key?("allowexternaldomains") -%>
 allowexternaldomains=<%= @sip_options["allowexternaldomains"] -%>         ; Disable INVITE and REFER to non-local domains
                                 ; Default is yes
-<% end
-if @sip_options.has_key?("autodomain") -%>
+<% end -%>
+<% if @sip_options.has_key?("autodomain") -%>
 autodomain=<%= @sip_options["autodomain"] -%>                  ; Turn this on to have Asterisk add local host
                                 ; name and local IP to domain list.
 
-<% end
-if @sip_options.has_key?("fromdomain") -%>
+<% end -%>
+<% if @sip_options.has_key?("fromdomain") -%>
 fromdomain=<%= @sip_options["fromdomain"] -%>        ; When making outbound SIP INVITEs to
                                 ; non-peers, use your primary domain "identity"
                                 ; for From: headers instead of just your IP
@@ -987,31 +985,31 @@ jbenable = <%= @sip_options["jbenable"] -%>               ; Enables the use of a
                               ; thus a jitterbuffer on the receive SIP side will be used only
                               ; if it is forced and enabled.
 
-<% end
-if @sip_options.has_key?("jbforce") -%>
+<% end -%>
+<% if @sip_options.has_key?("jbforce") -%>
 jbforce = <%= @sip_options["jbforce"] -%>                 ; Forces the use of a jitterbuffer on the receive side of a SIP
                               ; channel. Defaults to "no".
 
-<% end
-if @sip_options.has_key?("jbmaxsize") -%>
+<% end -%>
+<% if @sip_options.has_key?("jbmaxsize") -%>
 jbmaxsize = <%= @sip_options["jbmaxsize"] -%>              ; Max length of the jitterbuffer in milliseconds.
 
-<% end
-if @sip_options.has_key?("jbresyncthreshold") -%>
+<% end -%>
+<% if @sip_options.has_key?("jbresyncthreshold") -%>
 jbresyncthreshold = <%= @sip_options["jbresyncthreshold"] -%>     ; Jump in the frame timestamps over which the jitterbuffer is
                               ; resynchronized. Useful to improve the quality of the voice, with
                               ; big jumps in/broken timestamps, usually sent from exotic devices
                               ; and programs. Defaults to 1000.
 
-<% end
-if @sip_options.has_key?("jbimpl") -%>
+<% end -%>
+<% if @sip_options.has_key?("jbimpl") -%>
 jbimpl = <%= @sip_options["jbimpl"] -%>               ; Jitterbuffer implementation, used on the receiving side of a SIP
                               ; channel. Two implementations are currently available - "fixed"
                               ; (with size always equals to jbmaxsize) and "adaptive" (with
                               ; variable size, actually the new jb of iax2). Defaults to fixed.
 
-<% end
-if @sip_options.has_key?("jbtargetextra") -%>
+<% end -%>
+<% if @sip_options.has_key?("jbtargetextra") -%>
 jbtargetextra = <%= @sip_options["jbtargetextra"] -%>           ; This option only affects the jb when 'jbimpl = adaptive' is set.
                               ; The option represents the number of milliseconds by which the new jitter buffer
                               ; will pad its size. the default is 40, so without modification, the new
@@ -1019,8 +1017,8 @@ jbtargetextra = <%= @sip_options["jbtargetextra"] -%>           ; This option on
                               ; increasing this value may help if your network normally has low jitter,
                               ; but occasionally has spikes.
 
-<% end
-if @sip_options.has_key?("jblog") -%>
+<% end -%>
+<% if @sip_options.has_key?("jblog") -%>
 jblog = <%= @sip_options["jblog"] -%>                   ; Enables jitterbuffer frame logging. Defaults to "no".
 ;-----------------------------------------------------------------------------------
 <% end -%>
@@ -1094,11 +1092,11 @@ jblog = <%= @sip_options["jblog"] -%>                   ; Enables jitterbuffer f
 ;    The 'transport' part defaults to 'udp' but may also be 'tcp' or 'tls'.
 ;    Using 'udp://' explicitly is also useful in case the username part
 ;    contains a '/' ('user/name').
-<% end
-if @sip_options.has_key?("registertimeout") -%>
+<% end -%>
+<% if @sip_options.has_key?("registertimeout") -%>
 registertimeout=<%= @sip_options["registertimeout"] -%>              ; retry registration calls every 20 seconds (default)
-<% end
-if @sip_options.has_key?("registerattempts") -%>
+<% end -%>
+<% if @sip_options.has_key?("registerattempts") -%>
 registerattempts=<%= @sip_options["registerattempts"] -%>             ; Number of registration attempts before we give up
                                 ; 0 = continue forever, hammering the other server
                                 ; until it accepts the registration
