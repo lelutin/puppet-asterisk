@@ -169,6 +169,23 @@ Types
     }
     ```
 
+## Patches and Testing
+
+Contributions are highly welcomed, more so are those which contribute patches with tests. Or just more tests! We have [rspec-puppet](http://rspec-puppet.com/) and [rspec-system](https://github.com/puppetlabs/rspec-system-serverspec) tests. When [contributing patches](Github WorkFlow), please make sure that your patches pass tests:
+
+  ```
+  user@host01 ~/src/bw/puppet-composer (git)-[master] % rake spec
+  ....................................
+
+  Finished in 2.29 seconds
+  36 examples, 0 failures
+  user@host01 ~/src/bw/puppet-composer (git)-[master] % rake spec:system
+
+  ...loads of output...
+  2 examples, 0 failures
+  user@host01 ~/src/bw/puppet-composer (git)-[master] %
+
+
 IAX2 Options
 ------------
 
@@ -207,7 +224,8 @@ default hash with the default values, as defined in params.pp:
       autokill => 'yes',
     }
 
-Here is a complete list of all available options:
+Here is a [complete list](docs/aix.md) of all available options.
+
 
   * bindport: Bind Asterisk to this port. If you are binding to multiple
     addresses, you can specify the port for each interface in bindaddr (see
@@ -346,8 +364,10 @@ For passing in settings, you need to send a hash to the `asterisk::sip` class wi
 the `sip_options` parameter:
 
     $sip_options = {
-   	  disallow => ['all'],
+      disallow => ['all'],
       allow => ['alaw'],
+      localnet => [],
+      domain => [],
       udpbindaddr => '10.1.1.30',
       nat => 'yes',
       language => 'fr',
@@ -365,6 +385,8 @@ default hash with the default values, as defined in params.pp:
   $sip_options = {
     disallow          => ['all'],
     allow             => ['alaw'],
+    localnet          => ['192.168.0.0/255.255.0.0','10.0.0.0/255.0.0.0','172.16.0.0/12'.'169.254.0.0/255.255.0.0'],
+    domain            => [],
     context           => 'inbound',
     allowguest        => 'no',
     allowoverlap      => 'no',
