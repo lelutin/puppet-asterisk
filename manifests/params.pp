@@ -43,6 +43,9 @@ class asterisk::params {
   # service status
   $status = 'enabled'
 
+  # service should start
+  $manage_service = 'true'
+
   # configuration directory
   $confdir = '/etc/asterisk'
 
