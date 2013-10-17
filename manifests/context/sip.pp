@@ -1,7 +1,7 @@
 define asterisk::context::sip (
   $ensure        = 'present',
-  $username      = true,
-  $defaultuser   = false,
+  $username      = false,
+  $defaultuser   = true,
   $template_name = false,
   $secret        = false,
   $context       = false,
@@ -20,6 +20,7 @@ define asterisk::context::sip (
   $md5secret     = false,
   $pickupgroup   = false,
   $fromdomain    = false,
+  $fromuser      = false,
   $outboundproxy = false,
   $disallow      = [],
   $allow         = [],
