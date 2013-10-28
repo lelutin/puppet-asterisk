@@ -416,6 +416,10 @@ g726nonstandard = <%= @sip_options["g726nonstandard"] -%>          ; If the peer
 ;                                               ; applies for the global proxy, otherwise use the transport= option
 outboundproxy=<%= @sip_options["outboundproxy"] -%>
 <% end -%>
+<% if @sip_options.has_key?("transport") -%>
+transport=<%= @sip_options["transport"] -%>
+<% end -%>
+
 <% if @sip_options.has_key?("matchexterniplocally") -%>
 matchexterniplocally = <%= @sip_options["matchexterniplocally"] -%>     ; Only substitute the externip or externhost setting if it matches
                                 ; your localnet setting. Unless you have some sort of strange network

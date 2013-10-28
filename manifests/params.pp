@@ -69,6 +69,7 @@ class asterisk::params {
     allowguest        => 'no',
     allowoverlap      => 'no',
     udpbindaddr       => '0.0.0.0',
+    transport         => 'udp',
     tcpenable         => 'no',
     tcpbindaddr       => '0.0.0.0',
     srvlookup         => 'yes',
