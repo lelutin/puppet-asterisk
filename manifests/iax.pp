@@ -1,4 +1,4 @@
-# This Class descripes requirments for the asterisk dahdi module to work
+# This class describes requirements for the asterisk iax configurations to work
 class asterisk::iax (
 $iax_options = $asterisk::params::iax_options,
 ) inherits asterisk::params {
