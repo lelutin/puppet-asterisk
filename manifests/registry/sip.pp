@@ -14,11 +14,11 @@ define asterisk::registry::sip (
 
   file_line{ 'include /etc/asterisk/sip.registry.d/*':
       path => '/etc/asterisk/sip.conf',
-      line => "#include </etc/asterisk/sip.registry.d/*.conf>",
+      line => '#include </etc/asterisk/sip.registry.d/*.conf>',
   }
 
   asterisk::dotd_file { "${name}.conf":
     dotd_dir => 'sip.registry.d',
-    content => template('asterisk/registry/sip.erb'),
+    content  => template('asterisk/registry/sip.erb'),
   }
 }

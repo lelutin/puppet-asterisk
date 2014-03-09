@@ -15,7 +15,7 @@ define asterisk::dotd_file (
   }
 
   $conffile = $filename ? {
-    '' => $name,
+    ''      => $name,
     default => $filename,
   }
 
