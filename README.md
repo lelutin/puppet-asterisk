@@ -404,9 +404,14 @@ Still not implemented !
 
 Types:
 
-  * `asterisk::queue`
-  * `asterisk::sip`
+  * `asterisk::context::queue`
   * `asterisk::mwi`
+
+Templates:
+
+  * voicemail.conf
+  * modules.conf
+  * extensions.conf
 
 License
 -------
