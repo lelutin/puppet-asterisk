@@ -25,7 +25,8 @@ define asterisk::context::sip (
   $t38pt_udptl   = false,
   $disallow      = [],
   $allow         = [],
-  $dtmfmode      = false) {
+  $dtmfmode      = false
+) {
   require asterisk::sip
 
   asterisk::dotd_file {"sip_${name}.conf":

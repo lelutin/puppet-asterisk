@@ -1,8 +1,7 @@
 # This Class descripes packets needed for the translated asterisk voice promtsk
 class asterisk::language (
   $language = 'fr',
-)
-{
+) {
   $allowed_languages = [
     'de',
     'es',

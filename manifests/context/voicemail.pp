@@ -5,8 +5,8 @@ define asterisk::context::voicemail (
   $user_name = '',
   $email = '',
   $pager_email = '',
-  $options = {})
-{
+  $options     = {}
+) {
 
   $real_options = inline_template('<% if options.length -%>|<%= options.keys.collect {|key| value = options[key]; "#{key}=#{value}"}.join(",") -%><% end -%>')
   asterisk::dotd_file{"${context}-${name}.conf":

@@ -1,7 +1,8 @@
 define asterisk::registry::iax (
   $server,
   $user,
-  $password ) {
+  $password
+) {
   require asterisk::iax
 
   asterisk::dotd_file { "${name}.conf":

@@ -4,7 +4,8 @@ define asterisk::context::manager (
   $manager_name = 'manager',
   $permit       = '127.0.0.1/255.255.255.255',
   $read         = 'system,call',
-  $write        = 'system,call') {
+  $write        = 'system,call'
+) {
   require asterisk::manager
 
   asterisk::dotd_file {"${name}.conf":

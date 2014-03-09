@@ -1,7 +1,8 @@
 define asterisk::context::extensions (
   $ensure  = 'present',
   $source  = false,
-  $content = false) {
+  $content = false
+) {
   require asterisk::extensions
 
   if $source {

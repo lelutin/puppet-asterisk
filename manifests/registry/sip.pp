@@ -4,7 +4,8 @@ define asterisk::registry::sip (
   $password='',
   $authuser='',
   $port='',
-  $extension='' ) {
+  $extension=''
+) {
   require asterisk::sip
 
   if $password == '' and $authuser != '' {

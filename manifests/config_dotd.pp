@@ -2,7 +2,8 @@
 define asterisk::config_dotd (
   $additional_paths = [],
   $content = '',
-  $source = '') {
+  $source = ''
+) {
   include asterisk::install
   include asterisk::service
 

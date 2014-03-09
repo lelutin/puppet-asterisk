@@ -4,7 +4,8 @@ define asterisk::dotd_file (
   $source = '',
   $content = '',
   $ensure = 'present',
-  $filename = '') {
+  $filename = ''
+) {
 
   if ($source == '') and ($content == '') {
     fail('You must supply a value for either one of $source or $content.')

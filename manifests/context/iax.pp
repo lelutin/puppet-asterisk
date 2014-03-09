@@ -1,7 +1,8 @@
 define asterisk::context::iax (
   $ensure  = 'present',
   $source  = false,
-  $content = false) {
+  $content = false
+) {
   require asterisk::iax
 
   if $source {
