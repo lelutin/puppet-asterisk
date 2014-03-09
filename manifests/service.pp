@@ -3,14 +3,14 @@ class asterisk::service (
   $manage_service = $asterisk::params::manage_service,
 ) inherits asterisk::params {
 
-  if ( $manage_service == 'true' ) or ( $manage_service == 'auto') {
+  if $manage_service {
     service {'asterisk':
       ensure  => running,
       require => Package['asterisk'],
     }
   } else {
     service {'asterisk':
-      enable  => 'false',
+      enable  => false,
       require => Package['asterisk'],
     }
 
