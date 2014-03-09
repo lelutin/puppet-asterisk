@@ -1,5 +1,5 @@
 # This class describes packets needed for the translated asterisk voice prompts
-class asterisk::language (
+define asterisk::language (
   $language = 'fr',
 ) {
   $allowed_languages = [
@@ -12,13 +12,10 @@ class asterisk::language (
     'it',
     'se'
   ]
-  if $language in $allowed_languages{
-    package { "asterisk-prompt-${language}": ensure => installed; }
 
-    if ($::operatingsystem == 'debian') and ($::lsbdistcodename == 'squeeze') {
-      Package['asterisk-prompt-fr'] {
-        name => 'asterisk-prompt-fr-armelle',
-      }
-    }
+  if !( $language in $allowed_languages ) {
+    fail("Language '${language}' for Asterisk is unsupported.")
   }
+
+  package { "asterisk-prompt-${language}": ensure => installed; }
 }
