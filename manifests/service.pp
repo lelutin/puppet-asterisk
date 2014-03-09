@@ -1,7 +1,6 @@
 # class managing if service is running
-class asterisk::service (
-  $manage_service = $asterisk::params::manage_service,
-) inherits asterisk::params {
+class asterisk::service {
+  $manage_service = $asterisk::manage_service
 
   if $manage_service {
     service {'asterisk':
