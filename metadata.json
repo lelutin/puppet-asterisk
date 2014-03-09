@@ -41,7 +41,6 @@
     "manifests/voicemail.pp": "501510d0de243d2bbc28b7ba5bf3bbd5",
     "spec/spec.opts": "a600ded995d948e393fbe2320ba8e51c",
     "spec/spec_helper.rb": "3ea886dd135e120afa31e0aab12e85b0",
-    "templates/check_misdn.pl.erb": "c3c6c8414f745e83a7a91df95b444d0f",
     "templates/context/manager.erb": "1dcc574e796fc3aab2cab44b8d2bea11",
     "templates/context/sip.erb": "d7500205aefd5090f6cf80fcfd96e81f",
     "templates/iax.conf.erb": "b6fb433f5f95cbea1708e8b69a123bd1",
