@@ -406,5 +406,19 @@ Types:
 
   * `asterisk::queue`
   * `asterisk::sip`
-  * `asterisk::mwi`  
+  * `asterisk::mwi`
+
+License
+-------
+
+This module is licensed under the GPLv3+, feel free to redistribute, modify and
+contribute changes.
+
+A copy of the GPLv3 license text should be included with the module. If not,
+check out the github repository at https://github.com/lelutin/puppet-asterisk
+or one of its clones.
+
+The license text can also be downloaded from:
+
+https://www.gnu.org/licenses/gpl-3.0.txt
 
