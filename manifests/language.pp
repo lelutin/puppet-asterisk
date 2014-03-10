@@ -1,6 +1,6 @@
 # This class describes packets needed for the translated asterisk voice prompts
 define asterisk::language (
-  $language = 'fr',
+  $language
 ) {
   $allowed_languages = [
     'de',
