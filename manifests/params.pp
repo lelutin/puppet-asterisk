@@ -94,8 +94,7 @@ class asterisk::params {
       $package = [ 'asterisk' ]
     }
     default: {
-      fail("\"${module_name}\" provides no package default value
-            for \"${::operatingsystem}\"")
+      fail("\"${module_name}\" provides no package default value for \"${::operatingsystem}\"")
     }
   }
 
@@ -118,8 +117,7 @@ class asterisk::params {
       $service_settings_path = "/etc/default/${service_name}"
     }
     default: {
-      fail("\"${module_name}\" provides no service parameters
-            for \"${::operatingsystem}\"")
+      fail("\"${module_name}\" provides no service parameters for \"${::operatingsystem}\"")
     }
   }
 
