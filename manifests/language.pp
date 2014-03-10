@@ -4,13 +4,15 @@ define asterisk::language (
 ) {
   $allowed_languages = [
     'de',
-    'es',
     'es-co',
-    'fr',
     'fr-armelle',
     'fr-proformatique',
-    'it',
-    'se'
+    'it-menardi',
+    'it-menardi-alaw',
+    'it-menardi-gsm',
+    'it-menardi-wav',
+    'se',
+    'es'
   ]
 
   if !( $language in $allowed_languages ) {
