@@ -87,11 +87,11 @@ class asterisk::params {
   case $::operatingsystem {
     'CentOS', 'Fedora', 'Scientific', 'RedHat', 'Amazon', 'OracleLinux': {
       # main application
-      $package = [ 'asterisk' ]
+      $package_name = [ 'asterisk' ]
     }
     'Debian', 'Ubuntu': {
       # main application
-      $package = [ 'asterisk' ]
+      $package_name = [ 'asterisk' ]
     }
     default: {
       fail("\"${module_name}\" provides no package default value for \"${::operatingsystem}\"")
