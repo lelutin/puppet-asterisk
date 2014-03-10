@@ -5,21 +5,8 @@ To install Asterisk on a server, simply use the following:
 
   include asterisk
 
-This will install a plain version of Asterisk without any extra 
-Futures enabled. To enable any of the extra futures do the following:
-
-```puppet
-  include 'asterisk'
-  include 'asterisk::dahdi'
-```
-
-To include french sounds, you can use the following:
-
-```puppet
-  class { 'asterisk::language':
-    language      => 'fr',
-  }
-```
+This will install a plain version of Asterisk without any extra
+Futures enabled.
 
 Requirements
 ------------
@@ -27,6 +14,41 @@ Requirements
 In order to use this module, you need the augeasprovider for shellvar.
 
 see https://github.com/hercules-team/augeasproviders for details.
+
+You also need the stdlib module from:
+
+https://github.com/puppetlabs/puppetlabs-stdlib
+
+Extra features
+--------------
+
+To enable dahdi, use the following:
+
+```puppet
+  include 'asterisk::dahdi'
+```
+
+To include any language sounds, you can use the following (in this example,
+we're installing french and spanish sounds):
+
+```puppet
+  asterisk::language {
+    ['fr-armelle', 'es']:
+  }
+```
+
+Valid languages strings are the following:
+
+ * de
+ * es-co
+ * fr-armelle
+ * fr-proformatique
+ * it-menardi
+ * it-menardi-alaw
+ * it-menardi-gsm
+ * it-menardi-wav
+ * se
+ * es
 
 Types
 -----
@@ -109,7 +131,7 @@ Types
 
     ```puppet
     asterisk::context::iax { '5551234567':
-      source => 'puppet:///modules/site-asterisk/5551234567',
+      source => 'puppet:///modules/site_asterisk/5551234567',
     }
     ```
 
@@ -146,9 +168,10 @@ Types
       password => '112233',
       options => { 'attach' => 'yes', 'delete' => 'yes' },
     }
+    ```
 
   * `asterisk::context::manager`
-    
+
     ```puppet
     asterisk::context::manager { "nagios":
       permit => '127.0.0.1/255.255.255.255',
@@ -173,17 +196,16 @@ Types
 
 Contributions are highly welcomed, more so are those which contribute patches with tests. Or just more tests! We have [rspec-puppet](http://rspec-puppet.com/) and [rspec-system](https://github.com/puppetlabs/rspec-system-serverspec) tests. When [contributing patches](Github WorkFlow), please make sure that your patches pass tests:
 
-  ```
-  user@host01 ~/src/bw/puppet-composer (git)-[master] % rake spec
-  ....................................
+    user@host01 ~/src/bw/puppet-composer (git)-[master] % rake spec
+    ....................................
 
-  Finished in 2.29 seconds
-  36 examples, 0 failures
-  user@host01 ~/src/bw/puppet-composer (git)-[master] % rake spec:system
+    Finished in 2.29 seconds
+    36 examples, 0 failures
+    user@host01 ~/src/bw/puppet-composer (git)-[master] % rake spec:system
 
-  ...loads of output...
-  2 examples, 0 failures
-  user@host01 ~/src/bw/puppet-composer (git)-[master] %
+    ...loads of output...
+    2 examples, 0 failures
+    user@host01 ~/src/bw/puppet-composer (git)-[master] %
 
 
 IAX2 Options
@@ -193,20 +215,22 @@ If you are using the IAX2 protocol, you'll want to set some global
 configuration options. The default values are taken from Debian's default
 iax.conf file.
 
-For passing in settings, you need to send a hash to the `asterisk::iax` class with
+For passing in settings, you need to send a hash to the `asterisk` class with
 the `iax_options` parameter:
 
+    ```puppet
     $iax_options = {
         autokill => 'yes',
         jitterbuffer => 'no',
         forcejitterbuffer => 'no',
     }
-    class { 'asterisk::iax':
+    class { 'asterisk':
         iax_options => $iax_options,
     }
+    ```
 
 One thing to watch out for, is that when you are giving a hash to the
-`asterisk::iax` class, all the default values are not present anymore! So, you need
+`asterisk` class, all the default values are not present anymore! So, you need
 to define values for all of those that you are not overriding. Here is the
 default hash with the default values, as defined in params.pp:
 
@@ -224,7 +248,7 @@ default hash with the default values, as defined in params.pp:
       autokill => 'yes',
     }
 
-Here is a [complete list](docs/aix.md) of all available options.
+Here is a [complete list](docs/iax.md) of all available options.
 
 
   * bindport: Bind Asterisk to this port. If you are binding to multiple
@@ -360,9 +384,10 @@ If you are using the SIP protocol, you'll want to set some global
 configuration options. The default values are taken from Debian's default
 sip.conf file.
 
-For passing in settings, you need to send a hash to the `asterisk::sip` class with
+For passing in settings, you need to send a hash to the `asterisk` class with
 the `sip_options` parameter:
 
+    ```puppet
     $sip_options = {
       disallow => ['all'],
       allow => ['alaw'],
@@ -373,30 +398,33 @@ the `sip_options` parameter:
       language => 'fr',
       t38pt_udptl => 'yes',
     }
-    class { 'asterisk::sip':
+    class { 'asterisk':
         sip_options => $sip_options,
     }
+    ```
 
-One thing to watch out for, is that when you are giving a hash to the
-`asterisk::sip` class, all the default values are not present anymore! So, you need
-to define values for all of those that you are not overriding. Here is the
-default hash with the default values, as defined in params.pp:
+Similarly to the SIP options, when you are giving a hash to the `asterisk`
+class, all the default values are not present anymore! So, you need to define
+values for all of those that you are not overriding. Here is the default hash
+with the default values, as defined in params.pp:
 
-  $sip_options = {
-    disallow          => ['all'],
-    allow             => ['alaw'],
-    localnet          => ['192.168.0.0/255.255.0.0','10.0.0.0/255.0.0.0','172.16.0.0/12'.'169.254.0.0/255.255.0.0'],
-    domain            => [],
-    context           => 'inbound',
-    allowguest        => 'no',
-    allowoverlap      => 'no',
-    udpbindaddr       => '0.0.0.0',
-    tcpenable         => 'no',
-    tcpbindaddr       => '0.0.0.0',
-    srvlookup         => 'yes',
-  }
+    ```puppet
+    $sip_options = {
+      disallow          => ['all'],
+      allow             => ['alaw'],
+      localnet          => ['192.168.0.0/255.255.0.0','10.0.0.0/255.0.0.0','172.16.0.0/12'.'169.254.0.0/255.255.0.0'],
+      domain            => [],
+      context           => 'inbound',
+      allowguest        => 'no',
+      allowoverlap      => 'no',
+      udpbindaddr       => '0.0.0.0',
+      tcpenable         => 'no',
+      tcpbindaddr       => '0.0.0.0',
+      srvlookup         => 'yes',
+    }
+    ```
 
-Here a complete list of all available options, could be added.
+Here a complete list of all available options, should be added.
 
 
 Still not implemented !
