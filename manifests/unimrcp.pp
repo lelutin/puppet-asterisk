@@ -1,8 +1,12 @@
-# This Class descripes requirments for the asterisk dahdi module to work
+# This class installs UniMRCP
 class asterisk::unimrcp {
 
-    package { 'astunimrcp':
-            ensure => 'latest',
-            }
+  # FIXME this class is unusable as-is. See reason below
+  # XXX This package doesn't exist in debian repositories, either specify the
+  # addition apt source or if it's in another distro, put a barrier with
+  # $::lsbdistcodename.
+  package { 'astunimrcp':
+    ensure => 'latest',
+  }
 
 }
