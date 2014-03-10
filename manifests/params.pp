@@ -31,18 +31,6 @@ class asterisk::params {
 
   #### Default values for the parameters of the main module class, init.pp
 
-  # ensure
-  $ensure = 'present'
-
-  # autoupgrade
-  $autoupgrade = false
-
-  # restart on configuration change?
-  $restart_on_change = true
-
-  # service status
-  $status = 'enabled'
-
   # service should start
   $manage_service = true
 
@@ -102,19 +90,9 @@ class asterisk::params {
   case $::operatingsystem {
     'CentOS', 'Fedora', 'Scientific', 'RedHat', 'Amazon', 'OracleLinux': {
       $service_name          = 'asterisk'
-      $service_hasrestart    = true
-      $service_hasstatus     = true
-      $service_pattern       = $service_name
-      $service_provider      = 'redhat'
-      $service_settings_path = "/etc/sysconfig/${service_name}"
     }
     'Debian', 'Ubuntu': {
       $service_name          = 'asterisk'
-      $service_hasrestart    = true
-      $service_hasstatus     = true
-      $service_pattern       = $service_name
-      $service_provider      = 'debian'
-      $service_settings_path = "/etc/default/${service_name}"
     }
     default: {
       fail("\"${module_name}\" provides no service parameters for \"${::operatingsystem}\"")
