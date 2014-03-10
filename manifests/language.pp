@@ -1,7 +1,5 @@
 # This class describes packets needed for the translated asterisk voice prompts
-define asterisk::language (
-  $language
-) {
+define asterisk::language {
   $allowed_languages = [
     'de',
     'es-co',
@@ -15,9 +13,9 @@ define asterisk::language (
     'es'
   ]
 
-  if !( $language in $allowed_languages ) {
-    fail("Language '${language}' for Asterisk is unsupported.")
+  if !( $name in $allowed_languages ) {
+    fail("Language '${name}' for Asterisk is unsupported.")
   }
 
-  package { "asterisk-prompt-${language}": ensure => installed; }
+  package { "asterisk-prompt-${name}": ensure => installed; }
 }
