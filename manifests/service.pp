@@ -5,12 +5,10 @@ class asterisk::service {
   if $manage_service {
     service {$asterisk::service_name:
       ensure  => running,
-      require => Package['asterisk'],
     }
   } else {
     service {$asterisk::service_name:
       enable  => false,
-      require => Package['asterisk'],
     }
 
   }

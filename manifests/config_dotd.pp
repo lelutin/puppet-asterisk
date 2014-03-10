@@ -15,7 +15,7 @@ define asterisk::config_dotd (
     owner   => 'root',
     group   => 'asterisk',
     mode    => '0750',
-    require => [Package['asterisk'], Group['asterisk']],
+    require => Class['asterisk::install'],
   }
 
   # Avoid error messages
@@ -29,8 +29,8 @@ define asterisk::config_dotd (
     owner   => 'root',
     group   => 'asterisk',
     mode    => '0640',
-    require => [Package['asterisk'], Group['asterisk']],
-    notify  => Service['asterisk'],
+    require => Class['asterisk::install'],
+    notify  => Class['asterisk::service'],
   }
 
   if $content != '' {

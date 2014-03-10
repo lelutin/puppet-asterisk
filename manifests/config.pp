@@ -16,8 +16,6 @@ class asterisk::config {
     ensure  => present,
     target  => $service_settings_path,
     value   => 'yes',
-    require => Package['asterisk'],
-    notify  => Service['asterisk'],
   }
 
 }
