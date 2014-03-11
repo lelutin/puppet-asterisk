@@ -224,35 +224,37 @@ iax.conf file.
 For passing in settings, you need to send a hash to the `asterisk` class with
 the `iax_options` parameter:
 
-    ```puppet
-    $iax_options = {
-        autokill => 'yes',
-        jitterbuffer => 'no',
-        forcejitterbuffer => 'no',
-    }
-    class { 'asterisk':
-        iax_options => $iax_options,
-    }
-    ```
+```puppet
+$iax_options = {
+    autokill => 'yes',
+    jitterbuffer => 'no',
+    forcejitterbuffer => 'no',
+}
+class { 'asterisk':
+    iax_options => $iax_options,
+}
+```
 
 One thing to watch out for, is that when you are giving a hash to the
 `asterisk` class, all the default values are not present anymore! So, you need
 to define values for all of those that you are not overriding. Here is the
 default hash with the default values, as defined in params.pp:
 
-    $iax_options = {
-      disallow => ['lpc10'],
-      allow => ['gsm'],
-      delayreject => 'yes',
-      bandwidth => 'high',
-      jitterbuffer => 'yes',
-      forcejitterbuffer => 'yes',
-      maxjitterbuffer => '1000',
-      maxjitterinterps => '10',
-      resyncthreshold => '1000',
-      trunktimestamps => 'yes',
-      autokill => 'yes',
-    }
+```puppet
+$iax_options = {
+  disallow => ['lpc10'],
+  allow => ['gsm'],
+  delayreject => 'yes',
+  bandwidth => 'high',
+  jitterbuffer => 'yes',
+  forcejitterbuffer => 'yes',
+  maxjitterbuffer => '1000',
+  maxjitterinterps => '10',
+  resyncthreshold => '1000',
+  trunktimestamps => 'yes',
+  autokill => 'yes',
+}
+```
 
 Here is a [complete list](docs/iax.md) of all available options.
 
@@ -393,42 +395,42 @@ sip.conf file.
 For passing in settings, you need to send a hash to the `asterisk` class with
 the `sip_options` parameter:
 
-    ```puppet
-    $sip_options = {
-      disallow => ['all'],
-      allow => ['alaw'],
-      localnet => [],
-      domain => [],
-      udpbindaddr => '10.1.1.30',
-      nat => 'yes',
-      language => 'fr',
-      t38pt_udptl => 'yes',
-    }
-    class { 'asterisk':
-        sip_options => $sip_options,
-    }
-    ```
+```puppet
+$sip_options = {
+  disallow => ['all'],
+  allow => ['alaw'],
+  localnet => [],
+  domain => [],
+  udpbindaddr => '10.1.1.30',
+  nat => 'yes',
+  language => 'fr',
+  t38pt_udptl => 'yes',
+}
+class { 'asterisk':
+    sip_options => $sip_options,
+}
+```
 
 Similarly to the SIP options, when you are giving a hash to the `asterisk`
 class, all the default values are not present anymore! So, you need to define
 values for all of those that you are not overriding. Here is the default hash
 with the default values, as defined in params.pp:
 
-    ```puppet
-    $sip_options = {
-      disallow          => ['all'],
-      allow             => ['alaw'],
-      localnet          => ['192.168.0.0/255.255.0.0','10.0.0.0/255.0.0.0','172.16.0.0/12'.'169.254.0.0/255.255.0.0'],
-      domain            => [],
-      context           => 'inbound',
-      allowguest        => 'no',
-      allowoverlap      => 'no',
-      udpbindaddr       => '0.0.0.0',
-      tcpenable         => 'no',
-      tcpbindaddr       => '0.0.0.0',
-      srvlookup         => 'yes',
-    }
-    ```
+```puppet
+$sip_options = {
+  disallow          => ['all'],
+  allow             => ['alaw'],
+  localnet          => ['192.168.0.0/255.255.0.0','10.0.0.0/255.0.0.0','172.16.0.0/12'.'169.254.0.0/255.255.0.0'],
+  domain            => [],
+  context           => 'inbound',
+  allowguest        => 'no',
+  allowoverlap      => 'no',
+  udpbindaddr       => '0.0.0.0',
+  tcpenable         => 'no',
+  tcpbindaddr       => '0.0.0.0',
+  srvlookup         => 'yes',
+}
+```
 
 Here a complete list of all available options, should be added.
 
