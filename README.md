@@ -1,5 +1,5 @@
-puppet module to install and configure Asterisk
-===============================================
+Puppet module for Asterisk
+==========================
 
 To install Asterisk on a server, simply use the following:
 
@@ -192,7 +192,8 @@ Types
     }
     ```
 
-## Patches and Testing
+Patches and Testing
+-------------------
 
 Contributions are highly welcomed, more so are those which contribute patches with tests. Or just more tests! We have [rspec-puppet](http://rspec-puppet.com/) and [rspec-system](https://github.com/puppetlabs/rspec-system-serverspec) tests. When [contributing patches](Github WorkFlow), please make sure that your patches pass tests:
 
