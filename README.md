@@ -235,10 +235,12 @@ class { 'asterisk':
 }
 ```
 
-One thing to watch out for, is that when you are giving a hash to the
-`asterisk` class, all the default values are not present anymore! So, you need
-to define values for all of those that you are not overriding. Here is the
-default hash with the default values, as defined in params.pp:
+Keys that are present in the `$iax_options` paramter to the asterisk class will
+override the default options (or set new ones for options that are not present
+in the default option hash). This lets you use all the default values but
+change only a couple of values.
+
+Here is the default hash with the default values, as defined in params.pp:
 
 ```puppet
 $iax_options = {
@@ -284,10 +286,12 @@ class { 'asterisk':
 }
 ```
 
-Similarly to the SIP options, when you are giving a hash to the `asterisk`
-class, all the default values are not present anymore! So, you need to define
-values for all of those that you are not overriding. Here is the default hash
-with the default values, as defined in params.pp:
+Similarly to the SIP options, keys that are present in the `$sip_options`
+paramter to the asterisk class will override the default options (or set new
+ones for options that are not present in the default option hash). This lets
+you use all the default values but change only a couple of values.
+
+Here is the default hash with the default values, as defined in params.pp:
 
 ```puppet
 $sip_options = {

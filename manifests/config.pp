@@ -23,14 +23,14 @@ class asterisk::config {
   asterisk::config_dotd {'/etc/asterisk/queues.conf':}
   asterisk::config_dotd {'/etc/asterisk/manager.conf':}
 
-  $iax_options = $asterisk::iax_options
+  $iax_options = $asterisk::real_iax_options
 
   asterisk::config_dotd {'/etc/asterisk/iax.conf':
     additional_paths => ['/etc/asterisk/iax.registry.d'],
     content          => template('asterisk/iax.conf.erb'),
   }
 
-  $sip_options = $asterisk::sip_options
+  $sip_options = $asterisk::real_sip_options
 
   validate_array($sip_options['allow'])
   validate_array($sip_options['disallow'])
