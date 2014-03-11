@@ -1,5 +1,5 @@
 define asterisk::context::iax (
-  $ensure  = 'present',
+  $ensure  = present,
   $source  = false,
   $content = false
 ) {

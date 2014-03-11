@@ -1,5 +1,5 @@
 define asterisk::context::extensions (
-  $ensure  = 'present',
+  $ensure  = present,
   $source  = false,
   $content = false
 ) {

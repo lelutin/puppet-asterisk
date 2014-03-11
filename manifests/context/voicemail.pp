@@ -1,7 +1,7 @@
 define asterisk::context::voicemail (
   $context,
   $password,
-  $ensure      = 'present',
+  $ensure      = present,
   $user_name   = '',
   $email       = '',
   $pager_email = '',

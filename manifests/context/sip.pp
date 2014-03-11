@@ -1,5 +1,5 @@
 define asterisk::context::sip (
-  $ensure        = 'present',
+  $ensure        = present,
   $username      = false,
   $defaultuser   = true,
   $template_name = false,

@@ -1,5 +1,5 @@
 define asterisk::context::manager (
-  $ensure       = 'present',
+  $ensure       = present,
   $secret       = false,
   $manager_name = 'manager',
   $permit       = '127.0.0.1/255.255.255.255',
