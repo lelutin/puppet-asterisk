@@ -8,8 +8,12 @@ class asterisk (
   $service_name   = $asterisk::params::service_name
 ) inherits asterisk::params {
 
+  validate_bool($manage_service)
+  validate_absolute_path($confdir)
   validate_hash($iax_options)
   validate_hash($sip_options)
+  validate_string($package_name)
+  validate_string($service_name)
 
   $real_iax_options = merge($asterisk::params::iax_options, $iax_options)
   $real_sip_options = merge($asterisk::params::sip_options, $sip_options)
