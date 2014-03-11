@@ -52,7 +52,6 @@ Valid languages strings are the following:
 
 Types
 -----
-    Note: The loading of the folloging types will also create the corresponding config Files.
 
   * asterisk::context::extensions
 
@@ -181,7 +180,8 @@ Types
     }
     ```
 
-    paranoid configuration, with minimal network access, but the option to run system commands and trigger calls
+    paranoid configuration, with minimal network access, but the option to run
+    system commands and trigger calls:
 
     ```puppet
     asterisk::context::manager { "nagios":
@@ -195,7 +195,12 @@ Types
 Patches and Testing
 -------------------
 
-Contributions are highly welcomed, more so are those which contribute patches with tests. Or just more tests! We have [rspec-puppet](http://rspec-puppet.com/) and [rspec-system](https://github.com/puppetlabs/rspec-system-serverspec) tests. When [contributing patches](Github WorkFlow), please make sure that your patches pass tests:
+Contributions are highly welcomed, more so are those which contribute patches
+with tests. Or just more tests! We have
+[rspec-puppet](http://rspec-puppet.com/) and
+[rspec-system](https://github.com/puppetlabs/rspec-system-serverspec) tests.
+When [contributing patches](Github WorkFlow), please make sure that your
+patches pass tests:
 
     user@host01 ~/src/bw/puppet-composer (git)-[master] % rake spec
     ....................................
