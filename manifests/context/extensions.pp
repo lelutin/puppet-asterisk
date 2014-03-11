@@ -3,7 +3,6 @@ define asterisk::context::extensions (
   $source  = false,
   $content = false
 ) {
-  require asterisk::extensions
 
   if $source {
     asterisk::dotd_file {"${name}.conf":
@@ -24,4 +23,5 @@ define asterisk::context::extensions (
       fail('source or content parameter is required')
     }
   }
+
 }

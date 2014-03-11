@@ -6,7 +6,6 @@ define asterisk::context::manager (
   $read         = 'system,call',
   $write        = 'system,call'
 ) {
-  require asterisk::manager
 
   asterisk::dotd_file {"${name}.conf":
     ensure   => $ensure,
@@ -14,4 +13,5 @@ define asterisk::context::manager (
     content  => template('asterisk/context/manager.erb'),
     filename => "${name}.conf",
   }
+
 }

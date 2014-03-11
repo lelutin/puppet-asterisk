@@ -3,7 +3,6 @@ define asterisk::context::iax (
   $source  = false,
   $content = false
 ) {
-  require asterisk::iax
 
   if $source {
     asterisk::dotd_file {"${name}.conf":
@@ -24,4 +23,5 @@ define asterisk::context::iax (
       fail('source or content parameter is required')
     }
   }
+
 }

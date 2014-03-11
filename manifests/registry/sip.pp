@@ -6,7 +6,6 @@ define asterisk::registry::sip (
   $port='',
   $extension=''
 ) {
-  require asterisk::sip
 
   if $password == '' and $authuser != '' {
     fail('No value given for password: supplying a value for $authuser only makes sense when $password is set.')
@@ -16,4 +15,5 @@ define asterisk::registry::sip (
     dotd_dir => 'sip.registry.d',
     content  => template('asterisk/registry/sip.erb'),
   }
+
 }
