@@ -90,11 +90,11 @@ class asterisk::params {
   case $::operatingsystem {
     'CentOS', 'Fedora', 'Scientific', 'RedHat', 'Amazon', 'OracleLinux': {
       # main application
-      $package_name = [ 'asterisk' ]
+      $package_name = 'asterisk'
     }
     'Debian', 'Ubuntu': {
       # main application
-      $package_name = [ 'asterisk' ]
+      $package_name = 'asterisk'
     }
     default: {
       fail("\"${module_name}\" provides no package default value for \"${::operatingsystem}\"")
@@ -104,10 +104,10 @@ class asterisk::params {
   # service parameters
   case $::operatingsystem {
     'CentOS', 'Fedora', 'Scientific', 'RedHat', 'Amazon', 'OracleLinux': {
-      $service_name          = 'asterisk'
+      $service_name = 'asterisk'
     }
     'Debian', 'Ubuntu': {
-      $service_name          = 'asterisk'
+      $service_name = 'asterisk'
     }
     default: {
       fail("\"${module_name}\" provides no service parameters for \"${::operatingsystem}\"")
