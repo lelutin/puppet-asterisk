@@ -1,0 +1,16 @@
+;
+; Voicemail Configuration
+;
+
+[general]
+<% voicemail_options.sort.map do |name, value|
+  if value.is_a? Array
+    value.each do |v| -%>
+<%= name -%>=<%= v %>
+<%  end
+  else -%>
+<%= name -%>=<%= value %>
+<% end
+end -%>
+
+#include </etc/asterisk/voicemail.conf.d/*.conf>
