@@ -6,6 +6,8 @@ define asterisk::dotd_file (
   $content = '',
   $filename = ''
 ) {
+  include asterisk::config
+  include asterisk::service
 
   if ($source == '') and ($content == '') {
     fail('You must supply a value for either one of $source or $content.')
@@ -24,8 +26,8 @@ define asterisk::dotd_file (
     owner   => 'root',
     group   => 'asterisk',
     mode    => '0640',
-    require => File["/etc/asterisk/${dotd_dir}"],
-    notify  => Service['asterisk'],
+    require => Class['asterisk::config'],
+    notify  => Class['asterisk::service'],
   }
 
   if $content != '' {

@@ -13,7 +13,6 @@ define asterisk::context::voicemail (
     ensure   => $ensure,
     content  => "[${context}]\n${name} => ${password},${user_name},${email},${pager_email}${real_options}",
     dotd_dir => 'voicemail.conf.d',
-    notify   => Service['asterisk'],
   }
 
 }

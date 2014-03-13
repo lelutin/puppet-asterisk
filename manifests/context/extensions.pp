@@ -9,7 +9,6 @@ define asterisk::context::extensions (
       ensure   => $ensure,
       dotd_dir => 'extensions.conf.d',
       source   => $source,
-      notify   => Service['asterisk'],
     }
   } else {
     if $content {
@@ -17,7 +16,6 @@ define asterisk::context::extensions (
         ensure   => $ensure,
         dotd_dir => 'extensions.conf.d',
         content  => "[${name}]\n${content}",
-        notify   => Service['asterisk'],
       }
     } else {
       fail('source or content parameter is required')
