@@ -18,7 +18,6 @@ class asterisk::config {
     value   => 'yes',
   }
 
-  asterisk::config_dotd { '/etc/asterisk/extensions.conf': }
   asterisk::config_dotd { '/etc/asterisk/queues.conf': }
   asterisk::config_dotd { '/etc/asterisk/manager.conf': }
 
@@ -41,6 +40,11 @@ class asterisk::config {
   $voicemail_options = $asterisk::real_voicemail_options
   asterisk::config_dotd { '/etc/asterisk/voicemail.conf':
     content => template('asterisk/voicemail.conf.erb'),
+  }
+
+  $extensions_options = $asterisk::real_extensions_options
+  asterisk::config_dotd { '/etc/asterisk/extensions.conf':
+    content => template('asterisk/extensions.conf.erb'),
   }
 
   $modules_autoload = $asterisk::modules_autoload ? {

@@ -84,6 +84,13 @@ class asterisk::params {
     sendvoicemail    => 'yes',
   }
 
+  # extensions reasonable defaults
+  $extensions_options = {
+    static          => 'yes',
+    writeprotect    => 'no',
+    clearglobalvars => 'no',
+  }
+
   # modules reasonable defaults
   $modules_autoload = true
   $modules_noload = [

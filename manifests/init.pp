@@ -5,6 +5,7 @@ class asterisk (
   $iax_options            = {},
   $sip_options            = {},
   $voicemail_options      = {},
+  $extensions_options     = {},
   $modules_autoload       = $asterisk::params::modules_autoload,
   $modules_noload         = $asterisk::params::modules_noload,
   $modules_load           = $asterisk::params::modules_load,
@@ -18,6 +19,7 @@ class asterisk (
   validate_hash($iax_options)
   validate_hash($sip_options)
   validate_hash($voicemail_options)
+  validate_hash($extensions_options)
   validate_bool($modules_autoload)
   validate_array($modules_noload)
   validate_array($modules_load)
@@ -29,6 +31,10 @@ class asterisk (
   $real_sip_options = merge($asterisk::params::sip_options, $sip_options)
   $real_voicemail_options = merge(
     $asterisk::params::voicemail_options, $voicemail_options
+  )
+  $real_extensions_options = merge(
+    $asterisk::params::extensions_options,
+    $extensions_options
   )
 
   # Anchor this as per #8040 - this ensures that classes won't float off and
