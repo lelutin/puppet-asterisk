@@ -84,6 +84,26 @@ class asterisk::params {
     sendvoicemail    => 'yes',
   }
 
+  # modules reasonable defaults
+  $modules_autoload = true
+  $modules_noload = [
+    'pbx_gtkconsole.so',
+    'pbx_kdeconsole.so',
+    'app_intercom.so',
+    'chan_modem.so',
+    'chan_modem_aopen.so',
+    'chan_modem_bestdata.so',
+    'chan_modem_i4l.so',
+    'chan_capi.so',
+    'chan_alsa.so',
+    'cdr_sqlite.so',
+    'app_directory_odbc.so',
+    'res_config_odbc.so',
+    'res_config_pgsql.so'
+  ]
+  $modules_load = ['res_musiconhold.so']
+  $modules_global_options = {}
+
   #### Internal module values
 
   # packages

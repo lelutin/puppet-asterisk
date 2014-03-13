@@ -1,0 +1,18 @@
+;
+; Asterisk Module Loader configuration file
+;
+
+[modules]
+autoload=<%= modules_autoload %>
+
+<% modules_noload.each { |noload| -%>
+noload => <%= noload %>
+<% } %>
+<% modules_load.each { |load| -%>
+load => <%= load %>
+<% } %>
+[global]
+<% modules_global_options.sort.map { |key, value| -%>
+<%= key %>=<%= value %>
+<% } -%>
+
