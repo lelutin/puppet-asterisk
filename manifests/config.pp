@@ -18,34 +18,34 @@ class asterisk::config {
     value   => 'yes',
   }
 
-  asterisk::config_dotd { '/etc/asterisk/queues.conf': }
+  asterisk::config_dotd { '/etc/asterisk/queues': }
 
   $iax_options = $asterisk::real_iax_options
-  asterisk::config_dotd { '/etc/asterisk/iax.conf':
+  asterisk::config_dotd { '/etc/asterisk/iax':
     additional_paths => ['/etc/asterisk/iax.registry.d'],
     content          => template('asterisk/iax.conf.erb'),
   }
 
   $sip_options = $asterisk::real_sip_options
-  asterisk::config_dotd { '/etc/asterisk/sip.conf':
+  asterisk::config_dotd { '/etc/asterisk/sip':
     additional_paths => ['/etc/asterisk/sip.registry.d'],
     content          => template('asterisk/sip.conf.erb'),
   }
 
   $voicemail_options = $asterisk::real_voicemail_options
-  asterisk::config_dotd { '/etc/asterisk/voicemail.conf':
+  asterisk::config_dotd { '/etc/asterisk/voicemail':
     content => template('asterisk/voicemail.conf.erb'),
   }
 
   $extensions_options = $asterisk::real_extensions_options
-  asterisk::config_dotd { '/etc/asterisk/extensions.conf':
+  asterisk::config_dotd { '/etc/asterisk/extensions':
     content => template('asterisk/extensions.conf.erb'),
   }
 
   $manager_enable = $asterisk::real_manager_enable
   $manager_port = $asterisk::manager_port
   $manager_bindaddr = $asterisk::manager_bindaddr
-  asterisk::config_dotd { '/etc/asterisk/manager.conf':
+  asterisk::config_dotd { '/etc/asterisk/manager':
     content => template('asterisk/manager.conf.erb'),
   }
 

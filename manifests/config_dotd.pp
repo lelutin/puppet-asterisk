@@ -8,6 +8,7 @@ define asterisk::config_dotd (
   include asterisk::service
 
   $dirname = ["${name}.d"]
+  $cf_file_name = "${name}.conf"
   $paths = [$dirname, $additional_paths]
 
   file { $paths :
@@ -24,7 +25,7 @@ define asterisk::config_dotd (
   # [Nov 19 16:09:48] ERROR[3364] config.c: Future versions of Asterisk will treat a #include of a file that does not exist as an error, and will fail to load that configuration file.  Please ensure that the file '/etc/asterisk/iax.conf.d/*.conf' exists, even if it is empty.
   asterisk::config_dotd::nullfile{ $paths : }
 
-  file { $name :
+  file { $cf_file_name :
     ensure  => present,
     owner   => 'root',
     group   => 'asterisk',
@@ -38,12 +39,12 @@ define asterisk::config_dotd (
       fail('Please define only one of $content and $source')
     }
 
-    File[$name] {
+    File[$cf_file_name] {
       content => $content,
     }
   } else {
-    $filename = inline_template('<%= File.basename(name) -%>')
-    File[$name] {
+    $filename = inline_template('<%= File.basename(cf_file_name) -%>')
+    File[$cf_file_name] {
       source => $source ? {
         '' => [ "puppet:///modules/site-asterisk/${filename}.${::fqdn}",
                 "puppet:///modules/site-asterisk/${filename}",

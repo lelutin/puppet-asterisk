@@ -12,7 +12,7 @@ define asterisk::context::voicemail (
   asterisk::dotd_file{"${context}-${name}.conf":
     ensure   => $ensure,
     content  => "[${context}]\n${name} => ${password},${user_name},${email},${pager_email}${real_options}",
-    dotd_dir => 'voicemail.conf.d',
+    dotd_dir => 'voicemail.d',
   }
 
 }

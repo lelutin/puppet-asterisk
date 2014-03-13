@@ -8,6 +8,12 @@ To install Asterisk on a server, simply use the following:
 This will install a plain version of Asterisk without any extra
 Futures enabled.
 
+Upgrade notice: The module used to manage files under /etc/asterisk/file.conf.d
+for all values of "file" that were managed. Things have been moved to
+/etc/asterisk/file.d, so before upgrading you should remove all .conf.d
+directories (all files under the old dirs will be automatically recreated in
+the new directories).
+
 Requirements
 ------------
 
