@@ -46,8 +46,8 @@ define asterisk::config_dotd (
     $filename = inline_template('<%= File.basename(cf_file_name) -%>')
     File[$cf_file_name] {
       source => $source ? {
-        '' => [ "puppet:///modules/site-asterisk/${filename}.${::fqdn}",
-                "puppet:///modules/site-asterisk/${filename}",
+        '' => [ "puppet:///modules/site_asterisk/${filename}.${::fqdn}",
+                "puppet:///modules/site_asterisk/${filename}",
                 "puppet:///modules/asterisk/${filename}"],
         default => $source,
       },
