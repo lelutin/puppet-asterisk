@@ -362,8 +362,6 @@ Types:
 
 Templates:
 
-  * voicemail.conf
-  * modules.conf
   * extensions.conf
   * manager.conf
   * queues.conf
