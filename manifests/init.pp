@@ -37,6 +37,10 @@ class asterisk (
 
   $real_iax_options = merge($asterisk::params::iax_options, $iax_options)
   $real_sip_options = merge($asterisk::params::sip_options, $sip_options)
+  validate_array($real_sip_options['allow'])
+  validate_array($real_sip_options['disallow'])
+  validate_array($real_sip_options['domain'])
+  validate_array($real_sip_options['localnet'])
   $real_voicemail_options = merge(
     $asterisk::params::voicemail_options, $voicemail_options
   )
@@ -44,6 +48,10 @@ class asterisk (
     $asterisk::params::extensions_options,
     $extensions_options
   )
+  $real_modules_autoload = $modules_autoload ? {
+    true  => 'yes',
+    false => 'no',
+  }
   $real_manager_enable = $manager_enable ? {
     true  => 'yes',
     false => 'no',

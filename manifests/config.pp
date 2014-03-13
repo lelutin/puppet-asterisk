@@ -27,10 +27,6 @@ class asterisk::config {
   }
 
   $sip_options = $asterisk::real_sip_options
-  validate_array($sip_options['allow'])
-  validate_array($sip_options['disallow'])
-  validate_array($sip_options['domain'])
-  validate_array($sip_options['localnet'])
   asterisk::config_dotd { '/etc/asterisk/sip.conf':
     additional_paths => ['/etc/asterisk/sip.registry.d'],
     content          => template('asterisk/sip.conf.erb'),
@@ -53,10 +49,7 @@ class asterisk::config {
     content => template('asterisk/manager.conf.erb'),
   }
 
-  $modules_autoload = $asterisk::modules_autoload ? {
-    true  => 'yes',
-    false => 'no',
-  }
+  $modules_autoload = $asterisk::real_modules_autoload
   $modules_noload = $asterisk::modules_noload
   $modules_load = $asterisk::modules_load
   $modules_global_options = $asterisk::modules_global_options
