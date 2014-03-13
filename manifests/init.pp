@@ -10,6 +10,9 @@ class asterisk (
   $modules_noload         = $asterisk::params::modules_noload,
   $modules_load           = $asterisk::params::modules_load,
   $modules_global_options = $asterisk::params::modules_global_options,
+  $manager_enable         = $asterisk::params::manager_enable,
+  $manager_port           = $asterisk::params::manager_port,
+  $manager_bindaddr       = $asterisk::params::manager_bindaddr,
   $package_name           = $asterisk::params::package_name,
   $service_name           = $asterisk::params::service_name
 ) inherits asterisk::params {
@@ -24,6 +27,11 @@ class asterisk (
   validate_array($modules_noload)
   validate_array($modules_load)
   validate_hash($modules_global_options)
+  validate_bool($manager_enable)
+  if !is_integer($manager_port) {
+    fail('Parameter $manager_port needs to be an integer value')
+  }
+  validate_string($manager_bindaddr)
   validate_string($package_name)
   validate_string($service_name)
 
@@ -36,6 +44,10 @@ class asterisk (
     $asterisk::params::extensions_options,
     $extensions_options
   )
+  $real_manager_enable = $manager_enable ? {
+    true  => 'yes',
+    false => 'no',
+  }
 
   # Anchor this as per #8040 - this ensures that classes won't float off and
   # mess everything up. You can read about this at:

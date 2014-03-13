@@ -19,7 +19,6 @@ class asterisk::config {
   }
 
   asterisk::config_dotd { '/etc/asterisk/queues.conf': }
-  asterisk::config_dotd { '/etc/asterisk/manager.conf': }
 
   $iax_options = $asterisk::real_iax_options
   asterisk::config_dotd { '/etc/asterisk/iax.conf':
@@ -45,6 +44,13 @@ class asterisk::config {
   $extensions_options = $asterisk::real_extensions_options
   asterisk::config_dotd { '/etc/asterisk/extensions.conf':
     content => template('asterisk/extensions.conf.erb'),
+  }
+
+  $manager_enable = $asterisk::real_manager_enable
+  $manager_port = $asterisk::manager_port
+  $manager_bindaddr = $asterisk::manager_bindaddr
+  asterisk::config_dotd { '/etc/asterisk/manager.conf':
+    content => template('asterisk/manager.conf.erb'),
   }
 
   $modules_autoload = $asterisk::modules_autoload ? {

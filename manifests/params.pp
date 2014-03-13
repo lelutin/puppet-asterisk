@@ -111,6 +111,11 @@ class asterisk::params {
   $modules_load = ['res_musiconhold.so']
   $modules_global_options = {}
 
+  # manager reasonable defaults
+  $manager_enable = true
+  $manager_port = 5038
+  $manager_bindaddr = '127.0.0.1'
+
   #### Internal module values
 
   # packages
