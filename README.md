@@ -295,22 +295,62 @@ Here is the default hash with the default values, as defined in params.pp:
 
 ```puppet
 $sip_options = {
-  disallow          => ['all'],
-  allow             => ['alaw'],
-  localnet          => ['192.168.0.0/255.255.0.0','10.0.0.0/255.0.0.0','172.16.0.0/12'.'169.254.0.0/255.255.0.0'],
-  domain            => [],
-  context           => 'inbound',
-  allowguest        => 'no',
-  allowoverlap      => 'no',
-  udpbindaddr       => '0.0.0.0',
-  tcpenable         => 'no',
-  tcpbindaddr       => '0.0.0.0',
-  srvlookup         => 'yes',
+  disallow     => ['all'],
+  allow        => ['alaw'],
+  localnet     => ['192.168.0.0/255.255.0.0','10.0.0.0/255.0.0.0','172.16.0.0/12'.'169.254.0.0/255.255.0.0'],
+  domain       => [],
+  context      => 'inbound',
+  allowguest   => 'no',
+  allowoverlap => 'no',
+  udpbindaddr  => '0.0.0.0',
+  tcpenable    => 'no',
+  tcpbindaddr  => '0.0.0.0',
+  srvlookup    => 'yes',
 }
 ```
 
 Here a complete list of all available options, should be added.
 
+Voicemail Options
+-----------------
+
+Voicemail can be configured through a set of options in the `[general]`
+context. To set those options, you can pass values as a hash to the
+`voicemail_options` parameter to the main class. Default values are taken from
+the default configuration file from Debian:
+
+```puppet
+$voicemail_options = {
+  servermail      => 'telephone',
+  format          => 'wav49|wav',
+  emaildateformat => '%F, at %R:%S',
+  delete          => 'yes',
+}
+class { 'asterisk':
+  voicemail_options => $voicemail_options,
+}
+```
+
+Again, keys that are present in the `voicemail_options` parameter to the
+`asterisk` class will override the default options (or set new ones).
+
+Here is the default hash with the default values, as defined in params.pp:
+
+```puppet
+$voicemail_options = {
+  format           => 'wav49|gsm|wav',
+  serveremail      => 'asterisk',
+  attach           => 'yes',
+  minsecs          => 3,
+  skipms           => 3000,
+  maxsilence       => 10,
+  silencethreshold => 128,
+  maxlogins        => 3,
+  emailbody        => 'Dear ${VM_NAME}:\n\n\tjust wanted to let you know you were just ${IF($["${VM_CIDNUM}" = "${ORIG_VM_CIDNUM}"]?left:forwarded)} a ${V
+  emaildateformat  => '%A, %B %d, %Y at %r',
+  sendvoicemail    => 'yes',
+}
+```
 
 Still not implemented !
 -----------------------
