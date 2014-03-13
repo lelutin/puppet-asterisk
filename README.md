@@ -204,12 +204,12 @@ the `iax_options` parameter:
 
 ```puppet
 $iax_options = {
-    autokill          => 'yes',
-    jitterbuffer      => 'no',
-    forcejitterbuffer => 'no',
+  autokill          => 'yes',
+  jitterbuffer      => 'no',
+  forcejitterbuffer => 'no',
 }
 class { 'asterisk':
-    iax_options => $iax_options,
+  iax_options => $iax_options,
 }
 ```
 
@@ -260,7 +260,7 @@ $sip_options = {
   t38pt_udptl => 'yes',
 }
 class { 'asterisk':
-    sip_options => $sip_options,
+  sip_options => $sip_options,
 }
 ```
 
