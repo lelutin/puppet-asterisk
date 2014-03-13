@@ -330,6 +330,57 @@ $voicemail_options = {
 }
 ```
 
+Modules
+-------
+
+Configuring Asterisk modules is key to implementing your features right. Four
+parameter to the `asterisk` class offer you the possibility to customize what
+modules are loaded or not on your PBX. Default values for the parameters were
+taken from the default config file in Debian.
+
+ * `modules_autoload`: a boolean value (defaults to `true`) that decides
+   whether or not Asterisk will try to automatically load required modules even
+   though they are not explicitely marked as needing to be loaded in the
+   modules.conf file.
+
+ * `modules_noload`: an array of strings of explicitely unwanted modules that
+   won't load even though `modules_autoload` is true. Specifying an array to
+   this parameter overrides the default list so make sure to include all
+   unwanted modules. The default array is the following:
+
+   ```puppet
+   $modules_noload = [
+     'pbx_gtkconsole.so',
+     'pbx_kdeconsole.so',
+     'app_intercom.so',
+     'chan_modem.so',
+     'chan_modem_aopen.so',
+     'chan_modem_bestdata.so',
+     'chan_modem_i4l.so',
+     'chan_capi.so',
+     'chan_alsa.so',
+     'cdr_sqlite.so',
+     'app_directory_odbc.so',
+     'res_config_odbc.so',
+     'res_config_pgsql.so'
+   ]
+   ```
+
+ * `modules_load`: an array of strings of explicitely wanted modules.
+   Specifying an array to this parameter overrides the default list so make
+   sure to include all wanted modules. The default array is the following:
+
+   ```puppet
+   $modules_load = ['res_musiconhold.so']
+   ```
+
+ * `modules_global_options`: a hash of options that should be set in the
+   `[global]` context. These options let you customize behaviours for modules
+   that are loaded.
+
+For more information on configuring modules, you can consult this
+[wiki page](http://www.voip-info.org/wiki/index.php?page=Asterisk%20config%20modules.conf).
+
 Patches and Testing
 -------------------
 
