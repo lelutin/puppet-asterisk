@@ -330,6 +330,40 @@ $voicemail_options = {
 }
 ```
 
+Extensions Options
+------------------
+
+Some global options can be set for extensions. You can achieve that by passing
+a hash to the `extensions_options` parameter to the `asterisk` class. Default
+values are taken from the default Debian configuration file.
+
+```puppet
+$extensions_options = {
+  autofallthrough => 'yes',
+  clearglobalvars => 'yes',
+}
+class { 'asterisk':
+  extensions_options => $extensions_options,
+}
+```
+
+Keys that are present in the `voicemail_options` parameter to the
+`asterisk` class will override the default options (or set new ones).
+
+Here is the default hash with the default values, as defined in params.pp:
+
+```puppet
+$extensions_options = {
+  static          => 'yes',
+  writeprotect    => 'no',
+  clearglobalvars => 'no',
+}
+```
+
+Note that by default no global variables (e.g. values set in the `[globals]`
+context) are set. To set global variables, you can use an
+`asterisk::context::extension` resource with a context value of "globals".
+
 Modules
 -------
 
@@ -413,7 +447,6 @@ Types:
 
 Templates:
 
-  * extensions.conf
   * manager.conf
   * queues.conf
 
