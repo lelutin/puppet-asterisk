@@ -226,8 +226,8 @@ the `iax_options` parameter:
 
 ```puppet
 $iax_options = {
-    autokill => 'yes',
-    jitterbuffer => 'no',
+    autokill          => 'yes',
+    jitterbuffer      => 'no',
     forcejitterbuffer => 'no',
 }
 class { 'asterisk':
@@ -235,7 +235,7 @@ class { 'asterisk':
 }
 ```
 
-Keys that are present in the `$iax_options` paramter to the asterisk class will
+Keys that are present in the `iax_options` paramter to the `asterisk` class will
 override the default options (or set new ones for options that are not present
 in the default option hash). This lets you use all the default values but
 change only a couple of values.
@@ -244,17 +244,17 @@ Here is the default hash with the default values, as defined in params.pp:
 
 ```puppet
 $iax_options = {
-  disallow => ['lpc10'],
-  allow => ['gsm'],
-  delayreject => 'yes',
-  bandwidth => 'high',
-  jitterbuffer => 'yes',
+  disallow          => ['lpc10'],
+  allow             => ['gsm'],
+  delayreject       => 'yes',
+  bandwidth         => 'high',
+  jitterbuffer      => 'yes',
   forcejitterbuffer => 'yes',
-  maxjitterbuffer => '1000',
-  maxjitterinterps => '10',
-  resyncthreshold => '1000',
-  trunktimestamps => 'yes',
-  autokill => 'yes',
+  maxjitterbuffer   => '1000',
+  maxjitterinterps  => '10',
+  resyncthreshold   => '1000',
+  trunktimestamps   => 'yes',
+  autokill          => 'yes',
 }
 ```
 
@@ -272,13 +272,13 @@ the `sip_options` parameter:
 
 ```puppet
 $sip_options = {
-  disallow => ['all'],
-  allow => ['alaw'],
-  localnet => [],
-  domain => [],
+  disallow    => ['all'],
+  allow       => ['alaw'],
+  localnet    => [],
+  domain      => [],
   udpbindaddr => '10.1.1.30',
-  nat => 'yes',
-  language => 'fr',
+  nat         => 'yes',
+  language    => 'fr',
   t38pt_udptl => 'yes',
 }
 class { 'asterisk':
@@ -286,8 +286,8 @@ class { 'asterisk':
 }
 ```
 
-Similarly to the SIP options, keys that are present in the `$sip_options`
-paramter to the asterisk class will override the default options (or set new
+Similarly to the SIP options, keys that are present in the `sip_options`
+paramter to the `asterisk` class will override the default options (or set new
 ones for options that are not present in the default option hash). This lets
 you use all the default values but change only a couple of values.
 

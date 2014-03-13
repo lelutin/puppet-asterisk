@@ -54,19 +54,19 @@ class asterisk::params {
 
   # sip reasonable minimal defaults
   $sip_options = {
-    disallow          => ['all'],
-    allow             => ['alaw'],
-    domain            => [],
+    disallow     => ['all'],
+    allow        => ['alaw'],
+    domain       => [],
     # make all private networks (RFC 1918) be contained in localnet
-    localnet          => ['192.168.0.0/255.255.0.0','10.0.0.0/255.0.0.0','172.16.0.0/12','169.254.0.0/255.255.0.0'],
-    context           => 'inbound',
-    allowguest        => 'no',
-    allowoverlap      => 'no',
-    udpbindaddr       => '0.0.0.0',
-    transport         => 'udp',
-    tcpenable         => 'no',
-    tcpbindaddr       => '0.0.0.0',
-    srvlookup         => 'yes',
+    localnet     => ['192.168.0.0/255.255.0.0','10.0.0.0/255.0.0.0','172.16.0.0/12','169.254.0.0/255.255.0.0'],
+    context      => 'inbound',
+    allowguest   => 'no',
+    allowoverlap => 'no',
+    udpbindaddr  => '0.0.0.0',
+    transport    => 'udp',
+    tcpenable    => 'no',
+    tcpbindaddr  => '0.0.0.0',
+    srvlookup    => 'yes',
   }
 
   # voicemail reasonable defaults
