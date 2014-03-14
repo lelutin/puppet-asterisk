@@ -28,7 +28,7 @@ define asterisk::snippet::sip (
   $dtmfmode      = false
 ) {
 
-  asterisk::dotd::file {"sip_${name}.conf":
+  asterisk::dotd::file {"${name}.conf":
     ensure   => $ensure,
     dotd_dir => 'sip.d',
     content  => template('asterisk/snippet/sip.erb'),
