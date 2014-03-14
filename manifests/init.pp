@@ -42,6 +42,8 @@ class asterisk (
   validate_string($service_name)
 
   $real_iax_options = merge($asterisk::params::iax_options, $iax_options)
+  validate_array($real_iax_options['allow'])
+  validate_array($real_iax_options['disallow'])
   $real_sip_options = merge($asterisk::params::sip_options, $sip_options)
   validate_array($real_sip_options['allow'])
   validate_array($real_sip_options['disallow'])
