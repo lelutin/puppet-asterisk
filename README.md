@@ -387,7 +387,7 @@ $extensions_options = {
 
 Note that by default no global variables (e.g. values set in the `[globals]`
 context) are set. To set global variables, you can use an
-`asterisk::context::extension` resource with a context value of "globals".
+`asterisk::context::extensions` resource with a context value of "globals".
 
 Modules
 -------
