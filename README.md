@@ -178,11 +178,10 @@ Types
   * `asterisk::context::manager`
 
     ```puppet
-    asterisk::context::manager { "nagios":
-      permit => '127.0.0.1/255.255.255.255',
+    asterisk::context::manager { 'nagios':
       secret => 'topsecret1234',
-      read => 'all',
-      write => 'system, call, log, verbose, command, agent, user',
+      read   => ['all'],
+      write  => ['system', ' call', ' log', ' verbose', ' command', ' agent', ' user'],
     }
     ```
 
@@ -190,11 +189,31 @@ Types
     system commands and trigger calls:
 
     ```puppet
-    asterisk::context::manager { "nagios":
-      permit => '127.0.0.1/255.255.255.255',
+    asterisk::context::manager { 'nagios':
       secret => 'topsecret1234',
-      read => 'system,call',
-      write => 'system,call',
+      read   => ['system', 'call'],
+      write  => ['system', 'call'],
+    }
+    ```
+
+    permit remote management to two other systems on an internal network:
+
+    ```puppet
+    asterisk::context::manager { 'robocall':
+      secret => 'robotsdeservesomeloveafterall',
+      permit => ['10.10.10.200/255.255.255.0', '10.20.20.200/255.255.255.0'],
+      read   => ['system', 'call', 'log'],
+      write  => ['system', 'call', 'originate'],
+    }
+    ```
+
+    By default, the resource name is used as the manager name. To override the
+    manager name, you can use the `manager_name` parameter:
+
+    ```puppet
+    asterisk::context::manager { 'sysadmin':
+      secret       => 'nowyouseemenowyoudont',
+      manager_name => 'surreptitioustyrant',
     }
     ```
 

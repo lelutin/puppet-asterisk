@@ -1,7 +1,11 @@
-[<%= manager_name %>]
+[<%= real_manager_name %>]
 secret = <%= secret %>
-deny = 0.0.0.0/0.0.0.0
-permit = <%= permit %>
-read = <%= read %>
-write = <%= write %>
+<% deny.each { |deny_rule| -%>
+deny = <%= deny_rule %>
+<% } -%>
+<% permit.each { |permit_rule| -%>
+permit = <%= permit_rule %>
+<% } -%>
+read = <%= real_read %>
+write = <%= real_write %>
 
