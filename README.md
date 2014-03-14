@@ -62,17 +62,17 @@ Types
   * `asterisk::context::extensions`
 
     ```puppet
-    asterisk::context::extensions { "incoming":
+    asterisk::context::extensions { 'incoming':
       ensure => present,
       source => "...",
     }
 
-    asterisk::context::extensions { "incoming":
+    asterisk::context::extensions { 'incoming':
       ensure  => present,
       content => template(...),
     }
 
-    asterisk::context::extensions { "incoming":
+    asterisk::context::extensions { 'incoming':
       ensure => absent,
     }
     ```
@@ -80,13 +80,13 @@ Types
   * `asterisk::context::sip`
 
     ```puppet
-    asterisk::context::sip { "1234":
+    asterisk::context::sip { '1234':
       ensure  => present,
       secret  => 'blah',
       context => 'incoming',
     }
 
-    asterisk::context::sip { "1234":
+    asterisk::context::sip { '1234':
       ensure => absent,
     }
     ```
@@ -95,14 +95,14 @@ Types
     by giving it a value of '!', or inherit from a template:
 
     ```puppet
-    asterisk::context::sip { "corporate_user":
-      context => 'corporate',
-      type => 'friend',
+    asterisk::context::sip { 'corporate_user':
+      context       => 'corporate',
+      type          => 'friend',
       # ...
       template_name => '!',
     }
-    asterisk::context::sip { "hakim":
-      secret => 'ohnoes!',
+    asterisk::context::sip { 'hakim':
+      secret        => 'ohnoes!',
       template_name => 'corporate_user',
     }
     ```
@@ -112,7 +112,7 @@ Types
     ```puppet
     asterisk::registry::sip { 'providerX':
       server => 'sip.providerX.com',
-      user => 'doyoufindme',
+      user   => 'doyoufindme',
     }
     ```
 
@@ -121,11 +121,11 @@ Types
 
     ```puppet
     asterisk::registry::sip { 'friends_home':
-      server => 'home.friend.com',
-      port => '8888',
-      user => 'me',
-      password => 'myselfandI',
-      authuser => 'you',
+      server    => 'home.friend.com',
+      port      => '8888',
+      user      => 'me',
+      password  => 'myselfandI',
+      authuser  => 'you',
       extension => 'whatsupfriend',
     }
     ```
@@ -145,19 +145,19 @@ Types
     ```puppet
     asterisk::registry::iax { 'providerX':
       server => 'iax.providerX.com',
-      user => 'doyoufindme',
-      pass => 'attractive?',
+      user   => 'doyoufindme',
+      pass   => 'attractive?',
     }
     ```
 
   * `asterisk::context::voicemail`
 
     ```puppet
-    asterisk::context::voicemail { "3000":
-      context => 'some_context',
-      password => '5555',
+    asterisk::context::voicemail { '3000':
+      context   => 'some_context',
+      password  => '5555',
       user_name => 'Bob Bobby',
-      email => 'bob@bobby.comcom',
+      email     => 'bob@bobby.comcom',
     }
     ```
 
@@ -168,10 +168,10 @@ Types
     like the following:
 
     ```puppet
-    asterisk::context::voicemail { "3001":
-      context => 'blah',
+    asterisk::context::voicemail { '3001':
+      context  => 'blah',
       password => '112233',
-      options => { 'attach' => 'yes', 'delete' => 'yes' },
+      options  => { 'attach' => 'yes', 'delete' => 'yes' },
     }
     ```
 
