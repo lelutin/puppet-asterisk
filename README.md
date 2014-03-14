@@ -372,7 +372,7 @@ class { 'asterisk':
 }
 ```
 
-Keys that are present in the `voicemail_options` parameter to the
+Keys that are present in the `extensions_options` parameter to the
 `asterisk` class will override the default options (or set new ones).
 
 Here is the default hash with the default values, as defined in params.pp:
