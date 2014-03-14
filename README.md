@@ -389,6 +389,46 @@ Note that by default no global variables (e.g. values set in the `[globals]`
 context) are set. To set global variables, you can use an
 `asterisk::context::extensions` resource with a context value of "globals".
 
+Queues Options
+--------------
+
+For queues some global configurations and default values can be set in the
+`[general]` context. You can set options by passing a hash to the
+`queues_options` parameter to the `asterisk` class.
+
+Two options, monitor-type and monitor-format, could not be set inside the hash
+because the option names have a dash in them. You can use the
+`queues_monitor_type` and `queues_monitor_format` respectively to set the two
+options. If you specify an empty string to one of those two parameters, the
+options will not be mentioned in the configuration file. By default,
+`queues_monitor_type` has a value of `MixMonitor` and `queues_monitor_format`
+is empty.
+
+```puppet
+$queues_options = {
+  autofill  => 'no',
+  updatecdr => 'yes',
+}
+class { 'asterisk':
+  queues_monitor_type   => '',
+  queues_monitor_format => 'gsm|wav|wav49',
+  queues_options        => $queues_options,
+}
+```
+
+Keys that are present in the `queues_options` parameter to the `asterisk` class
+will override the default options (or set new ones).
+
+Here is the default hash with the default values, as defined in params.pp:
+
+```puppet
+$queues_options = {
+  persistentmembers => 'yes',
+  autofill          => 'yes',
+  shared_lastcall   => 'no',
+}
+```
+
 Modules
 -------
 
@@ -490,10 +530,6 @@ Types:
 
   * `asterisk::context::queue`
   * `asterisk::mwi`
-
-Templates:
-
-  * queues.conf
 
 License
 -------
