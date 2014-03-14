@@ -18,8 +18,6 @@ class asterisk::config {
     value   => 'yes',
   }
 
-  asterisk::config_dotd { '/etc/asterisk/queues': }
-
   $iax_options = $asterisk::real_iax_options
   asterisk::config_dotd { '/etc/asterisk/iax':
     additional_paths => ['/etc/asterisk/iax.registry.d'],
@@ -40,6 +38,13 @@ class asterisk::config {
   $extensions_options = $asterisk::real_extensions_options
   asterisk::config_dotd { '/etc/asterisk/extensions':
     content => template('asterisk/extensions.conf.erb'),
+  }
+
+  $queues_monitor_type = $asterisk::queues_monitor_type
+  $queues_monitor_format = $asterisk::queues_monitor_format
+  $queues_options = $asterisk::real_queues_options
+  asterisk::config_dotd { '/etc/asterisk/queues':
+    content => template('asterisk/queues.conf.erb'),
   }
 
   $manager_enable = $asterisk::real_manager_enable

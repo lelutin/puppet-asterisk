@@ -91,6 +91,15 @@ class asterisk::params {
     clearglobalvars => 'no',
   }
 
+  # queues reasonable defaults
+  $queues_monitor_type = 'MixMonitor'
+  $queues_monitor_format = ''
+  $queues_options = {
+    persistentmembers => 'yes',
+    autofill          => 'yes',
+    shared_lastcall   => 'no',
+  }
+
   # modules reasonable defaults
   $modules_autoload = true
   $modules_noload = [

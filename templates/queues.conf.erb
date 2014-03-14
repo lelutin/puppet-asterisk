@@ -1,0 +1,21 @@
+;
+; Global settings for call queues
+;
+[general]
+<% if !queues_monitor_type.empty? -%>
+monitor-type=<%= queues_monitor_type %>
+<% end
+if !queues_monitor_format.empty? -%>
+monitor-format=<%= queues_monitor_format %>
+<% end -%>
+<% queues_options.sort.map do |name, value|
+  if value.is_a? Array
+    value.each do |v| -%>
+<%= name -%>=<%= v %>
+<%  end
+  else -%>
+<%= name -%>=<%= value %>
+<% end
+end -%>
+
+#include </etc/asterisk/queues.d/*.conf>
