@@ -421,6 +421,27 @@ taken from the default config file in Debian.
 For more information on configuring modules, you can consult this
 [wiki page](http://www.voip-info.org/wiki/index.php?page=Asterisk%20config%20modules.conf).
 
+Manager options
+---------------
+
+Asterisk maintains a service on a port through which you can inspect asterisk's
+state and issue commands to the PBX. You can control on which IP and port it
+binds to and if it is enabled at all with three parameters to the `asterisk`
+class.
+
+ * `manager_enable`: a boolean value that decides whether or not the manager is
+   in function. Defaults to true.
+
+ * `manager_port`: an integer value that specifies on which port the manager
+   will listen. Default value is 5038.
+
+ * `manager_bindaddr`: a string that contains the IP address on which the
+   manager should bind. Default value is 127.0.0.1.
+
+By default, no user access is configured. If you want to enable users to
+interact with the manager, you should declare `asterisk::context::manager`
+resources.
+
 Patches and Testing
 -------------------
 
@@ -453,7 +474,6 @@ Types:
 
 Templates:
 
-  * manager.conf
   * queues.conf
 
 License
