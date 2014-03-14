@@ -4,7 +4,7 @@ define asterisk::registry::iax (
   $password
 ) {
 
-  asterisk::dotd_file { "${name}.conf":
+  asterisk::dotd::file { "${name}.conf":
     dotd_dir => 'iax.registry.d',
     content  => template('asterisk/registry/iax.erb'),
   }

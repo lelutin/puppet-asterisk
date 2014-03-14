@@ -28,7 +28,7 @@ define asterisk::context::sip (
   $dtmfmode      = false
 ) {
 
-  asterisk::dotd_file {"sip_${name}.conf":
+  asterisk::dotd::file {"sip_${name}.conf":
     ensure   => $ensure,
     dotd_dir => 'sip.d',
     content  => template('asterisk/context/sip.erb'),

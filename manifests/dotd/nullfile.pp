@@ -1,5 +1,5 @@
 # This is a hack to make it possible to iterate over multiple directories.
-define asterisk::config_dotd::nullfile () {
+define asterisk::dotd::nullfile () {
   include asterisk::install
   include asterisk::service
 

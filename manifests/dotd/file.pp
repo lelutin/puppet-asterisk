@@ -1,5 +1,5 @@
 # create include files and set their permissions.
-define asterisk::dotd_file (
+define asterisk::dotd::file (
   $dotd_dir,
   $ensure = present,
   $source = '',

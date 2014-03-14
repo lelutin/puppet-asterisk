@@ -11,7 +11,7 @@ define asterisk::registry::sip (
     fail('No value given for password: supplying a value for $authuser only makes sense when $password is set.')
   }
 
-  asterisk::dotd_file { "${name}.conf":
+  asterisk::dotd::file { "${name}.conf":
     dotd_dir => 'sip.registry.d',
     content  => template('asterisk/registry/sip.erb'),
   }

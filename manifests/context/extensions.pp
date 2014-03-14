@@ -5,14 +5,14 @@ define asterisk::context::extensions (
 ) {
 
   if $source {
-    asterisk::dotd_file {"${name}.conf":
+    asterisk::dotd::file {"${name}.conf":
       ensure   => $ensure,
       dotd_dir => 'extensions.d',
       source   => $source,
     }
   } else {
     if $content {
-      asterisk::dotd_file {"${name}.conf":
+      asterisk::dotd::file {"${name}.conf":
         ensure   => $ensure,
         dotd_dir => 'extensions.d',
         content  => "[${name}]\n${content}",

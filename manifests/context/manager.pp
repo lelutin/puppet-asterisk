@@ -23,7 +23,7 @@ define asterisk::context::manager (
   $real_read = join($read, ',')
   $real_write = join($write, ',')
 
-  asterisk::dotd_file {"${name}.conf":
+  asterisk::dotd::file {"${name}.conf":
     ensure   => $ensure,
     dotd_dir => 'manager.d',
     content  => template('asterisk/context/manager.erb'),
