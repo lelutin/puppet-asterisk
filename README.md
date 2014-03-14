@@ -535,7 +535,14 @@ Still not implemented !
 Types:
 
   * `asterisk::snippet::queue`
+  * `asterisk::snippet::agent`
+  * `asterisk::snippet::parkinglot`
   * `asterisk::mwi`
+
+Templates:
+
+  * agents.conf
+  * features.conf
 
 License
 -------
