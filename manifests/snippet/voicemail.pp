@@ -8,6 +8,13 @@ define asterisk::snippet::voicemail (
   $options     = {}
 ) {
 
+  validate_string($context)
+  validate_string($password)
+  validate_string($user_name)
+  validate_string($email)
+  validate_string($pager_email)
+  validate_hash($options)
+
   $real_options = inline_template('<% if options.length -%>|<%= options.keys.collect {|key| value = options[key]; "#{key}=#{value}"}.join(",") -%><% end -%>')
   asterisk::dotd::file{"${context}-${name}.conf":
     ensure   => $ensure,
