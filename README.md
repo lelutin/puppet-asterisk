@@ -8,11 +8,17 @@ To install Asterisk on a server, simply use the following:
 This will install a plain version of Asterisk without any extra
 Futures enabled.
 
-Upgrade notice: The module used to manage files under /etc/asterisk/file.conf.d
-for all values of "file" that were managed. Things have been moved to
-/etc/asterisk/file.d, so before upgrading you should remove all .conf.d
-directories (all files under the old dirs will be automatically recreated in
-the new directories).
+Upgrade notices:
+
+ * The module used to manage files under /etc/asterisk/file.conf.d
+   for all values of "file" that were managed. Things have been moved to
+   /etc/asterisk/file.d, so before upgrading you should remove all .conf.d
+   directories (all files under the old dirs will be automatically recreated in
+   the new directories).
+
+ * The defines that were previously named asterisk::context::xyz are now named
+   asterisk::snippet::xyz. Users will need to adjust their manifests to
+   upgrade.
 
 Requirements
 ------------
@@ -59,34 +65,34 @@ Valid languages strings are the following:
 Types
 -----
 
-  * `asterisk::context::extensions`
+  * `asterisk::snippet::extensions`
 
     ```puppet
-    asterisk::context::extensions { 'incoming':
+    asterisk::snippet::extensions { 'incoming':
       ensure => present,
       source => "...",
     }
 
-    asterisk::context::extensions { 'incoming':
+    asterisk::snippet::extensions { 'incoming':
       ensure  => present,
       content => template(...),
     }
 
-    asterisk::context::extensions { 'incoming':
+    asterisk::snippet::extensions { 'incoming':
       ensure => absent,
     }
     ```
 
-  * `asterisk::context::sip`
+  * `asterisk::snippet::sip`
 
     ```puppet
-    asterisk::context::sip { '1234':
+    asterisk::snippet::sip { '1234':
       ensure  => present,
       secret  => 'blah',
       context => 'incoming',
     }
 
-    asterisk::context::sip { '1234':
+    asterisk::snippet::sip { '1234':
       ensure => absent,
     }
     ```
@@ -95,13 +101,13 @@ Types
     by giving it a value of '!', or inherit from a template:
 
     ```puppet
-    asterisk::context::sip { 'corporate_user':
+    asterisk::snippet::sip { 'corporate_user':
       context       => 'corporate',
       type          => 'friend',
       # ...
       template_name => '!',
     }
-    asterisk::context::sip { 'hakim':
+    asterisk::snippet::sip { 'hakim':
       secret        => 'ohnoes!',
       template_name => 'corporate_user',
     }
@@ -130,12 +136,12 @@ Types
     }
     ```
 
-  * `asterisk::context::iax`
+  * `asterisk::snippet::iax`
 
-    This class works similarly to the asterisk::context::extensions class.
+    This class works similarly to the asterisk::snippet::extensions class.
 
     ```puppet
-    asterisk::context::iax { '5551234567':
+    asterisk::snippet::iax { '5551234567':
       source => 'puppet:///modules/site_asterisk/5551234567',
     }
     ```
@@ -150,10 +156,10 @@ Types
     }
     ```
 
-  * `asterisk::context::voicemail`
+  * `asterisk::snippet::voicemail`
 
     ```puppet
-    asterisk::context::voicemail { '3000':
+    asterisk::snippet::voicemail { '3000':
       context   => 'some_context',
       password  => '5555',
       user_name => 'Bob Bobby',
@@ -168,17 +174,17 @@ Types
     like the following:
 
     ```puppet
-    asterisk::context::voicemail { '3001':
+    asterisk::snippet::voicemail { '3001':
       context  => 'blah',
       password => '112233',
       options  => { 'attach' => 'yes', 'delete' => 'yes' },
     }
     ```
 
-  * `asterisk::context::manager`
+  * `asterisk::snippet::manager`
 
     ```puppet
-    asterisk::context::manager { 'nagios':
+    asterisk::snippet::manager { 'nagios':
       secret => 'topsecret1234',
       read   => ['all'],
       write  => ['system', ' call', ' log', ' verbose', ' command', ' agent', ' user'],
@@ -189,7 +195,7 @@ Types
     system commands and trigger calls:
 
     ```puppet
-    asterisk::context::manager { 'nagios':
+    asterisk::snippet::manager { 'nagios':
       secret => 'topsecret1234',
       read   => ['system', 'call'],
       write  => ['system', 'call'],
@@ -199,7 +205,7 @@ Types
     permit remote management to two other systems on an internal network:
 
     ```puppet
-    asterisk::context::manager { 'robocall':
+    asterisk::snippet::manager { 'robocall':
       secret => 'robotsdeservesomeloveafterall',
       permit => ['10.10.10.200/255.255.255.0', '10.20.20.200/255.255.255.0'],
       read   => ['system', 'call', 'log'],
@@ -211,7 +217,7 @@ Types
     manager name, you can use the `manager_name` parameter:
 
     ```puppet
-    asterisk::context::manager { 'sysadmin':
+    asterisk::snippet::manager { 'sysadmin':
       secret       => 'nowyouseemenowyoudont',
       manager_name => 'surreptitioustyrant',
     }
@@ -387,7 +393,7 @@ $extensions_options = {
 
 Note that by default no global variables (e.g. values set in the `[globals]`
 context) are set. To set global variables, you can use an
-`asterisk::context::extensions` resource with a context value of "globals".
+`asterisk::snippet::extensions` resource with a context value of "globals".
 
 Queues Options
 --------------
@@ -498,7 +504,7 @@ class.
    manager should bind. Default value is 127.0.0.1.
 
 By default, no user access is configured. If you want to enable users to
-interact with the manager, you should declare `asterisk::context::manager`
+interact with the manager, you should declare `asterisk::snippet::manager`
 resources.
 
 Patches and Testing
@@ -528,7 +534,7 @@ Still not implemented !
 
 Types:
 
-  * `asterisk::context::queue`
+  * `asterisk::snippet::queue`
   * `asterisk::mwi`
 
 License

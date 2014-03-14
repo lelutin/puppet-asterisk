@@ -1,4 +1,4 @@
-define asterisk::context::extensions (
+define asterisk::snippet::iax (
   $ensure  = present,
   $source  = false,
   $content = false
@@ -7,14 +7,14 @@ define asterisk::context::extensions (
   if $source {
     asterisk::dotd::file {"${name}.conf":
       ensure   => $ensure,
-      dotd_dir => 'extensions.d',
+      dotd_dir => 'iax.d',
       source   => $source,
     }
   } else {
     if $content {
       asterisk::dotd::file {"${name}.conf":
         ensure   => $ensure,
-        dotd_dir => 'extensions.d',
+        dotd_dir => 'iax.d',
         content  => "[${name}]\n${content}",
       }
     } else {

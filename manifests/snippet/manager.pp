@@ -1,4 +1,4 @@
-define asterisk::context::manager (
+define asterisk::snippet::manager (
   $secret,
   $ensure       = present,
   $manager_name = false,
@@ -26,7 +26,7 @@ define asterisk::context::manager (
   asterisk::dotd::file {"${name}.conf":
     ensure   => $ensure,
     dotd_dir => 'manager.d',
-    content  => template('asterisk/context/manager.erb'),
+    content  => template('asterisk/snippet/manager.erb'),
     filename => "${name}.conf",
   }
 

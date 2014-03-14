@@ -1,4 +1,4 @@
-define asterisk::context::sip (
+define asterisk::snippet::sip (
   $ensure        = present,
   $username      = false,
   $defaultuser   = true,
@@ -31,7 +31,7 @@ define asterisk::context::sip (
   asterisk::dotd::file {"sip_${name}.conf":
     ensure   => $ensure,
     dotd_dir => 'sip.d',
-    content  => template('asterisk/context/sip.erb'),
+    content  => template('asterisk/snippet/sip.erb'),
     filename => "${name}.conf",
   }
 }
