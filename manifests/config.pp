@@ -40,8 +40,6 @@ class asterisk::config {
     content => template('asterisk/extensions.conf.erb'),
   }
 
-  $queues_monitor_type = $asterisk::queues_monitor_type
-  $queues_monitor_format = $asterisk::queues_monitor_format
   $queues_options = $asterisk::real_queues_options
   asterisk::dotd { '/etc/asterisk/queues':
     content => template('asterisk/queues.conf.erb'),

@@ -6,8 +6,6 @@ class asterisk (
   $sip_options            = {},
   $voicemail_options      = {},
   $extensions_options     = {},
-  $queues_monitor_type    = $asterisk::params::queues_monitor_type,
-  $queues_monitor_format  = $asterisk::params::queues_monitor_format,
   $queues_options         = $asterisk::params::queues_options,
   $modules_autoload       = $asterisk::params::modules_autoload,
   $modules_noload         = $asterisk::params::modules_noload,
@@ -26,8 +24,6 @@ class asterisk (
   validate_hash($sip_options)
   validate_hash($voicemail_options)
   validate_hash($extensions_options)
-  validate_string($queues_monitor_type)
-  validate_string($queues_monitor_format)
   validate_hash($queues_options)
   validate_bool($modules_autoload)
   validate_array($modules_noload)

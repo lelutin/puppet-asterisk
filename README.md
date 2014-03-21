@@ -20,6 +20,14 @@ Upgrade notices:
    asterisk::snippet::xyz. Users will need to adjust their manifests to
    upgrade.
 
+ * The `queues_monitor_type` and `queues_monitor_format` parameters to the
+   default class were removed in favor of using quoted strings in the options
+   array. Users who used those two options need to place their values in the
+   `$queues_options` hash with 'monitor-type' and 'monitor-format' strings as
+   keys, respectively. To ensure that 'monitor-type' is not present in the
+   config file, simply leave it out (as opposed to the previous behaviour of
+   the option that required an empty string for this).
+
 Requirements
 ------------
 
@@ -223,6 +231,37 @@ Types
     }
     ```
 
+Notes on options
+----------------
+
+Asterisk as lots and lots of configuration variables that can be set in
+different files. In order to simplify the module, we're actually not validating
+that the options passed in are valid ones and expect this validation to be done
+by the user.
+
+As you will see in some of the following sections, some configuration files
+will be customizable through option hashes. The format of those hashes is
+always the same and looks like the following:
+
+```puppet
+$xyz_options = {
+  'configuration-option1' => 'value1',
+  'allow'                 => ['list-value1', 'list-value2'],
+  #[...]
+}
+```
+
+We encourage users to use strings as hash keys since some Asterisk options have
+dashes in their name and dashes are prohibited in hash heys as symbols.
+
+Some options should always be arrays: the option can be specified in the
+configuration file more than once to declare more values. Those options will
+generally be set in the hashes that define default values (see in each section
+below) as arrays either containing a number of strings, or being empty. We
+enforce that those options be arrays since we need to iterate over them in
+templates. Empty arrays mean that the option should not appear in the
+configuration file.
+
 IAX2 Options
 ------------
 
@@ -235,9 +274,9 @@ the `iax_options` parameter:
 
 ```puppet
 $iax_options = {
-  autokill          => 'yes',
-  jitterbuffer      => 'no',
-  forcejitterbuffer => 'no',
+  'autokill'          => 'yes',
+  'jitterbuffer'      => 'no',
+  'forcejitterbuffer' => 'no',
 }
 class { 'asterisk':
   iax_options => $iax_options,
@@ -253,17 +292,17 @@ Here is the default hash with the default values, as defined in params.pp:
 
 ```puppet
 $iax_options = {
-  disallow          => ['lpc10'],
-  allow             => ['gsm'],
-  delayreject       => 'yes',
-  bandwidth         => 'high',
-  jitterbuffer      => 'yes',
-  forcejitterbuffer => 'yes',
-  maxjitterbuffer   => '1000',
-  maxjitterinterps  => '10',
-  resyncthreshold   => '1000',
-  trunktimestamps   => 'yes',
-  autokill          => 'yes',
+  'disallow'          => ['lpc10'],
+  'allow'             => ['gsm'],
+  'delayreject'       => 'yes',
+  'bandwidth'         => 'high',
+  'jitterbuffer'      => 'yes',
+  'forcejitterbuffer' => 'yes',
+  'maxjitterbuffer'   => '1000',
+  'maxjitterinterps'  => '10',
+  'resyncthreshold'   => '1000',
+  'trunktimestamps'   => 'yes',
+  'autokill'          => 'yes',
 }
 ```
 
@@ -281,14 +320,14 @@ the `sip_options` parameter:
 
 ```puppet
 $sip_options = {
-  disallow    => ['all'],
-  allow       => ['alaw'],
-  localnet    => [],
-  domain      => [],
-  udpbindaddr => '10.1.1.30',
-  nat         => 'yes',
-  language    => 'fr',
-  t38pt_udptl => 'yes',
+  'disallow'    => ['all'],
+  'allow'       => ['alaw'],
+  'localnet'    => [],
+  'domain'      => [],
+  'udpbindaddr' => '10.1.1.30',
+  'nat'         => 'yes',
+  'language'    => 'fr',
+  't38pt_udptl' => 'yes',
 }
 class { 'asterisk':
   sip_options => $sip_options,
@@ -304,17 +343,17 @@ Here is the default hash with the default values, as defined in params.pp:
 
 ```puppet
 $sip_options = {
-  disallow     => ['all'],
-  allow        => ['alaw'],
-  localnet     => ['192.168.0.0/255.255.0.0','10.0.0.0/255.0.0.0','172.16.0.0/12'.'169.254.0.0/255.255.0.0'],
-  domain       => [],
-  context      => 'inbound',
-  allowguest   => 'no',
-  allowoverlap => 'no',
-  udpbindaddr  => '0.0.0.0',
-  tcpenable    => 'no',
-  tcpbindaddr  => '0.0.0.0',
-  srvlookup    => 'yes',
+  'disallow'     => ['all'],
+  'allow'        => ['alaw'],
+  'localnet'     => ['192.168.0.0/255.255.0.0','10.0.0.0/255.0.0.0','172.16.0.0/12'.'169.254.0.0/255.255.0.0'],
+  'domain'       => [],
+  'context'      => 'inbound',
+  'allowguest'   => 'no',
+  'allowoverlap' => 'no',
+  'udpbindaddr'  => '0.0.0.0',
+  'tcpenable'    => 'no',
+  'tcpbindaddr'  => '0.0.0.0',
+  'srvlookup'    => 'yes',
 }
 ```
 
@@ -330,10 +369,10 @@ the default configuration file from Debian:
 
 ```puppet
 $voicemail_options = {
-  servermail      => 'telephone',
-  format          => 'wav49|wav',
-  emaildateformat => '%F, at %R:%S',
-  delete          => 'yes',
+  'servermail'      => 'telephone',
+  'format'          => 'wav49|wav',
+  'emaildateformat' => '%F, at %R:%S',
+  'delete'          => 'yes',
 }
 class { 'asterisk':
   voicemail_options => $voicemail_options,
@@ -347,17 +386,17 @@ Here is the default hash with the default values, as defined in params.pp:
 
 ```puppet
 $voicemail_options = {
-  format           => 'wav49|gsm|wav',
-  serveremail      => 'asterisk',
-  attach           => 'yes',
-  minsecs          => 3,
-  skipms           => 3000,
-  maxsilence       => 10,
-  silencethreshold => 128,
-  maxlogins        => 3,
-  emailbody        => 'Dear ${VM_NAME}:\n\n\tjust wanted to let you know you were just ${IF($["${VM_CIDNUM}" = "${ORIG_VM_CIDNUM}"]?left:forwarded)} a ${VM_DUR} long message (number ${VM_MSGNUM})\nin mailbox ${VM_MAILBOX} from ${VM_CALLERID} <${VM_CIDNUM}>, on ${VM_DATE},\n${IF($["${VM_CIDNUM}" = "${ORIG_VM_CIDNUM}"]?so:(originally sent by ${ORIG_VM_CALLERID} on ${ORIG_VM_DATE})\nso)} you might want to check it when you get a chance.  Thanks!\n\n\t\t\t\t--Asterisk\n',
-  emaildateformat  => '%A, %B %d, %Y at %r',
-  sendvoicemail    => 'yes',
+  'format'           => 'wav49|gsm|wav',
+  'serveremail'      => 'asterisk',
+  'attach'           => 'yes',
+  'minsecs'          => 3,
+  'skipms'           => 3000,
+  'maxsilence'       => 10,
+  'silencethreshold' => 128,
+  'maxlogins'        => 3,
+  'emailbody'        => 'Dear ${VM_NAME}:\n\n\tjust wanted to let you know you were just ${IF($["${VM_CIDNUM}" = "${ORIG_VM_CIDNUM}"]?left:forwarded)} a ${VM_DUR} long message (number ${VM_MSGNUM})\nin mailbox ${VM_MAILBOX} from ${VM_CALLERID} <${VM_CIDNUM}>, on ${VM_DATE},\n${IF($["${VM_CIDNUM}" = "${ORIG_VM_CIDNUM}"]?so:(originally sent by ${ORIG_VM_CALLERID} on ${ORIG_VM_DATE})\nso)} you might want to check it when you get a chance.  Thanks!\n\n\t\t\t\t--Asterisk\n',
+  'emaildateformat'  => '%A, %B %d, %Y at %r',
+  'sendvoicemail'    => 'yes',
 }
 ```
 
@@ -370,8 +409,8 @@ values are taken from the default Debian configuration file.
 
 ```puppet
 $extensions_options = {
-  autofallthrough => 'yes',
-  clearglobalvars => 'yes',
+  'autofallthrough' => 'yes',
+  'clearglobalvars' => 'yes',
 }
 class { 'asterisk':
   extensions_options => $extensions_options,
@@ -385,9 +424,9 @@ Here is the default hash with the default values, as defined in params.pp:
 
 ```puppet
 $extensions_options = {
-  static          => 'yes',
-  writeprotect    => 'no',
-  clearglobalvars => 'no',
+  'static'          => 'yes',
+  'writeprotect'    => 'no',
+  'clearglobalvars' => 'no',
 }
 ```
 
@@ -402,23 +441,13 @@ For queues some global configurations and default values can be set in the
 `[general]` context. You can set options by passing a hash to the
 `queues_options` parameter to the `asterisk` class.
 
-Two options, monitor-type and monitor-format, could not be set inside the hash
-because the option names have a dash in them. You can use the
-`queues_monitor_type` and `queues_monitor_format` respectively to set the two
-options. If you specify an empty string to one of those two parameters, the
-options will not be mentioned in the configuration file. By default,
-`queues_monitor_type` has a value of `MixMonitor` and `queues_monitor_format`
-is empty.
-
 ```puppet
 $queues_options = {
-  autofill  => 'no',
-  updatecdr => 'yes',
+  'autofill'  => 'no',
+  'updatecdr' => 'yes',
 }
 class { 'asterisk':
-  queues_monitor_type   => '',
-  queues_monitor_format => 'gsm|wav|wav49',
-  queues_options        => $queues_options,
+  queues_options => $queues_options,
 }
 ```
 
@@ -429,9 +458,10 @@ Here is the default hash with the default values, as defined in params.pp:
 
 ```puppet
 $queues_options = {
-  persistentmembers => 'yes',
-  autofill          => 'yes',
-  shared_lastcall   => 'no',
+  'monitor-type'      => 'MixMonitor',
+  'persistentmembers' => 'yes',
+  'autofill'          => 'yes',
+  'shared_lastcall'   => 'no',
 }
 ```
 
