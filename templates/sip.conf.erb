@@ -1,7 +1,10 @@
+; THIS FILE IS MANAGED BY PUPPET
+; all local modifications will be lost
+; To change values found in this file, see the $sip_options parameter of
+; the asterisk module
 ;
 ; SIP Configuration for Asterisk
 ;
-
 [general]
 <% sip_options.sort.map do |name, value|
   if value.is_a? Array

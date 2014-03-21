@@ -1,12 +1,9 @@
+; THIS FILE IS MANAGED BY PUPPET
+; all local modifications will be lost
+; To change values found in this file, see the $iax_options parameter of
+; the asterisk module
+;
 ; Inter-Asterisk eXchange driver definition
-;
-; This configuration is re-read at reload
-; or with the CLI command
-; 	reload chan_iax2.so
-;
-; General settings, like port number to bind to, and
-; an option address (the default is to bind to all
-; local addresses).
 ;
 [general]
 <% iax_options.sort.map do |name, value|
