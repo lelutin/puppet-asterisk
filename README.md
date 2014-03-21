@@ -8,25 +8,8 @@ To install Asterisk on a server, simply use the following:
 This will install a plain version of Asterisk without any extra
 Futures enabled.
 
-Upgrade notices:
-
- * The module used to manage files under /etc/asterisk/file.conf.d
-   for all values of "file" that were managed. Things have been moved to
-   /etc/asterisk/file.d, so before upgrading you should remove all .conf.d
-   directories (all files under the old dirs will be automatically recreated in
-   the new directories).
-
- * The defines that were previously named asterisk::context::xyz are now named
-   asterisk::snippet::xyz. Users will need to adjust their manifests to
-   upgrade.
-
- * The `queues_monitor_type` and `queues_monitor_format` parameters to the
-   default class were removed in favor of using quoted strings in the options
-   array. Users who used those two options need to place their values in the
-   `$queues_options` hash with 'monitor-type' and 'monitor-format' strings as
-   keys, respectively. To ensure that 'monitor-type' is not present in the
-   config file, simply leave it out (as opposed to the previous behaviour of
-   the option that required an empty string for this).
+Users that are upgrading (e.g. switching or merging to current master) should
+consult the section named "Upgrade notices" near the end.
 
 Requirements
 ------------
@@ -536,6 +519,27 @@ class.
 By default, no user access is configured. If you want to enable users to
 interact with the manager, you should declare `asterisk::snippet::manager`
 resources.
+
+Upgrade notices
+---------------
+
+ * The module used to manage files under /etc/asterisk/file.conf.d
+   for all values of "file" that were managed. Things have been moved to
+   /etc/asterisk/file.d, so before upgrading you should remove all .conf.d
+   directories (all files under the old dirs will be automatically recreated in
+   the new directories).
+
+ * The defines that were previously named asterisk::context::xyz are now named
+   asterisk::snippet::xyz. Users will need to adjust their manifests to
+   upgrade.
+
+ * The `queues_monitor_type` and `queues_monitor_format` parameters to the
+   default class were removed in favor of using quoted strings in the options
+   array. Users who used those two options need to place their values in the
+   `$queues_options` hash with 'monitor-type' and 'monitor-format' strings as
+   keys, respectively. To ensure that 'monitor-type' is not present in the
+   config file, simply leave it out (as opposed to the previous behaviour of
+   the option that required an empty string for this).
 
 Patches and Testing
 -------------------
