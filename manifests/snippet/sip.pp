@@ -28,6 +28,10 @@ define asterisk::snippet::sip (
   $dtmfmode      = false
 ) {
 
+  # Ensure that we can iterate over some of the parameters.
+  validate_array($disallow)
+  validate_array($allow)
+
   asterisk::dotd::file {"${name}.conf":
     ensure   => $ensure,
     dotd_dir => 'sip.d',
