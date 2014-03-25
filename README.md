@@ -233,7 +233,7 @@ Types
 Notes on options
 ----------------
 
-Asterisk as lots and lots of configuration variables that can be set in
+Asterisk has lots and lots of configuration variables that can be set in
 different files. In order to simplify the module, we're actually not validating
 that the options passed in are valid ones and expect this validation to be done
 by the user.
@@ -261,31 +261,19 @@ enforce that those options be arrays since we need to iterate over them in
 templates. Empty arrays mean that the option should not appear in the
 configuration file.
 
+Default values are taken from Debian's default configuration files.
+
+Keys that are present in the option hash paramters to the `asterisk` class will
+override the default options (or set new ones for options that are not present
+in the default option hash). This lets you use all the default values but
+change only a couple of values.
+
 IAX2 Options
 ------------
 
 If you are using the IAX2 protocol, you'll want to set some global
-configuration options. The default values are taken from Debian's default
-iax.conf file.
-
-For passing in settings, you need to send a hash to the `asterisk` class with
-the `iax_options` parameter:
-
-```puppet
-$iax_options = {
-  'autokill'          => 'yes',
-  'jitterbuffer'      => 'no',
-  'forcejitterbuffer' => 'no',
-}
-class { 'asterisk':
-  iax_options => $iax_options,
-}
-```
-
-Keys that are present in the `iax_options` paramter to the `asterisk` class will
-override the default options (or set new ones for options that are not present
-in the default option hash). This lets you use all the default values but
-change only a couple of values.
+configuration options. For passing in settings, you need to send a hash to the
+`asterisk` class with the `iax_options` parameter.
 
 Here is the default hash with the default values, as defined in params.pp:
 
@@ -311,32 +299,8 @@ SIP Options
 ------------
 
 If you are using the SIP protocol, you'll want to set some global
-configuration options. The default values are taken from Debian's default
-sip.conf file.
-
-For passing in settings, you need to send a hash to the `asterisk` class with
-the `sip_options` parameter:
-
-```puppet
-$sip_options = {
-  'disallow'    => ['all'],
-  'allow'       => ['alaw'],
-  'localnet'    => [],
-  'domain'      => [],
-  'udpbindaddr' => '10.1.1.30',
-  'nat'         => 'yes',
-  'language'    => 'fr',
-  't38pt_udptl' => 'yes',
-}
-class { 'asterisk':
-  sip_options => $sip_options,
-}
-```
-
-Similarly to the SIP options, keys that are present in the `sip_options`
-paramter to the `asterisk` class will override the default options (or set new
-ones for options that are not present in the default option hash). This lets
-you use all the default values but change only a couple of values.
+configuration options. For passing in settings, you need to send a hash to the
+`asterisk` class with the `sip_options` parameter.
 
 Here is the default hash with the default values, as defined in params.pp:
 
@@ -363,23 +327,7 @@ Voicemail Options
 
 Voicemail can be configured through a set of options in the `[general]`
 context. To set those options, you can pass values as a hash to the
-`voicemail_options` parameter to the main class. Default values are taken from
-the default configuration file from Debian:
-
-```puppet
-$voicemail_options = {
-  'servermail'      => 'telephone',
-  'format'          => 'wav49|wav',
-  'emaildateformat' => '%F, at %R:%S',
-  'delete'          => 'yes',
-}
-class { 'asterisk':
-  voicemail_options => $voicemail_options,
-}
-```
-
-Again, keys that are present in the `voicemail_options` parameter to the
-`asterisk` class will override the default options (or set new ones).
+`voicemail_options` parameter to the main class.
 
 Here is the default hash with the default values, as defined in params.pp:
 
@@ -403,21 +351,7 @@ Extensions Options
 ------------------
 
 Some global options can be set for extensions. You can achieve that by passing
-a hash to the `extensions_options` parameter to the `asterisk` class. Default
-values are taken from the default Debian configuration file.
-
-```puppet
-$extensions_options = {
-  'autofallthrough' => 'yes',
-  'clearglobalvars' => 'yes',
-}
-class { 'asterisk':
-  extensions_options => $extensions_options,
-}
-```
-
-Keys that are present in the `extensions_options` parameter to the
-`asterisk` class will override the default options (or set new ones).
+a hash to the `extensions_options` parameter to the `asterisk` class.
 
 Here is the default hash with the default values, as defined in params.pp:
 
@@ -439,19 +373,6 @@ Queues Options
 For queues some global configurations and default values can be set in the
 `[general]` context. You can set options by passing a hash to the
 `queues_options` parameter to the `asterisk` class.
-
-```puppet
-$queues_options = {
-  'autofill'  => 'no',
-  'updatecdr' => 'yes',
-}
-class { 'asterisk':
-  queues_options => $queues_options,
-}
-```
-
-Keys that are present in the `queues_options` parameter to the `asterisk` class
-will override the default options (or set new ones).
 
 Here is the default hash with the default values, as defined in params.pp:
 
