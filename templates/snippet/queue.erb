@@ -1,0 +1,152 @@
+; THIS FILE IS MANAGED BY PUPPET
+; all local modifications will be lost
+[<%= @name %>]
+<% if @strategy != false -%>
+strategy=<%= @strategy %>
+<% end -%>
+<% for member in @members %>member=<%= member %>
+<% end -%>
+<% if @memberdelay != false -%>
+memberdelay=<%= @memberdelay %>
+<% end -%>
+<% if @penaltymemberslimit != false -%>
+penaltymemberslimit=<%= @penaltymemberslimit %>
+<% end -%>
+<% if @membermacro != false -%>
+membermacro=<%= @membermacro %>
+<% end -%>
+<% if @membergosub != false -%>
+membergosub=<%= @membergosub %>
+<% end -%>
+<% if @context != false -%>
+context=<%= @context %>
+<% end -%>
+<% if @defaultrule != false -%>
+defaultrule=<%= @defaultrule %>
+<% end -%>
+<% if @maxlen != false -%>
+maxlen=<%= @maxlen %>
+<% end -%>
+<% if @musicclass != false -%>
+musicclass=<%= @musicclass %>
+<% end -%>
+<% if @servicelevel != false -%>
+servicelevel=<%= @servicelevel %>
+<% end -%>
+<% if @weight != false -%>
+weight=<%= @weight %>
+<% end -%>
+<% if ! @joinempty.empty? -%>
+joinempty=<%= @joinempty.join(',') %>
+<% end -%>
+<% if ! @leavewhenempty.empty? -%>
+leavewhenempty=<%= @leavewhenempty.join(',') %>
+<% end -%>
+<% if @eventwhencalled != false -%>
+eventwhencalled=<%= @eventwhencalled %>
+<% end -%>
+<% if @eventmemberstatus != false -%>
+eventmemberstatus=<%= @eventmemberstatus %>
+<% end -%>
+<% if @reportholdtime != false -%>
+reportholdtime=<%= @reportholdtime %>
+<% end -%>
+<% if @ringinuse != false -%>
+ringinuse=<%= @ringinuse %>
+<% end -%>
+<% if @monitor_type != false -%>
+monitor-type=<%= @monitor_type %>
+<% end -%>
+<% if ! @monitor_format.empty? -%>
+monitor-format=<%= @monitor_format.join('|') %>
+<% end -%>
+<% if @announce != false -%>
+announce=<%= @announce %>
+<% end -%>
+<% if @announce_frequency != false -%>
+announce-frequency=<%= @announce_frequency %>
+<% end -%>
+<% if @min_announce_frequency != false -%>
+min-announce-frequency=<%= @min_announce_frequency %>
+<% end -%>
+<% if @announce_holdtime != false -%>
+announce-holdtime=<%= @announce_holdtime %>
+<% end -%>
+<% if @announce_position != false -%>
+announce-position=<%= @announce_position %>
+<% end -%>
+<% if @announce_position_limit != false -%>
+announce-position-limit=<%= @announce_position_limit %>
+<% end -%>
+<% if @announce_round_seconds != false -%>
+announce-round-seconds=<%= @announce_round_seconds %>
+<% end -%>
+<% if ! @periodic_announce.empty? -%>
+periodic-announce=<%= @periodic_announce.join(',') %>
+<% end -%>
+<% if @periodic_announce_frequency != false -%>
+periodic-announce-frequency=<%= @periodic_announce_frequency %>
+<% end -%>
+<% if @random_periodic_announce != false -%>
+random-periodic-announce=<%= @random_periodic_announce %>
+<% end -%>
+<% if @relative_periodic_announce != false -%>
+relative-periodic-announce=<%= @relative_periodic_announce %>
+<% end -%>
+<% if @queue_youarenext != false -%>
+queue-youarenext=<%= @queue_youarenext %>
+<% end -%>
+<% if @queue_thereare != false -%>
+queue-thereare=<%= @queue_thereare %>
+<% end -%>
+<% if @queue_callswaiting != false -%>
+queue-callswaiting=<%= @queue_callswaiting %>
+<% end -%>
+<% if @queue_holdtime != false -%>
+queue-holdtime=<%= @queue_holdtime %>
+<% end -%>
+<% if @queue_minute != false -%>
+queue-minute=<%= @queue_minute %>
+<% end -%>
+<% if @queue_minutes != false -%>
+queue-minutes=<%= @queue_minutes %>
+<% end -%>
+<% if @queue_seconds != false -%>
+queue-seconds=<%= @queue_seconds %>
+<% end -%>
+<% if @queue_thankyou != false -%>
+queue-thankyou=<%= @queue_thankyou %>
+<% end -%>
+<% if @queue_reporthold != false -%>
+queue-reporthold=<%= @queue_reporthold %>
+<% end -%>
+<% if @wrapuptime != false -%>
+wrapuptime=<%= @wrapuptime %>
+<% end -%>
+<% if @timeout != false -%>
+timeout=<%= @timeout %>
+<% end -%>
+<% if @timeoutrestart != false -%>
+timeoutrestart=<%= @timeoutrestart %>
+<% end -%>
+<% if @timeoutpriority != false -%>
+timeoutpriority=<%= @timeoutpriority %>
+<% end -%>
+<% if @retry != false -%>
+retry=<%= @retry %>
+<% end -%>
+<% if @autofill != false -%>
+autofill=<%= @autofill %>
+<% end -%>
+<% if @autopause != false -%>
+autopause=<%= @autopause %>
+<% end -%>
+<% if @setinterfacevar != false -%>
+setinterfacevar=<%= @setinterfacevar %>
+<% end -%>
+<% if @setqueuevar != false -%>
+setqueuevar=<%= @setqueuevar %>
+<% end -%>
+<% if @setqueueentryvar != false -%>
+setqueueentryvar=<%= @setqueueentryvar %>
+<% end -%>

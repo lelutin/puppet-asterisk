@@ -214,6 +214,22 @@ Types
     }
     ```
 
+  * `asterisk::snippet::queue`
+
+    ```puppet
+    asterisk::snippet::queue { 'frontline':
+      ensure   => present,
+      stragegy => 'rrmemory',
+      members  => [
+        'SIP/reception',
+        'SIP/secretary',
+      ],
+      maxlen   => 30,
+      timeout  => 20,
+      retry    => 10,
+    }
+    ```
+
 Notes on options
 ----------------
 
@@ -568,7 +584,6 @@ Still not implemented !
 
 Types:
 
-  * `asterisk::snippet::queue`
   * `asterisk::snippet::agent`
   * `asterisk::snippet::parkinglot`
   * `asterisk::mwi`
