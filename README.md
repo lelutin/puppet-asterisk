@@ -27,8 +27,7 @@ https://github.com/puppetlabs/puppetlabs-stdlib
 Extra features
 --------------
 
-Dahdi
-=====
+### Dahdi ###
 
 To enable dahdi, use the following:
 
@@ -36,8 +35,7 @@ To enable dahdi, use the following:
   include 'asterisk::dahdi'
 ```
 
-Language sounds
-===============
+### Language sounds ###
 
 To include any language sounds, you can use the following (in this example,
 we're installing french and spanish sounds):
