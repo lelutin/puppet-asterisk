@@ -3,10 +3,12 @@ Puppet module for Asterisk
 
 To install Asterisk on a server, simply use the following:
 
-  include asterisk
+```puppet
+include asterisk
+```
 
 This will install a plain version of Asterisk without any extra
-Futures enabled.
+features enabled.
 
 Users that are upgrading (e.g. switching or merging to current master) should
 consult the section named "Upgrade notices" near the end.
@@ -25,11 +27,17 @@ https://github.com/puppetlabs/puppetlabs-stdlib
 Extra features
 --------------
 
+Dahdi
+=====
+
 To enable dahdi, use the following:
 
 ```puppet
   include 'asterisk::dahdi'
 ```
+
+Language sounds
+===============
 
 To include any language sounds, you can use the following (in this example,
 we're installing french and spanish sounds):
