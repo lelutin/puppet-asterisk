@@ -544,7 +544,6 @@ Types:
   * `asterisk::feature`
   * `asterisk::feature::applicationmap`
   * `asterisk::agent`
-  * `asterisk::parkinglot`
   * `asterisk::mwi`
 
 Templates:
