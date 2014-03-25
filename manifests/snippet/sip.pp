@@ -11,7 +11,7 @@ define asterisk::snippet::sip (
   $insecure      = 'no',
   $language      = 'en',
   $nat           = false,
-  $qualify       = no,
+  $qualify       = 'no',
   $vmexten       = false,
   $callerid      = false,
   $calllimit     = false,
