@@ -56,34 +56,34 @@ Valid languages strings are the following:
 Types
 -----
 
-  * `asterisk::snippet::extensions`
+  * `asterisk::extensions`
 
     ```puppet
-    asterisk::snippet::extensions { 'incoming':
+    asterisk::extensions { 'incoming':
       ensure => present,
       source => "...",
     }
 
-    asterisk::snippet::extensions { 'incoming':
+    asterisk::extensions { 'incoming':
       ensure  => present,
       content => template(...),
     }
 
-    asterisk::snippet::extensions { 'incoming':
+    asterisk::extensions { 'incoming':
       ensure => absent,
     }
     ```
 
-  * `asterisk::snippet::sip`
+  * `asterisk::sip`
 
     ```puppet
-    asterisk::snippet::sip { '1234':
+    asterisk::sip { '1234':
       ensure  => present,
       secret  => 'blah',
       context => 'incoming',
     }
 
-    asterisk::snippet::sip { '1234':
+    asterisk::sip { '1234':
       ensure => absent,
     }
     ```
@@ -92,13 +92,13 @@ Types
     by giving it a value of '!', or inherit from a template:
 
     ```puppet
-    asterisk::snippet::sip { 'corporate_user':
+    asterisk::sip { 'corporate_user':
       context       => 'corporate',
       type          => 'friend',
       # ...
       template_name => '!',
     }
-    asterisk::snippet::sip { 'hakim':
+    asterisk::sip { 'hakim':
       secret        => 'ohnoes!',
       template_name => 'corporate_user',
     }
@@ -127,12 +127,12 @@ Types
     }
     ```
 
-  * `asterisk::snippet::iax`
+  * `asterisk::iax`
 
-    This class works similarly to the asterisk::snippet::extensions class.
+    This class works similarly to the asterisk::extensions class.
 
     ```puppet
-    asterisk::snippet::iax { '5551234567':
+    asterisk::iax { '5551234567':
       source => 'puppet:///modules/site_asterisk/5551234567',
     }
     ```
@@ -147,10 +147,10 @@ Types
     }
     ```
 
-  * `asterisk::snippet::voicemail`
+  * `asterisk::voicemail`
 
     ```puppet
-    asterisk::snippet::voicemail { '3000':
+    asterisk::voicemail { '3000':
       context   => 'some_context',
       password  => '5555',
       user_name => 'Bob Bobby',
@@ -165,17 +165,17 @@ Types
     like the following:
 
     ```puppet
-    asterisk::snippet::voicemail { '3001':
+    asterisk::voicemail { '3001':
       context  => 'blah',
       password => '112233',
       options  => { 'attach' => 'yes', 'delete' => 'yes' },
     }
     ```
 
-  * `asterisk::snippet::manager`
+  * `asterisk::manager`
 
     ```puppet
-    asterisk::snippet::manager { 'nagios':
+    asterisk::manager { 'nagios':
       secret => 'topsecret1234',
       read   => ['all'],
       write  => ['system', ' call', ' log', ' verbose', ' command', ' agent', ' user'],
@@ -186,7 +186,7 @@ Types
     system commands and trigger calls:
 
     ```puppet
-    asterisk::snippet::manager { 'nagios':
+    asterisk::manager { 'nagios':
       secret => 'topsecret1234',
       read   => ['system', 'call'],
       write  => ['system', 'call'],
@@ -196,7 +196,7 @@ Types
     permit remote management to two other systems on an internal network:
 
     ```puppet
-    asterisk::snippet::manager { 'robocall':
+    asterisk::manager { 'robocall':
       secret => 'robotsdeservesomeloveafterall',
       permit => ['10.10.10.200/255.255.255.0', '10.20.20.200/255.255.255.0'],
       read   => ['system', 'call', 'log'],
@@ -208,16 +208,16 @@ Types
     manager name, you can use the `manager_name` parameter:
 
     ```puppet
-    asterisk::snippet::manager { 'sysadmin':
+    asterisk::manager { 'sysadmin':
       secret       => 'nowyouseemenowyoudont',
       manager_name => 'surreptitioustyrant',
     }
     ```
 
-  * `asterisk::snippet::queue`
+  * `asterisk::queue`
 
     ```puppet
-    asterisk::snippet::queue { 'frontline':
+    asterisk::queue { 'frontline':
       ensure   => present,
       stragegy => 'rrmemory',
       members  => [
@@ -431,7 +431,7 @@ $extensions_options = {
 
 Note that by default no global variables (e.g. values set in the `[globals]`
 context) are set. To set global variables, you can use an
-`asterisk::snippet::extensions` resource with a context value of "globals".
+`asterisk::extensions` resource with a context value of "globals".
 
 Queues Options
 --------------
@@ -533,7 +533,7 @@ class.
    manager should bind. Default value is 127.0.0.1.
 
 By default, no user access is configured. If you want to enable users to
-interact with the manager, you should declare `asterisk::snippet::manager`
+interact with the manager, you should declare `asterisk::manager`
 resources.
 
 Upgrade notices
@@ -545,9 +545,9 @@ Upgrade notices
    directories (all files under the old dirs will be automatically recreated in
    the new directories).
 
- * The defines that were previously named asterisk::context::xyz are now named
-   asterisk::snippet::xyz. Users will need to adjust their manifests to
-   upgrade.
+ * The defines that were previously named asterisk::context::xyz (or
+   transitorily asterisk::snippet::xyz) are now named asterisk::xyz. Users will
+   need to adjust their manifests to upgrade.
 
  * The `queues_monitor_type` and `queues_monitor_format` parameters to the
    default class were removed in favor of using quoted strings in the options
@@ -584,8 +584,8 @@ Still not implemented !
 
 Types:
 
-  * `asterisk::snippet::agent`
-  * `asterisk::snippet::parkinglot`
+  * `asterisk::agent`
+  * `asterisk::parkinglot`
   * `asterisk::mwi`
 
 Templates:

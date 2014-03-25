@@ -1,4 +1,4 @@
-define asterisk::snippet::voicemail (
+define asterisk::voicemail (
   $context,
   $password,
   $ensure      = present,

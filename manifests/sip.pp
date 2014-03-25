@@ -1,4 +1,4 @@
-define asterisk::snippet::sip (
+define asterisk::sip (
   $ensure        = present,
   $username      = false,
   $defaultuser   = true,

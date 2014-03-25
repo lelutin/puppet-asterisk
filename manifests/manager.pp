@@ -1,4 +1,4 @@
-define asterisk::snippet::manager (
+define asterisk::manager (
   $secret,
   $ensure       = present,
   $manager_name = false,

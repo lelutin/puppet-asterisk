@@ -1,4 +1,4 @@
-define asterisk::snippet::queue (
+define asterisk::queue (
   $ensure = present,
   $strategy = false,
   $members = [],
