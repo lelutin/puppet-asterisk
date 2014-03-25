@@ -58,7 +58,12 @@ class asterisk::params {
     'allow'        => ['alaw'],
     'domain'       => [],
     # make all private networks (RFC 1918) be contained in localnet
-    'localnet'     => ['192.168.0.0/255.255.0.0','10.0.0.0/255.0.0.0','172.16.0.0/12','169.254.0.0/255.255.0.0'],
+    'localnet'     => [
+      '192.168.0.0/255.255.0.0',
+      '10.0.0.0/255.0.0.0',
+      '172.16.0.0/12',
+      '169.254.0.0/255.255.0.0'
+    ],
     'context'      => 'inbound',
     'allowguest'   => 'no',
     'allowoverlap' => 'no',
