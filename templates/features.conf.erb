@@ -1,0 +1,21 @@
+; THIS FILE IS MANAGED BY PUPPET
+; all local modifications will be lost
+; To change values found in this file, see the $features_options and
+; $features_featuremap parameters of the asterisk module
+;
+; Call Features (parking, transfer, etc) configuration
+;
+[general]
+<% @features_options.sort.map do |key, value| -%>
+<%= key %>=<%= value %>
+<% end -%>
+
+[featuremap]
+<% @features_featuremap.sort.map do |key, value| -%>
+<%= key %> => <%= value %>
+<% end -%>
+
+[applicationmap]
+#include </etc/asterisk/features.applicationmap.d/*.conf>
+
+#include </etc/asterisk/features.d/*.conf>

@@ -373,6 +373,36 @@ Note that by default no global variables (e.g. values set in the `[globals]`
 context) are set. To set global variables, you can use an
 `asterisk::extensions` resource with a context value of "globals".
 
+Features Options
+----------------
+
+Some global feature options can be configured, like the default parkinglot, via
+the `features_options` parameter to the `asterisk` class.
+
+Here is the default hash with the default values, as defined in params.pp:
+
+```puppet
+$features_options = {
+  'parkext' => '700',
+  'parkpos' => '701-720',
+  'context' => 'parkedcalls',
+}
+```
+
+A special context, `featuremap`, lets you configure global features. By
+default, no feature is configured. You can pass a hash to the
+`features_featuremap` parameter to the `asterisk` class to configure features
+in this context.
+
+Another special context, `applicationmap`, lets you configure dynamic features.
+To set entries in this context, you should use the
+`asterisk::feature::applicationmap` defined type. Note also that for dynamic
+features to work the DYNAMIC_FEATURES channel variable must be set by listing
+features enabled in the channel, separated by '#'.
+
+To configure additional feature contexts, you can use the `asterisk::feature`
+defined type.
+
 Queues Options
 --------------
 
@@ -511,6 +541,8 @@ Still not implemented !
 
 Types:
 
+  * `asterisk::feature`
+  * `asterisk::feature::applicationmap`
   * `asterisk::agent`
   * `asterisk::parkinglot`
   * `asterisk::mwi`
@@ -518,7 +550,6 @@ Types:
 Templates:
 
   * agents.conf
-  * features.conf
 
 License
 -------

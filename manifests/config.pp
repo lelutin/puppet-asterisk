@@ -40,6 +40,13 @@ class asterisk::config {
     content => template('asterisk/extensions.conf.erb'),
   }
 
+  $features_options = $asterisk::real_features_options
+  $features_featuremap = $asterisk::features_featuremap
+  asterisk::dotd { '/etc/asterisk/features':
+    additional_paths => ['/etc/asterisk/features.applicationmap.d'],
+    content          => template('asterisk/features.conf.erb'),
+  }
+
   $queues_options = $asterisk::real_queues_options
   asterisk::dotd { '/etc/asterisk/queues':
     content => template('asterisk/queues.conf.erb'),

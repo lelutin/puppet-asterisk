@@ -91,6 +91,13 @@ class asterisk::params {
     'clearglobalvars' => 'no',
   }
 
+  # features default values (defines the default parkinglot)
+  $features_options = {
+    'parkext' => '700',
+    'parkpos' => '701-720',
+    'context' => 'parkedcalls',
+  }
+
   # queues reasonable defaults
   $queues_options = {
     'monitor-type'      => 'MixMonitor',
