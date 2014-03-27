@@ -1,6 +1,8 @@
 # type that installes asterisk base packages.
 class asterisk (
   $manage_service          = $asterisk::params::manage_service,
+  $package_name            = $asterisk::params::package_name,
+  $service_name            = $asterisk::params::service_name,
   $confdir                 = $asterisk::params::confdir,
   $iax_options             = {},
   $sip_options             = {},
@@ -15,9 +17,7 @@ class asterisk (
   $modules_global_options  = $asterisk::params::modules_global_options,
   $manager_enable          = $asterisk::params::manager_enable,
   $manager_port            = $asterisk::params::manager_port,
-  $manager_bindaddr        = $asterisk::params::manager_bindaddr,
-  $package_name            = $asterisk::params::package_name,
-  $service_name            = $asterisk::params::service_name
+  $manager_bindaddr        = $asterisk::params::manager_bindaddr
 ) inherits asterisk::params {
 
   validate_bool($manage_service)
