@@ -12,10 +12,10 @@ class asterisk::config {
     }
   }
 
-  shellvar {'RUNASTERISK':
-    ensure  => present,
-    target  => $service_settings_path,
-    value   => 'yes',
+  augeas { 'run_asterisk':
+    changes => [
+      "set /files/${service_settings_path}/RUNASTERISK yes",
+    ],
   }
 
   $iax_options = $asterisk::real_iax_options

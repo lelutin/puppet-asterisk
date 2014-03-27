@@ -16,13 +16,12 @@ consult the section named "Upgrade notices" near the end.
 Requirements
 ------------
 
-In order to use this module, you need the augeasprovider for shellvar.
-
-see https://github.com/hercules-team/augeasproviders for details.
-
-You also need the stdlib module from:
+In order to use this module, you need the stdlib module from:
 
 https://github.com/puppetlabs/puppetlabs-stdlib
+
+You should also make sure that augeas is available since it is used to enable
+the service in `/etc/default/asterisk`.
 
 Extra features
 --------------
