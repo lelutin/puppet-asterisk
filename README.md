@@ -398,6 +398,20 @@ Note that by default no global variables (e.g. values set in the `[globals]`
 context) are set. To set global variables, you can use an
 `asterisk::extensions` resource with a context value of "globals".
 
+Agents options
+--------------
+
+Some global options can be set for agents. One option in the `[general]`
+context, `multiplelogin`, can be set via the `agents_multiplelogin` parameter
+to the `asterisk class` with a boolean value.
+
+Global options in the `[agents]` context can be set by passing a hash to the
+`agents_options` parameter to the `asterisk` class. By default this parameter
+doesn't define any global options.
+
+For creating agents, it is recommended to use the `asterisk::agent` defined
+type.
+
 Features Options
 ----------------
 
@@ -568,10 +582,6 @@ Types:
 
   * `asterisk::agent`
   * `asterisk::mwi`
-
-Templates:
-
-  * agents.conf
 
 License
 -------

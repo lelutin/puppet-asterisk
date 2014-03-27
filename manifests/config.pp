@@ -40,6 +40,12 @@ class asterisk::config {
     content => template('asterisk/extensions.conf.erb'),
   }
 
+  $agents_multiplelogin = $asterisk::real_agents_multiplelogin
+  $agents_options = $asterisk::agents_options
+  asterisk::dotd { '/etc/asterisk/agents':
+    content => template('asterisk/agents.conf.erb'),
+  }
+
   $features_options = $asterisk::real_features_options
   $features_featuremap = $asterisk::features_featuremap
   asterisk::dotd { '/etc/asterisk/features':

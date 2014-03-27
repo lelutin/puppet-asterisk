@@ -1,0 +1,12 @@
+;
+; Agent configuration
+;
+[general]
+multiplelogin=<%= @real_agents_multiplelogin %>
+
+[agents]
+<% @agents_options.sort.map do |key, value| -%>
+<%= key %>=<%= value %>
+<% end -%>
+
+#include </etc/asterisk/agents.d/*.conf>

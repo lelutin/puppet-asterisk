@@ -8,6 +8,8 @@ class asterisk (
   $sip_options             = {},
   $voicemail_options       = {},
   $extensions_options      = {},
+  $agents_multiplelogin    = $asterisk::params::agents_multiplelogin,
+  $agents_options          = {},
   $features_options        = $asterisk::params::features_options,
   $features_featuremap     = {},
   $queues_options          = $asterisk::params::queues_options,
@@ -26,6 +28,8 @@ class asterisk (
   validate_hash($sip_options)
   validate_hash($voicemail_options)
   validate_hash($extensions_options)
+  validate_bool($agents_multiplelogin)
+  validate_hash($agents_options)
   validate_hash($features_options)
   validate_hash($features_featuremap)
   validate_hash($queues_options)
@@ -56,6 +60,10 @@ class asterisk (
     $asterisk::params::extensions_options,
     $extensions_options
   )
+  $real_agents_multiplelogin = $agents_multiplelogin ? {
+    true  => 'yes',
+    false => 'no',
+  }
   $real_features_options = merge(
     $asterisk::params::features_options,
     $features_options

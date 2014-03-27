@@ -96,6 +96,9 @@ class asterisk::params {
     'clearglobalvars' => 'no',
   }
 
+  # default values for agents
+  $agents_multiplelogin = true
+
   # features default values (defines the default parkinglot)
   $features_options = {
     'parkext' => '700',
