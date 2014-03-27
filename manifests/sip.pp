@@ -36,6 +36,5 @@ define asterisk::sip (
     ensure   => $ensure,
     dotd_dir => 'sip.d',
     content  => template('asterisk/snippet/sip.erb'),
-    filename => "${name}.conf",
   }
 }

@@ -27,7 +27,6 @@ define asterisk::manager (
     ensure   => $ensure,
     dotd_dir => 'manager.d',
     content  => template('asterisk/snippet/manager.erb'),
-    filename => "${name}.conf",
   }
 
 }

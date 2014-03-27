@@ -9,7 +9,6 @@ define asterisk::feature (
     ensure   => $ensure,
     dotd_dir => 'features.d',
     content  => template('asterisk/snippet/feature.erb'),
-    filename => "${name}.conf",
   }
 
 }

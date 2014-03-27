@@ -63,7 +63,6 @@ define asterisk::queue (
     ensure   => $ensure,
     dotd_dir => 'queues.d',
     content  => template('asterisk/snippet/queue.erb'),
-    filename => "${name}.conf",
   }
 
 }
