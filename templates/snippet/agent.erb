@@ -1,0 +1,3 @@
+<% if ! @groups.empty? -%>group=<%= @groups.join(",") %><% end %>
+agent => <%= @ext %>,<%= @password %>,<%= @agent_name %>
+<% if ! @groups.empty? -%>group=<% end %>

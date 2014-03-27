@@ -178,6 +178,38 @@ Types
     }
     ```
 
+  * `asterisk::agent`
+
+    To define a static agent:
+
+    ```puppet
+    asterisk::agent { 'joe':
+      ext        => '1001',
+      password   => '123413425',
+      agent_name => 'Joe Bonham',
+    }
+    ```
+
+    You can also assign a static agent to one or more agent groups with the
+    `groups` arguemnt.
+
+    ```puppet
+    asterisk::agent { 'cindy':
+      ext        => '1002',
+      password   => '754326',
+      agent_name => 'Cindy Rotterbauer',
+      groups     => ['1']
+    }
+    ```
+
+    Static agents have some disadvantages compared to dynamic agents. For
+    example, once assigned to a queue they cannot logout of that queue. For
+    more information on how to setup dynamic agents, see:
+
+    * [http://www.voip-info.org/wiki/view/Asterisk+cmd+AgentLogin](http://www.voip-info.org/wiki/view/Asterisk+cmd+AgentLogin)
+    * [http://www.voip-info.org/wiki/view/Asterisk+cmd+AddQueueMember](http://www.voip-info.org/wiki/view/Asterisk+cmd+AddQueueMember)
+    * [http://www.voip-info.org/wiki/view/Asterisk+cmd+RemoveQueueMember](http://www.voip-info.org/wiki/view/Asterisk+cmd+RemoveQueueMember)
+
   * `asterisk::manager`
 
     ```puppet
@@ -580,7 +612,6 @@ Still not implemented !
 
 Types:
 
-  * `asterisk::agent`
   * `asterisk::mwi`
 
 License
