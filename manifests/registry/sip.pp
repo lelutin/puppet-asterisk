@@ -1,10 +1,11 @@
 define asterisk::registry::sip (
   $server,
   $user,
-  $password='',
-  $authuser='',
-  $port='',
-  $extension=''
+  $ensure    = present,
+  $password  = '',
+  $authuser  = '',
+  $port      = '',
+  $extension = ''
 ) {
 
   if $password == '' and $authuser != '' {
@@ -12,6 +13,7 @@ define asterisk::registry::sip (
   }
 
   asterisk::dotd::file { "${name}.conf":
+    ensure   => $ensure,
     dotd_dir => 'sip.registry.d',
     content  => template('asterisk/registry/sip.erb'),
   }
