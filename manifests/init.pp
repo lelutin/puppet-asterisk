@@ -12,11 +12,11 @@ class asterisk (
   $agents_options          = {},
   $features_options        = $asterisk::params::features_options,
   $features_featuremap     = {},
-  $queues_options          = $asterisk::params::queues_options,
+  $queues_options          = {},
   $modules_autoload        = $asterisk::params::modules_autoload,
   $modules_noload          = $asterisk::params::modules_noload,
   $modules_load            = $asterisk::params::modules_load,
-  $modules_global_options  = $asterisk::params::modules_global_options,
+  $modules_global_options  = {},
   $manager_enable          = $asterisk::params::manager_enable,
   $manager_port            = $asterisk::params::manager_port,
   $manager_bindaddr        = $asterisk::params::manager_bindaddr

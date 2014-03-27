@@ -132,7 +132,6 @@ class asterisk::params {
     'res_config_pgsql.so'
   ]
   $modules_load = ['res_musiconhold.so']
-  $modules_global_options = {}
 
   # manager reasonable defaults
   $manager_enable = true
