@@ -236,6 +236,31 @@ Types
     }
     ```
 
+  * `asterisk::feature`
+
+    Define features that are contained within feature group "myfeaturegroup":
+
+    ```puppet
+    $ft_options = {
+      'pausemonitor'   => '#1,self/callee,Pausemonitor',
+      'unpauseMonitor' => '#3,self/callee,UnPauseMonitor',
+    }
+    asterisk::feature { 'myfeaturegroup':
+      options => $ft_options,
+    }
+    ```
+
+  * `asterisk::feature::applicationmap`
+
+    Define a global feature:
+
+    ```puppet
+    asterisk::feature::applicationmap { 'pausemonitor':
+      feature => 'pausemonitor',
+      value   => '#1,self/callee,Pausemonitor',
+    }
+    ```
+
 Notes on options
 ----------------
 
@@ -541,8 +566,6 @@ Still not implemented !
 
 Types:
 
-  * `asterisk::feature`
-  * `asterisk::feature::applicationmap`
   * `asterisk::agent`
   * `asterisk::mwi`
 

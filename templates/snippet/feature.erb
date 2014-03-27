@@ -1,0 +1,6 @@
+; THIS FILE IS MANAGED BY PUPPET
+; all local modifications will be lost
+[<%= @name %>]
+<% @options.sort.map do |name, value| -%>
+<%= name -%> => <%= value %>
+<% end -%>
