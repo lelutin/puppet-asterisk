@@ -26,95 +26,72 @@
 # === Authors
 #
 # * Maximilian Ronniger <mailto:mxr@rise-world.com>
+# * Gabriel Filion <gabster@lelutin.ca>
 #
 class asterisk::params {
 
-  #### Default values for the parameters of the main module class, init.pp
-
-  # service should start
   $manage_service = true
 
-  # configuration directory
   $confdir = '/etc/asterisk'
 
-  # iax reasonable defaults
   $iax_options = {
     'disallow'          => ['lpc10'],
-    'allow'             => ['gsm'],
-    'delayreject'       => 'yes',
-    'bandwidth'         => 'high',
-    'jitterbuffer'      => 'yes',
-    'forcejitterbuffer' => 'yes',
-    'maxjitterbuffer'   => '1000',
-    'maxjitterinterps'  => '10',
-    'resyncthreshold'   => '1000',
-    'trunktimestamps'   => 'yes',
+    'bandwidth'         => 'low',
+    'jitterbuffer'      => 'no',
+    'forcejitterbuffer' => 'no',
     'autokill'          => 'yes',
   }
 
-  # sip reasonable minimal defaults
   $sip_options = {
-    'disallow'     => ['all'],
-    'allow'        => ['alaw'],
+    'disallow'     => [],
+    'allow'        => [],
     'domain'       => [],
-    # make all private networks (RFC 1918) be contained in localnet
-    'localnet'     => [
-      '192.168.0.0/255.255.0.0',
-      '10.0.0.0/255.0.0.0',
-      '172.16.0.0/12',
-      '169.254.0.0/255.255.0.0'
-    ],
-    'context'      => 'inbound',
-    'allowguest'   => 'no',
+    'localnet'     => [],
+    'context'      => 'default',
     'allowoverlap' => 'no',
     'udpbindaddr'  => '0.0.0.0',
-    'transport'    => 'udp',
     'tcpenable'    => 'no',
     'tcpbindaddr'  => '0.0.0.0',
+    'transport'    => 'udp',
     'srvlookup'    => 'yes',
   }
 
-  # voicemail reasonable defaults
   $voicemail_options = {
     'format'           => 'wav49|gsm|wav',
     'serveremail'      => 'asterisk',
     'attach'           => 'yes',
-    'minsecs'          => 3,
     'skipms'           => 3000,
     'maxsilence'       => 10,
     'silencethreshold' => 128,
     'maxlogins'        => 3,
+    # This is not really the default value for emailbody but it makes more
+    # sense to be a bit more verbose by default.
     'emailbody'        => 'Dear ${VM_NAME}:\n\n\tjust wanted to let you know you were just ${IF($["${VM_CIDNUM}" = "${ORIG_VM_CIDNUM}"]?left:forwarded)} a ${VM_DUR} long message (number ${VM_MSGNUM})\nin mailbox ${VM_MAILBOX} from ${VM_CALLERID} <${VM_CIDNUM}>, on ${VM_DATE},\n${IF($["${VM_CIDNUM}" = "${ORIG_VM_CIDNUM}"]?so:(originally sent by ${ORIG_VM_CALLERID} on ${ORIG_VM_DATE})\nso)} you might want to check it when you get a chance.  Thanks!\n\n\t\t\t\t--Asterisk\n',
     'emaildateformat'  => '%A, %B %d, %Y at %r',
+    'pagerdateformat'  => '%A, %B %d, %Y at %r',
     'sendvoicemail'    => 'yes',
   }
 
-  # extensions reasonable defaults
   $extensions_options = {
     'static'          => 'yes',
     'writeprotect'    => 'no',
     'clearglobalvars' => 'no',
   }
 
-  # default values for agents
   $agents_multiplelogin = true
 
-  # features default values (defines the default parkinglot)
+  # defines the default parkinglot
   $features_options = {
     'parkext' => '700',
     'parkpos' => '701-720',
     'context' => 'parkedcalls',
   }
 
-  # queues reasonable defaults
   $queues_options = {
-    'monitor-type'      => 'MixMonitor',
     'persistentmembers' => 'yes',
-    'autofill'          => 'yes',
-    'shared_lastcall'   => 'no',
+    'monitor-type'      => 'MixMonitor',
   }
 
-  # modules reasonable defaults
   $modules_autoload = true
   $modules_noload = [
     'pbx_gtkconsole.so',
@@ -133,7 +110,6 @@ class asterisk::params {
   ]
   $modules_load = ['res_musiconhold.so']
 
-  # manager reasonable defaults
   $manager_enable = true
   $manager_port = 5038
   $manager_bindaddr = '127.0.0.1'

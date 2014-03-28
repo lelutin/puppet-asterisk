@@ -342,15 +342,9 @@ Here is the default hash with the default values, as defined in params.pp:
 ```puppet
 $iax_options = {
   'disallow'          => ['lpc10'],
-  'allow'             => ['gsm'],
-  'delayreject'       => 'yes',
-  'bandwidth'         => 'high',
-  'jitterbuffer'      => 'yes',
-  'forcejitterbuffer' => 'yes',
-  'maxjitterbuffer'   => '1000',
-  'maxjitterinterps'  => '10',
-  'resyncthreshold'   => '1000',
-  'trunktimestamps'   => 'yes',
+  'bandwidth'         => 'low',
+  'jitterbuffer'      => 'no',
+  'forcejitterbuffer' => 'no',
   'autokill'          => 'yes',
 }
 ```
@@ -368,16 +362,16 @@ Here is the default hash with the default values, as defined in params.pp:
 
 ```puppet
 $sip_options = {
-  'disallow'     => ['all'],
-  'allow'        => ['alaw'],
-  'localnet'     => ['192.168.0.0/255.255.0.0','10.0.0.0/255.0.0.0','172.16.0.0/12'.'169.254.0.0/255.255.0.0'],
+  'disallow'     => [],
+  'allow'        => [],
   'domain'       => [],
-  'context'      => 'inbound',
-  'allowguest'   => 'no',
+  'localnet'     => [],
+  'context'      => 'default',
   'allowoverlap' => 'no',
   'udpbindaddr'  => '0.0.0.0',
   'tcpenable'    => 'no',
   'tcpbindaddr'  => '0.0.0.0',
+  'transport'    => 'udp',
   'srvlookup'    => 'yes',
 }
 ```
@@ -398,13 +392,15 @@ $voicemail_options = {
   'format'           => 'wav49|gsm|wav',
   'serveremail'      => 'asterisk',
   'attach'           => 'yes',
-  'minsecs'          => 3,
   'skipms'           => 3000,
   'maxsilence'       => 10,
   'silencethreshold' => 128,
   'maxlogins'        => 3,
+  # This is not really the default value for emailbody but it makes more
+  # sense to be a bit more verbose by default.
   'emailbody'        => 'Dear ${VM_NAME}:\n\n\tjust wanted to let you know you were just ${IF($["${VM_CIDNUM}" = "${ORIG_VM_CIDNUM}"]?left:forwarded)} a ${VM_DUR} long message (number ${VM_MSGNUM})\nin mailbox ${VM_MAILBOX} from ${VM_CALLERID} <${VM_CIDNUM}>, on ${VM_DATE},\n${IF($["${VM_CIDNUM}" = "${ORIG_VM_CIDNUM}"]?so:(originally sent by ${ORIG_VM_CALLERID} on ${ORIG_VM_DATE})\nso)} you might want to check it when you get a chance.  Thanks!\n\n\t\t\t\t--Asterisk\n',
   'emaildateformat'  => '%A, %B %d, %Y at %r',
+  'pagerdateformat'  => '%A, %B %d, %Y at %r',
   'sendvoicemail'    => 'yes',
 }
 ```
@@ -484,10 +480,8 @@ Here is the default hash with the default values, as defined in params.pp:
 
 ```puppet
 $queues_options = {
-  'monitor-type'      => 'MixMonitor',
   'persistentmembers' => 'yes',
-  'autofill'          => 'yes',
-  'shared_lastcall'   => 'no',
+  'monitor-type'      => 'MixMonitor',
 }
 ```
 
@@ -583,6 +577,10 @@ Upgrade notices
    keys, respectively. To ensure that 'monitor-type' is not present in the
    config file, simply leave it out (as opposed to the previous behaviour of
    the option that required an empty string for this).
+
+ * Some default values were removed and some others were modified to be closer
+   to default Debian config files. You should verify that new values or
+   variables that disappear won't have an impact on your setup.
 
 Patches and Testing
 -------------------
