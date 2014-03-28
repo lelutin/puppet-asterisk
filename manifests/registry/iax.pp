@@ -6,7 +6,7 @@ define asterisk::registry::iax (
 ) {
 
   asterisk::dotd::file { "registry__iax_${name}.conf":
-    ensute   => $ensure,
+    ensure   => $ensure,
     dotd_dir => 'iax.registry.d',
     content  => template('asterisk/registry/iax.erb'),
     filename => "${name}.conf",
