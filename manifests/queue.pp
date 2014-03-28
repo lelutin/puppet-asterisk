@@ -59,10 +59,11 @@ define asterisk::queue (
   validate_array($monitor_format)
   validate_array($periodic_announce)
 
-  asterisk::dotd::file {"${name}.conf":
+  asterisk::dotd::file {"queue_${name}.conf":
     ensure   => $ensure,
     dotd_dir => 'queues.d',
     content  => template('asterisk/snippet/queue.erb'),
+    filename => "${name}.conf",
   }
 
 }

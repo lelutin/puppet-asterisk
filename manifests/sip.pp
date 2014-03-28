@@ -32,9 +32,10 @@ define asterisk::sip (
   validate_array($disallow)
   validate_array($allow)
 
-  asterisk::dotd::file {"${name}.conf":
+  asterisk::dotd::file {"sip_${name}.conf":
     ensure   => $ensure,
     dotd_dir => 'sip.d',
     content  => template('asterisk/snippet/sip.erb'),
+    filename => "${name}.conf",
   }
 }

@@ -5,17 +5,19 @@ define asterisk::iax (
 ) {
 
   if $source {
-    asterisk::dotd::file {"${name}.conf":
+    asterisk::dotd::file {"iax_${name}.conf":
       ensure   => $ensure,
       dotd_dir => 'iax.d',
       source   => $source,
+      filename => "${name}.conf",
     }
   } else {
     if $content {
-      asterisk::dotd::file {"${name}.conf":
+      asterisk::dotd::file {"iax_${name}.conf":
         ensure   => $ensure,
         dotd_dir => 'iax.d',
         content  => "[${name}]\n${content}",
+        filename => "${name}.conf",
       }
     } else {
       fail('source or content parameter is required')
