@@ -9,14 +9,14 @@
 [modules]
 autoload=<%= modules_autoload %>
 
-<% modules_noload.each { |noload| -%>
+<% @modules_noload.each do |noload| -%>
 noload => <%= noload %>
-<% } %>
-<% modules_load.each { |load| -%>
+<% end -%>
+<% @modules_load.each do |load| -%>
 load => <%= load %>
-<% } %>
+<% end -%>
 [global]
-<% modules_global_options.sort.map { |key, value| -%>
+<% @modules_global_options.sort.map do |key, value| -%>
 <%= key %>=<%= value %>
-<% } -%>
+<% end -%>
 
