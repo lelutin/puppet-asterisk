@@ -396,7 +396,34 @@ $sip_options = {
 }
 ```
 
-Here a complete list of all available options, should be added.
+TODO: Here a complete list of all available options, should be added.
+
+### SIP encryption ###
+
+If you want to enable SIP encryption, you can set the following settings in the
+`sip_options` parameter to the `asterisk` class:
+
+```puppet
+$sip_option = {
+  'transports'          => ['tls'],
+  'encryption'          => 'yes',
+  'tlsenable'           => 'yes',
+  # Change the following two values to the full paths where you're placing your
+  # own certificat and CA files, respectively.
+  'tlscertfile'         => '/etc/ssl/somecert.crt',
+  'tlscafile'           => '/etc/ssl/someca.crt',
+  # Only set this to 'yes' if you can't possibly get a verifiable certificate.
+  'tlsdontverifyserver' => 'no',
+}
+```
+
+Note: the 'transports' option needs to be an array, so even though you only
+enable 'tls' as a transport, you need to enclose the string inside an array.
+
+For more information about how to configure Asterisk with SIP encryption
+(SRTP), consult:
+
+http://www.voip-info.org/wiki/view/Asterisk+SRTP
 
 Voicemail Options
 -----------------
