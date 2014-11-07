@@ -76,3 +76,9 @@ pickupgroup=<%= pickupgroup %>
 <% if dtmfmode != false -%>
 dtmfmode=<%= dtmfmode %>
 <% end -%>
+<% if ! transports.empty? -%>
+transport=<%= transports.join(',') %>
+<% end -%>
+<% if encryption != '' -%>
+encryption=<%= encryption %>
+<% end -%>
