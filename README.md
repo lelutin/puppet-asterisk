@@ -45,7 +45,11 @@ we're installing french and spanish sounds):
   }
 ```
 
-Valid languages strings are the following:
+Valid languages strings are the following (these are all based on debian
+package names for now -- either asterisk-prompt-X or asterisk-Y. the language
+strings that start with core-sounds enable you to install language sounds in a
+specific encoding to avoid the need for asterisk to recode it while feeding it
+to a device):
 
  * de
  * es-co
@@ -57,6 +61,22 @@ Valid languages strings are the following:
  * it-menardi-wav
  * se
  * es
+ * core-sounds-en
+ * core-sounds-en-g722
+ * core-sounds-en-gsm
+ * core-sounds-en-wav
+ * core-sounds-es
+ * core-sounds-es-g722
+ * core-sounds-es-gsm
+ * core-sounds-es-wav
+ * core-sounds-fr
+ * core-sounds-fr-g722
+ * core-sounds-fr-gsm
+ * core-sounds-fr-wav
+ * core-sounds-ru
+ * core-sounds-ru-g722
+ * core-sounds-ru-gsm
+ * core-sounds-ru-wav
 
 Types
 -----
