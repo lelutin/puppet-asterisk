@@ -35,6 +35,7 @@ class asterisk::params {
   $confdir = '/etc/asterisk'
 
   $iax_options = {
+    'allow'             => [],
     'disallow'          => ['lpc10'],
     'bandwidth'         => 'low',
     'jitterbuffer'      => 'no',
