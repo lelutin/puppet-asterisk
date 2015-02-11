@@ -1,13 +1,13 @@
 ; THIS FILE IS MANAGED BY PUPPET
 ; all local modifications will be lost
-[<%= real_manager_name %>]
-secret = <%= secret %>
-<% deny.each { |deny_rule| -%>
+[<%= @real_manager_name %>]
+secret = <%= @secret %>
+<% @deny.each { |deny_rule| -%>
 deny = <%= deny_rule %>
 <% } -%>
-<% permit.each { |permit_rule| -%>
+<% @permit.each { |permit_rule| -%>
 permit = <%= permit_rule %>
 <% } -%>
-read = <%= real_read %>
-write = <%= real_write %>
+read = <%= @real_read %>
+write = <%= @real_write %>
 

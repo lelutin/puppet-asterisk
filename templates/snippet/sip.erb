@@ -1,84 +1,84 @@
 ; THIS FILE IS MANAGED BY PUPPET
 ; all local modifications will be lost
-[<%= name %>]
-<% if template_name != false -%>
-(<%= template_name %>)
+[<%= @name %>]
+<% if @template_name != false -%>
+(<%= @template_name %>)
 <% end -%>
-<% if account_type != false -%>
-type=<%= account_type %>
+<% if @account_type != false -%>
+type=<%= @account_type %>
 <% end -%>
-<% if username != false -%>
-username=<%= username %>
+<% if @username != false -%>
+username=<%= @username %>
 <% end -%>
-<% if defaultuser != false -%>
-defaultuser=<%= name %>
+<% if @defaultuser != false -%>
+defaultuser=<%= @name %>
 <% end -%>
-<% if secret != false -%>
-secret=<%= secret %>
+<% if @secret != false -%>
+secret=<%= @secret %>
 <% end -%>
-<% if context != false -%>
-context=<%= context %>
+<% if @context != false -%>
+context=<%= @context %>
 <% end -%>
-<% if canreinvite != false -%>
-canreinvite=<%= canreinvite %>
+<% if @canreinvite != false -%>
+canreinvite=<%= @canreinvite %>
 <% end -%>
-<% if host != false -%>
-host=<%= host %><% end%>
-<% if insecure != false -%>
-insecure=<%= insecure %>
+<% if @host != false -%>
+host=<%= @host %><% end%>
+<% if @insecure != false -%>
+insecure=<%= @insecure %>
 <% end -%>
-<% if language != false -%>
-language=<%= language %>
+<% if @language != false -%>
+language=<%= @language %>
 <% end -%>
-<% if nat != false -%>
-nat=<%= nat %>
+<% if @nat != false -%>
+nat=<%= @nat %>
 <% end -%>
-<% if qualify != false -%>
-qualify=<%= qualify %>
+<% if @qualify != false -%>
+qualify=<%= @qualify %>
 <% end -%>
-<% if vmexten != false -%>
-vmexten=<%= vmexten %>
+<% if @vmexten != false -%>
+vmexten=<%= @vmexten %>
 <% end -%>
-<% if fromdomain != false -%>
-fromdomain=<%= fromdomain %>
+<% if @fromdomain != false -%>
+fromdomain=<%= @fromdomain %>
 <% end -%>
-<% if fromuser != false -%>
-fromuser=<%= fromuser %>
+<% if @fromuser != false -%>
+fromuser=<%= @fromuser %>
 <% end -%>
-<% if account_type == 'peer' and outboundproxy != false -%>
-outboundproxy=<%= outboundproxy %>
+<% if @account_type == 'peer' and @outboundproxy != false -%>
+outboundproxy=<%= @outboundproxy %>
 <% end -%>
-<% if callerid != false -%>
-callerid=<%= callerid %>
+<% if @callerid != false -%>
+callerid=<%= @callerid %>
 <% end -%>
-<% if calllimit != false -%>
-call-limit=<%= calllimit %>
+<% if @calllimit != false -%>
+call-limit=<%= @calllimit %>
 <% end -%>
-<% if callgroup != false -%>
-callgroup=<%= callgroup %>
+<% if @callgroup != false -%>
+callgroup=<%= @callgroup %>
 <% end -%>
-<% if t38pt_udptl != false -%>
-t38pt_udptl=<%= t38pt_udptl %>
+<% if @t38pt_udptl != false -%>
+t38pt_udptl=<%= @t38pt_udptl %>
 <% end -%>
-<% if mailbox != false -%>
-mailbox=<%= mailbox %>
+<% if @mailbox != false -%>
+mailbox=<%= @mailbox %>
 <% end -%>
-<% if md5secret != false -%>
-md5secret=<%= md5secret %>
+<% if @md5secret != false -%>
+md5secret=<%= @md5secret %>
 <% end -%>
-<% if pickupgroup != false -%>
-pickupgroup=<%= pickupgroup %>
+<% if @pickupgroup != false -%>
+pickupgroup=<%= @pickupgroup %>
 <% end -%>
-<% for dproto in disallow %>disallow=<%= dproto %>
+<% for dproto in @disallow %>disallow=<%= dproto %>
 <% end -%>
-<% for aproto in allow %>allow=<%= aproto %>
+<% for aproto in @allow %>allow=<%= aproto %>
 <% end -%>
-<% if dtmfmode != false -%>
-dtmfmode=<%= dtmfmode %>
+<% if @dtmfmode != false -%>
+dtmfmode=<%= @dtmfmode %>
 <% end -%>
-<% if ! transports.empty? -%>
-transport=<%= transports.join(',') %>
+<% if ! @transports.empty? -%>
+transport=<%= @transports.join(',') %>
 <% end -%>
-<% if encryption != '' -%>
-encryption=<%= encryption %>
+<% if @encryption != '' -%>
+encryption=<%= @encryption %>
 <% end -%>
