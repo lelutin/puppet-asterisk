@@ -1,7 +1,7 @@
 define asterisk::sip (
   $ensure        = present,
   $username      = false,
-  $defaultuser   = true,
+  $defaultuser   = false,
   $template_name = false,
   $secret        = false,
   $context       = false,
