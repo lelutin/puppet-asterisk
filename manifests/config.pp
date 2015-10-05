@@ -1,3 +1,4 @@
+# Manage all of asterisk's basic configuration files.
 class asterisk::config {
 
   case $::operatingsystem {

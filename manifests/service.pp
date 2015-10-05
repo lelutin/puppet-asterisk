@@ -1,4 +1,8 @@
-# class managing if service is running
+# Ensure the Asterisk service is running.
+#
+# FIXME: why are we disabling the service when $manage_service is set to false?
+# this does not make any sense.
+#
 class asterisk::service {
   $manage_service = $asterisk::manage_service
 

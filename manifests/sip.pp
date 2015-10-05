@@ -1,3 +1,10 @@
+# Configure general SIP options
+#
+# $ensure can be set to absent in order to remove SIP configuration.
+#
+# All options correspond to SIP options that can be set. See the README to find
+# information about those options.
+#
 define asterisk::sip (
   $ensure        = present,
   $username      = false,

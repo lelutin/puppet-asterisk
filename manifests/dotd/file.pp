@@ -1,4 +1,17 @@
-# create include files and set their permissions.
+# Create a file inside a .d directory and set its permissions correctly.
+#
+# $dotd_dir is the path of the .d directory in which the file should be created.
+#
+# $ensure can be set to absent to remove the file
+#
+# $source is a puppet file source where the contents can be found.
+#
+# $content is the textual contents of the file. This option is mutually
+#   exclusive with $source.
+#
+# $filename if defined, sets the name of the file created. Otherwise, $name is
+#   used as the file name.
+#
 define asterisk::dotd::file (
   $dotd_dir,
   $ensure = present,

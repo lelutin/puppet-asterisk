@@ -1,3 +1,13 @@
+# Configure an asterisk queue
+#
+# This resource presents a multitude of options, corresponding to different
+# options that can be configured for queues. The README file presents links to
+# resources that describe what all of the options do.
+#
+# One parameter is an exception:
+#
+# $ensure can be set to absent in order to remove a queue
+#
 define asterisk::queue (
   $ensure = present,
   $strategy = false,

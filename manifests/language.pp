@@ -1,3 +1,8 @@
+# Install an asterisk language pack.
+#
+# The language packs defined here were taken directly from packages available
+# on debian and so this might not work for other distros.
+#
 define asterisk::language {
   $allowed_languages = [
     'de',

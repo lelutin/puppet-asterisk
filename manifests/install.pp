@@ -1,3 +1,4 @@
+# Install packages that are necessary for an asterisk server.
 class asterisk::install {
 
   package {

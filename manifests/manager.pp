@@ -1,3 +1,26 @@
+# Configure and asterisk manager
+#
+# $secret is the authentication password.
+#
+# $ensure can be set to absent to remove the manager.
+#
+# $manager_name can be used to override the name of the manager. By default the
+#   name of the manager corresponds to $name.
+#
+# $deny is a list of IP specifications that are denied access to the manager.
+#   Denied IPs can be overridden by $permit. This makes it possible to only
+#   permit access to some IP addresses. Default value is to deny access to
+#   everybody.
+#
+# $permit is a list of IP specifications that are permitted access to the
+#   manager.
+#
+# $read is a list of authorizations given to the manager to read certain
+#   information or configuration.
+#
+# $write is a list of authorizations given to the manager to write (change)
+#   certain information or configuration.
+#
 define asterisk::manager (
   $secret,
   $ensure       = present,

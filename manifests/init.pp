@@ -1,4 +1,9 @@
-# type that installes asterisk base packages.
+# Install an asterisk server.
+#
+# Options and their values are very numerous, so they will not be detailed in
+# this file. All options of this class are detailed in the module's README
+# file.
+#
 class asterisk (
   $manage_service          = $asterisk::params::manage_service,
   $package_name            = $asterisk::params::package_name,

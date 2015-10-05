@@ -1,32 +1,6 @@
-# == Class: asterisk::params
-#
-# This class exists to
-# 1. Declutter the default value assignment for class parameters.
-# 2. Manage internally used module variables in a central place.
-#
-# Therefore, many operating system dependent differences (names, paths, ...)
-# are addressed in here.
-#
-#
-# === Parameters
-#
-# This class does not provide any parameters.
-#
-#
-# === Examples
+# Default values for the asterisk class
 #
 # This class is not intended to be used directly.
-#
-#
-# === Links
-#
-# * {Puppet Docs: Using Parameterized Classes}[http://j.mp/nVpyWY]
-#
-#
-# === Authors
-#
-# * Maximilian Ronniger <mailto:mxr@rise-world.com>
-# * Gabriel Filion <gabster@lelutin.ca>
 #
 class asterisk::params {
 
