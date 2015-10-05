@@ -87,13 +87,12 @@ how general configuration is set.
 ### Setting options with the $xyz_options parameters ###
 
 Asterisk has lots and lots of configuration variables that can be set in
-different files. In order to simplify the module, we're actually not validating
-that the options passed in are valid ones and expect this validation to be done
-by the user.
+different files.
 
-As you will see in some of the following sections, some configuration files
-will be customizable through option hashes. The format of those hashes is
-always the same and looks like the following:
+As you will see in some of the following configuration sections, some
+configuration files will be customizable through option hashes. The format of
+those hashes is always the same and looks like the following, where xyz would
+match the name of the configuration file:
 
 ```puppet
 $xyz_options = {
@@ -103,15 +102,19 @@ $xyz_options = {
 }
 ```
 
-We encourage users to use strings as hash keys since some Asterisk options have
-dashes in their name and dashes are prohibited in hash keys as symbols.
+In order to simplify the module, we're actually not validating that the options
+passed in are valid ones and expect this validation to be done by the user.
+
+We encourage users to use strings as hash keys as in the example above since
+some Asterisk options have dashes in their name and dashes are prohibited in
+puppet DSL symbols.
 
 Some options should always be arrays: the option can be specified in the
 configuration file more than once to declare more values. Those options will
-generally be set in the hashes that define default values (see in each section
-below) as arrays either containing a number of strings, or being empty. We
-enforce that those options be arrays since we need to iterate over them in
-templates. Empty arrays mean that the option should not appear in the
+always be set in the hashes that define default values (see in each section
+below) as arrays either containing a number of strings, or being empty. The
+module enforces that those options be arrays since it needs to iterate over them
+in templates. Empty arrays mean that the option should not appear in the
 configuration file.
 
 Default values are taken from Debian's default configuration files.
