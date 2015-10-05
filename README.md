@@ -13,6 +13,16 @@ features enabled.
 Users that are upgrading (e.g. switching or merging to current master) should
 consult the section named "Upgrade notices" near the end.
 
+Requirements
+------------
+
+In order to use this module, you need the stdlib module from:
+
+https://github.com/puppetlabs/puppetlabs-stdlib
+
+You should also make sure that augeas is installed since it is used to enable
+the service in `/etc/default/asterisk`.
+
 Reference reading
 -----------------
 
@@ -70,16 +80,6 @@ how general configuration is set.
 
   * `$manager_enable`, `$manager_port` and `$manager_bindaddr` are detailed in
     the Manager Options section.
-
-Requirements
-------------
-
-In order to use this module, you need the stdlib module from:
-
-https://github.com/puppetlabs/puppetlabs-stdlib
-
-You should also make sure that augeas is available since it is used to enable
-the service in `/etc/default/asterisk`.
 
 Extra features
 --------------
