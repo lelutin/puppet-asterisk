@@ -1,4 +1,4 @@
-# This is a hack to make it possible to iterate over multiple directories.
+# Create a file in .d directories to avoid service start issues (see dotd.pp)
 define asterisk::dotd::nullfile () {
   include asterisk::install
   include asterisk::service
