@@ -1,4 +1,20 @@
-# Generic .d configuration directory
+# Configure the contents of a file and create a corresponding .d configuration
+# directory so that puppet can drop files for on-demand configuration snippets.
+#
+# $additional_paths lets one manage multiple .d directories while managing only
+#   one configuration file. This trick is useful if some configuration snippets
+#   need to be parsed before others (e.g. registries vs. contexts)
+#
+# $content is the configuration file contents
+#
+# $source is a puppet file source. If this is specified, $content will be
+#   overridden. So one must not use both parameters at the same time.
+#
+# $manage_nullfile is a boolean value that decides if a null.conf file is
+#   created in each .d directories. This file is necessary in empty .d dirs,
+#   since asterisk will refuse to start if some included files do not exist.
+#   Default is to create null.conf in all .d directories.
+#
 define asterisk::dotd (
   $additional_paths = [],
   $content          = '',
