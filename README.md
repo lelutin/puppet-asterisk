@@ -13,6 +13,49 @@ features enabled.
 Users that are upgrading (e.g. switching or merging to current master) should
 consult the section named "Upgrade notices" near the end.
 
+Parameters to the asterisk class
+--------------------------------
+
+The main class has a couple of parameters that determine what is managed and
+how general configuration is set.
+
+  * `$manage_service` is a boolean that determines whether puppet will ensure
+    that the service is running. Default value is true.
+
+  * `$package_name` can be used to override the name of the package that
+    installs Asterisk. Default value is "asterisk".
+
+  * `$service_name` can be used to override the name of the Asterisk service.
+    Default value is "asterisk".
+
+  * `$confdir` can be used to override the path to the Asterisk configuration.
+    Default value is "/etc/asterisk".
+
+  * `$iax_options` is a hash of global options for IAX2. See section IAX2
+    Options.
+
+  * `$sip_options` is a hash of global options for SIP. See section SIP Options.
+
+  * `$voicemail_options` is a hash of global options for voicemail. See section
+    Voicemail Options.
+
+  * `$extensions_options` is a hash of global options for extensions. See
+    section Extensions Options.
+
+  * `$agents_multiplelogin` and `$agents_options` are detailed in the Agents
+    Options section.
+
+  * `$features_options` and `$featuremap` are detailed in the Features Options
+    section.
+
+  * `$queues_options` is detailed in the Queues Options section.
+
+  * `$modules_autoload`, `$modules_noload`, `$modules_load` and
+    `$modules_global_options` are detailed in the Modules section.
+
+  * `$manager_enable`, `$manager_port` and `$manager_bindaddr` are detailed in
+    the Manager Options section.
+
 Requirements
 ------------
 
@@ -339,7 +382,7 @@ $xyz_options = {
 ```
 
 We encourage users to use strings as hash keys since some Asterisk options have
-dashes in their name and dashes are prohibited in hash heys as symbols.
+dashes in their name and dashes are prohibited in hash keys as symbols.
 
 Some options should always be arrays: the option can be specified in the
 configuration file more than once to declare more values. Those options will
@@ -478,7 +521,7 @@ Note that by default no global variables (e.g. values set in the `[globals]`
 context) are set. To set global variables, you can use an
 `asterisk::extensions` resource with a context value of "globals".
 
-Agents options
+Agents Options
 --------------
 
 Some global options can be set for agents. One option in the `[general]`
@@ -589,7 +632,7 @@ taken from the default config file in Debian.
 For more information on configuring modules, you can consult this
 [wiki page](http://www.voip-info.org/wiki/index.php?page=Asterisk%20config%20modules.conf).
 
-Manager options
+Manager Options
 ---------------
 
 Asterisk maintains a service on a port through which you can inspect asterisk's
