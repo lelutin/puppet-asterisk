@@ -1,8 +1,9 @@
 # Generic .d configuration directory
 define asterisk::dotd (
   $additional_paths = [],
-  $content = '',
-  $source = ''
+  $content          = '',
+  $source           = '',
+  $manage_nullfile  = true,
 ) {
   include asterisk::install
   include asterisk::service
@@ -19,11 +20,13 @@ define asterisk::dotd (
     require => Class['asterisk::install'],
   }
 
-  # Avoid error messages
-  # [Nov 19 16:09:48] ERROR[3364] config.c: *********************************************************
-  # [Nov 19 16:09:48] ERROR[3364] config.c: *********** YOU SHOULD REALLY READ THIS ERROR ***********
-  # [Nov 19 16:09:48] ERROR[3364] config.c: Future versions of Asterisk will treat a #include of a file that does not exist as an error, and will fail to load that configuration file.  Please ensure that the file '/etc/asterisk/iax.conf.d/*.conf' exists, even if it is empty.
-  asterisk::dotd::nullfile{ $paths : }
+  if $manage_nullfile {
+    # Avoid error messages
+    # [Nov 19 16:09:48] ERROR[3364] config.c: *********************************************************
+    # [Nov 19 16:09:48] ERROR[3364] config.c: *********** YOU SHOULD REALLY READ THIS ERROR ***********
+    # [Nov 19 16:09:48] ERROR[3364] config.c: Future versions of Asterisk will treat a #include of a file that does not exist as an error, and will fail to load that configuration file.  Please ensure that the file '/etc/asterisk/iax.conf.d/*.conf' exists, even if it is empty.
+    asterisk::dotd::nullfile{ $paths : }
+  }
 
   file { $cf_file_name :
     ensure  => present,
