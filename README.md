@@ -13,6 +13,21 @@ features enabled.
 Users that are upgrading (e.g. switching or merging to current master) should
 consult the section named "Upgrade notices" near the end.
 
+Reference reading
+-----------------
+
+Some good references to consult when it comes to Asterisk configuration are:
+
+ * Online version of "Asterisk: The Definitive Guide" 3rd edition. This is
+   definitely the best and most up to date documentation available. A must
+   read for anyone that is configuring a PBX with Asterisk. Consult this
+   reference if you need more information about any options that can be
+   configured with this module. The web site mentions a 4th edition was
+   released but it is not available online: http://asteriskdocs.org/
+ * A good reference for VoIP and Asterisk (some information might be outdated):
+   http://www.voip-info.org/
+ * The Asterisk project wiki: https://wiki.asterisk.org/
+
 Parameters to the asterisk class
 --------------------------------
 
@@ -123,6 +138,8 @@ to a device):
 
 Types
 -----
+
+TODO: split those up into specific sections.
 
   * `asterisk::extensions`
 
@@ -418,9 +435,6 @@ $iax_options = {
 }
 ```
 
-For more information about IAX2 general options, see
-http://www.asterisk.name/iax.html
-
 SIP Options
 ------------
 
@@ -446,8 +460,6 @@ $sip_options = {
 }
 ```
 
-TODO: Here a complete list of all available options, should be added.
-
 ### SIP encryption ###
 
 If you want to enable SIP encryption, you can set the following settings in the
@@ -469,11 +481,6 @@ $sip_option = {
 
 Note: the 'transports' option needs to be an array, so even though you only
 enable 'tls' as a transport, you need to enclose the string inside an array.
-
-For more information about how to configure Asterisk with SIP encryption
-(SRTP), consult:
-
-http://www.voip-info.org/wiki/view/Asterisk+SRTP
 
 Voicemail Options
 -----------------
@@ -629,9 +636,6 @@ taken from the default config file in Debian.
  * `modules_global_options`: a hash of options that should be set in the
    `[global]` context. These options let you customize behaviours for modules
    that are loaded.
-
-For more information on configuring modules, you can consult this
-[wiki page](http://www.voip-info.org/wiki/index.php?page=Asterisk%20config%20modules.conf).
 
 Manager Options
 ---------------
