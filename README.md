@@ -418,7 +418,8 @@ $iax_options = {
 }
 ```
 
-See the [complete list](docs/iax.md) of all available options.
+For more information about IAX2 general options, see
+http://www.asterisk.name/iax.html
 
 SIP Options
 ------------
