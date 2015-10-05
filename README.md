@@ -38,6 +38,9 @@ Some good references to consult when it comes to Asterisk configuration are:
    http://www.voip-info.org/
  * The Asterisk project wiki: https://wiki.asterisk.org/
 
+Configuring Asterisk
+====================
+
 Parameters to the asterisk class
 --------------------------------
 
@@ -81,60 +84,42 @@ how general configuration is set.
   * `$manager_enable`, `$manager_port` and `$manager_bindaddr` are detailed in
     the Manager Options section.
 
-Extra features
---------------
+### Setting options with the $xyz_options parameters ###
 
-### Dahdi ###
+Asterisk has lots and lots of configuration variables that can be set in
+different files. In order to simplify the module, we're actually not validating
+that the options passed in are valid ones and expect this validation to be done
+by the user.
 
-To enable dahdi, use the following:
-
-```puppet
-  include 'asterisk::dahdi'
-```
-
-### Language sounds ###
-
-To include any language sounds, you can use the following (in this example,
-we're installing french and spanish sounds):
+As you will see in some of the following sections, some configuration files
+will be customizable through option hashes. The format of those hashes is
+always the same and looks like the following:
 
 ```puppet
-  asterisk::language {
-    ['fr-armelle', 'es']:
-  }
+$xyz_options = {
+  'configuration-option1' => 'value1',
+  'allow'                 => ['list-value1', 'list-value2'],
+  #[...]
+}
 ```
 
-Valid languages strings are the following (these are all based on debian
-package names for now -- either asterisk-prompt-X or asterisk-Y. the language
-strings that start with core-sounds enable you to install language sounds in a
-specific encoding to avoid the need for asterisk to recode it while feeding it
-to a device):
+We encourage users to use strings as hash keys since some Asterisk options have
+dashes in their name and dashes are prohibited in hash keys as symbols.
 
- * de
- * es-co
- * fr-armelle
- * fr-proformatique
- * it-menardi
- * it-menardi-alaw
- * it-menardi-gsm
- * it-menardi-wav
- * se
- * es
- * core-sounds-en
- * core-sounds-en-g722
- * core-sounds-en-gsm
- * core-sounds-en-wav
- * core-sounds-es
- * core-sounds-es-g722
- * core-sounds-es-gsm
- * core-sounds-es-wav
- * core-sounds-fr
- * core-sounds-fr-g722
- * core-sounds-fr-gsm
- * core-sounds-fr-wav
- * core-sounds-ru
- * core-sounds-ru-g722
- * core-sounds-ru-gsm
- * core-sounds-ru-wav
+Some options should always be arrays: the option can be specified in the
+configuration file more than once to declare more values. Those options will
+generally be set in the hashes that define default values (see in each section
+below) as arrays either containing a number of strings, or being empty. We
+enforce that those options be arrays since we need to iterate over them in
+templates. Empty arrays mean that the option should not appear in the
+configuration file.
+
+Default values are taken from Debian's default configuration files.
+
+Keys that are present in the option hash paramters to the `asterisk` class will
+override the default options (or set new ones for options that are not present
+in the default option hash). This lets you use all the default values but
+change only a couple of values.
 
 Types
 -----
@@ -378,44 +363,6 @@ TODO: split those up into specific sections.
     }
     ```
 
-Notes on options
-----------------
-
-Asterisk has lots and lots of configuration variables that can be set in
-different files. In order to simplify the module, we're actually not validating
-that the options passed in are valid ones and expect this validation to be done
-by the user.
-
-As you will see in some of the following sections, some configuration files
-will be customizable through option hashes. The format of those hashes is
-always the same and looks like the following:
-
-```puppet
-$xyz_options = {
-  'configuration-option1' => 'value1',
-  'allow'                 => ['list-value1', 'list-value2'],
-  #[...]
-}
-```
-
-We encourage users to use strings as hash keys since some Asterisk options have
-dashes in their name and dashes are prohibited in hash keys as symbols.
-
-Some options should always be arrays: the option can be specified in the
-configuration file more than once to declare more values. Those options will
-generally be set in the hashes that define default values (see in each section
-below) as arrays either containing a number of strings, or being empty. We
-enforce that those options be arrays since we need to iterate over them in
-templates. Empty arrays mean that the option should not appear in the
-configuration file.
-
-Default values are taken from Debian's default configuration files.
-
-Keys that are present in the option hash paramters to the `asterisk` class will
-override the default options (or set new ones for options that are not present
-in the default option hash). This lets you use all the default values but
-change only a couple of values.
-
 IAX2 Options
 ------------
 
@@ -658,8 +605,64 @@ By default, no user access is configured. If you want to enable users to
 interact with the manager, you should declare `asterisk::manager`
 resources.
 
-Upgrade notices
+Dahdi
+-----
+
+Dahdi is a set of kernel modules combined with an asterisk module that let
+people interact with Digium cards to send and receive calls from the POTS. To
+enable dahdi, use the following:
+
+```puppet
+  include 'asterisk::dahdi'
+```
+
+Language sounds
 ---------------
+
+To include any language sounds, you can use the following (in this example,
+we're installing french and spanish sounds):
+
+```puppet
+  asterisk::language {
+    ['fr-armelle', 'es']:
+  }
+```
+
+Valid languages strings are the following (these are all based on debian
+package names for now -- either asterisk-prompt-X or asterisk-Y. the language
+strings that start with core-sounds enable you to install language sounds in a
+specific encoding to avoid the need for asterisk to recode it while feeding it
+to a device):
+
+ * de
+ * es-co
+ * fr-armelle
+ * fr-proformatique
+ * it-menardi
+ * it-menardi-alaw
+ * it-menardi-gsm
+ * it-menardi-wav
+ * se
+ * es
+ * core-sounds-en
+ * core-sounds-en-g722
+ * core-sounds-en-gsm
+ * core-sounds-en-wav
+ * core-sounds-es
+ * core-sounds-es-g722
+ * core-sounds-es-gsm
+ * core-sounds-es-wav
+ * core-sounds-fr
+ * core-sounds-fr-g722
+ * core-sounds-fr-gsm
+ * core-sounds-fr-wav
+ * core-sounds-ru
+ * core-sounds-ru-g722
+ * core-sounds-ru-gsm
+ * core-sounds-ru-wav
+
+Upgrade notices
+===============
 
  * The module used to manage files under /etc/asterisk/file.conf.d
    for all values of "file" that were managed. Things have been moved to
@@ -684,7 +687,7 @@ Upgrade notices
    variables that disappear won't have an impact on your setup.
 
 Patches and Testing
--------------------
+===================
 
 Contributions are highly welcomed, more so are those which contribute patches
 with tests. Or just more tests! We have
@@ -713,7 +716,7 @@ Types:
   * `asterisk::mwi`
 
 License
--------
+=======
 
 This module is licensed under the GPLv3+, feel free to redistribute, modify and
 contribute changes.
