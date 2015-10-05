@@ -287,6 +287,12 @@ Types
     }
     ```
 
+    For more information of Asterisk call queues, visit
+    http://www.voip-info.org/wiki/view/Asterisk+call+queues
+
+    For a full list of available options, see
+    http://www.voip-info.org/wiki/view/Asterisk+config+queues.conf
+
   * `asterisk::feature`
 
     Define features that are contained within feature group "myfeaturegroup":
