@@ -11,7 +11,7 @@ This will install a plain version of Asterisk without any extra
 features enabled.
 
 Users that are upgrading (e.g. switching or merging to current master) should
-consult the section named "Upgrade notices" near the end.
+consult the section named [Upgrade notices](#upgrade-notices) near the end.
 
 Requirements
 ------------
