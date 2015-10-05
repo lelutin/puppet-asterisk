@@ -124,250 +124,47 @@ override the default options (or set new ones for options that are not present
 in the default option hash). This lets you use all the default values but
 change only a couple of values.
 
-Types
------
+Source or content
+-----------------
 
-TODO: split those up into specific sections.
+Most of the defined types that drop a configuration file in a .d directory can
+either take a puppet source specification (of the form 'puppet:///modules/...'
+or a textual content.
 
-  * `asterisk::extensions`
+The puppet source specification is always used with the `source` parameter and
+textual content with the `content` parameter.
 
-    ```puppet
-    asterisk::extensions { 'incoming':
-      ensure => present,
-      source => "...",
-    }
+When using a puppet source specification the user has complete control over the
+contents of the configuration file. When textual content is used, the contents
+will usually be added after a line that defines a configuration section (e.g. a
+line of the form '[section]').
 
-    asterisk::extensions { 'incoming':
-      ensure  => present,
-      content => template(...),
-    }
+`source` and `content` are always mutually exclusive.
 
-    asterisk::extensions { 'incoming':
-      ensure => absent,
-    }
-    ```
+IAX2
+----
 
-  * `asterisk::sip`
+The `asterisk::iax` defined type helps you configure an IAX2 channel. `source`
+or `content` can be used with this type.
 
-    ```puppet
-    asterisk::sip { '1234':
-      ensure  => present,
-      secret  => 'blah',
-      context => 'incoming',
-    }
+```puppet
+asterisk::iax { '5551234567':
+  source => 'puppet:///modules/site_asterisk/5551234567',
+}
+```
 
-    asterisk::sip { '1234':
-      ensure => absent,
-    }
-    ```
+The `asterisk::registry::iax` defined type is used to configure an IAX2
+registry. All parameters (except for ensure) are mandatory. For example:
 
-    You can also use the 'template_name' argument to either define a template,
-    by giving it a value of '!', or inherit from a template:
+```puppet
+asterisk::registry::iax { 'providerX':
+  server => 'iax.providerX.com',
+  user   => 'doyoufindme',
+  pass   => 'attractive?',
+}
+```
 
-    ```puppet
-    asterisk::sip { 'corporate_user':
-      context       => 'corporate',
-      type          => 'friend',
-      # ...
-      template_name => '!',
-    }
-    asterisk::sip { 'hakim':
-      secret        => 'ohnoes!',
-      template_name => 'corporate_user',
-    }
-    ```
-
-  * `asterisk::registry::sip`
-
-    ```puppet
-    asterisk::registry::sip { 'providerX':
-      server => 'sip.providerX.com',
-      user   => 'doyoufindme',
-    }
-    ```
-
-    Password, authuser, port number and extension are optional parameters. If
-    you define authuser, you must specify a password.
-
-    ```puppet
-    asterisk::registry::sip { 'friends_home':
-      server    => 'home.friend.com',
-      port      => '8888',
-      user      => 'me',
-      password  => 'myselfandI',
-      authuser  => 'you',
-      extension => 'whatsupfriend',
-    }
-    ```
-
-  * `asterisk::iax`
-
-    This class works similarly to the asterisk::extensions class.
-
-    ```puppet
-    asterisk::iax { '5551234567':
-      source => 'puppet:///modules/site_asterisk/5551234567',
-    }
-    ```
-
-  * `asterisk::registry::iax`
-
-    ```puppet
-    asterisk::registry::iax { 'providerX':
-      server => 'iax.providerX.com',
-      user   => 'doyoufindme',
-      pass   => 'attractive?',
-    }
-    ```
-
-  * `asterisk::voicemail`
-
-    ```puppet
-    asterisk::voicemail { '3000':
-      context   => 'some_context',
-      password  => '5555',
-      user_name => 'Bob Bobby',
-      email     => 'bob@bobby.comcom',
-    }
-    ```
-
-    You can also use the optional 'pager_email' to set the email that should
-    receive a page about new voice messages.
-
-    And finally, the argument 'options' can take a hash of voicemail options
-    like the following:
-
-    ```puppet
-    asterisk::voicemail { '3001':
-      context  => 'blah',
-      password => '112233',
-      options  => { 'attach' => 'yes', 'delete' => 'yes' },
-    }
-    ```
-
-  * `asterisk::agent`
-
-    To define a static agent:
-
-    ```puppet
-    asterisk::agent { 'joe':
-      ext        => '1001',
-      password   => '123413425',
-      agent_name => 'Joe Bonham',
-    }
-    ```
-
-    You can also assign a static agent to one or more agent groups with the
-    `groups` arguemnt.
-
-    ```puppet
-    asterisk::agent { 'cindy':
-      ext        => '1002',
-      password   => '754326',
-      agent_name => 'Cindy Rotterbauer',
-      groups     => ['1']
-    }
-    ```
-
-    Static agents have some disadvantages compared to dynamic agents. For
-    example, once assigned to a queue they cannot logout of that queue. For
-    more information on how to setup dynamic agents, see:
-
-    * [http://www.voip-info.org/wiki/view/Asterisk+cmd+AgentLogin](http://www.voip-info.org/wiki/view/Asterisk+cmd+AgentLogin)
-    * [http://www.voip-info.org/wiki/view/Asterisk+cmd+AddQueueMember](http://www.voip-info.org/wiki/view/Asterisk+cmd+AddQueueMember)
-    * [http://www.voip-info.org/wiki/view/Asterisk+cmd+RemoveQueueMember](http://www.voip-info.org/wiki/view/Asterisk+cmd+RemoveQueueMember)
-
-  * `asterisk::manager`
-
-    ```puppet
-    asterisk::manager { 'nagios':
-      secret => 'topsecret1234',
-      read   => ['all'],
-      write  => ['system', ' call', ' log', ' verbose', ' command', ' agent', ' user'],
-    }
-    ```
-
-    paranoid configuration, with minimal network access, but the option to run
-    system commands and trigger calls:
-
-    ```puppet
-    asterisk::manager { 'nagios':
-      secret => 'topsecret1234',
-      read   => ['system', 'call'],
-      write  => ['system', 'call'],
-    }
-    ```
-
-    permit remote management to two other systems on an internal network:
-
-    ```puppet
-    asterisk::manager { 'robocall':
-      secret => 'robotsdeservesomeloveafterall',
-      permit => ['10.10.10.200/255.255.255.0', '10.20.20.200/255.255.255.0'],
-      read   => ['system', 'call', 'log'],
-      write  => ['system', 'call', 'originate'],
-    }
-    ```
-
-    By default, the resource name is used as the manager name. To override the
-    manager name, you can use the `manager_name` parameter:
-
-    ```puppet
-    asterisk::manager { 'sysadmin':
-      secret       => 'nowyouseemenowyoudont',
-      manager_name => 'surreptitioustyrant',
-    }
-    ```
-
-  * `asterisk::queue`
-
-    ```puppet
-    asterisk::queue { 'frontline':
-      ensure   => present,
-      stragegy => 'rrmemory',
-      members  => [
-        'SIP/reception',
-        'SIP/secretary',
-      ],
-      maxlen   => 30,
-      timeout  => 20,
-      retry    => 10,
-    }
-    ```
-
-    For more information of Asterisk call queues, visit
-    http://www.voip-info.org/wiki/view/Asterisk+call+queues
-
-    For a full list of available options, see
-    http://www.voip-info.org/wiki/view/Asterisk+config+queues.conf
-
-  * `asterisk::feature`
-
-    Define features that are contained within feature group "myfeaturegroup":
-
-    ```puppet
-    $ft_options = {
-      'pausemonitor'   => '#1,self/callee,Pausemonitor',
-      'unpauseMonitor' => '#3,self/callee,UnPauseMonitor',
-    }
-    asterisk::feature { 'myfeaturegroup':
-      options => $ft_options,
-    }
-    ```
-
-  * `asterisk::feature::applicationmap`
-
-    Define a global feature:
-
-    ```puppet
-    asterisk::feature::applicationmap { 'pausemonitor':
-      feature => 'pausemonitor',
-      value   => '#1,self/callee,Pausemonitor',
-    }
-    ```
-
-IAX2 Options
-------------
+### IAX2 Options ###
 
 If you are using the IAX2 protocol, you'll want to set some global
 configuration options. For passing in settings, you need to send a hash to the
@@ -385,8 +182,70 @@ $iax_options = {
 }
 ```
 
-SIP Options
-------------
+SIP
+---
+
+You can configure SIP channels with the `asterisk::sip` defined type. `source`
+and `content` can be used with this type.
+
+```puppet
+asterisk::sip { '1234':
+  ensure  => present,
+  secret  => 'blah',
+  context => 'incoming',
+}
+```
+
+You can also use the `template_name` argument to either define a template, or
+make the channel definition inherit from a template.
+
+To define a template, set `template_name` to '!':
+
+```puppet
+asterisk::sip { 'corporate_user':
+  context       => 'corporate',
+  type          => 'friend',
+  # ...
+  template_name => '!',
+}
+```
+
+If inheriting from a template, set `template_name` to
+the name of the template from which the channel is inheriting options.
+
+```puppet
+asterisk::sip { 'hakim':
+  secret        => 'ohnoes!',
+  template_name => 'corporate_user',
+}
+```
+
+The defined type `asterisk::registry::sip` lets you configure a SIP registry.
+The `server` and `user` paramters are mandatory.
+
+```puppet
+asterisk::registry::sip { 'providerX':
+  server => 'sip.providerX.com',
+  user   => 'doyoufindme',
+}
+```
+
+Password, authuser, port number and extension are optional parameters. If you
+define authuser, you must specify a password.
+
+```puppet
+asterisk::registry::sip { 'friends_home':
+  server    => 'home.friend.com',
+  port      => '8888',
+  user      => 'me',
+  password  => 'myselfandI',
+  authuser  => 'you',
+  extension => 'whatsupfriend',
+}
+```
+
+
+### SIP Options ###
 
 If you are using the SIP protocol, you'll want to set some global
 configuration options. For passing in settings, you need to send a hash to the
@@ -432,8 +291,36 @@ $sip_option = {
 Note: the 'transports' option needs to be an array, so even though you only
 enable 'tls' as a transport, you need to enclose the string inside an array.
 
-Voicemail Options
------------------
+Voicemail
+---------
+
+With the defined type `asterisk::voicemail` you can configure a voicemail. The
+`context` and `password` parameters are mandatory:
+
+```puppet
+asterisk::voicemail { '3000':
+  context   => 'some_context',
+  password  => '5555',
+  user_name => 'Bob Bobby',
+  email     => 'bob@bobby.comcom',
+}
+```
+
+You can also use the optional 'pager_email' parameter to set the email that
+should receive a page about new voice messages.
+
+And finally, the argument 'options' can take a hash of voicemail options like
+the following:
+
+```puppet
+asterisk::voicemail { '3001':
+  context  => 'blah',
+  password => '112233',
+  options  => { 'attach' => 'yes', 'delete' => 'yes' },
+}
+```
+
+### Voicemail Options ###
 
 Voicemail can be configured through a set of options in the `[general]`
 context. To set those options, you can pass values as a hash to the
@@ -459,8 +346,20 @@ $voicemail_options = {
 }
 ```
 
-Extensions Options
-------------------
+Extensions
+----------
+
+Extensions can be set with the `asterisk::extensions` defined type. `source` or
+`content` can be used with this type.
+
+```puppet
+asterisk::extensions { 'incoming':
+  ensure  => present,
+  content => template('site_asterisk/extensions/incoming.erb'),
+}
+```
+
+### Extensions Options ###
 
 Some global options can be set for extensions. You can achieve that by passing
 a hash to the `extensions_options` parameter to the `asterisk` class.
@@ -479,8 +378,43 @@ Note that by default no global variables (e.g. values set in the `[globals]`
 context) are set. To set global variables, you can use an
 `asterisk::extensions` resource with a context value of "globals".
 
-Agents Options
---------------
+Agents
+------
+
+To define an agent you can use the `asterisk::agent` defined type. The `ext`,
+`password` and `agent_name` parameters are mandatory.
+
+To define a static agent:
+
+```puppet
+asterisk::agent { 'joe':
+  ext        => '1001',
+  password   => '123413425',
+  agent_name => 'Joe Bonham',
+}
+```
+
+You can also assign a static agent to one or more agent groups with the
+`groups` parameter. This parameter is a list of group names:
+
+```puppet
+asterisk::agent { 'cindy':
+  ext        => '1002',
+  password   => '754326',
+  agent_name => 'Cindy Rotterbauer',
+  groups     => ['1']
+}
+```
+
+Static agents have some disadvantages compared to dynamic agents. For example,
+once assigned to a queue they cannot logout of that queue. For more information
+on how to setup dynamic agents, see:
+
+ * [http://www.voip-info.org/wiki/view/Asterisk+cmd+AgentLogin](http://www.voip-info.org/wiki/view/Asterisk+cmd+AgentLogin)
+ * [http://www.voip-info.org/wiki/view/Asterisk+cmd+AddQueueMember](http://www.voip-info.org/wiki/view/Asterisk+cmd+AddQueueMember)
+ * [http://www.voip-info.org/wiki/view/Asterisk+cmd+RemoveQueueMember](http://www.voip-info.org/wiki/view/Asterisk+cmd+RemoveQueueMember)
+
+### Agents Options ###
 
 Some global options can be set for agents. One option in the `[general]`
 context, `multiplelogin`, can be set via the `agents_multiplelogin` parameter
@@ -493,8 +427,38 @@ doesn't define any global options.
 For creating agents, it is recommended to use the `asterisk::agent` defined
 type.
 
-Features Options
-----------------
+Features
+--------
+
+Features let you configure call parking and special numbers that trigger
+special functionality. The `asterisk::feature` defined type helps you
+configuring such features. The `options` parameter is mandatory.
+
+Define features that are contained within feature group "myfeaturegroup":
+
+```puppet
+$ft_options = {
+  'pausemonitor'   => '#1,self/callee,Pausemonitor',
+  'unpauseMonitor' => '#3,self/callee,UnPauseMonitor',
+}
+asterisk::feature { 'myfeaturegroup':
+  options => $ft_options,
+}
+```
+
+A special section in the features configuration file, namely
+`[applicationmaps]` lets you define global features. The
+`asterisk::feature::applicationmap` defined type helps you configure such a
+global feature. The `feature` and `value` parameters are mandatory:
+
+```puppet
+asterisk::feature::applicationmap { 'pausemonitor':
+  feature => 'pausemonitor',
+  value   => '#1,self/callee,Pausemonitor',
+}
+```
+
+### Features Options ###
 
 Some global feature options can be configured, like the default parkinglot, via
 the `features_options` parameter to the `asterisk` class.
@@ -523,8 +487,32 @@ features enabled in the channel, separated by '#'.
 To configure additional feature contexts, you can use the `asterisk::feature`
 defined type.
 
-Queues Options
---------------
+Queues
+------
+
+Asterisk can put call in queues, for example when all agents are busy and the call cannot get connected. To create a queue, you can use the `asterisk::queue` defined type:
+
+```puppet
+asterisk::queue { 'frontline':
+  ensure   => present,
+  stragegy => 'rrmemory',
+  members  => [
+    'SIP/reception',
+    'SIP/secretary',
+  ],
+  maxlen   => 30,
+  timeout  => 20,
+  retry    => 10,
+}
+```
+
+Call queues have lots of options and can interact with agents. Because of this
+we will not detail all of the parameters here. Please refer to the
+manifests/queue.pp file for the complete list of supported parameters. Also,
+for an in-depth coverage of call queueing, see:
+http://www.asteriskdocs.org/en/3rd_Edition/asterisk-book-html-chunk/asterisk-ACD.html
+
+### Queues Options ###
 
 For queues some global configurations and default values can be set in the
 `[general]` context. You can set options by passing a hash to the
@@ -587,8 +575,59 @@ taken from the default config file in Debian.
    `[global]` context. These options let you customize behaviours for modules
    that are loaded.
 
-Manager Options
----------------
+Managers
+--------
+
+Asterisk can expose an interface for managing the PBX. This interface can be
+offered to different users with different permissions. You can configure read
+and write access to certain features of the PBX for each user.
+
+The `asterisk::manager` defined type helps you configure a manager access. The
+`secret` parameter is mandatory. By default, the resource name is used as the
+manager name:
+
+```puppet
+asterisk::manager { 'nagios':
+  secret => 'topsecret1234',
+  read   => ['all'],
+  write  => ['system', ' call', ' log', ' verbose', ' command', ' agent', ' user'],
+}
+```
+
+Here's a paranoid version of the above configuration, with minimal network
+access, but the option to run system commands and trigger calls:
+
+```puppet
+asterisk::manager { 'nagios':
+  secret => 'topsecret1234',
+  read   => ['system', 'call'],
+  write  => ['system', 'call'],
+}
+```
+
+Here, we permit remote management to two other systems on an internal network:
+
+```puppet
+asterisk::manager { 'robocall':
+  secret => 'robotsdeservesomeloveafterall',
+  permit => ['10.10.10.200/255.255.255.0', '10.20.20.200/255.255.255.0'],
+  read   => ['system', 'call', 'log'],
+  write  => ['system', 'call', 'originate'],
+}
+```
+
+To override the manager name, you can use the `manager_name` parameter:
+
+```puppet
+asterisk::manager { 'sysadmin':
+  secret       => 'nowyouseemenowyoudont',
+  read         => ['all'],
+  write        => ['all'],
+  manager_name => 'surreptitioustyrant',
+}
+```
+
+### Manager Options ###
 
 Asterisk maintains a service on a port through which you can inspect asterisk's
 state and issue commands to the PBX. You can control on which IP and port it
