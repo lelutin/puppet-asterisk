@@ -174,11 +174,13 @@ Here is the default hash with the default values, as defined in params.pp:
 
 ```puppet
 $iax_options = {
+  'allow'             => [],
   'disallow'          => ['lpc10'],
   'bandwidth'         => 'low',
   'jitterbuffer'      => 'no',
   'forcejitterbuffer' => 'no',
   'autokill'          => 'yes',
+  'delayreject'       => 'yes',
 }
 ```
 

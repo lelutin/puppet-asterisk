@@ -15,6 +15,8 @@ class asterisk::params {
     'jitterbuffer'      => 'no',
     'forcejitterbuffer' => 'no',
     'autokill'          => 'yes',
+    # Some added security default options
+    'delayreject'       => 'yes',
   }
 
   $sip_options = {
