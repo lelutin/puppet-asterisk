@@ -34,13 +34,17 @@ define asterisk::sip (
   $allow         = [],
   $dtmfmode      = false,
   $transports    = [],
-  $encryption    = ''
+  $encryption    = '',
+  $deny          = [],
+  $permit        = [],
 ) {
 
   # Ensure that we can iterate over some of the parameters.
   validate_array($disallow)
   validate_array($allow)
   validate_array($transports)
+  validate_array($deny)
+  validate_array($permit)
 
   asterisk::dotd::file {"sip_${name}.conf":
     ensure   => $ensure,
