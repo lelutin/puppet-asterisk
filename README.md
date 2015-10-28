@@ -255,17 +255,19 @@ Here is the default hash with the default values, as defined in params.pp:
 
 ```puppet
 $sip_options = {
-  'disallow'     => [],
-  'allow'        => [],
-  'domain'       => [],
-  'localnet'     => [],
-  'context'      => 'default',
-  'allowoverlap' => 'no',
-  'udpbindaddr'  => '0.0.0.0',
-  'tcpenable'    => 'no',
-  'tcpbindaddr'  => '0.0.0.0',
-  'transport'    => 'udp',
-  'srvlookup'    => 'yes',
+  'disallow'         => [],
+  'allow'            => [],
+  'domain'           => [],
+  'localnet'         => [],
+  'context'          => 'default',
+  'allowoverlap'     => 'no',
+  'udpbindaddr'      => '0.0.0.0',
+  'tcpenable'        => 'no',
+  'tcpbindaddr'      => '0.0.0.0',
+  'transport'        => 'udp',
+  'srvlookup'        => 'yes',
+  'allowguest'       => 'no',
+  'alwaysauthreject' => 'yes',
 }
 ```
 

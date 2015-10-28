@@ -18,17 +18,20 @@ class asterisk::params {
   }
 
   $sip_options = {
-    'disallow'     => [],
-    'allow'        => [],
-    'domain'       => [],
-    'localnet'     => [],
-    'context'      => 'default',
-    'allowoverlap' => 'no',
-    'udpbindaddr'  => '0.0.0.0',
-    'tcpenable'    => 'no',
-    'tcpbindaddr'  => '0.0.0.0',
-    'transport'    => 'udp',
-    'srvlookup'    => 'yes',
+    'disallow'         => [],
+    'allow'            => [],
+    'domain'           => [],
+    'localnet'         => [],
+    'context'          => 'default',
+    'allowoverlap'     => 'no',
+    'udpbindaddr'      => '0.0.0.0',
+    'tcpenable'        => 'no',
+    'tcpbindaddr'      => '0.0.0.0',
+    'transport'        => 'udp',
+    'srvlookup'        => 'yes',
+    # Some added security default options
+    'allowguest'       => 'no',
+    'alwaysauthreject' => 'yes',
   }
 
   $voicemail_options = {
