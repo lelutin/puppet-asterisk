@@ -35,10 +35,9 @@ define asterisk::voicemail (
   validate_string($pager_email)
   validate_hash($options)
 
-  $real_options = inline_template('<% if options.length -%>|<%= options.keys.collect {|key| value = options[key]; "#{key}=#{value}"}.join(",") -%><% end -%>')
   asterisk::dotd::file{"${context}-${name}.conf":
     ensure   => $ensure,
-    content  => "[${context}]\n${name} => ${password},${user_name},${email},${pager_email}${real_options}",
+    content  => template('asterisk/snippet/voicemail.erb'),
     dotd_dir => 'voicemail.d',
   }
 
