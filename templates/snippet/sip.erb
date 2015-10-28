@@ -82,3 +82,7 @@ transport=<%= @transports.join(',') %>
 <% if @encryption != '' -%>
 encryption=<%= @encryption %>
 <% end -%>
+<% for denyip in @deny %>deny=<%= denyip %>
+<% end -%>
+<% for allowip in @allow %>allow=<%= allowip %>
+<% end -%>
