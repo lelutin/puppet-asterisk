@@ -50,6 +50,9 @@ how general configuration is set.
   * `$manage_service` is a boolean that determines whether puppet will ensure
     that the service is running. Default value is true.
 
+  * `$manage_package` is a boolean that determines whether puppet will ensure
+    that the package is installed. Default value is true.
+
   * `$package_name` can be used to override the name of the package that
     installs Asterisk. Default value is "asterisk".
 

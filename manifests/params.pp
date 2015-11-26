@@ -5,6 +5,7 @@
 class asterisk::params {
 
   $manage_service = true
+  $manage_package = true
 
   $confdir = '/etc/asterisk'
 
