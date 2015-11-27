@@ -72,6 +72,17 @@ class asterisk::params {
     'monitor-type'      => 'MixMonitor',
   }
 
+  $http_options = {
+    'bindaddr'         => '127.0.0.1',
+    'enabled'            => 'yes',
+    'bindport'           => 8080,
+    'prefix'          => 'asterisk',
+    'sessionlimit'     => 100,
+    'session_inactivity'      => 30000,
+    'session_keep_alive='      => '15000',
+    'enablestatic'         => 'yes',
+  }
+
   $modules_autoload = true
   $modules_noload = [
     'pbx_gtkconsole.so',
