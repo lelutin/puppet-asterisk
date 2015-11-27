@@ -78,6 +78,8 @@ how general configuration is set.
 
   * `$queues_options` is detailed in the Queues Options section.
 
+  * `$http_options` is detailed in the Asterisk Built-in HTTP Server section.
+
   * `$modules_autoload`, `$modules_noload`, `$modules_load` and
     `$modules_global_options` are detailed in the Modules section.
 
