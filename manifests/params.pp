@@ -72,6 +72,13 @@ class asterisk::params {
     'monitor-type'      => 'MixMonitor',
   }
 
+  $logger_options = {
+    'rotatestrategy'         => 'rotate',
+    'use_callids'            => 'yes',
+    'appendhostname'           => 'yes',
+    'queue_log'          => 'yes',
+  }
+
   $modules_autoload = true
   $modules_noload = [
     'pbx_gtkconsole.so',
