@@ -6,8 +6,8 @@
 ;
 ; "logger reload" at the CLI will reload configuration
 ; of the logging system.
-
-[general]
+;
+;[general]
 ;
 ; Customize the display of debug message time stamps
 ; this example is the ISO 8601 date format (yyyy-mm-dd HH:MM:SS)
@@ -175,3 +175,21 @@
 
 ;syslog keyword : This special keyword logs to syslog facility
 ;syslog.local0 => notice,warning,error
+
+[general]
+<% @logger_options.sort.map do |name, value|
+  if value.is_a? Array
+    value.each do |v| -%>
+<%= name -%>=<%= v %>
+<%  end
+  else -%>
+<%= name -%>=<%= value %>
+<% end
+end -%>
+
+[logfiles]
+console => notice,warning,error,security
+messages => notice,warning,error,security
+
+#include </etc/asterisk/logger.d/*.conf>
+

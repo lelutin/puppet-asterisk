@@ -17,6 +17,7 @@ class asterisk (
   $agents_options          = {},
   $features_options        = $asterisk::params::features_options,
   $features_featuremap     = {},
+  $logger_options          = $asterisk::params::logger_options,
   $queues_options          = {},
   $modules_autoload        = $asterisk::params::modules_autoload,
   $modules_noload          = $asterisk::params::modules_noload,
@@ -37,6 +38,7 @@ class asterisk (
   validate_hash($agents_options)
   validate_hash($features_options)
   validate_hash($features_featuremap)
+  validate_hash($logger_options)
   validate_hash($queues_options)
   validate_bool($modules_autoload)
   validate_array($modules_noload)
