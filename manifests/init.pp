@@ -6,6 +6,7 @@
 #
 class asterisk (
   $manage_service          = $asterisk::params::manage_service,
+  $manage_package          = $asterisk::params::manage_package,
   $package_name            = $asterisk::params::package_name,
   $service_name            = $asterisk::params::service_name,
   $confdir                 = $asterisk::params::confdir,
