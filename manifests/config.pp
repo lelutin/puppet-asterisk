@@ -59,6 +59,11 @@ class asterisk::config {
     content => template('asterisk/queues.conf.erb'),
   }
 
+  $http_options = $asterisk::http_options
+  asterisk::dotd { '/etc/asterisk/http':
+    content => template('asterisk/http.conf.erb'),
+  }
+
   $manager_enable = $asterisk::real_manager_enable
   $manager_port = $asterisk::manager_port
   $manager_bindaddr = $asterisk::manager_bindaddr
