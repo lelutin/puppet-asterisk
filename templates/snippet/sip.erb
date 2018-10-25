@@ -1,9 +1,6 @@
 ; THIS FILE IS MANAGED BY PUPPET
 ; all local modifications will be lost
-[<%= @name %>]
-<% if @template_name -%>
-(<%= @template_name %>)
-<% end -%>
+[<%= @name %>]<% if @template_name %>(<%= @template_name %>)<% end %>
 <% if @account_type -%>
 type=<%= @account_type %>
 <% end -%>
