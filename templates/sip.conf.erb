@@ -6,7 +6,7 @@
 ; SIP Configuration for Asterisk
 ;
 [general]
-<% @sip_general.sort.map do |name, value|
+<% @sip_general.map do |name, value|
   if value.is_a? Array
     value.each do |v| -%>
 <%= name -%>=<%= v %>
