@@ -740,21 +740,15 @@ Patches and Testing
 
 Contributions are highly welcomed, more so are those which contribute patches
 with tests. Or just more tests! We have
-[rspec-puppet](http://rspec-puppet.com/) and
-[rspec-system](https://github.com/puppetlabs/rspec-system-serverspec) tests.
+[rspec-puppet](http://rspec-puppet.com/) tests.
 When [contributing patches](Github WorkFlow), please make sure that your
 patches pass tests:
 
-    user@host01 ~/src/bw/puppet-composer (git)-[master] % rake spec
+    user@host01 ~/src/bw/puppet-composer (git)-[master] % rake tests
     ....................................
 
     Finished in 2.29 seconds
     36 examples, 0 failures
-    user@host01 ~/src/bw/puppet-composer (git)-[master] % rake spec:system
-
-    ...loads of output...
-    2 examples, 0 failures
-    user@host01 ~/src/bw/puppet-composer (git)-[master] %
 
 
 Still not implemented !
