@@ -14,7 +14,7 @@ define asterisk::extensions (
 ) {
 
   if $source {
-    asterisk::dotd::file {"extensions_${name}.conf":
+    asterisk::dotd::file { "extensions_${name}.conf":
       ensure   => $ensure,
       dotd_dir => 'extensions.d',
       source   => $source,
@@ -22,7 +22,7 @@ define asterisk::extensions (
     }
   } else {
     if $content {
-      asterisk::dotd::file {"extensions_${name}.conf":
+      asterisk::dotd::file { "extensions_${name}.conf":
         ensure   => $ensure,
         dotd_dir => 'extensions.d',
         content  => "[${name}]\n${content}",

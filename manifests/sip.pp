@@ -46,7 +46,7 @@ define asterisk::sip (
   validate_array($deny)
   validate_array($permit)
 
-  asterisk::dotd::file {"sip_${name}.conf":
+  asterisk::dotd::file { "sip_${name}.conf":
     ensure   => $ensure,
     dotd_dir => 'sip.d',
     content  => template('asterisk/snippet/sip.erb'),

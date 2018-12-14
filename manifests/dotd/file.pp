@@ -30,7 +30,7 @@ define asterisk::dotd::file (
     fail('Please provide either a $source or a $content, but not both.')
   }
 
-  file {"/etc/asterisk/${dotd_dir}/${filename}":
+  file { "/etc/asterisk/${dotd_dir}/${filename}":
     ensure  => $ensure,
     owner   => 'root',
     group   => 'asterisk',

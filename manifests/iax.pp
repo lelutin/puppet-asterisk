@@ -16,7 +16,7 @@ define asterisk::iax (
 ) {
 
   if $source {
-    asterisk::dotd::file {"iax_${name}.conf":
+    asterisk::dotd::file { "iax_${name}.conf":
       ensure   => $ensure,
       dotd_dir => 'iax.d',
       source   => $source,
@@ -24,7 +24,7 @@ define asterisk::iax (
     }
   } else {
     if $content {
-      asterisk::dotd::file {"iax_${name}.conf":
+      asterisk::dotd::file { "iax_${name}.conf":
         ensure   => $ensure,
         dotd_dir => 'iax.d',
         content  => "[${name}]\n${content}",

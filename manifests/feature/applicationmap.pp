@@ -12,11 +12,10 @@ define asterisk::feature::applicationmap (
   $ensure = present
 ) {
 
-  $content = inline_template('<%= @feature %> => <%= @value %>')
-  asterisk::dotd::file {"feature__applicationmap_${name}.conf":
+  asterisk::dotd::file { "feature__applicationmap_${name}.conf":
     ensure   => $ensure,
     dotd_dir => 'features.applicationmap.d',
-    content  => $content,
+    content  => "${feature} => ${value}",
     filename => "${name}.conf",
   }
 

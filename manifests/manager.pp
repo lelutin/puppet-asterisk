@@ -46,7 +46,7 @@ define asterisk::manager (
   $real_read = join($read, ',')
   $real_write = join($write, ',')
 
-  asterisk::dotd::file {"manager_${name}.conf":
+  asterisk::dotd::file { "manager_${name}.conf":
     ensure   => $ensure,
     dotd_dir => 'manager.d',
     content  => template('asterisk/snippet/manager.erb'),

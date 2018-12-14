@@ -18,7 +18,7 @@ define asterisk::agent (
   Array                     $groups = []
 ) {
 
-  asterisk::dotd::file {"agent_${name}.conf":
+  asterisk::dotd::file { "agent_${name}.conf":
     ensure   => $ensure,
     dotd_dir => 'agents.d',
     content  => template('asterisk/snippet/agent.erb'),

@@ -35,7 +35,7 @@ define asterisk::voicemail (
   validate_string($pager_email)
   validate_hash($options)
 
-  asterisk::dotd::file{"${context}-${name}.conf":
+  asterisk::dotd::file{ "${context}-${name}.conf":
     ensure   => $ensure,
     content  => template('asterisk/snippet/voicemail.erb'),
     dotd_dir => 'voicemail.d',

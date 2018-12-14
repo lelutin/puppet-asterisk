@@ -2,10 +2,11 @@
 class asterisk::install {
 
   if $asterisk::manage_package {
-    package {
-      [$asterisk::package_name,
+    package { [
+      $asterisk::package_name,
       'asterisk-core-sounds-en',
-      'asterisk-core-sounds-en-gsm']:
+      'asterisk-core-sounds-en-gsm'
+    ]:
       ensure => installed,
     }
   }

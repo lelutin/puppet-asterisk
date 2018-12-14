@@ -7,13 +7,13 @@
 # TODO This class is possibly incomplete and it needs to be finished and tested.
 class asterisk::dahdi {
 
-  package {
-    ['asterisk-dahdi',
+  package { [
+    'asterisk-dahdi',
     'dahdi',
     'dahdi-dkms', # dahdi autokompile ubuntu
     'dahdi-linux', # dahdi linux kernel module
     'dahdi-source', # dahdi sources
-    ]:
+  ]:
     ensure => installed
   }
 
