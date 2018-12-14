@@ -70,7 +70,7 @@ define asterisk::dotd (
     File[$cf_file_name] {
       source => $source ? {
         '' => [
-          "puppet:///modules/site_asterisk/${filename}.${::fqdn}",
+          "puppet:///modules/site_asterisk/${filename}.${facts['fqdn']}",
           "puppet:///modules/site_asterisk/${filename}",
           "puppet:///modules/asterisk/${filename}"
         ],

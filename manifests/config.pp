@@ -1,15 +1,15 @@
 # Manage all of asterisk's basic configuration files.
 class asterisk::config {
 
-  case $::operatingsystem {
-    'CentOS', 'Fedora', 'Scientific', 'RedHat', 'Amazon', 'OracleLinux': {
+  case $facts['os']['family'] {
+    'RedHat': {
       $service_settings_path = "/etc/sysconfig/${asterisk::service_name}"
     }
-    'Debian', 'Ubuntu': {
+    'Debian': {
       $service_settings_path = "/etc/default/${asterisk::service_name}"
     }
     default: {
-      fail("Unsupported system '${::operatingsystem}'.")
+      fail("Unsupported system '${facts['os']['name']}'.")
     }
   }
 
