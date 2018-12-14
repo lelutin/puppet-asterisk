@@ -1,0 +1,8 @@
+---
+fixtures:
+  symlinks:
+    "asterisk": "#{source_dir}"
+  forge_modules:
+    "stdlib":
+      repo: "puppetlabs/stdlib"
+      ref: "5.1.0"
