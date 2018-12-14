@@ -4,11 +4,6 @@
 #
 class asterisk::params {
 
-  $manage_service = true
-  $manage_package = true
-
-  $confdir = '/etc/asterisk'
-
   $iax_options = {
     'allow'             => [],
     'disallow'          => ['lpc10'],
@@ -59,8 +54,6 @@ class asterisk::params {
     'clearglobalvars' => 'no',
   }
 
-  $agents_multiplelogin = true
-
   # defines the default parkinglot
   $features_options = {
     'parkext' => '700',
@@ -73,7 +66,6 @@ class asterisk::params {
     'monitor-type'      => 'MixMonitor',
   }
 
-  $modules_autoload = true
   $modules_noload = [
     'pbx_gtkconsole.so',
     'pbx_kdeconsole.so',
@@ -90,39 +82,5 @@ class asterisk::params {
     'res_config_pgsql.so'
   ]
   $modules_load = ['res_musiconhold.so']
-
-  $manager_enable = true
-  $manager_port = 5038
-  $manager_bindaddr = '127.0.0.1'
-
-  #### Internal module values
-
-  # packages
-  case $::operatingsystem {
-    'CentOS', 'Fedora', 'Scientific', 'RedHat', 'Amazon', 'OracleLinux': {
-      # main application
-      $package_name = 'asterisk'
-    }
-    'Debian', 'Ubuntu': {
-      # main application
-      $package_name = 'asterisk'
-    }
-    default: {
-      fail("\"${module_name}\" provides no package default value for \"${::operatingsystem}\"")
-    }
-  }
-
-  # service parameters
-  case $::operatingsystem {
-    'CentOS', 'Fedora', 'Scientific', 'RedHat', 'Amazon', 'OracleLinux': {
-      $service_name = 'asterisk'
-    }
-    'Debian', 'Ubuntu': {
-      $service_name = 'asterisk'
-    }
-    default: {
-      fail("\"${module_name}\" provides no service parameters for \"${::operatingsystem}\"")
-    }
-  }
 
 }

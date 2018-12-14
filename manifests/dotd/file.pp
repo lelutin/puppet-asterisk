@@ -13,28 +13,24 @@
 #   used as the file name.
 #
 define asterisk::dotd::file (
-  $dotd_dir,
-  $ensure = present,
-  $source = '',
-  $content = '',
-  $filename = ''
+  String                       $dotd_dir,
+  Enum['present', 'absent']    $ensure   = present,
+  Optional[String]             $content  = undef,
+  Optional[Stdlib::Filesource] $source   = undef,
+  String                       $filename = $name,
 ) {
   include asterisk::config
   include asterisk::service
 
-  if ($source == '') and ($content == '') {
-    fail('You must supply a value for either one of $source or $content.')
+  $nb_set = count([$content, $source])
+  if $nb_set == 0 {
+    fail('One of $content or $source need to be defined, none were set')
   }
-  if ($source != '') and ($content != '') {
+  if $nb_set == 2 {
     fail('Please provide either a $source or a $content, but not both.')
   }
 
-  $conffile = $filename ? {
-    ''      => $name,
-    default => $filename,
-  }
-
-  file {"/etc/asterisk/${dotd_dir}/${conffile}":
+  file {"/etc/asterisk/${dotd_dir}/${filename}":
     ensure  => $ensure,
     owner   => 'root',
     group   => 'asterisk',
@@ -43,12 +39,12 @@ define asterisk::dotd::file (
     notify  => Class['asterisk::service'],
   }
 
-  if $content != '' {
-    File["/etc/asterisk/${dotd_dir}/${conffile}"] {
+  if $content =~ String {
+    File["/etc/asterisk/${dotd_dir}/${filename}"] {
       content => $content,
     }
   } else {
-    File["/etc/asterisk/${dotd_dir}/${conffile}"] {
+    File["/etc/asterisk/${dotd_dir}/${filename}"] {
       source => $source,
     }
   }

@@ -16,10 +16,10 @@
 #   Default is to create null.conf in all .d directories.
 #
 define asterisk::dotd (
-  $additional_paths = [],
-  $content          = '',
-  $source           = '',
-  $manage_nullfile  = true,
+  Array[Stdlib::Absolutepath]  $additional_paths = [],
+  Optional[String]             $content          = undef,
+  Optional[Stdlib::Filesource] $source           = undef,
+  Boolean                      $manage_nullfile  = true,
 ) {
   include asterisk::install
   include asterisk::service
@@ -53,21 +53,27 @@ define asterisk::dotd (
     notify  => Class['asterisk::service'],
   }
 
-  if $content != '' {
-    if $source != '' {
-      fail('Please define only one of $content and $source')
-    }
+  $nb_set = count([$content, $source])
+  if $nb_set == 0 {
+    fail('One of $content or $source need to be defined, none were set')
+  }
+  if $nb_set == 2 {
+    fail('Please provide either a $source or a $content, but not both.')
+  }
 
+  if $content =~ String {
     File[$cf_file_name] {
       content => $content,
     }
   } else {
-    $filename = inline_template('<%= File.basename(cf_file_name) -%>')
+    $filename = basename($cf_file_name)
     File[$cf_file_name] {
       source => $source ? {
-        '' => [ "puppet:///modules/site_asterisk/${filename}.${::fqdn}",
-                "puppet:///modules/site_asterisk/${filename}",
-                "puppet:///modules/asterisk/${filename}"],
+        '' => [
+          "puppet:///modules/site_asterisk/${filename}.${::fqdn}",
+          "puppet:///modules/site_asterisk/${filename}",
+          "puppet:///modules/asterisk/${filename}"
+        ],
         default => $source,
       },
     }

@@ -11,14 +11,12 @@
 # $groups is a list of groups to which the agent is associated.
 #
 define asterisk::agent (
-  $ext,
-  $password,
-  $agent_name,
-  $ensure = present,
-  $groups = []
+  String                    $ext,
+  Sensitive[String]         $password,
+  String                    $agent_name,
+  Enum['present', 'absent'] $ensure = present,
+  Array                     $groups = []
 ) {
-
-  validate_array($groups)
 
   asterisk::dotd::file {"agent_${name}.conf":
     ensure   => $ensure,
