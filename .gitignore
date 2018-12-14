@@ -1,3 +1,4 @@
+.vagrant
 /pkg
 spec/fixtures
 /doc
