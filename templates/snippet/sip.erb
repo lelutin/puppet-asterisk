@@ -69,9 +69,11 @@ md5secret=<%= @md5secret %>
 <% if @pickupgroup -%>
 pickupgroup=<%= @pickupgroup %>
 <% end -%>
-<% for dproto in @disallow %>disallow=<%= dproto %>
+<% for dproto in @disallow -%>
+disallow=<%= dproto %>
 <% end -%>
-<% for aproto in @allow %>allow=<%= aproto %>
+<% for aproto in @allow -%>
+allow=<%= aproto %>
 <% end -%>
 <% if @dtmfmode -%>
 dtmfmode=<%= @dtmfmode %>
@@ -82,7 +84,9 @@ transport=<%= @transports.join(',') %>
 <% if @encryption -%>
 encryption=<%= @encryption %>
 <% end -%>
-<% for denyip in @deny %>deny=<%= denyip %>
+<% for denyip in @deny -%>
+deny=<%= denyip %>
 <% end -%>
-<% for permitip in @permit %>permit=<%= permitip %>
+<% for permitip in @permit -%>
+permit=<%= permitip %>
 <% end -%>
