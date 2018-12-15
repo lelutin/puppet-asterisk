@@ -6,11 +6,9 @@
 # $ensure can be set to absent to remove certain feature
 #
 define asterisk::feature (
-  $options,
+  Hash $options,
   $ensure = present
 ) {
-
-  validate_hash($options)
 
   asterisk::dotd::file { "feature_${name}.conf":
     ensure   => $ensure,

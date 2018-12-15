@@ -1,85 +1,85 @@
 ; THIS FILE IS MANAGED BY PUPPET
 ; all local modifications will be lost
 [<%= @name %>]
-<% if @template_name != false -%>
+<% if @template_name -%>
 (<%= @template_name %>)
 <% end -%>
-<% if @account_type != false -%>
+<% if @account_type -%>
 type=<%= @account_type %>
 <% end -%>
-<% if @username != false -%>
+<% if @username -%>
 username=<%= @username %>
 <% end -%>
-<% if @defaultuser != false -%>
+<% if @defaultuser -%>
 defaultuser=<%= @defaultuser %>
 <% end -%>
-<% if @secret != false -%>
-secret=<%= @secret %>
+<% if @secret -%>
+secret=<%= @secret.unwrap %>
 <% end -%>
-<% if @context != false -%>
+<% if @context -%>
 context=<%= @context %>
 <% end -%>
-<% if @canreinvite != false -%>
+<% if @canreinvite -%>
 canreinvite=<%= @canreinvite %>
 <% end -%>
-<% if @host != false -%>
+<% if @host -%>
 host=<%= @host %><% end%>
-<% if @insecure != false -%>
+<% if @insecure -%>
 insecure=<%= @insecure %>
 <% end -%>
-<% if @language != false -%>
+<% if @language -%>
 language=<%= @language %>
 <% end -%>
-<% if @nat != false -%>
+<% if @nat -%>
 nat=<%= @nat %>
 <% end -%>
-<% if @qualify != false -%>
+<% if @qualify -%>
 qualify=<%= @qualify %>
 <% end -%>
-<% if @vmexten != false -%>
+<% if @vmexten -%>
 vmexten=<%= @vmexten %>
 <% end -%>
-<% if @fromdomain != false -%>
+<% if @fromdomain -%>
 fromdomain=<%= @fromdomain %>
 <% end -%>
-<% if @fromuser != false -%>
+<% if @fromuser -%>
 fromuser=<%= @fromuser %>
 <% end -%>
-<% if @account_type == 'peer' and @outboundproxy != false -%>
+<% if @account_type == 'peer' and @outboundproxy -%>
 outboundproxy=<%= @outboundproxy %>
 <% end -%>
-<% if @callerid != false -%>
+<% if @callerid -%>
 callerid=<%= @callerid %>
 <% end -%>
-<% if @calllimit != false -%>
+<% if @calllimit -%>
 call-limit=<%= @calllimit %>
 <% end -%>
-<% if @callgroup != false -%>
+<% if @callgroup -%>
 callgroup=<%= @callgroup %>
 <% end -%>
-<% if @t38pt_udptl != false -%>
+<% if @t38pt_udptl -%>
 t38pt_udptl=<%= @t38pt_udptl %>
 <% end -%>
-<% if @mailbox != false -%>
+<% if @mailbox -%>
 mailbox=<%= @mailbox %>
 <% end -%>
-<% if @md5secret != false -%>
+<% if @md5secret -%>
 md5secret=<%= @md5secret %>
 <% end -%>
-<% if @pickupgroup != false -%>
+<% if @pickupgroup -%>
 pickupgroup=<%= @pickupgroup %>
 <% end -%>
 <% for dproto in @disallow %>disallow=<%= dproto %>
 <% end -%>
 <% for aproto in @allow %>allow=<%= aproto %>
 <% end -%>
-<% if @dtmfmode != false -%>
+<% if @dtmfmode -%>
 dtmfmode=<%= @dtmfmode %>
 <% end -%>
 <% if ! @transports.empty? -%>
 transport=<%= @transports.join(',') %>
 <% end -%>
-<% if @encryption != '' -%>
+<% if @encryption -%>
 encryption=<%= @encryption %>
 <% end -%>
 <% for denyip in @deny %>deny=<%= denyip %>

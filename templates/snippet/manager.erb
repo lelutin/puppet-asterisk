@@ -1,7 +1,7 @@
 ; THIS FILE IS MANAGED BY PUPPET
 ; all local modifications will be lost
-[<%= @real_manager_name %>]
-secret = <%= @secret %>
+[<%= @manager_name %>]
+secret = <%= @secret.unwrap %>
 <% @deny.each { |deny_rule| -%>
 deny = <%= deny_rule %>
 <% } -%>

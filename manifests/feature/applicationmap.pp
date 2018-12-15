@@ -7,8 +7,8 @@
 # $ensure can be set to absent to remove the corresponding file.
 #
 define asterisk::feature::applicationmap (
-  $feature,
-  $value,
+  String[1] $feature,
+  String[1] $value,
   $ensure = present
 ) {
 

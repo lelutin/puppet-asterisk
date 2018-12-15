@@ -19,21 +19,14 @@
 #   'tz' option.
 #
 define asterisk::voicemail (
-  $context,
-  $password,
-  $ensure      = present,
-  $user_name   = '',
-  $email       = '',
-  $pager_email = '',
-  $options     = {}
+  String[1]            $context,
+  Sensitive[String[1]] $password,
+  $ensure                           = present,
+  String               $user_name   = '',
+  String               $email       = '',
+  String               $pager_email = '',
+  Hash                 $options     = {}
 ) {
-
-  validate_string($context)
-  validate_string($password)
-  validate_string($user_name)
-  validate_string($email)
-  validate_string($pager_email)
-  validate_hash($options)
 
   asterisk::dotd::file{ "${context}-${name}.conf":
     ensure   => $ensure,

@@ -9,28 +9,24 @@
 #
 define asterisk::extensions (
   $ensure  = present,
-  $source  = false,
-  $content = false
+  $source  = undef,
+  # Only enforcing type for this param since we're using its value
+  Optional[String] $content = undef
 ) {
 
-  if $source {
-    asterisk::dotd::file { "extensions_${name}.conf":
-      ensure   => $ensure,
-      dotd_dir => 'extensions.d',
-      source   => $source,
-      filename => "${name}.conf",
-    }
-  } else {
-    if $content {
-      asterisk::dotd::file { "extensions_${name}.conf":
-        ensure   => $ensure,
-        dotd_dir => 'extensions.d',
-        content  => "[${name}]\n${content}",
-        filename => "${name}.conf",
-      }
-    } else {
-      fail('source or content parameter is required')
-    }
+  if $content !~ Undef {
+    $real_content = "[${name}]\n${content}"
+  }
+  else {
+    $real_content = $content
+  }
+
+  asterisk::dotd::file { "extensions_${name}.conf":
+    ensure   => $ensure,
+    dotd_dir => 'extensions.d',
+    source   => $source,
+    content  => $real_content,
+    filename => "${name}.conf",
   }
 
 }

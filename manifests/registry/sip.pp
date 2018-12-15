@@ -18,16 +18,16 @@
 #   remote server. When not set, extension will be 's'.
 #
 define asterisk::registry::sip (
-  $server,
-  $user,
-  $ensure    = present,
-  $password  = '',
-  $authuser  = '',
-  $port      = '',
-  $extension = ''
+  String[1]                      $server,
+  String[1]                      $user,
+  $ensure                                   = present,
+  Optional[Sensitive[String[1]]] $password  = undef,
+  Optional[String[1]]            $authuser  = undef,
+  Optional[String[1]]            $port      = undef,
+  Optional[String[1]]            $extension = undef
 ) {
 
-  if $password == '' and $authuser != '' {
+  if $password =~ Undef and $authuser !~ Undef {
     fail('No value given for password: supplying a value for $authuser only makes sense when $password is set.')
   }
 

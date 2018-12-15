@@ -22,26 +22,14 @@
 #   certain information or configuration.
 #
 define asterisk::manager (
-  $secret,
-  $ensure       = present,
-  $manager_name = false,
-  $deny         = ['0.0.0.0/0.0.0.0'],
-  $permit       = ['127.0.0.1/255.255.255.255'],
-  $read         = ['system', 'call'],
-  $write        = ['system', 'call']
+  Sensitive[String[1]] $secret,
+  $ensure                            = present,
+  String[1]            $manager_name = $name,
+  Array[String[1]]     $deny         = ['0.0.0.0/0.0.0.0'],
+  Array[String[1]]     $permit       = ['127.0.0.1/255.255.255.255'],
+  Array[String[1]]     $read         = ['system', 'call'],
+  Array[String[1]]     $write        = ['system', 'call']
 ) {
-
-  validate_string($secret)
-  validate_array($deny)
-  validate_array($permit)
-  validate_array($read)
-  validate_array($write)
-
-  $real_manager_name = $manager_name ? {
-    false   => $name,
-    default => $manager_name
-  }
-  validate_string($real_manager_name)
 
   $real_read = join($read, ',')
   $real_write = join($write, ',')

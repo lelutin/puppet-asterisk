@@ -1,39 +1,39 @@
 ; THIS FILE IS MANAGED BY PUPPET
 ; all local modifications will be lost
 [<%= @name %>]
-<% if @strategy != false -%>
+<% if @strategy -%>
 strategy=<%= @strategy %>
 <% end -%>
 <% for member in @members %>member=<%= member %>
 <% end -%>
-<% if @memberdelay != false -%>
+<% if @memberdelay -%>
 memberdelay=<%= @memberdelay %>
 <% end -%>
-<% if @penaltymemberslimit != false -%>
+<% if @penaltymemberslimit -%>
 penaltymemberslimit=<%= @penaltymemberslimit %>
 <% end -%>
-<% if @membermacro != false -%>
+<% if @membermacro -%>
 membermacro=<%= @membermacro %>
 <% end -%>
-<% if @membergosub != false -%>
+<% if @membergosub -%>
 membergosub=<%= @membergosub %>
 <% end -%>
-<% if @context != false -%>
+<% if @context -%>
 context=<%= @context %>
 <% end -%>
-<% if @defaultrule != false -%>
+<% if @defaultrule -%>
 defaultrule=<%= @defaultrule %>
 <% end -%>
-<% if @maxlen != false -%>
+<% if @maxlen -%>
 maxlen=<%= @maxlen %>
 <% end -%>
-<% if @musicclass != false -%>
+<% if @musicclass -%>
 musicclass=<%= @musicclass %>
 <% end -%>
-<% if @servicelevel != false -%>
+<% if @servicelevel -%>
 servicelevel=<%= @servicelevel %>
 <% end -%>
-<% if @weight != false -%>
+<% if @weight -%>
 weight=<%= @weight %>
 <% end -%>
 <% if ! @joinempty.empty? -%>
@@ -42,111 +42,111 @@ joinempty=<%= @joinempty.join(',') %>
 <% if ! @leavewhenempty.empty? -%>
 leavewhenempty=<%= @leavewhenempty.join(',') %>
 <% end -%>
-<% if @eventwhencalled != false -%>
+<% if @eventwhencalled -%>
 eventwhencalled=<%= @eventwhencalled %>
 <% end -%>
-<% if @eventmemberstatus != false -%>
+<% if @eventmemberstatus -%>
 eventmemberstatus=<%= @eventmemberstatus %>
 <% end -%>
-<% if @reportholdtime != false -%>
+<% if @reportholdtime -%>
 reportholdtime=<%= @reportholdtime %>
 <% end -%>
-<% if @ringinuse != false -%>
+<% if @ringinuse -%>
 ringinuse=<%= @ringinuse %>
 <% end -%>
-<% if @monitor_type != false -%>
+<% if @monitor_type -%>
 monitor-type=<%= @monitor_type %>
 <% end -%>
 <% if ! @monitor_format.empty? -%>
 monitor-format=<%= @monitor_format.join('|') %>
 <% end -%>
-<% if @announce != false -%>
+<% if @announce -%>
 announce=<%= @announce %>
 <% end -%>
-<% if @announce_frequency != false -%>
+<% if @announce_frequency -%>
 announce-frequency=<%= @announce_frequency %>
 <% end -%>
-<% if @min_announce_frequency != false -%>
+<% if @min_announce_frequency -%>
 min-announce-frequency=<%= @min_announce_frequency %>
 <% end -%>
-<% if @announce_holdtime != false -%>
+<% if @announce_holdtime -%>
 announce-holdtime=<%= @announce_holdtime %>
 <% end -%>
-<% if @announce_position != false -%>
+<% if @announce_position -%>
 announce-position=<%= @announce_position %>
 <% end -%>
-<% if @announce_position_limit != false -%>
+<% if @announce_position_limit -%>
 announce-position-limit=<%= @announce_position_limit %>
 <% end -%>
-<% if @announce_round_seconds != false -%>
+<% if @announce_round_seconds -%>
 announce-round-seconds=<%= @announce_round_seconds %>
 <% end -%>
 <% if ! @periodic_announce.empty? -%>
 periodic-announce=<%= @periodic_announce.join(',') %>
 <% end -%>
-<% if @periodic_announce_frequency != false -%>
+<% if @periodic_announce_frequency -%>
 periodic-announce-frequency=<%= @periodic_announce_frequency %>
 <% end -%>
-<% if @random_periodic_announce != false -%>
+<% if @random_periodic_announce -%>
 random-periodic-announce=<%= @random_periodic_announce %>
 <% end -%>
-<% if @relative_periodic_announce != false -%>
+<% if @relative_periodic_announce -%>
 relative-periodic-announce=<%= @relative_periodic_announce %>
 <% end -%>
-<% if @queue_youarenext != false -%>
+<% if @queue_youarenext -%>
 queue-youarenext=<%= @queue_youarenext %>
 <% end -%>
-<% if @queue_thereare != false -%>
+<% if @queue_thereare -%>
 queue-thereare=<%= @queue_thereare %>
 <% end -%>
-<% if @queue_callswaiting != false -%>
+<% if @queue_callswaiting -%>
 queue-callswaiting=<%= @queue_callswaiting %>
 <% end -%>
-<% if @queue_holdtime != false -%>
+<% if @queue_holdtime -%>
 queue-holdtime=<%= @queue_holdtime %>
 <% end -%>
-<% if @queue_minute != false -%>
+<% if @queue_minute -%>
 queue-minute=<%= @queue_minute %>
 <% end -%>
-<% if @queue_minutes != false -%>
+<% if @queue_minutes -%>
 queue-minutes=<%= @queue_minutes %>
 <% end -%>
-<% if @queue_seconds != false -%>
+<% if @queue_seconds -%>
 queue-seconds=<%= @queue_seconds %>
 <% end -%>
-<% if @queue_thankyou != false -%>
+<% if @queue_thankyou -%>
 queue-thankyou=<%= @queue_thankyou %>
 <% end -%>
-<% if @queue_reporthold != false -%>
+<% if @queue_reporthold -%>
 queue-reporthold=<%= @queue_reporthold %>
 <% end -%>
-<% if @wrapuptime != false -%>
+<% if @wrapuptime -%>
 wrapuptime=<%= @wrapuptime %>
 <% end -%>
-<% if @timeout != false -%>
+<% if @timeout -%>
 timeout=<%= @timeout %>
 <% end -%>
-<% if @timeoutrestart != false -%>
+<% if @timeoutrestart -%>
 timeoutrestart=<%= @timeoutrestart %>
 <% end -%>
-<% if @timeoutpriority != false -%>
+<% if @timeoutpriority -%>
 timeoutpriority=<%= @timeoutpriority %>
 <% end -%>
-<% if @retry != false -%>
+<% if @retry -%>
 retry=<%= @retry %>
 <% end -%>
-<% if @autofill != false -%>
+<% if @autofill -%>
 autofill=<%= @autofill %>
 <% end -%>
-<% if @autopause != false -%>
+<% if @autopause -%>
 autopause=<%= @autopause %>
 <% end -%>
-<% if @setinterfacevar != false -%>
+<% if @setinterfacevar -%>
 setinterfacevar=<%= @setinterfacevar %>
 <% end -%>
-<% if @setqueuevar != false -%>
+<% if @setqueuevar -%>
 setqueuevar=<%= @setqueuevar %>
 <% end -%>
-<% if @setqueueentryvar != false -%>
+<% if @setqueueentryvar -%>
 setqueueentryvar=<%= @setqueueentryvar %>
 <% end -%>

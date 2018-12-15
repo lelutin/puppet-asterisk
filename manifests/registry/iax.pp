@@ -9,9 +9,9 @@
 # $ensure can be set to absent in order to remove the registry
 #
 define asterisk::registry::iax (
-  $server,
-  $user,
-  $password,
+  String[1]            $server,
+  String[1]            $user,
+  Sensitive[String[1]] $password,
   $ensure = present,
 ) {
 
