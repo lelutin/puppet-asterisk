@@ -18,7 +18,6 @@
 # @see https://www.voip-info.org/asterisk-config-sipconf/
 #
 # @todo use better data types. some should be boolean, some should have an enum
-# @todo remove insecure?
 # @todo find a method to let users interleave deny and user rules instead of outputting all deny and then all permit.
 #
 # @param ensure
@@ -90,11 +89,10 @@
 #   authenticating. Set to a hostname or IP address to match only for this host
 #   or IP address.
 # @param insecure
-#   This option was removed in asterisk 1.6. If set to `port`, allow matching
-#   of peer by IP address without matching port number. If set to `invite`, do
-#   not require authentication of incoming INVITEs. If set to `no`, all
-#   connections will be authenticated regardless of port or IP address.
-#   Defaults to `no`.
+#   If set to `port`, allow matching of peer by IP address without matching
+#   port number. If set to `invite`, do not require authentication of incoming
+#   INVITEs. If set to `no`, all connections will be authenticated regardless
+#   of port or IP address.  Defaults to `no`.
 # @param language
 #   Language code to define prompts for this peer/user.
 # @param nat
