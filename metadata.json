@@ -1,6 +1,6 @@
 {
   "name": "LeLutin-asterisk",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "author": "LeLutin",
   "summary": "Install and configure the Asterisk PBX service",
   "license": "GPL-3.0+",
@@ -8,12 +8,18 @@
   "project_page": "https://github.com/lelutin/puppet-asterisk",
   "issues_url": "https://github.com/lelutin/puppet-asterisk/issues",
   "dependencies": [
-    {"name":"puppetlabs-stdlib","version_requirement":">= 3.0.0"}
+    {"name":"puppetlabs/stdlib","version_requirement":">= 4.25.0 < 6.0.0"}
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 4.0.0 < 6.0.0"
+    }
   ],
   "operatingsystem_support": [
     {
       "operatingsystem": "Debian",
-      "operatingsystemrelease":[ "7", "8" ]
+      "operatingsystemrelease":[ "8", "9" ]
     }
   ],
   "tags": ["asterisk", "sip", "iax", "PBX", "VoIP"]
