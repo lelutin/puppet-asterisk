@@ -1,7 +1,7 @@
 ; THIS FILE IS MANAGED BY PUPPET
 ; all local modifications will be lost
 ; To change values found in this file, see the $modules_autoload,
-; $modules_noload, $modules_load and $modules_global_options parameters of the
+; $modules_noload, $modules_load and $modules_global parameters of the
 ; asterisk module
 ;
 ; Asterisk Module Loader configuration file
@@ -9,14 +9,14 @@
 [modules]
 autoload=<%= @modules_autoload %>
 
-<% @modules_noload.each do |noload| -%>
+<% scope.lookupvar("asterisk::modules_noload").each do |noload| -%>
 noload => <%= noload %>
 <% end -%>
-<% @modules_load.each do |load| -%>
+<% scope.lookupvar("asterisk::modules_load").each do |load| -%>
 load => <%= load %>
 <% end -%>
 [global]
-<% @modules_global_options.sort.map do |key, value| -%>
+<% scope.lookupvar("asterisk::modules_global").sort.map do |key, value| -%>
 <%= key %>=<%= value %>
 <% end -%>
 

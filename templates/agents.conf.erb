@@ -1,7 +1,7 @@
 ; THIS FILE IS MANAGED BY PUPPET
 ; all local modifications will be lost
 ; To change values found in this file, see the $agents_multiplelogin and
-; $agents_options parameters of the asterisk module
+; $agents_global parameters of the asterisk module
 ;
 ; Agent configuration
 ;
@@ -9,7 +9,7 @@
 multiplelogin=<%= @agents_multiplelogin %>
 
 [agents]
-<% @agents_options.sort.map do |key, value| -%>
+<% scope.lookupvar("asterisk::agents_global").sort.map do |key, value| -%>
 <%= key %>=<%= value %>
 <% end -%>
 

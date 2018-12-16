@@ -26,40 +26,39 @@ class asterisk::config {
     ],
   }
 
-  $iax_options = $asterisk::real_iax_options
+  $iax_general = $asterisk::real_iax_general
   asterisk::dotd { '/etc/asterisk/iax':
     additional_paths => ['/etc/asterisk/iax.registry.d'],
     content          => template('asterisk/iax.conf.erb'),
   }
 
-  $sip_options = $asterisk::real_sip_options
+  $sip_general = $asterisk::real_sip_general
   asterisk::dotd { '/etc/asterisk/sip':
     additional_paths => ['/etc/asterisk/sip.registry.d'],
     content          => template('asterisk/sip.conf.erb'),
   }
 
-  $voicemail_options = $asterisk::real_voicemail_options
+  $voicemail_general = $asterisk::real_voicemail_general
   asterisk::dotd { '/etc/asterisk/voicemail':
     content => template('asterisk/voicemail.conf.erb'),
   }
 
-  $extensions_options = $asterisk::real_extensions_options
+  $extensions_general = $asterisk::real_extensions_general
   asterisk::dotd { '/etc/asterisk/extensions':
     content => template('asterisk/extensions.conf.erb'),
   }
 
   $agents_multiplelogin = $asterisk::real_agents_multiplelogin
-  $agents_options = $asterisk::agents_options
   asterisk::dotd { '/etc/asterisk/agents':
     content => template('asterisk/agents.conf.erb'),
   }
 
-  $features_options = $asterisk::real_features_options
+  $features_general = $asterisk::real_features_general
   asterisk::dotd { '/etc/asterisk/features':
     content          => template('asterisk/features.conf.erb'),
   }
 
-  $queues_options = $asterisk::real_queues_options
+  $queues_general = $asterisk::real_queues_general
   asterisk::dotd { '/etc/asterisk/queues':
     content => template('asterisk/queues.conf.erb'),
   }
@@ -72,9 +71,6 @@ class asterisk::config {
   }
 
   $modules_autoload = $asterisk::real_modules_autoload
-  $modules_noload = $asterisk::modules_noload
-  $modules_load = $asterisk::modules_load
-  $modules_global_options = $asterisk::modules_global_options
   file { '/etc/asterisk/modules.conf' :
     ensure  => present,
     content => template('asterisk/modules.conf.erb'),

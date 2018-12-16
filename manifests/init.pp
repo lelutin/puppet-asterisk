@@ -23,35 +23,37 @@
 # @param confdir
 #   Absolute path to the asterisk configuration directory.
 #
-# @param iax_options
-#   Options for the global section of the iax.conf file. Options are set in the
-#   file as `key = value`.
-# @param sip_options
-#   Options for the global section of the sip.conf file. Options are set in the
-#   file as `key = value`.
-# @param voicemail_options
-#   Options for the global section of the voicemail.conf file. Options are set
-#   in the file as `key = value`.
-# @param extensions_options
-#   Options for the global section of the extensions.conf file. Options are set
-#   in the file as `key = value`.
+# @param iax_general
+#   Global configurations for IAX2. Options are set in the file as `key =
+#   value` in the `[general]` section of `iax.conf`.
+# @param sip_general
+#   Global configurations for SIP. Options are set in the file as `key = value`
+#   in the `[general]` section of the `sip.conf` file.
+# @param voicemail_general
+#   Global configurations for voicemail. Options are set in the file as `key =
+#   value` in the `[general]` section of the `voicemail.conf` file.
+# @param extensions_general
+#   Global configurations for the dialplan. Options are set in the file as `key
+#   = value` in the `[general]` section of the `extensions.conf` file.
 # @param agents_multiplelogin
 #   Set this to false to disable possibility for agents to be logged in
-#   multiple times. This option is set in the `general` section of the
-#   agents.conf file.
-# @param agents_options
-#   Options for the global `agents` section of the agents.conf file. Options
-#   are set in the file as `key = value`.
-# @param features_options
-#   Global call features. Options are set in the file as `key = value`.
+#   multiple times. This option is set in the `[general]` section of the
+#   `agents.conf` file.
+# @param agents_global
+#   Global configurations for agents. Options are set in the file as `key =
+#   value` in the `[agents]` section of the `agents.conf` file.
+# @param features_general
+#   Global call features. Options are set in the file as `key = value` in the
+#   `[general]` section of `features.conf`.
 # @param features_featuremap
-#   Global feature maps. Options are set in the file as `key => value`.
+#   Global feature maps. Options are set in the file as `key => value` in the
+#   `[featuremap]` section of `features.conf`.
 # @param features_applicationmap
 #   Global application feature maps. Options are set in the file as `key =>
-#   value`.
-# @param queues_options
-#   Options for the global section of the queues.conf file. Options are set in
-#   the file as `key = value`.
+#   value` in the `[applicationmap]` section of `features.conf`.
+# @param queues_general
+#   Global configurations for queues. Options are set in the file as `key =
+#   value` in the `[general]` section of the `queues.conf` file.
 # @param modules_autoload
 #   Set this to false to avoid having asterisk load modules automatically on an
 #   as-needed basis. This can be used to configure modules in a more
@@ -62,9 +64,9 @@
 # @param modules_load
 #   List of modules that asterisk should load on startup. This is useful if
 #   you've set `modules_autoload` to `false`.
-# @param modules_global_options
-#   Options for the global section of the modules.conf file. Options are set in
-#   the file as `key = value`.
+# @param modules_global
+#   Global configurations for modules. Options are set in the file as `key =
+#   value` in the `[global]` section of the `modules.conf` file.
 # @param manager_enable
 #   Set this to false to disable asterisk manager.
 # @param manager_port
@@ -80,50 +82,50 @@ class asterisk (
   String               $package_name            = 'asterisk',
   String               $service_name            = 'asterisk',
   Stdlib::Absolutepath $confdir                 = '/etc/asterisk',
-  Hash                 $iax_options             = {},
-  Hash                 $sip_options             = {},
-  Hash                 $voicemail_options       = {},
-  Hash                 $extensions_options      = {},
+  Hash                 $iax_general             = {},
+  Hash                 $sip_general             = {},
+  Hash                 $voicemail_general       = {},
+  Hash                 $extensions_general      = {},
   Boolean              $agents_multiplelogin    = true,
-  Hash                 $agents_options          = {},
-  Hash                 $features_options        = $asterisk::params::features_options,
+  Hash                 $agents_global           = {},
+  Hash                 $features_general        = $asterisk::params::features_general,
   Hash                 $features_featuremap     = {},
   Hash                 $features_applicationmap = {},
-  Hash                 $queues_options          = {},
+  Hash                 $queues_general          = {},
   Boolean              $modules_autoload        = true,
   Array[String]        $modules_noload          = $asterisk::params::modules_noload,
   Array[String]        $modules_load            = $asterisk::params::modules_load,
-  Hash                 $modules_global_options  = {},
+  Hash                 $modules_global          = {},
   Boolean              $manager_enable          = true,
   Integer              $manager_port            = 5038,
   String               $manager_bindaddr        = '127.0.0.1',
 ) inherits asterisk::params {
 
-  # We'll only ensure the type of some of the *_options on which templates iterate
+  # We'll only ensure the type of some of the *_general on which templates iterate
 
-  $real_iax_options = merge($asterisk::params::iax_options, $iax_options)
-  assert_type(Array[String], $real_iax_options['allow'])
-  assert_type(Array[String], $real_iax_options['disallow'])
-  $real_sip_options = merge($asterisk::params::sip_options, $sip_options)
-  assert_type(Array[String], $real_sip_options['allow'])
-  assert_type(Array[String], $real_sip_options['disallow'])
-  assert_type(Array[String], $real_sip_options['domain'])
-  assert_type(Array[String], $real_sip_options['localnet'])
-  $real_voicemail_options = merge(
-    $asterisk::params::voicemail_options, $voicemail_options
+  $real_iax_general = merge($asterisk::params::iax_general, $iax_general)
+  assert_type(Array[String], $real_iax_general['allow'])
+  assert_type(Array[String], $real_iax_general['disallow'])
+  $real_sip_general = merge($asterisk::params::sip_general, $sip_general)
+  assert_type(Array[String], $real_sip_general['allow'])
+  assert_type(Array[String], $real_sip_general['disallow'])
+  assert_type(Array[String], $real_sip_general['domain'])
+  assert_type(Array[String], $real_sip_general['localnet'])
+  $real_voicemail_general = merge(
+    $asterisk::params::voicemail_general, $voicemail_general
   )
-  $real_extensions_options = merge(
-    $asterisk::params::extensions_options,
-    $extensions_options
+  $real_extensions_general = merge(
+    $asterisk::params::extensions_general,
+    $extensions_general
   )
   $real_agents_multiplelogin = bool2str($agents_multiplelogin, 'yes', 'no')
-  $real_features_options = merge(
-    $asterisk::params::features_options,
-    $features_options
+  $real_features_general = merge(
+    $asterisk::params::features_general,
+    $features_general
   )
-  $real_queues_options = merge(
-    $asterisk::params::queues_options,
-    $queues_options
+  $real_queues_general = merge(
+    $asterisk::params::queues_general,
+    $queues_general
   )
   $real_modules_autoload = bool2str($modules_autoload, 'yes', 'no')
   $real_manager_enable = bool2str($manager_enable, 'yes', 'no')

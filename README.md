@@ -62,32 +62,32 @@ how general configuration is set.
   * `$confdir` can be used to override the path to the Asterisk configuration.
     Default value is "/etc/asterisk".
 
-  * `$iax_options` is a hash of global options for IAX2. See section IAX2
+  * `$iax_general` is a hash of global options for IAX2. See section IAX2
     Options.
 
-  * `$sip_options` is a hash of global options for SIP. See section SIP Options.
+  * `$sip_general` is a hash of global options for SIP. See section SIP Options.
 
-  * `$voicemail_options` is a hash of global options for voicemail. See section
+  * `$voicemail_general` is a hash of global options for voicemail. See section
     Voicemail Options.
 
-  * `$extensions_options` is a hash of global options for extensions. See
+  * `$extensions_general` is a hash of global options for extensions. See
     section Extensions Options.
 
-  * `$agents_multiplelogin` and `$agents_options` are detailed in the Agents
+  * `$agents_multiplelogin` and `$agents_global` are detailed in the Agents
     Options section.
 
-  * `$features_options` and `$featuremap` are detailed in the Features Options
+  * `$features_general` and `$featuremap` are detailed in the Features Options
     section.
 
-  * `$queues_options` is detailed in the Queues Options section.
+  * `$queues_general` is detailed in the Queues Options section.
 
   * `$modules_autoload`, `$modules_noload`, `$modules_load` and
-    `$modules_global_options` are detailed in the Modules section.
+    `$modules_global` are detailed in the Modules section.
 
   * `$manager_enable`, `$manager_port` and `$manager_bindaddr` are detailed in
     the Manager Options section.
 
-### Setting options with the $xyz_options parameters ###
+### Setting options with the $xyz_general or $xyz_global parameters ###
 
 Asterisk has lots and lots of configuration variables that can be set in
 different files.
@@ -98,7 +98,7 @@ those hashes is always the same and looks like the following, where xyz would
 match the name of the configuration file:
 
 ```puppet
-$xyz_options = {
+$xyz_general = {
   'configuration-option1' => 'value1',
   'allow'                 => ['list-value1', 'list-value2'],
   #[...]
@@ -171,12 +171,12 @@ asterisk::registry::iax { 'providerX':
 
 If you are using the IAX2 protocol, you'll want to set some global
 configuration options. For passing in settings, you need to send a hash to the
-`asterisk` class with the `iax_options` parameter.
+`asterisk` class with the `iax_general` parameter.
 
 Here is the default hash with the default values, as defined in params.pp:
 
 ```puppet
-$iax_options = {
+$iax_general = {
   'allow'             => [],
   'disallow'          => ['lpc10'],
   'bandwidth'         => 'low',
@@ -254,12 +254,12 @@ asterisk::registry::sip { 'friends_home':
 
 If you are using the SIP protocol, you'll want to set some global
 configuration options. For passing in settings, you need to send a hash to the
-`asterisk` class with the `sip_options` parameter.
+`asterisk` class with the `sip_general` parameter.
 
 Here is the default hash with the default values, as defined in params.pp:
 
 ```puppet
-$sip_options = {
+$sip_general = {
   'disallow'         => [],
   'allow'            => [],
   'domain'           => [],
@@ -279,7 +279,7 @@ $sip_options = {
 ### SIP encryption ###
 
 If you want to enable SIP encryption, you can set the following settings in the
-`sip_options` parameter to the `asterisk` class:
+`sip_general` parameter to the `asterisk` class:
 
 ```puppet
 $sip_option = {
@@ -331,12 +331,12 @@ asterisk::voicemail { '3001':
 
 Voicemail can be configured through a set of options in the `[general]`
 context. To set those options, you can pass values as a hash to the
-`voicemail_options` parameter to the main class.
+`voicemail_general` parameter to the main class.
 
 Here is the default hash with the default values, as defined in params.pp:
 
 ```puppet
-$voicemail_options = {
+$voicemail_general = {
   'format'           => 'wav49|gsm|wav',
   'serveremail'      => 'asterisk',
   'attach'           => 'yes',
@@ -369,12 +369,12 @@ asterisk::extensions { 'incoming':
 ### Extensions Options ###
 
 Some global options can be set for extensions. You can achieve that by passing
-a hash to the `extensions_options` parameter to the `asterisk` class.
+a hash to the `extensions_general` parameter to the `asterisk` class.
 
 Here is the default hash with the default values, as defined in params.pp:
 
 ```puppet
-$extensions_options = {
+$extensions_general = {
   'static'          => 'yes',
   'writeprotect'    => 'no',
   'clearglobalvars' => 'no',
@@ -428,7 +428,7 @@ context, `multiplelogin`, can be set via the `agents_multiplelogin` parameter
 to the `asterisk class` with a boolean value.
 
 Global options in the `[agents]` context can be set by passing a hash to the
-`agents_options` parameter to the `asterisk` class. By default this parameter
+`agents_global` parameter to the `asterisk` class. By default this parameter
 doesn't define any global options.
 
 For creating agents, it is recommended to use the `asterisk::agent` defined
@@ -465,15 +465,15 @@ asterisk::feature::applicationmap { 'pausemonitor':
 }
 ```
 
-### Features Options ###
+### Features global configurations ###
 
 Some global feature options can be configured, like the default parkinglot, via
-the `features_options` parameter to the `asterisk` class.
+the `features_general` parameter to the `asterisk` class.
 
 Here is the default hash with the default values, as defined in params.pp:
 
 ```puppet
-$features_options = {
+$features_general = {
   'parkext' => '700',
   'parkpos' => '701-720',
   'context' => 'parkedcalls',
@@ -523,12 +523,12 @@ http://www.asteriskdocs.org/en/3rd_Edition/asterisk-book-html-chunk/asterisk-ACD
 
 For queues some global configurations and default values can be set in the
 `[general]` context. You can set options by passing a hash to the
-`queues_options` parameter to the `asterisk` class.
+`queues_general` parameter to the `asterisk` class.
 
 Here is the default hash with the default values, as defined in params.pp:
 
 ```puppet
-$queues_options = {
+$queues_general = {
   'persistentmembers' => 'yes',
   'monitor-type'      => 'MixMonitor',
 }
@@ -578,7 +578,7 @@ taken from the default config file in Debian.
    $modules_load = ['res_musiconhold.so']
    ```
 
- * `modules_global_options`: a hash of options that should be set in the
+ * `modules_global`: a hash of options that should be set in the
    `[global]` context. These options let you customize behaviours for modules
    that are loaded.
 
@@ -726,7 +726,7 @@ Upgrade notices
  * The `queues_monitor_type` and `queues_monitor_format` parameters to the
    default class were removed in favor of using quoted strings in the options
    array. Users who used those two options need to place their values in the
-   `$queues_options` hash with 'monitor-type' and 'monitor-format' strings as
+   `$queues_general` hash with 'monitor-type' and 'monitor-format' strings as
    keys, respectively. To ensure that 'monitor-type' is not present in the
    config file, simply leave it out (as opposed to the previous behaviour of
    the option that required an empty string for this).

@@ -9,7 +9,7 @@ class asterisk::params {
   # Cannot call assert_private() here. It seems as though inheritance breaks
   # the checks for the function.
 
-  $iax_options = {
+  $iax_general = {
     'allow'             => [],
     'disallow'          => ['lpc10'],
     'bandwidth'         => 'low',
@@ -20,7 +20,7 @@ class asterisk::params {
     'delayreject'       => 'yes',
   }
 
-  $sip_options = {
+  $sip_general = {
     'disallow'         => [],
     'allow'            => [],
     'domain'           => [],
@@ -37,7 +37,7 @@ class asterisk::params {
     'alwaysauthreject' => 'yes',
   }
 
-  $voicemail_options = {
+  $voicemail_general = {
     'format'           => 'wav49|gsm|wav',
     'serveremail'      => 'asterisk',
     'attach'           => 'yes',
@@ -53,20 +53,20 @@ class asterisk::params {
     'sendvoicemail'    => 'yes',
   }
 
-  $extensions_options = {
+  $extensions_general = {
     'static'          => 'yes',
     'writeprotect'    => 'no',
     'clearglobalvars' => 'no',
   }
 
   # defines the default parkinglot
-  $features_options = {
+  $features_general = {
     'parkext' => '700',
     'parkpos' => '701-720',
     'context' => 'parkedcalls',
   }
 
-  $queues_options = {
+  $queues_general = {
     'persistentmembers' => 'yes',
     'monitor-type'      => 'MixMonitor',
   }

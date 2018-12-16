@@ -5,7 +5,7 @@
 # of the application maps that need to be enabled in DYNAMIC_FEATURES, you can
 # use the name of a group to enable them all.
 #
-# To configure global features, see the `features_options` parameter to the
+# To configure global features, see the `features_general` parameter to the
 # main class, `asterisk`.
 #
 # @example feature configuration
