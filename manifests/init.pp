@@ -6,6 +6,7 @@
 # @see http://www.asteriskdocs.org/en/3rd_Edition/asterisk-book-html-chunk/ACD_id288901.html#options_general_queues_id001 General queues options
 #
 # @todo Purge unmanaged configs by default. Add parameter to disable purging.
+# @todo Add hash-based params that can be used to create a set of resources for each type with create_resource. This can be useful for pushing data out to hiera.
 #
 # @param manage_service
 #   Set this to false to avoid managing the asterisk service. By default puppet
