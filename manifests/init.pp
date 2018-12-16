@@ -41,6 +41,11 @@
 #   are set in the file as `key = value`.
 # @param features_options
 #   Global call features. Options are set in the file as `key = value`.
+# @param features_featuremap
+#   Global feature maps. Options are set in the file as `key => value`.
+# @param features_applicationmap
+#   Global application feature maps. Options are set in the file as `key =>
+#   value`.
 # @param queues_options
 #   Options for the global section of the queues.conf file. Options are set in
 #   the file as `key = value`.
@@ -67,27 +72,28 @@
 #   binding to localhost.
 #
 class asterisk (
-  Boolean              $manage_service         = true,
-  Boolean              $manage_package         = true,
-  String               $package_name           = 'asterisk',
-  String               $service_name           = 'asterisk',
-  Stdlib::Absolutepath $confdir                = '/etc/asterisk',
-  Hash                 $iax_options            = {},
-  Hash                 $sip_options            = {},
-  Hash                 $voicemail_options      = {},
-  Hash                 $extensions_options     = {},
-  Boolean              $agents_multiplelogin   = true,
-  Hash                 $agents_options         = {},
-  Hash                 $features_options       = $asterisk::params::features_options,
-  Hash                 $features_featuremap    = {},
-  Hash                 $queues_options         = {},
-  Boolean              $modules_autoload       = true,
-  Array[String]        $modules_noload         = $asterisk::params::modules_noload,
-  Array[String]        $modules_load           = $asterisk::params::modules_load,
-  Hash                 $modules_global_options = {},
-  Boolean              $manager_enable         = true,
-  Integer              $manager_port           = 5038,
-  String               $manager_bindaddr       = '127.0.0.1',
+  Boolean              $manage_service          = true,
+  Boolean              $manage_package          = true,
+  String               $package_name            = 'asterisk',
+  String               $service_name            = 'asterisk',
+  Stdlib::Absolutepath $confdir                 = '/etc/asterisk',
+  Hash                 $iax_options             = {},
+  Hash                 $sip_options             = {},
+  Hash                 $voicemail_options       = {},
+  Hash                 $extensions_options      = {},
+  Boolean              $agents_multiplelogin    = true,
+  Hash                 $agents_options          = {},
+  Hash                 $features_options        = $asterisk::params::features_options,
+  Hash                 $features_featuremap     = {},
+  Hash                 $features_applicationmap = {},
+  Hash                 $queues_options          = {},
+  Boolean              $modules_autoload        = true,
+  Array[String]        $modules_noload          = $asterisk::params::modules_noload,
+  Array[String]        $modules_load            = $asterisk::params::modules_load,
+  Hash                 $modules_global_options  = {},
+  Boolean              $manager_enable          = true,
+  Integer              $manager_port            = 5038,
+  String               $manager_bindaddr        = '127.0.0.1',
 ) inherits asterisk::params {
 
   # We'll only ensure the type of some of the *_options on which templates iterate

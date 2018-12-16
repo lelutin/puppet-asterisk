@@ -57,7 +57,6 @@ class asterisk::config {
   $features_options = $asterisk::real_features_options
   $features_featuremap = $asterisk::features_featuremap
   asterisk::dotd { '/etc/asterisk/features':
-    additional_paths => ['/etc/asterisk/features.applicationmap.d'],
     content          => template('asterisk/features.conf.erb'),
   }
 

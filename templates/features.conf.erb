@@ -16,6 +16,8 @@
 <% end -%>
 
 [applicationmap]
-#include </etc/asterisk/features.applicationmap.d/*.conf>
+<% @features_applicationmap.sort.map do |key, value| -%>
+<%= key %> => <%= value %>
+<% end -%>
 
 #include </etc/asterisk/features.d/*.conf>
