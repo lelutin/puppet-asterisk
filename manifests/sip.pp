@@ -19,7 +19,6 @@
 #
 # @todo use better data types. some should be boolean, some should have an enum
 # @todo remove insecure?
-# @todo rename calllimit to call_limit
 # @todo find a method to let users interleave deny and user rules instead of outputting all deny and then all permit.
 #
 # @param ensure
@@ -117,7 +116,7 @@
 # @param callerid
 #   Caller ID information used when nothing else is available. When
 #   unspecified, defaults to `asterisk`.
-# @param calllimit
+# @param call_limit
 #   Number of simultaneous calls through this user/peer.
 # @param callgroup
 #   Call groups for calls to this device.
@@ -194,7 +193,7 @@ define asterisk::sip (
   Optional[String[1]] $qualify       = 'no',
   Optional[String[1]] $vmexten       = undef,
   Optional[String[1]] $callerid      = undef,
-  Optional[Integer]   $calllimit     = undef,
+  Optional[Integer]   $call_limit    = undef,
   Optional[String[1]] $callgroup     = undef,
   Optional[String[1]] $mailbox       = undef,
   Optional[String[1]] $pickupgroup   = undef,
