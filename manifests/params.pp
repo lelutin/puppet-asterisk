@@ -6,7 +6,8 @@
 #
 class asterisk::params {
 
-  assert_private()
+  # Cannot call assert_private() here. It seems as though inheritance breaks
+  # the checks for the function.
 
   $iax_options = {
     'allow'             => [],
