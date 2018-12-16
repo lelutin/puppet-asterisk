@@ -39,9 +39,6 @@ define asterisk::manager (
   Array[String[1]]     $write        = ['system', 'call']
 ) {
 
-  $real_read = join($read, ',')
-  $real_write = join($write, ',')
-
   asterisk::dotd::file { "manager_${name}.conf":
     ensure   => $ensure,
     dotd_dir => 'manager.d',

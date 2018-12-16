@@ -8,5 +8,5 @@ deny = <%= deny_rule %>
 <% @permit.each { |permit_rule| -%>
 permit = <%= permit_rule %>
 <% } -%>
-read = <%= @real_read %>
-write = <%= @real_write %>
+read = <%= @read.join(",") %>
+write = <%= @write.join(",") %>
