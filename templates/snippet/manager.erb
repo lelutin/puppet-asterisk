@@ -10,3 +10,8 @@ permit = <%= permit_rule %>
 <% } -%>
 read = <%= @read.join(",") %>
 write = <%= @write.join(",") %>
+writetimeout = <%= @writetimeout %>
+displayconnects = <%= @real_displayconnects %>
+<% if @eventfilter -%>
+eventfilter = <%= @eventfilter %>
+<% end -%>

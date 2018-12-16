@@ -6,6 +6,7 @@
 #     permit => ['192.168.120.0/255.255.255.0'],
 #   }
 #
+# @see http://asteriskdocs.org/en/3rd_Edition/asterisk-book-html-chunk/AMI-configuration.html#AMI_id265404
 # @see https://www.voip-info.org/asterisk-config-managerconf/
 #
 # @param secret
@@ -28,15 +29,29 @@
 # @param write
 #   List of authorizations given to the manager to write (change) certain
 #   information or configuration. Defaults to `system` and `call`.
+# @param writetimeout
+#   Timeout in milliseconds used by Asterisk when writing data to the AMI
+#   connection for this user.
+# @param displayconnects
+#   Set this to no to avoid reporting connections to the AMI as verbose
+#   messages printed to the Asterisk console.
+# @param eventfilter
+#   Whitelist- or blacklist-style filtering of manager events before they are
+#   delivered to the AMI client application. Filters are specified using a
+#   regular expression. A specified filter is a whitelist filter unless
+#   preceded by an exclamation point.
 #
 define asterisk::manager (
   Sensitive[String[1]]          $secret,
-  $ensure                                     = present,
-  String[1]                     $manager_name = $name,
-  Array[String[1]]              $deny         = ['0.0.0.0/0.0.0.0'],
-  Array[String[1]]              $permit       = ['127.0.0.1/255.255.255.255'],
-  Array[Asterisk::ManagerPerms] $read         = ['system', 'call'],
-  Array[Asterisk::ManagerPerms] $write        = ['system', 'call']
+  $ensure                                        = present,
+  String[1]                     $manager_name    = $name,
+  Array[String[1]]              $deny            = ['0.0.0.0/0.0.0.0'],
+  Array[String[1]]              $permit          = ['127.0.0.1/255.255.255.255'],
+  Array[Asterisk::ManagerPerms] $read            = ['system', 'call'],
+  Array[Asterisk::ManagerPerms] $write           = ['system', 'call'],
+  Integer                       $writetimeout    = 100,
+  Boolean                       $displayconnects = true,
+  Optional[String]              $eventfilter     = undef,
 ) {
 
   $wo_rights = ['config','command','originate']
@@ -52,6 +67,8 @@ define asterisk::manager (
       fail("read-only right '${right}' given to the \$write parameter")
     }
   }
+
+  $real_displayconnects = bool2str($displayconnects, 'yes', 'no')
 
   asterisk::dotd::file { "manager_${name}.conf":
     ensure   => $ensure,
