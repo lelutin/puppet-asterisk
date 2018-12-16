@@ -4,6 +4,8 @@
 #
 class asterisk::params {
 
+  assert_private()
+
   $iax_options = {
     'allow'             => [],
     'disallow'          => ['lpc10'],

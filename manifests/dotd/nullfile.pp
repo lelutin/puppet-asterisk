@@ -1,5 +1,7 @@
 # Create a file in .d directories to avoid service start issues (see dotd.pp)
 define asterisk::dotd::nullfile () {
+  assert_private()
+
   include asterisk::install
   include asterisk::service
 

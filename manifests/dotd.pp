@@ -21,6 +21,9 @@ define asterisk::dotd (
   Optional[Stdlib::Filesource] $source           = undef,
   Boolean                      $manage_nullfile  = true,
 ) {
+
+  assert_private()
+
   include asterisk::install
   include asterisk::service
 

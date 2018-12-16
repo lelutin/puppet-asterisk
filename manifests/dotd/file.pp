@@ -19,6 +19,8 @@ define asterisk::dotd::file (
   Optional[Stdlib::Filesource] $source   = undef,
   String                       $filename = $name,
 ) {
+  assert_private()
+
   include asterisk::config
   include asterisk::service
 

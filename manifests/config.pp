@@ -1,6 +1,8 @@
 # Manage all of asterisk's basic configuration files.
 class asterisk::config {
 
+  assert_private()
+
   case $facts['os']['family'] {
     'RedHat': {
       $service_settings_path = "/etc/sysconfig/${asterisk::service_name}"
