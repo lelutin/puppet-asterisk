@@ -18,7 +18,6 @@
 # @see https://www.voip-info.org/asterisk-config-sipconf/
 #
 # @todo use better data types. some should be boolean, some should have an enum
-# @todo missing directmedia
 # @todo remove insecure?
 # @todo rename calllimit to call_limit
 # @todo find a method to let users interleave deny and user rules instead of outputting all deny and then all permit.
@@ -60,6 +59,33 @@
 #   as the common Cisco ATA 186. Setting this to `nonat` will allow reinvite
 #   when local, deny reinvite when NAT. Finally setting this to `update` will
 #   use `UPDATE` instead of `INVITE`.
+# @param directmedia
+#   By default, Asterisk tries to re-invite media streams to an optimal path.
+#   If there's no reason for Asterisk to stay in the media path, the media will
+#   be redirected. This does not really work well in the case where Asterisk is
+#   outside and the clients are on the inside of a NAT. In that case, you want
+#   to set this parameter to `nonat`. `nonat` will allow media path redirection
+#   (reinvite) but only when the peer where the media is being sent is known to
+#   not be behind a NAT (as the RTP core can determine it based on the apparent
+#   IP address the media arrives from). If you set this parameter to `update`,
+#   Asterisk will use an `UPDATE` command instead of an `INVITE` command to
+#   redirect media. `update` can also be combined with `nonat` with the value
+#   `nonat,update`.
+# @param directrtpsetup
+#   Set this to `true` to enable the new experimental direct RTP setup. This
+#   sets up the call directly with media peer-2-peer without re-invites.  Will
+#   not work for video and cases where the callee sends RTP payloads and fmtp
+#   headers in the 200 OK that does not match the callers INVITE. This will
+#   also fail if directmedia is enabled when the device is actually behind NAT.
+# @param directmediadeny
+#   List of CIDR prefixes (e.g. of the form `prefix/number of bits for mask` --
+#   for example `172.16.0.0/16`) that should be denied passing directmedia to
+#   other peers. You can use this if some of your phones are on IP addresses
+#   that can not reach each other directly. This way you can force RTP to
+#   always flow through asterisk in such cases. See also `directmediapermit`.
+# @param directmediapermit
+#   List of CIDR prefixes that should be allowed passing directmedia to other
+#   peers. See `directmediadeny`.
 # @param host
 #   Set this to `dynamic` to require the device to register itself before
 #   authenticating. Set to a hostname or IP address to match only for this host
@@ -157,6 +183,10 @@ define asterisk::sip (
   Optional[Sensitive[String[1]]] $remotesecret  = undef,
   Optional[String[1]] $context       = undef,
   Optional[String[1]] $canreinvite   = 'no',
+  Optional[String[1]] $directmedia   = 'no',
+  Optional[Boolean]   $directrtpsetup = true,
+  Array[String[1]]    $directmediadeny = [],
+  Array[String[1]]    $directmediapermit = [],
   Optional[String[1]] $host          = 'dynamic',
   Optional[String[1]] $insecure      = 'no',
   Optional[String[1]] $language      = 'en',
@@ -180,6 +210,13 @@ define asterisk::sip (
   Array[String[1]]    $deny          = [],
   Array[String[1]]    $permit        = [],
 ) {
+
+  if $directrtpsetup =~ Boolean {
+    $real_directrtpsetup = bool2str($directrtpsetup, 'yes', 'no')
+  }
+  else {
+    $real_directrtpsetup = $directrtpsetup
+  }
 
   asterisk::dotd::file { "sip_${name}.conf":
     ensure   => $ensure,

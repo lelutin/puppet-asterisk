@@ -28,6 +28,18 @@ context=<%= @context %>
 <% if @canreinvite -%>
 canreinvite=<%= @canreinvite %>
 <% end -%>
+<% if @directmedia -%>
+directmedia=<%= @directmedia %>
+<% end -%>
+<% if @real_directrtpsetup -%>
+directrtpsetup=<%= @real_directrtpsetup %>
+<% end -%>
+<% for dmdeny in @directmediadeny -%>
+directmediadeny=<%= dmdeny %>
+<% end -%>
+<% for dmpermit in @directmediapermit -%>
+directmediapermit=<%= dmpermit %>
+<% end -%>
 <% if @host -%>
 host=<%= @host %><% end%>
 <% if @insecure -%>
