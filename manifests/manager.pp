@@ -6,8 +6,6 @@
 #     permit => ['192.168.120.0/255.255.255.0'],
 #   }
 #
-# @todo create enum type for read and write
-#
 # @see https://www.voip-info.org/asterisk-config-managerconf/
 #
 # @param secret
@@ -32,14 +30,28 @@
 #   information or configuration. Defaults to `system` and `call`.
 #
 define asterisk::manager (
-  Sensitive[String[1]] $secret,
-  $ensure                            = present,
-  String[1]            $manager_name = $name,
-  Array[String[1]]     $deny         = ['0.0.0.0/0.0.0.0'],
-  Array[String[1]]     $permit       = ['127.0.0.1/255.255.255.255'],
-  Array[String[1]]     $read         = ['system', 'call'],
-  Array[String[1]]     $write        = ['system', 'call']
+  Sensitive[String[1]]          $secret,
+  $ensure                                     = present,
+  String[1]                     $manager_name = $name,
+  Array[String[1]]              $deny         = ['0.0.0.0/0.0.0.0'],
+  Array[String[1]]              $permit       = ['127.0.0.1/255.255.255.255'],
+  Array[Asterisk::ManagerPerms] $read         = ['system', 'call'],
+  Array[Asterisk::ManagerPerms] $write        = ['system', 'call']
 ) {
+
+  $wo_rights = ['config','command','originate']
+  $wo_rights.each |String $right| {
+    if $right in $read {
+      fail("write-only right '${right}' given to the \$read parameter")
+    }
+  }
+
+  $ro_rights = ['log','verbose','dtmf','cdr','dialplan','cc']
+  $ro_rights.each |String $right| {
+    if $right in $write {
+      fail("read-only right '${right}' given to the \$write parameter")
+    }
+  }
 
   asterisk::dotd::file { "manager_${name}.conf":
     ensure   => $ensure,
