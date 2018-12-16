@@ -55,7 +55,6 @@ class asterisk::config {
   }
 
   $features_options = $asterisk::real_features_options
-  $features_featuremap = $asterisk::features_featuremap
   asterisk::dotd { '/etc/asterisk/features':
     content          => template('asterisk/features.conf.erb'),
   }

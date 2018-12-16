@@ -11,12 +11,12 @@
 <% end -%>
 
 [featuremap]
-<% @features_featuremap.sort.map do |key, value| -%>
+<% scope.lookupvar("asterisk::features_featuremap").sort.map do |key, value| -%>
 <%= key %> => <%= value %>
 <% end -%>
 
 [applicationmap]
-<% @features_applicationmap.sort.map do |key, value| -%>
+<% scope.lookupvar("asterisk::features_applicationmap").sort.map do |key, value| -%>
 <%= key %> => <%= value %>
 <% end -%>
 
