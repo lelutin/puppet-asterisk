@@ -20,11 +20,6 @@ asterisk::feature { 'exclusivity':
   }
 }
 
-asterisk::feature::applicationmap { 'bananaphone':
-  feature => 'ringtone',
-  value   => 'ringringringringring',
-}
-
 asterisk::iax { 'meetingroom':
   content => "type=user\ncontext=press_one",
 }
