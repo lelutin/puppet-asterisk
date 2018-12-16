@@ -16,6 +16,12 @@ defaultuser=<%= @defaultuser %>
 <% if @secret -%>
 secret=<%= @secret.unwrap %>
 <% end -%>
+<% if @md5secret -%>
+md5secret=<%= @md5secret %>
+<% end -%>
+<% if @remotesecret -%>
+secret=<%= @remotesecret.unwrap %>
+<% end -%>
 <% if @context -%>
 context=<%= @context %>
 <% end -%>
@@ -62,9 +68,6 @@ t38pt_udptl=<%= @t38pt_udptl %>
 <% end -%>
 <% if @mailbox -%>
 mailbox=<%= @mailbox %>
-<% end -%>
-<% if @md5secret -%>
-md5secret=<%= @md5secret %>
 <% end -%>
 <% if @pickupgroup -%>
 pickupgroup=<%= @pickupgroup %>

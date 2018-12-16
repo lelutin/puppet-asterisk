@@ -18,7 +18,6 @@
 # @see https://www.voip-info.org/asterisk-config-sipconf/
 #
 # @todo use better data types. some should be boolean, some should have an enum
-# @todo missing remotesecret parameter for outbound auth
 # @todo missing directmedia
 # @todo remove insecure?
 # @todo rename calllimit to call_limit
@@ -44,6 +43,13 @@
 #   Authentication user name.
 # @param secret
 #   Authentication secret for inbound connections.
+# @param md5secret
+#   MD5-Hash of `<user>:==SIP_realm==:<secret>` (can be used instead of
+#   `secret`). Default for authenticating to an Asterisk server when SIP realm
+#   is not explicitly declared is `<user>:asterisk:<secret>`.
+# @param remotesecret
+#   Authentication secret for outbound connections. If this is not set,
+#   `$secret` is used for outbound connections.
 # @param context
 #   Name of the dialplan context that is used as starting point when an inbound
 #   call is received through this peer/user.
@@ -92,10 +98,6 @@
 # @param mailbox
 #   Voicemail extension (for message waiting indications). Not valid for `type`
 #   set to `user`.
-# @param md5secret
-#   MD5-Hash of `<user>:==SIP_realm==:<secret>` (can be used instead of
-#   `secret`). Default for authenticating to an Asterisk server when SIP realm
-#   is not explicitly declared is `<user>:asterisk:<secret>`.
 # @param pickupgroup
 #   Group that can pickup fellow workers’ calls using `*8` and the `Pickup()`
 #   application on the `*8` extension.
@@ -151,6 +153,8 @@ define asterisk::sip (
   Optional[String[1]] $username      = undef,
   Optional[String[1]] $defaultuser   = undef,
   Optional[Sensitive[String[1]]] $secret        = undef,
+  Optional[String[1]] $md5secret     = undef,
+  Optional[Sensitive[String[1]]] $remotesecret  = undef,
   Optional[String[1]] $context       = undef,
   Optional[String[1]] $canreinvite   = 'no',
   Optional[String[1]] $host          = 'dynamic',
@@ -163,7 +167,6 @@ define asterisk::sip (
   Optional[Integer]   $calllimit     = undef,
   Optional[String[1]] $callgroup     = undef,
   Optional[String[1]] $mailbox       = undef,
-  Optional[String[1]] $md5secret     = undef,
   Optional[String[1]] $pickupgroup   = undef,
   Optional[String[1]] $fromdomain    = undef,
   Optional[String[1]] $fromuser      = undef,
