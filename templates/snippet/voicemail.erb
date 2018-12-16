@@ -1,3 +1,3 @@
 [<%= @context %>]
-<%= @name %> => <%= @password.unwrap %>,<%= @user_name %>,<%= @email %>,<%= @pager_email %><% if @options.length > 0 -%>|<%= @options.keys.collect {|key| value = @options[key]; "#{key}=#{value}"}.join(",") %><% end -%>
+<%= @name %> => <%= @password.unwrap %>,<% if @user_name -%><%= @user_name %><% end -%>,<% if @email -%><%= @email %><% end -%>,<% if @pager_email -%><%= @pager_email %><% end -%><% if @options.length > 0 -%>|<%= @options.keys.collect {|key| value = @options[key]; "#{key}=#{value}"}.join(",") %><% end -%>
 

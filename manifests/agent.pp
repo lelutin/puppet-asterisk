@@ -27,7 +27,7 @@ define asterisk::agent (
   Sensitive[String]         $password,
   String                    $agent_name,
   Enum['present', 'absent'] $ensure = present,
-  Array                     $groups = []
+  Array[String[1]]          $groups = []
 ) {
 
   asterisk::dotd::file { "agent_${name}.conf":

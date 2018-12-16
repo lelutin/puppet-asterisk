@@ -23,7 +23,7 @@
 #   not set, extension will be 's'.
 #
 define asterisk::registry::sip (
-  String[1]                      $server,
+  Stdlib::Host                   $server,
   String[1]                      $user,
   $ensure                                   = present,
   Optional[Sensitive[String[1]]] $password  = undef,

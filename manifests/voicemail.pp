@@ -1,5 +1,12 @@
 # @summary Configure a voicemail
 #
+# @example voicemail with email address
+#   asterisk::voicemail { 'taro':
+#     context  => 'support2',
+#     password => Sensitive.new('557722981749'),
+#     email    => 'taro.suupaa@support.com',
+#   }
+#
 # @param context
 #   Name of the context in which the voicemail is assigned.
 # @param password
@@ -23,10 +30,10 @@ define asterisk::voicemail (
   String[1]            $context,
   Sensitive[String[1]] $password,
   $ensure                           = present,
-  String               $user_name   = '',
-  String               $email       = '',
-  String               $pager_email = '',
-  Hash                 $options     = {}
+  Optional[String[1]]  $user_name   = undef,
+  Optional[String[1]]  $email       = undef,
+  Optional[String[1]]  $pager_email = undef,
+  Hash[String,String]  $options     = {}
 ) {
 
   asterisk::dotd::file{ "${context}-${name}.conf":

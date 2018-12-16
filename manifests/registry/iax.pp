@@ -13,7 +13,7 @@
 #   Set to `absent` in order to remove the registry.
 #
 define asterisk::registry::iax (
-  String[1]            $server,
+  Stdlib::Host         $server,
   String[1]            $user,
   Sensitive[String[1]] $password,
   $ensure = present,

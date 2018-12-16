@@ -17,6 +17,7 @@
 #
 # @see https://www.voip-info.org/asterisk-config-sipconf/
 #
+# @todo use better data types. some should be boolean, some should have an enum
 # @todo missing remotesecret parameter for outbound auth
 # @todo missing directmedia
 # @todo remove insecure?

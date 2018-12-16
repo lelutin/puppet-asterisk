@@ -6,6 +6,8 @@
 #     permit => ['192.168.120.0/255.255.255.0'],
 #   }
 #
+# @todo create enum type for read and write
+#
 # @see https://www.voip-info.org/asterisk-config-managerconf/
 #
 # @param secret
