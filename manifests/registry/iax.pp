@@ -1,12 +1,16 @@
-# Configure an IAX2 registry
+# @summary Configure an IAX2 registry
 #
-# $server is the hostname or IP of the server to which Asterisk should register.
+# This makes it possible to register to an IAX2 peer for authenticated
+# connections.
 #
-# $user is the user name used for registering with the distant server.
-#
-# $password is the password used for registering.
-#
-# $ensure can be set to absent in order to remove the registry
+# @param server
+#   Hostname or IP address of the server to which Asterisk should register.
+# @param user
+#   User name used for authenticating with the distant server.
+# @param password
+#   Password used for authenticating.
+# @param ensure
+#   Set to `absent` in order to remove the registry.
 #
 define asterisk::registry::iax (
   String[1]            $server,

@@ -1,25 +1,33 @@
-# Configure and asterisk manager
+# @summary Configure an asterisk manager
 #
-# $secret is the authentication password.
+# @example manager with default authorizations that can connect from LAN.
+#   asterisk::manager { 'sophie':
+#     secret => Sensitive.new('youllneverguesswhatitis'),
+#     permit => ['192.168.120.0/255.255.255.0'],
+#   }
 #
-# $ensure can be set to absent to remove the manager.
+# @see https://www.voip-info.org/asterisk-config-managerconf/
 #
-# $manager_name can be used to override the name of the manager. By default the
-#   name of the manager corresponds to $name.
-#
-# $deny is a list of IP specifications that are denied access to the manager.
-#   Denied IPs can be overridden by $permit. This makes it possible to only
-#   permit access to some IP addresses. Default value is to deny access to
-#   everybody.
-#
-# $permit is a list of IP specifications that are permitted access to the
-#   manager.
-#
-# $read is a list of authorizations given to the manager to read certain
-#   information or configuration.
-#
-# $write is a list of authorizations given to the manager to write (change)
-#   certain information or configuration.
+# @param secret
+#   Authentication password for the manager.
+# @param ensure
+#   Set to `absent` to remove the manager.
+# @param manager_name
+#   Can be used to override the name of the manager. By default the
+#   name of the manager corresponds to `$name`.
+# @param deny
+#   List of IP specifications that are denied access to the manager.  Denied
+#   IPs can be overridden by `$permit`. This makes it possible to only permit
+#   access to some IP addresses. Default value is to deny access to everybody.
+# @param permit
+#   List of IP specifications that are permitted access to the manager.
+#   Defaults to premitting only localhost.
+# @param read
+#   List of authorizations given to the manager to read certain information or
+#   configuration. Defaults to `system` and `call`.
+# @param write
+#   List of authorizations given to the manager to write (change) certain
+#   information or configuration. Defaults to `system` and `call`.
 #
 define asterisk::manager (
   Sensitive[String[1]] $secret,

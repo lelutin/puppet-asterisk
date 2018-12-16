@@ -1,4 +1,8 @@
-# Ensure the Asterisk service is running.
+# @summary Ensure the Asterisk service is running.
+#
+# This class is not intended to be used directly.
+#
+# @api private
 #
 class asterisk::service {
 

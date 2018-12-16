@@ -1,7 +1,12 @@
-# Install an asterisk language pack.
+# @summary Install an asterisk language pack.
+#
+# The name of the resource is the name of a language pack.
 #
 # The language packs defined here were taken directly from packages available
 # on debian and so this might not work for other distros.
+#
+# @example installing two language packs
+#   asterisk::language { ['de', 'es']: }
 #
 define asterisk::language {
   $allowed_languages = [

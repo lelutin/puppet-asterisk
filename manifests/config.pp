@@ -1,4 +1,9 @@
-# Manage all of asterisk's basic configuration files.
+# @summary asterisk basic configuration files.
+#
+# This class is not intended to be used directly.
+#
+# @api private
+#
 class asterisk::config {
 
   assert_private()

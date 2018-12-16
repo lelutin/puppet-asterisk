@@ -1,15 +1,21 @@
-# Create a file inside a .d directory and set its permissions correctly.
+# @summary Create a file inside a .d directory and set its permissions correctly.
 #
-# $dotd_dir is the path of the .d directory in which the file should be created.
+# This defined type is not intended to be used directly.
 #
-# $ensure can be set to absent to remove the file
+# @api private
 #
-# $source is a puppet file source where the contents can be found.
-#
-# $content is the textual contents of the file. This option is mutually
-#   exclusive with $source.
-#
-# $filename if defined, sets the name of the file created. Otherwise, $name is
+# @param dotd_dir
+#   Path of the .d directory, relative to asterisk's configuration directory,
+#   in which the file should be created.
+# @param ensure
+#   Set to `absent` to remove the file
+# @param source
+#   Puppet file source where the contents can be found.
+# @param content
+#   Textual contents of the file. This option is mutually exclusive with
+#   `$source`.
+# @param filename
+#   Can be used to override the name of the file created. Otherwise, `$name` is
 #   used as the file name.
 #
 define asterisk::dotd::file (

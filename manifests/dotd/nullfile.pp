@@ -1,4 +1,11 @@
-# Create a file in .d directories to avoid service start issues (see dotd.pp)
+# @summary Create a file in .d directories to avoid service start issues
+#
+# The name of the resouce should be the path to create the file in.
+#
+# This defined type is not intended to be used directly.
+#
+# @api private
+#
 define asterisk::dotd::nullfile () {
   assert_private()
 

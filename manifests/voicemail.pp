@@ -1,22 +1,23 @@
-# Configure a voicemail
+# @summary Configure a voicemail
 #
-# $context is the name of the context in which the voicemail is assigned.
-#
-# $password is the authentication password set for accessing the voicemail.
-#
-# $ensure can be set to absent to remove the voicemail.
-#
-# $user_name is a name assigned to the voicemail, usually the name of the
-#   person using it.
-#
-# $email is the email address to which voicemail message sounds will be sent.
-#
-# $pager_email is an email to which a page will be sent upon receiving a
-#   voicemail.
-#
-# $options is a hash containing options that are set for the voicemail. For
+# @param context
+#   Name of the context in which the voicemail is assigned.
+# @param password
+#   Authentication password set for accessing the voicemail. This is usually a
+#   series of numbers so that phones can dial the password, but it can be a
+#   textual password as well.
+# @param ensure
+#   Set to `absent` to remove the voicemail.
+# @param user_name
+#   Name assigned to the voicemail, usually the name of the person using it.
+# @param email
+#   Email address to which voicemail message sounds will be sent.
+# @param pager_email
+#   Email address to which a page will be sent upon receiving a voicemail.
+# @param options
+#   Hash containing options that are set for the voicemail. For
 #   example, a specific timezone can be set on individual voicemails with the
-#   'tz' option.
+#   'tz' option. Options are set in the file as `key = value`.
 #
 define asterisk::voicemail (
   String[1]            $context,

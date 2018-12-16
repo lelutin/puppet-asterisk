@@ -1,31 +1,92 @@
-# Install an asterisk server.
+# @summary Install and configure an asterisk server.
 #
-# Options and their values are very numerous, so they will not be detailed in
-# this file. All options of this class are detailed in the module's README
-# file.
+# @example simple install
+#   class { 'asterisk': }
+#
+# @see http://www.asteriskdocs.org/en/3rd_Edition/asterisk-book-html-chunk/ACD_id288901.html#options_general_queues_id001 General queues options
+#
+# @todo Purge unmanaged configs by default. Add parameter to disable purging.
+#
+# @param manage_service
+#   Set this to false to avoid managing the asterisk service. By default puppet
+#   will enable the service and ensure that it is running.
+# @param manage_package
+#   Set this to false to avoid installing the asterisk package.
+# @param package_name
+#   Name of the package being installed for asterisk.
+# @param service_name
+#   Name of the asterisk service.
+# @param confdir
+#   Absolute path to the asterisk configuration directory.
+#
+# @param iax_options
+#   Options for the global section of the iax.conf file. Options are set in the
+#   file as `key = value`.
+# @param sip_options
+#   Options for the global section of the sip.conf file. Options are set in the
+#   file as `key = value`.
+# @param voicemail_options
+#   Options for the global section of the voicemail.conf file. Options are set
+#   in the file as `key = value`.
+# @param extensions_options
+#   Options for the global section of the extensions.conf file. Options are set
+#   in the file as `key = value`.
+# @param agents_multiplelogin
+#   Set this to false to disable possibility for agents to be logged in
+#   multiple times. This option is set in the `general` section of the
+#   agents.conf file.
+# @param agents_options
+#   Options for the global `agents` section of the agents.conf file. Options
+#   are set in the file as `key = value`.
+# @param features_options
+#   Global call features. Options are set in the file as `key = value`.
+# @param queues_options
+#   Options for the global section of the queues.conf file. Options are set in
+#   the file as `key = value`.
+# @param modules_autoload
+#   Set this to false to avoid having asterisk load modules automatically on an
+#   as-needed basis. This can be used to configure modules in a more
+#   restrictive manner.
+# @param modules_noload
+#   List of modules that asterisk should not load. This can be useful if
+#   `modules_autoload` is set to `true`.
+# @param modules_load
+#   List of modules that asterisk should load on startup. This is useful if
+#   you've set `modules_autoload` to `false`.
+# @param modules_global_options
+#   Options for the global section of the modules.conf file. Options are set in
+#   the file as `key = value`.
+# @param manager_enable
+#   Set this to false to disable asterisk manager.
+# @param manager_port
+#   Port number on which asterisk will listen to for manager connections.
+#   Defaults to 5038.
+# @param manager_bindaddr
+#   IP address to have asterisk bind to for manager connections. Defaults to
+#   binding to localhost.
 #
 class asterisk (
-  Boolean              $manage_service          = true,
-  Boolean              $manage_package          = true,
-  String               $package_name            = 'asterisk',
-  String               $service_name            = 'asterisk',
-  Stdlib::Absolutepath $confdir                 = '/etc/asterisk',
-  Hash                 $iax_options             = {},
-  Hash                 $sip_options             = {},
-  Hash                 $voicemail_options       = {},
-  Hash                 $extensions_options      = {},
-  Boolean              $agents_multiplelogin    = true,
-  Hash                 $agents_options          = {},
-  Hash                 $features_options        = $asterisk::params::features_options,
-  Hash                 $features_featuremap     = {},
-  Hash                 $queues_options          = {},
-  Boolean              $modules_autoload        = true,
-  Array[String]        $modules_noload          = $asterisk::params::modules_noload,
-  Array[String]        $modules_load            = $asterisk::params::modules_load,
-  Hash                 $modules_global_options  = {},
-  Boolean              $manager_enable          = true,
-  Integer              $manager_port            = 5038,
-  String               $manager_bindaddr        = '127.0.0.1',
+  Boolean              $manage_service         = true,
+  Boolean              $manage_package         = true,
+  String               $package_name           = 'asterisk',
+  String               $service_name           = 'asterisk',
+  Stdlib::Absolutepath $confdir                = '/etc/asterisk',
+  Hash                 $iax_options            = {},
+  Hash                 $sip_options            = {},
+  Hash                 $voicemail_options      = {},
+  Hash                 $extensions_options     = {},
+  Boolean              $agents_multiplelogin   = true,
+  Hash                 $agents_options         = {},
+  Hash                 $features_options       = $asterisk::params::features_options,
+  Hash                 $features_featuremap    = {},
+  Hash                 $queues_options         = {},
+  Boolean              $modules_autoload       = true,
+  Array[String]        $modules_noload         = $asterisk::params::modules_noload,
+  Array[String]        $modules_load           = $asterisk::params::modules_load,
+  Hash                 $modules_global_options = {},
+  Boolean              $manager_enable         = true,
+  Integer              $manager_port           = 5038,
+  String               $manager_bindaddr       = '127.0.0.1',
 ) inherits asterisk::params {
 
   # We'll only ensure the type of some of the *_options on which templates iterate

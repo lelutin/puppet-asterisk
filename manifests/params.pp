@@ -1,6 +1,8 @@
-# Default values for the asterisk class
+# @summary Default values for the asterisk class
 #
 # This class is not intended to be used directly.
+#
+# @api private
 #
 class asterisk::params {
 

@@ -1,14 +1,26 @@
-# Configure an asterisk agent
+# @summary Configure an asterisk agent
 #
-# $ext specifies the extension corresponding to the agent.
+# @example Basic agent
+#   asterisk::agent { 'provocateur':
+#     ext        => '700',
+#     password   => Sensitive.new('supersecret'),
+#     agent_name => 'provocateur',
+#   }
 #
-# $password is the login password of the agent.
+# @see https://www.voip-info.org/asterisk-cmd-agentlogin Dynamic agent login
+# @see https://www.voip-info.org/asterisk-cmd-addqueuemember Adding agents to queues
+# @see https://www.voip-info.org/asterisk-cmd-removequeuemember Removing agents from queues
 #
-# $agent_name is name by which the agent is referred to within dialplan.
-#
-# $ensure can be set to absent to remove a given agent.
-#
-# $groups is a list of groups to which the agent is associated.
+# @param ext
+#   Extension corresponding to the agent.
+# @param password
+#   Login password of the agent.
+# @param agent_name
+#   Name by which the agent is referred to within dialplan.
+# @param ensure
+#   Can be set to absent to remove a given agent.
+# @param groups
+#   List of groups to which the agent is associated.
 #
 define asterisk::agent (
   String                    $ext,

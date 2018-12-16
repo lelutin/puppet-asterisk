@@ -1,19 +1,31 @@
-# Configure the contents of a file and create a corresponding .d configuration
-# directory so that puppet can drop files for on-demand configuration snippets.
+# @summary Create a .d directory associated to a configuration file
 #
-# $additional_paths lets one manage multiple .d directories while managing only
-#   one configuration file. This trick is useful if some configuration snippets
-#   need to be parsed before others (e.g. registries vs. contexts)
+# This will configure the contents of a file and create a corresponding .d
+# configuration directory so that puppet can drop files for on-demand
+# configuration snippets.
 #
-# $content is the configuration file contents
+# This defined type is not intended to be used directly.
 #
-# $source is a puppet file source. If this is specified, $content will be
-#   overridden. So one must not use both parameters at the same time.
+# @api private
 #
-# $manage_nullfile is a boolean value that decides if a null.conf file is
-#   created in each .d directories. This file is necessary in empty .d dirs,
-#   since asterisk will refuse to start if some included files do not exist.
-#   Default is to create null.conf in all .d directories.
+# @param additional_paths
+#   List of additional directories that should be created. Lets one manage
+#   multiple .d directories while managing only one configuration file. This
+#   trick is useful if some configuration snippets need to be parsed before
+#   others (e.g. registries vs. contexts)
+# @param content
+#   Textual contents of the configuration file. This parameter is mutually
+#   exclusive with the `$source` param. Either this param or `$source` need to
+#   be used.
+# @param source
+#   Puppet file source where contents of the configuration file will be found.
+#   This parameter is mutually exclusive with the `$content` param. Either this
+#   param or `$content` need to be used.
+# @param manage_nullfile
+#   Set this to false to avoid creating a null.conf file in each .d
+#   directories. This file is necessary in empty .d dirs, since asterisk will
+#   refuse to start if some included files do not exist. By default a file is
+#   created in all .d directories.
 #
 define asterisk::dotd (
   Array[Stdlib::Absolutepath]  $additional_paths = [],

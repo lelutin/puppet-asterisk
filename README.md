@@ -417,9 +417,9 @@ Static agents have some disadvantages compared to dynamic agents. For example,
 once assigned to a queue they cannot logout of that queue. For more information
 on how to setup dynamic agents, see:
 
- * [http://www.voip-info.org/wiki/view/Asterisk+cmd+AgentLogin](http://www.voip-info.org/wiki/view/Asterisk+cmd+AgentLogin)
- * [http://www.voip-info.org/wiki/view/Asterisk+cmd+AddQueueMember](http://www.voip-info.org/wiki/view/Asterisk+cmd+AddQueueMember)
- * [http://www.voip-info.org/wiki/view/Asterisk+cmd+RemoveQueueMember](http://www.voip-info.org/wiki/view/Asterisk+cmd+RemoveQueueMember)
+ * [https://www.voip-info.org/asterisk-cmd-agentlogin](https://www.voip-info.org/asterisk-cmd-agentlogin)
+ * [https://www.voip-info.org/asterisk-cmd-addqueuemember](https://www.voip-info.org/asterisk-cmd-addqueuemember)
+ * [https://www.voip-info.org/asterisk-cmd-removequeuemember](https://www.voip-info.org/asterisk-cmd-removequeuemember)
 
 ### Agents Options ###
 

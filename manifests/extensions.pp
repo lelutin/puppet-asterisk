@@ -1,11 +1,23 @@
-# Configure a dialplan context and extensions within that context
+# @summary Configure a dialplan context and extensions within that context
 #
-# $ensure can be set to false to remove the corresponding configuration file.
+# This can be used to configure your different contexts with extensions, but it
+# can also be used to create macros that can be called in other contexts.
 #
-# $source is a puppet file source where the contents of the file can be found.
+# @example basic context with one extension
+#   asterisk::extensions { 'basic':
+#     content => 'exten => 666,1,Hangup()',
+#   }
 #
-# $content is the textual contents of the file. This option is mutually
-#   exclusive with $source.
+# @see https://www.voip-info.org/asterisk-config-extensionsconf/
+# @see http://asteriskdocs.org/en/3rd_Edition/asterisk-book-html-chunk/asterisk-DP-Basics.html
+#
+# @param ensure
+#   Set this to false to remove the corresponding configuration file.
+# @param source
+#   Puppet file source where the contents of the file can be found.
+# @param content
+#   Textual contents of the file. This option is mutually exclusive with
+#   `$source`.
 #
 define asterisk::extensions (
   $ensure  = present,

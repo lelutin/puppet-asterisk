@@ -1,10 +1,15 @@
-# Configure a feature in the special context [applicationmap]
+# @summary Configure a global application map feature
 #
-# $feature is the name of the feature.
+# @see http://asteriskdocs.org/en/3rd_Edition/asterisk-book-html-chunk/AdditionalConfig_id256654.html#AdditionalConfig_id243954
 #
-# $value is the value given to the feature.
+# @todo Add parameters so that users can declare more than one line in a file.
 #
-# $ensure can be set to absent to remove the corresponding file.
+# @param feature
+#   Name of the feature.
+# @param value
+#   Value given to the feature.
+# @param ensure
+#   Set to `absent` to remove the corresponding file.
 #
 define asterisk::feature::applicationmap (
   String[1] $feature,
