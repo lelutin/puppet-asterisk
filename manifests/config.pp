@@ -43,9 +43,12 @@ class asterisk::config {
     content => template('asterisk/voicemail.conf.erb'),
   }
 
-  $extensions_general = $asterisk::real_extensions_general
+  $ext_context = {
+    general => $asterisk::real_extensions_general,
+    globals => $asterisk::extensions_globals,
+  }
   asterisk::dotd { '/etc/asterisk/extensions':
-    content => template('asterisk/extensions.conf.erb'),
+    content => epp('asterisk/extensions.conf.epp', $ext_context),
   }
 
   $agents_multiplelogin = $asterisk::real_agents_multiplelogin

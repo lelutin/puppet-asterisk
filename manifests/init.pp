@@ -8,7 +8,6 @@
 # @todo Purge unmanaged configs by default. Add parameter to disable purging.
 # @todo Add hash-based params that can be used to create a set of resources for each type with create_resource. This can be useful for pushing data out to hiera.
 # @todo make it possible to manage dialplan with the two other methods (e.g. AEL and Lua)
-# @todo manage options for the `[globals]` section of extensions.conf
 # @todo overhaul README file before release. lots of things have changed
 #
 # @param manage_service
@@ -35,6 +34,21 @@
 # @param extensions_general
 #   Global configurations for the dialplan. Options are set in the file as `key
 #   = value` in the `[general]` section of the `extensions.conf` file.
+# @param extensions_globals
+#   Hash of global variables for the dialplan, placed in the `[globals]`
+#   section of the `extensions.conf` file. The variables defined here can be
+#   accessed throughout the dialplan with the `GLOBAL()` function. Global
+#   variables can make dialplans reusable by different servers with different
+#   use cases. They also make dialplans easier to maintain by concentrating
+#   certain information in one location (e.g. to avoid having to modify the
+#   same value through many contexts and macros). Global variables can also be
+#   used for hiding passwords from Asterisk logs, for example for `register`
+#   lines or calls to `Dial()` where information about the provider is combined
+#   with username and password: when using a global variable, the variable name
+#   will be shown in logs, not the actual password. Variables are set in the
+#   file as `key = value`. If you pass in a Sensitive type as the value, it
+#   will be unwrapped for outputting in the configuration file: this can avoid
+#   showing certain sensitive information (as passwords) in puppet logs.
 # @param agents_multiplelogin
 #   Set this to false to disable possibility for agents to be logged in
 #   multiple times. This option is set in the `[general]` section of the
@@ -86,6 +100,7 @@ class asterisk (
   Hash                      $sip_general             = {},
   Hash                      $voicemail_general       = {},
   Hash                      $extensions_general      = {},
+  Asterisk::ExtGlobalVars   $extensions_globals      = {},
   Boolean                   $agents_multiplelogin    = true,
   Hash                      $agents_global           = {},
   Asterisk::FeaturesGeneral $features_general        = $asterisk::params::features_general,
