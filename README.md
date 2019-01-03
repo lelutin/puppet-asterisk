@@ -28,6 +28,9 @@ Reference reading
 
 Some good references to consult when it comes to Asterisk configuration are:
 
+ * The most up to date reference and documentation for all configurations can
+   be found in upstream default configuration files. They can also be found in
+   the `asterisk-doc` debian package.
  * Online version of "Asterisk: The Definitive Guide" 3rd edition. This is
    definitely the best and most up to date documentation available. A must
    read for anyone that is configuring a PBX with Asterisk. Consult this
