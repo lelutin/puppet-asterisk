@@ -18,7 +18,6 @@
 # @see https://www.voip-info.org/asterisk-config-sipconf/
 #
 # @todo use better data types. some should be boolean, some should have an enum
-# @todo find a method to let users interleave deny and user rules instead of outputting all deny and then all permit.
 #
 # @param ensure
 #   Set this to `absent` in order to remove SIP configuration.
@@ -158,16 +157,13 @@
 #   Set to `yes` to offer SRTP encrypted media (and only SRTP encrypted media)
 #   on outgoing calls to a peer. Calls will fail with `HANGUPCAUSE=58` if the
 #   peer does not support SRTP. Defaults to `no`.
-# @param deny
-#   List of IP address definitions of the form `prefix/mask` that should be
-#   denied access to this peer/user. Order Matters! – The last matching
-#   deny/permit rule is the one used. If no rule matches, then the connection
-#   is permitted.
-# @param permit
-#   List of IP address definitions of the form `prefix/mask` that should be
-#   permitted access to this peer/user. Order Matters! – The last matching
-#   deny/permit rule is the one used. If no rule matches, then the connection
-#   is permitted.
+# @param access
+#   List of permit/deny rules for CIDR prefixes like `prefix/mask`. Each
+#   element of the list should be a one element hash that specifies either
+#   'permit' or 'deny' as a key and the CIDR prefix as its value. Order
+#   Matters! – Rules are placed in the configuration file in the same order as
+#   elements were inserted into the list. The last matching deny/permit rule is
+#   the one used. If no rule matches, then the connection is permitted.
 #
 define asterisk::sip (
   $ensure                                           = present,
@@ -204,8 +200,7 @@ define asterisk::sip (
   Optional[String[1]]            $dtmfmode          = undef,
   Array[String[1]]               $transports        = [],
   Optional[String]               $encryption        = '',
-  Array[String[1]]               $deny              = [],
-  Array[String[1]]               $permit            = [],
+  Array[Asterisk::Access]        $access            = [],
 ) {
 
   if $directrtpsetup =~ Boolean {

@@ -99,9 +99,8 @@ transport=<%= @transports.join(',') %>
 <% if @encryption -%>
 encryption=<%= @encryption %>
 <% end -%>
-<% for denyip in @deny -%>
-deny=<%= denyip %>
-<% end -%>
-<% for permitip in @permit -%>
-permit=<%= permitip %>
+<% @access.each do |acc| -%>
+  <%- acc.each do |type, spec| -%>
+<%= type %>=<%= spec %>
+  <%- end -%>
 <% end -%>
