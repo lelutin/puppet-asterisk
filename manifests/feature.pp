@@ -31,7 +31,7 @@ define asterisk::feature (
   $ensure = present
 ) {
 
-  asterisk::dotd::file { "feature_${name}.conf":
+  asterisk::dotd::file { "featuremap_group_${name}.conf":
     ensure   => $ensure,
     dotd_dir => 'features.d',
     content  => template('asterisk/snippet/feature.erb'),
