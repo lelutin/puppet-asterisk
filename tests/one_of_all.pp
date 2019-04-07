@@ -2,7 +2,12 @@
 # class without arguments and the most simple case for all of the defined
 # types. Its purpose is to make it easy to see if something got broken somehow.
 
-include asterisk
+class { 'asterisk':
+  extensions_globals => {
+    'TRUNK'       => 'patate',
+    'CHUNKAWOMBA' => Sensitive.new('megamega'),
+  }
+}
 
 asterisk::agent { 'smith':
   ext        => '7000',
