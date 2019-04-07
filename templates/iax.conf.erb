@@ -6,7 +6,7 @@
 ; Inter-Asterisk eXchange driver definition
 ;
 [general]
-<% @iax_general.sort.map do |name, value|
+<% @iax_general.map do |name, value|
   if value.is_a? Array
     value.each do |v| -%>
 <%= name -%>=<%= v %>

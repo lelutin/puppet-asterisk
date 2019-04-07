@@ -6,7 +6,7 @@
 ; Global settings for call queues
 ;
 [general]
-<% @queues_general.sort.map do |name, value|
+<% @queues_general.map do |name, value|
   if value.is_a? Array
     value.each do |v| -%>
 <%= name -%>=<%= v %>

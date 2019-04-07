@@ -9,7 +9,7 @@
 multiplelogin=<%= @agents_multiplelogin %>
 
 [agents]
-<% scope.lookupvar("asterisk::agents_global").sort.map do |key, value| -%>
+<% scope.lookupvar("asterisk::agents_global").map do |key, value| -%>
 <%= key %>=<%= value %>
 <% end -%>
 

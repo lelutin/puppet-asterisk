@@ -16,7 +16,7 @@ noload => <%= noload %>
 load => <%= load %>
 <% end -%>
 [global]
-<% scope.lookupvar("asterisk::modules_global").sort.map do |key, value| -%>
+<% scope.lookupvar("asterisk::modules_global").map do |key, value| -%>
 <%= key %>=<%= value %>
 <% end -%>
 
