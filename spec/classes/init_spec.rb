@@ -2,7 +2,9 @@ require 'spec_helper'
 describe 'asterisk' do
   let(:title) { 'asterisk' }
   let(:facts) { {
-    :operatingsystem => 'Debian',
+    :os => {
+      :family => 'Debian',
+    },
   } }
 
   context 'with defaults for all parameters' do
