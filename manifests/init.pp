@@ -6,8 +6,11 @@
 # @see http://www.asteriskdocs.org/en/3rd_Edition/asterisk-book-html-chunk/ACD_id288901.html#options_general_queues_id001 General queues options
 #
 # @todo Purge unmanaged configs by default. Add parameter to disable purging.
-# @todo Add hash-based params that can be used to create a set of resources for each type with create_resource. This can be useful for pushing data out to hiera.
-# @todo make it possible to manage dialplan with the two other methods (e.g. AEL and Lua)
+# @todo Add hash-based params that can be used to create a set of resources
+#   for each type with create_resource. This can be useful for pushing data out
+#   to hiera.
+# @todo make it possible to manage dialplan with the two other methods (e.g.
+  # AEL and Lua)
 # @todo overhaul README file before release. lots of things have changed
 #
 # @param manage_service
@@ -60,10 +63,10 @@
 #   Global call features. Options are set in the file as `key = value` in the
 #   `[general]` section of `features.conf`.
 # @param features_featuremap
-#   Global feature maps. Options are set in the file as `key => value` in the
+#   Global feature maps. Options are set in the file as `key             => value` in the
 #   `[featuremap]` section of `features.conf`.
 # @param features_applicationmap
-#   Global application feature maps. Options are set in the file as `key =>
+#   Global application feature maps. Options are set in the file as `key => 
 #   value` in the `[applicationmap]` section of `features.conf`.
 # @param queues_general
 #   Global configurations for queues. Options are set in the file as `key =
