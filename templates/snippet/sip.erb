@@ -96,6 +96,12 @@ transport=<%= @transports.join(',') %>
 <% if @encryption -%>
 encryption=<%= @encryption %>
 <% end -%>
+<% if @trustrpid -%>
+trustrpid=<%= @trustrpid %>
+<% end -%>
+<% if @sendrpid -%>
+sendrpid=<%= @sendrpid %>
+<% end -%>
 <% @access.each do |acc| -%>
   <%- acc.each do |type, spec| -%>
 <%= type %>=<%= spec %>

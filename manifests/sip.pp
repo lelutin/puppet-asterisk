@@ -164,6 +164,10 @@
 #   Matters! – Rules are placed in the configuration file in the same order as
 #   elements were inserted into the list. The last matching deny/permit rule is
 #   the one used. If no rule matches, then the connection is permitted.
+# @param trustrpid
+#   If a Remote-Party-ID SIP header should be sent. Defaults to `no`.
+# @param sendrpid
+#   If Remote-Party-ID SIP header should be trusted. Defaults to `no`.
 #
 define asterisk::sip (
   $ensure                                           = present,
@@ -201,6 +205,8 @@ define asterisk::sip (
   Array[String[1]]               $transports        = [],
   Optional[String]               $encryption        = '',
   Array[Asterisk::Access]        $access            = [],
+  Optional[Enum['yes', 'no']]    $trustrpid         = undef,
+  Optional[Enum['yes', 'no']]    $sendrpid          = undef
 ) {
 
   if $directrtpsetup =~ Boolean {
