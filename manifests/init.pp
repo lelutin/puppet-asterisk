@@ -19,7 +19,7 @@
 # @param manage_package
 #   Set this to false to avoid installing the asterisk package.
 # @param package_name
-#   Name of the package being installed for asterisk.
+#   Name or array of the package(s) being installed for asterisk.
 # @param service_name
 #   Name of the asterisk service.
 # @param confdir
@@ -66,7 +66,7 @@
 #   Global feature maps. Options are set in the file as `key             => value` in the
 #   `[featuremap]` section of `features.conf`.
 # @param features_applicationmap
-#   Global application feature maps. Options are set in the file as `key => 
+#   Global application feature maps. Options are set in the file as `key =>
 #   value` in the `[applicationmap]` section of `features.conf`.
 # @param queues_general
 #   Global configurations for queues. Options are set in the file as `key =
@@ -94,29 +94,29 @@
 #   binding to localhost.
 #
 class asterisk (
-  Boolean                   $manage_service          = true,
-  Boolean                   $manage_package          = true,
-  String                    $package_name            = 'asterisk',
-  String                    $service_name            = 'asterisk',
-  Stdlib::Absolutepath      $confdir                 = '/etc/asterisk',
-  Hash                      $iax_general             = {},
-  Hash                      $sip_general             = {},
-  Hash                      $voicemail_general       = {},
-  Hash                      $extensions_general      = {},
-  Asterisk::ExtGlobalVars   $extensions_globals      = {},
-  Boolean                   $agents_multiplelogin    = true,
-  Hash                      $agents_global           = {},
-  Asterisk::FeaturesGeneral $features_general        = $asterisk::params::features_general,
-  Asterisk::Featuremap      $features_featuremap     = {},
-  Hash[String,String]       $features_applicationmap = {},
-  Hash                      $queues_general          = {},
-  Boolean                   $modules_autoload        = true,
-  Array[String]             $modules_noload          = $asterisk::params::modules_noload,
-  Array[String]             $modules_load            = $asterisk::params::modules_load,
-  Hash                      $modules_global          = {},
-  Boolean                   $manager_enable          = true,
-  Integer                   $manager_port            = 5038,
-  String                    $manager_bindaddr        = '127.0.0.1',
+  Boolean                        $manage_service          = true,
+  Boolean                        $manage_package          = true,
+  Variant[String, Array[String]] $package_name            = $asterisk::params::package_name,
+  String                         $service_name            = 'asterisk',
+  Stdlib::Absolutepath           $confdir                 = '/etc/asterisk',
+  Hash                           $iax_general             = {},
+  Hash                           $sip_general             = {},
+  Hash                           $voicemail_general       = {},
+  Hash                           $extensions_general      = {},
+  Asterisk::ExtGlobalVars        $extensions_globals      = {},
+  Boolean                        $agents_multiplelogin    = true,
+  Hash                           $agents_global           = {},
+  Asterisk::FeaturesGeneral      $features_general        = $asterisk::params::features_general,
+  Asterisk::Featuremap           $features_featuremap     = {},
+  Hash[String,String]            $features_applicationmap = {},
+  Hash                           $queues_general          = {},
+  Boolean                        $modules_autoload        = true,
+  Array[String]                  $modules_noload          = $asterisk::params::modules_noload,
+  Array[String]                  $modules_load            = $asterisk::params::modules_load,
+  Hash                           $modules_global          = {},
+  Boolean                        $manager_enable          = true,
+  Integer                        $manager_port            = 5038,
+  String                         $manager_bindaddr        = '127.0.0.1',
 ) inherits asterisk::params {
 
   # We'll only ensure the type of some of the *_general on which templates iterate

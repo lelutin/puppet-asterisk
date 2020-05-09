@@ -9,11 +9,7 @@ class asterisk::install {
   assert_private()
 
   if $asterisk::manage_package {
-    package { [
-      $asterisk::package_name,
-      'asterisk-core-sounds-en',
-      'asterisk-core-sounds-en-gsm'
-    ]:
+    package { $asterisk::package_name:
       ensure => installed,
     }
   }

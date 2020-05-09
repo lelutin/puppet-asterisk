@@ -9,6 +9,12 @@ class asterisk::params {
   # Cannot call assert_private() here. It seems as though inheritance breaks
   # the checks for the function.
 
+  $package_name = [
+    'asterisk',
+    'asterisk-core-sounds-en',
+    'asterisk-core-sounds-en-gsm'
+  ]
+
   $iax_general = {
     'allow'             => [],
     'disallow'          => ['lpc10'],
