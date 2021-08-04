@@ -67,8 +67,13 @@ class asterisk::config {
   }
 
   $logger_general = $asterisk::logger_general
-  asterisk::dotd { '/etc/asterisk/logger':
+  $log_files = $asterisk::log_files
+  file { '/etc/asterisk/logger.conf' :
+    ensure  => present,
     content => template('asterisk/logger.conf.erb'),
+    owner   => 'root',
+    group   => 'asterisk',
+    mode    => '0640',
   }
 
   $manager_enable = $asterisk::real_manager_enable

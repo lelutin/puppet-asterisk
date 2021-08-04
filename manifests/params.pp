@@ -88,6 +88,15 @@ class asterisk::params {
     'queue_log'      => 'yes',
   }
 
+  $log_files = {
+    'console'  => {
+      levels => ['notice','warning','error'],
+    },
+    'messages' => {
+      levels => ['notice','warning','error'],
+    },
+  }
+
   $modules_noload = [
     'pbx_gtkconsole.so',
     'pbx_kdeconsole.so',

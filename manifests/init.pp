@@ -71,6 +71,17 @@
 # @param logger_general
 #   Global configurations for asterisk logging. Options are set in the file as
 #   `key=value` in the `[general]` section of `logger.conf`.
+# @param log_files
+#   A hash defining log files. Keys set log filenames and values should be
+#   hashes containing at least one key `levels` that has an associated list of
+#   strings for levels that'll be output in that log file and an optional key
+#   `formatter` which has a string value of either `default` or `json` and
+#   defines which format will be output to the log. If the `formatter` key is
+#   omitted, the default format is used. Log files can be the special names
+#   `console` or `syslog` to determine what output is sent to the asterisk CLI
+#   console and syslog, respectively, or it can be a file name. File names can
+#   be either relative to the `asterisk.conf` setting `astlogdir` or an
+#   absolute path.
 # @param queues_general
 #   Global configurations for queues. Options are set in the file as `key =
 #   value` in the `[general]` section of the `queues.conf` file.
@@ -113,6 +124,7 @@ class asterisk (
   Asterisk::Featuremap           $features_featuremap     = {},
   Hash[String,String]            $features_applicationmap = {},
   Hash[String,String]            $logger_general          = $asterisk::params::logger_general,
+  Hash[String,Asterisk::Logfile] $log_files               = $asterisk::params::log_files,
   Hash                           $queues_general          = {},
   Boolean                        $modules_autoload        = true,
   Array[String]                  $modules_noload          = $asterisk::params::modules_noload,

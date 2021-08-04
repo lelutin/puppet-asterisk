@@ -23,8 +23,6 @@
 end -%>
 
 [logfiles]
-console => notice,warning,error,security
-messages => notice,warning,error,security
-
-#include </etc/asterisk/logger.d/*.conf>
-
+<%- @log_files.each do |filename,options| -%>
+<%= filename %> => <% if options.has_key? 'formatter' %>[<%= options['formatter'] %>]<% end %><%= options['levels'].join(',') %>
+<%- end -%>
