@@ -66,6 +66,11 @@ class asterisk::config {
     content => template('asterisk/queues.conf.erb'),
   }
 
+  $logger_options = $asterisk::logger_options
+  asterisk::dotd { '/etc/asterisk/logger':
+    content => template('asterisk/logger.conf.erb'),
+  }
+
   $manager_enable = $asterisk::real_manager_enable
   $manager_port = $asterisk::manager_port
   $manager_bindaddr = $asterisk::manager_bindaddr
