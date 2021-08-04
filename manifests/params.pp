@@ -81,12 +81,7 @@ class asterisk::params {
     'monitor-type'      => 'MixMonitor',
   }
 
-  $logger_general = {
-    'rotatestrategy' => 'rotate',
-    'use_callids'    => 'yes',
-    'appendhostname' => 'yes',
-    'queue_log'      => 'yes',
-  }
+  $logger_general = {}
 
   $log_files = {
     'console'  => {
