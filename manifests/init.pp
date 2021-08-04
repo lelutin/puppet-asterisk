@@ -109,7 +109,7 @@ class asterisk (
   Asterisk::FeaturesGeneral      $features_general        = $asterisk::params::features_general,
   Asterisk::Featuremap           $features_featuremap     = {},
   Hash[String,String]            $features_applicationmap = {},
-  Hash[String,String]            $logger_options          = $asterisk::params::logger_options,
+  Hash[String,String]            $logger_general          = $asterisk::params::logger_general,
   Hash                           $queues_general          = {},
   Boolean                        $modules_autoload        = true,
   Array[String]                  $modules_noload          = $asterisk::params::modules_noload,

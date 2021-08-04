@@ -66,7 +66,7 @@ class asterisk::config {
     content => template('asterisk/queues.conf.erb'),
   }
 
-  $logger_options = $asterisk::logger_options
+  $logger_general = $asterisk::logger_general
   asterisk::dotd { '/etc/asterisk/logger':
     content => template('asterisk/logger.conf.erb'),
   }
