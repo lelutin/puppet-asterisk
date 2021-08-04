@@ -63,11 +63,14 @@
 #   Global call features. Options are set in the file as `key = value` in the
 #   `[general]` section of `features.conf`.
 # @param features_featuremap
-#   Global feature maps. Options are set in the file as `key             => value` in the
+#   Global feature maps. Options are set in the file as `key => value` in the
 #   `[featuremap]` section of `features.conf`.
 # @param features_applicationmap
 #   Global application feature maps. Options are set in the file as `key =>
 #   value` in the `[applicationmap]` section of `features.conf`.
+# @param logger_general
+#   Global configurations for asterisk logging. Options are set in the file as
+#   `key=value` in the `[general]` section of `logger.conf`.
 # @param queues_general
 #   Global configurations for queues. Options are set in the file as `key =
 #   value` in the `[general]` section of the `queues.conf` file.
