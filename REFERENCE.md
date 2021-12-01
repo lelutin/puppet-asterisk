@@ -46,6 +46,7 @@
 * [`Asterisk::ExtGlobalVars`](#asteriskextglobalvars): A hash of global variables for the dialplan
 * [`Asterisk::Featuremap`](#asteriskfeaturemap): Options that can be set for featuremap
 * [`Asterisk::Featuresgeneral`](#asteriskfeaturesgeneral): Possible values for the `[general]` section of features.conf
+* [`Asterisk::Logfile`](#asterisklogfile): Options that can be set for a log file
 * [`Asterisk::ManagerPerms`](#asteriskmanagerperms): Possible permissions given to AMI users
 
 ## Classes
@@ -91,11 +92,11 @@ Default value: ``true``
 
 ##### `package_name`
 
-Data type: `String`
+Data type: `Variant[String, Array[String]]`
 
-Name of the package being installed for asterisk.
+Name or array of the package(s) being installed for asterisk.
 
-Default value: `'asterisk'`
+Default value: `$asterisk::params::package_name`
 
 ##### `service_name`
 
@@ -202,7 +203,7 @@ Default value: `$asterisk::params::features_general`
 
 Data type: `Asterisk::Featuremap`
 
-Global feature maps. Options are set in the file as `key             => value` in the
+Global feature maps. Options are set in the file as `key => value` in the
 `[featuremap]` section of `features.conf`.
 
 Default value: `{}`
@@ -215,6 +216,32 @@ Global application feature maps. Options are set in the file as `key =>
 value` in the `[applicationmap]` section of `features.conf`.
 
 Default value: `{}`
+
+##### `logger_general`
+
+Data type: `Hash[String,String]`
+
+Global configurations for asterisk logging. Options are set in the file as
+`key=value` in the `[general]` section of `logger.conf`.
+
+Default value: `$asterisk::params::logger_general`
+
+##### `log_files`
+
+Data type: `Hash[String,Asterisk::Logfile]`
+
+A hash defining log files. Keys set log filenames and values should be
+hashes containing at least one key `levels` that has an associated list of
+strings for levels that'll be output in that log file and an optional key
+`formatter` which has a string value of either `default` or `json` and
+defines which format will be output to the log. If the `formatter` key is
+omitted, the default format is used. Log files can be the special names
+`console` or `syslog` to determine what output is sent to the asterisk CLI
+console and syslog, respectively, or it can be a file name. File names can
+be either relative to the `asterisk.conf` setting `astlogdir` or an
+absolute path.
+
+Default value: `$asterisk::params::log_files`
 
 ##### `queues_general`
 
@@ -1640,6 +1667,22 @@ the one used. If no rule matches, then the connection is permitted.
 
 Default value: `[]`
 
+##### `trustrpid`
+
+Data type: `Optional[Enum['yes', 'no']]`
+
+If a Remote-Party-ID SIP header should be sent. Defaults to `no`.
+
+Default value: ``undef``
+
+##### `sendrpid`
+
+Data type: `Optional[Enum['yes', 'no', 'pai', 'rpid']]`
+
+If Remote-Party-ID SIP header should be trusted. Defaults to `no`.
+
+Default value: ``undef``
+
 ### `asterisk::voicemail`
 
 Configure a voicemail
@@ -1786,6 +1829,22 @@ Alias of `Struct[{
   Optional[atxferdropcall]        => Enum['yes','no'],
   Optional[atxferloopdelay]       => Integer,
   Optional[atxfercallbackretries] => Integer,
+}]`
+
+### `Asterisk::Logfile`
+
+Options that can be set for a log file
+
+* **See also**
+  * https://wiki.asterisk.org/wiki/display/AST/Logging+Configuration
+
+Alias of `Struct[{
+  Optional[formatter] => Enum['default','json'],
+  levels => Array[
+            Variant[
+              Enum['debug','notice','warning','error','dtmf','fax','security','verbose'],
+              Pattern[/^verbose\([1-9]\d*\)$/]]
+            ,1],
 }]`
 
 ### `Asterisk::ManagerPerms`
