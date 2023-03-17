@@ -6,11 +6,11 @@ AllCops:
   NewCops: enable
   Include:
   - "./**/*.rb"
+  - Gemfile
+  - Rakefile
   Exclude:
   - bin/*
   - ".vendor/**/*"
-  - Gemfile
-  - Rakefile
   - pkg/**/*
   - spec/fixtures/**/*
   - vendor/**/*
@@ -74,6 +74,8 @@ Style/FormatStringToken:
   Description: Following the main puppet project's style, prefer the simpler template
     tokens over annotated ones.
   EnforcedStyle: template
+Style/FrozenStringLiteralComment:
+  Enabled: false
 Style/Lambda:
   Description: Prefer the keyword for easier discoverability.
   EnforcedStyle: literal
