@@ -1,8 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.configure("2") do |config|
-  config.vm.box = "debian-10-amd64"
+Vagrant.configure('2') do |config|
+  config.vm.box = 'debian-10-amd64'
 
   config.vm.define :test do |test|
     # This shell script will make sure that you have your module copied in
@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
     #
     # You do NOT want to have librarian-puppet work on a synced_dir if it's
     # using nfs: this could destroy all your files on the host.
-    test.vm.provision "install librarian-puppet and install dependencies", type: "shell" do |s|
+    test.vm.provision 'install librarian-puppet and install dependencies', type: 'shell' do |s|
       s.inline = <<-SHELL
         apt-get update
         apt-get install -y librarian-puppet git
@@ -33,10 +33,10 @@ Vagrant.configure("2") do |config|
     end
 
     test.vm.provision :puppet do |puppet|
-      puppet.manifests_path = "tests"
+      puppet.manifests_path = 'tests'
       # Change this to any file name in tests/ to run another test
-      puppet.manifest_file = "init.pp"
-      puppet.options = ["--modulepath", "/tmp/vagrant-puppet/modules"]
+      puppet.manifest_file = 'init.pp'
+      puppet.options = ['--modulepath', '/tmp/vagrant-puppet/modules']
     end
   end
 end
