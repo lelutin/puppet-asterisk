@@ -4,10 +4,6 @@ AllCops:
   DisplayCopNames: true
   TargetRubyVersion: '2.7'
   NewCops: enable
-  Include:
-  - "./**/*.rb"
-  - Gemfile
-  - Rakefile
   Exclude:
   - bin/*
   - ".vendor/**/*"
