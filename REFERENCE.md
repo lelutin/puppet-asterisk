@@ -9,7 +9,7 @@
 #### Public Classes
 
 * [`asterisk`](#asterisk): Install and configure an asterisk server.
-* [`asterisk::dahdi`](#asteriskdahdi): Requirements for the asterisk dahdi module to work
+* [`asterisk::dahdi`](#asterisk--dahdi): Requirements for the asterisk dahdi module to work
 
 #### Private Classes
 
@@ -22,17 +22,17 @@
 
 #### Public Defined types
 
-* [`asterisk::agent`](#asteriskagent): Configure an asterisk agent
-* [`asterisk::extensions`](#asteriskextensions): Configure a dialplan context and extensions within that context
-* [`asterisk::feature`](#asteriskfeature): Configure an asterisk feature application map grouping
-* [`asterisk::iax`](#asteriskiax): Configure an IAX2 context and its options
-* [`asterisk::language`](#asterisklanguage): Install an asterisk language pack.
-* [`asterisk::manager`](#asteriskmanager): Configure an asterisk manager
-* [`asterisk::queue`](#asteriskqueue): Configure an asterisk queue
-* [`asterisk::registry::iax`](#asteriskregistryiax): Configure an IAX2 registry
-* [`asterisk::registry::sip`](#asteriskregistrysip): Configure a SIP registry
-* [`asterisk::sip`](#asterisksip): Configure a SIP peer, a user or a template for the previous.
-* [`asterisk::voicemail`](#asteriskvoicemail): Configure a voicemail
+* [`asterisk::agent`](#asterisk--agent): Configure an asterisk agent
+* [`asterisk::extensions`](#asterisk--extensions): Configure a dialplan context and extensions within that context
+* [`asterisk::feature`](#asterisk--feature): Configure an asterisk feature application map grouping
+* [`asterisk::iax`](#asterisk--iax): Configure an IAX2 context and its options
+* [`asterisk::language`](#asterisk--language): Install an asterisk language pack.
+* [`asterisk::manager`](#asterisk--manager): Configure an asterisk manager
+* [`asterisk::queue`](#asterisk--queue): Configure an asterisk queue
+* [`asterisk::registry::iax`](#asterisk--registry--iax): Configure an IAX2 registry
+* [`asterisk::registry::sip`](#asterisk--registry--sip): Configure a SIP registry
+* [`asterisk::sip`](#asterisk--sip): Configure a SIP peer, a user or a template for the previous.
+* [`asterisk::voicemail`](#asterisk--voicemail): Configure a voicemail
 
 #### Private Defined types
 
@@ -42,16 +42,16 @@
 
 ### Data types
 
-* [`Asterisk::Access`](#asteriskaccess): A deny or permit line for Asterisk configuration
-* [`Asterisk::ExtGlobalVars`](#asteriskextglobalvars): A hash of global variables for the dialplan
-* [`Asterisk::Featuremap`](#asteriskfeaturemap): Options that can be set for featuremap
-* [`Asterisk::Featuresgeneral`](#asteriskfeaturesgeneral): Possible values for the `[general]` section of features.conf
-* [`Asterisk::Logfile`](#asterisklogfile): Options that can be set for a log file
-* [`Asterisk::ManagerPerms`](#asteriskmanagerperms): Possible permissions given to AMI users
+* [`Asterisk::Access`](#Asterisk--Access): A deny or permit line for Asterisk configuration
+* [`Asterisk::ExtGlobalVars`](#Asterisk--ExtGlobalVars): A hash of global variables for the dialplan
+* [`Asterisk::Featuremap`](#Asterisk--Featuremap): Options that can be set for featuremap
+* [`Asterisk::Featuresgeneral`](#Asterisk--Featuresgeneral): Possible values for the `[general]` section of features.conf
+* [`Asterisk::Logfile`](#Asterisk--Logfile): Options that can be set for a log file
+* [`Asterisk::ManagerPerms`](#Asterisk--ManagerPerms): Possible permissions given to AMI users
 
 ## Classes
 
-### `asterisk`
+### <a name="asterisk"></a>`asterisk`
 
 AEL and Lua)
 
@@ -71,26 +71,52 @@ class { 'asterisk': }
 
 #### Parameters
 
-The following parameters are available in the `asterisk` class.
+The following parameters are available in the `asterisk` class:
 
-##### `manage_service`
+* [`manage_service`](#-asterisk--manage_service)
+* [`manage_package`](#-asterisk--manage_package)
+* [`package_name`](#-asterisk--package_name)
+* [`service_name`](#-asterisk--service_name)
+* [`confdir`](#-asterisk--confdir)
+* [`iax_general`](#-asterisk--iax_general)
+* [`sip_general`](#-asterisk--sip_general)
+* [`voicemail_general`](#-asterisk--voicemail_general)
+* [`extensions_general`](#-asterisk--extensions_general)
+* [`extensions_globals`](#-asterisk--extensions_globals)
+* [`agents_multiplelogin`](#-asterisk--agents_multiplelogin)
+* [`agents_global`](#-asterisk--agents_global)
+* [`features_general`](#-asterisk--features_general)
+* [`features_featuremap`](#-asterisk--features_featuremap)
+* [`features_applicationmap`](#-asterisk--features_applicationmap)
+* [`logger_general`](#-asterisk--logger_general)
+* [`log_files`](#-asterisk--log_files)
+* [`queues_general`](#-asterisk--queues_general)
+* [`modules_autoload`](#-asterisk--modules_autoload)
+* [`modules_noload`](#-asterisk--modules_noload)
+* [`modules_load`](#-asterisk--modules_load)
+* [`modules_global`](#-asterisk--modules_global)
+* [`manager_enable`](#-asterisk--manager_enable)
+* [`manager_port`](#-asterisk--manager_port)
+* [`manager_bindaddr`](#-asterisk--manager_bindaddr)
+
+##### <a name="-asterisk--manage_service"></a>`manage_service`
 
 Data type: `Boolean`
 
 Set this to false to avoid managing the asterisk service. By default puppet
 will enable the service and ensure that it is running.
 
-Default value: ``true``
+Default value: `true`
 
-##### `manage_package`
+##### <a name="-asterisk--manage_package"></a>`manage_package`
 
 Data type: `Boolean`
 
 Set this to false to avoid installing the asterisk package.
 
-Default value: ``true``
+Default value: `true`
 
-##### `package_name`
+##### <a name="-asterisk--package_name"></a>`package_name`
 
 Data type: `Variant[String, Array[String]]`
 
@@ -98,7 +124,7 @@ Name or array of the package(s) being installed for asterisk.
 
 Default value: `$asterisk::params::package_name`
 
-##### `service_name`
+##### <a name="-asterisk--service_name"></a>`service_name`
 
 Data type: `String`
 
@@ -106,7 +132,7 @@ Name of the asterisk service.
 
 Default value: `'asterisk'`
 
-##### `confdir`
+##### <a name="-asterisk--confdir"></a>`confdir`
 
 Data type: `Stdlib::Absolutepath`
 
@@ -114,7 +140,7 @@ Absolute path to the asterisk configuration directory.
 
 Default value: `'/etc/asterisk'`
 
-##### `iax_general`
+##### <a name="-asterisk--iax_general"></a>`iax_general`
 
 Data type: `Hash`
 
@@ -123,7 +149,7 @@ value` in the `[general]` section of `iax.conf`.
 
 Default value: `{}`
 
-##### `sip_general`
+##### <a name="-asterisk--sip_general"></a>`sip_general`
 
 Data type: `Hash`
 
@@ -132,7 +158,7 @@ in the `[general]` section of the `sip.conf` file.
 
 Default value: `{}`
 
-##### `voicemail_general`
+##### <a name="-asterisk--voicemail_general"></a>`voicemail_general`
 
 Data type: `Hash`
 
@@ -141,7 +167,7 @@ value` in the `[general]` section of the `voicemail.conf` file.
 
 Default value: `{}`
 
-##### `extensions_general`
+##### <a name="-asterisk--extensions_general"></a>`extensions_general`
 
 Data type: `Hash`
 
@@ -150,7 +176,7 @@ Global configurations for the dialplan. Options are set in the file as `key
 
 Default value: `{}`
 
-##### `extensions_globals`
+##### <a name="-asterisk--extensions_globals"></a>`extensions_globals`
 
 Data type: `Asterisk::ExtGlobalVars`
 
@@ -171,7 +197,7 @@ showing certain sensitive information (as passwords) in puppet logs.
 
 Default value: `{}`
 
-##### `agents_multiplelogin`
+##### <a name="-asterisk--agents_multiplelogin"></a>`agents_multiplelogin`
 
 Data type: `Boolean`
 
@@ -179,9 +205,9 @@ Set this to false to disable possibility for agents to be logged in
 multiple times. This option is set in the `[general]` section of the
 `agents.conf` file.
 
-Default value: ``true``
+Default value: `true`
 
-##### `agents_global`
+##### <a name="-asterisk--agents_global"></a>`agents_global`
 
 Data type: `Hash`
 
@@ -190,7 +216,7 @@ value` in the `[agents]` section of the `agents.conf` file.
 
 Default value: `{}`
 
-##### `features_general`
+##### <a name="-asterisk--features_general"></a>`features_general`
 
 Data type: `Asterisk::FeaturesGeneral`
 
@@ -199,7 +225,7 @@ Global call features. Options are set in the file as `key = value` in the
 
 Default value: `$asterisk::params::features_general`
 
-##### `features_featuremap`
+##### <a name="-asterisk--features_featuremap"></a>`features_featuremap`
 
 Data type: `Asterisk::Featuremap`
 
@@ -208,7 +234,7 @@ Global feature maps. Options are set in the file as `key => value` in the
 
 Default value: `{}`
 
-##### `features_applicationmap`
+##### <a name="-asterisk--features_applicationmap"></a>`features_applicationmap`
 
 Data type: `Hash[String,String]`
 
@@ -217,7 +243,7 @@ value` in the `[applicationmap]` section of `features.conf`.
 
 Default value: `{}`
 
-##### `logger_general`
+##### <a name="-asterisk--logger_general"></a>`logger_general`
 
 Data type: `Hash[String,String]`
 
@@ -226,7 +252,7 @@ Global configurations for asterisk logging. Options are set in the file as
 
 Default value: `$asterisk::params::logger_general`
 
-##### `log_files`
+##### <a name="-asterisk--log_files"></a>`log_files`
 
 Data type: `Hash[String,Asterisk::Logfile]`
 
@@ -243,7 +269,7 @@ absolute path.
 
 Default value: `$asterisk::params::log_files`
 
-##### `queues_general`
+##### <a name="-asterisk--queues_general"></a>`queues_general`
 
 Data type: `Hash`
 
@@ -252,7 +278,7 @@ value` in the `[general]` section of the `queues.conf` file.
 
 Default value: `{}`
 
-##### `modules_autoload`
+##### <a name="-asterisk--modules_autoload"></a>`modules_autoload`
 
 Data type: `Boolean`
 
@@ -260,9 +286,9 @@ Set this to false to avoid having asterisk load modules automatically on an
 as-needed basis. This can be used to configure modules in a more
 restrictive manner.
 
-Default value: ``true``
+Default value: `true`
 
-##### `modules_noload`
+##### <a name="-asterisk--modules_noload"></a>`modules_noload`
 
 Data type: `Array[String]`
 
@@ -271,7 +297,7 @@ List of modules that asterisk should not load. This can be useful if
 
 Default value: `$asterisk::params::modules_noload`
 
-##### `modules_load`
+##### <a name="-asterisk--modules_load"></a>`modules_load`
 
 Data type: `Array[String]`
 
@@ -280,7 +306,7 @@ you've set `modules_autoload` to `false`.
 
 Default value: `$asterisk::params::modules_load`
 
-##### `modules_global`
+##### <a name="-asterisk--modules_global"></a>`modules_global`
 
 Data type: `Hash`
 
@@ -289,15 +315,15 @@ value` in the `[global]` section of the `modules.conf` file.
 
 Default value: `{}`
 
-##### `manager_enable`
+##### <a name="-asterisk--manager_enable"></a>`manager_enable`
 
 Data type: `Boolean`
 
 Set this to false to disable asterisk manager.
 
-Default value: ``true``
+Default value: `true`
 
-##### `manager_port`
+##### <a name="-asterisk--manager_port"></a>`manager_port`
 
 Data type: `Integer`
 
@@ -306,7 +332,7 @@ Defaults to 5038.
 
 Default value: `5038`
 
-##### `manager_bindaddr`
+##### <a name="-asterisk--manager_bindaddr"></a>`manager_bindaddr`
 
 Data type: `String`
 
@@ -315,7 +341,7 @@ binding to localhost.
 
 Default value: `'127.0.0.1'`
 
-### `asterisk::dahdi`
+### <a name="asterisk--dahdi"></a>`asterisk::dahdi`
 
 DAHDI (Digium/Asterisk Hardware Device Interface) lets you connect your
 Asterisk PBX to a card, Digium and some other models, that bridges calls with
@@ -325,7 +351,7 @@ the POTS.
 
 ## Defined types
 
-### `asterisk::agent`
+### <a name="asterisk--agent"></a>`asterisk::agent`
 
 Configure an asterisk agent
 
@@ -351,27 +377,33 @@ asterisk::agent { 'provocateur':
 
 #### Parameters
 
-The following parameters are available in the `asterisk::agent` defined type.
+The following parameters are available in the `asterisk::agent` defined type:
 
-##### `ext`
+* [`ext`](#-asterisk--agent--ext)
+* [`password`](#-asterisk--agent--password)
+* [`agent_name`](#-asterisk--agent--agent_name)
+* [`ensure`](#-asterisk--agent--ensure)
+* [`groups`](#-asterisk--agent--groups)
+
+##### <a name="-asterisk--agent--ext"></a>`ext`
 
 Data type: `String`
 
 Extension corresponding to the agent.
 
-##### `password`
+##### <a name="-asterisk--agent--password"></a>`password`
 
 Data type: `Sensitive[String]`
 
 Login password of the agent.
 
-##### `agent_name`
+##### <a name="-asterisk--agent--agent_name"></a>`agent_name`
 
 Data type: `String`
 
 Name by which the agent is referred to within dialplan.
 
-##### `ensure`
+##### <a name="-asterisk--agent--ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
@@ -379,7 +411,7 @@ Can be set to absent to remove a given agent.
 
 Default value: `present`
 
-##### `groups`
+##### <a name="-asterisk--agent--groups"></a>`groups`
 
 Data type: `Array[String[1]]`
 
@@ -387,7 +419,7 @@ List of groups to which the agent is associated.
 
 Default value: `[]`
 
-### `asterisk::extensions`
+### <a name="asterisk--extensions"></a>`asterisk::extensions`
 
 This can be used to configure your different contexts with extensions, but it
 can also be used to create macros that can be called in other contexts.
@@ -408,9 +440,13 @@ asterisk::extensions { 'basic':
 
 #### Parameters
 
-The following parameters are available in the `asterisk::extensions` defined type.
+The following parameters are available in the `asterisk::extensions` defined type:
 
-##### `ensure`
+* [`ensure`](#-asterisk--extensions--ensure)
+* [`source`](#-asterisk--extensions--source)
+* [`content`](#-asterisk--extensions--content)
+
+##### <a name="-asterisk--extensions--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -418,24 +454,24 @@ Set this to false to remove the corresponding configuration file.
 
 Default value: `present`
 
-##### `source`
+##### <a name="-asterisk--extensions--source"></a>`source`
 
 Data type: `Any`
 
 Puppet file source where the contents of the file can be found.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `content`
+##### <a name="-asterisk--extensions--content"></a>`content`
 
 Data type: `Optional[String]`
 
 Textual contents of the file. This option is mutually exclusive with
 `$source`.
 
-Default value: ``undef``
+Default value: `undef`
 
-### `asterisk::feature`
+### <a name="asterisk--feature"></a>`asterisk::feature`
 
 This resource will define an application map grouping. It can be used to set
 dynamic features with the DYNAMIC_FEATURES variable: instead of listing all
@@ -466,15 +502,18 @@ asterisk::feature { 'shifteight':
 
 #### Parameters
 
-The following parameters are available in the `asterisk::feature` defined type.
+The following parameters are available in the `asterisk::feature` defined type:
 
-##### `options`
+* [`options`](#-asterisk--feature--options)
+* [`ensure`](#-asterisk--feature--ensure)
+
+##### <a name="-asterisk--feature--options"></a>`options`
 
 Data type: `Hash`
 
 Hash of options with keys being option names and values their values.
 
-##### `ensure`
+##### <a name="-asterisk--feature--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -482,7 +521,7 @@ Set this to `absent` to remove the feature.
 
 Default value: `present`
 
-### `asterisk::iax`
+### <a name="asterisk--iax"></a>`asterisk::iax`
 
 A context named after `$name` will be created. You can configure iax2 users,
 peers or the special context `callnumberlimits` that lets you override limits
@@ -495,9 +534,13 @@ to call numbers per IP address range.
 
 #### Parameters
 
-The following parameters are available in the `asterisk::iax` defined type.
+The following parameters are available in the `asterisk::iax` defined type:
 
-##### `ensure`
+* [`ensure`](#-asterisk--iax--ensure)
+* [`source`](#-asterisk--iax--source)
+* [`content`](#-asterisk--iax--content)
+
+##### <a name="-asterisk--iax--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -505,15 +548,15 @@ Set this to `absent` to remove the configuration file.
 
 Default value: `present`
 
-##### `source`
+##### <a name="-asterisk--iax--source"></a>`source`
 
 Data type: `Any`
 
 Puppet file source where the contents of the file can be found.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `content`
+##### <a name="-asterisk--iax--content"></a>`content`
 
 Data type: `Optional[String]`
 
@@ -522,9 +565,9 @@ exclusive with `$source`. The content is placed after the name of the
 context (which is `$name`) and so it should not include the context name
 definition.
 
-Default value: ``undef``
+Default value: `undef`
 
-### `asterisk::language`
+### <a name="asterisk--language"></a>`asterisk::language`
 
 The name of the resource is the name of a language pack.
 
@@ -539,7 +582,7 @@ on debian and so this might not work for other distros.
 asterisk::language { ['de', 'es']: }
 ```
 
-### `asterisk::manager`
+### <a name="asterisk--manager"></a>`asterisk::manager`
 
 Configure an asterisk manager
 
@@ -560,15 +603,26 @@ asterisk::manager { 'sophie':
 
 #### Parameters
 
-The following parameters are available in the `asterisk::manager` defined type.
+The following parameters are available in the `asterisk::manager` defined type:
 
-##### `secret`
+* [`secret`](#-asterisk--manager--secret)
+* [`ensure`](#-asterisk--manager--ensure)
+* [`manager_name`](#-asterisk--manager--manager_name)
+* [`deny`](#-asterisk--manager--deny)
+* [`permit`](#-asterisk--manager--permit)
+* [`read`](#-asterisk--manager--read)
+* [`write`](#-asterisk--manager--write)
+* [`writetimeout`](#-asterisk--manager--writetimeout)
+* [`displayconnects`](#-asterisk--manager--displayconnects)
+* [`eventfilter`](#-asterisk--manager--eventfilter)
+
+##### <a name="-asterisk--manager--secret"></a>`secret`
 
 Data type: `Sensitive[String[1]]`
 
 Authentication password for the manager.
 
-##### `ensure`
+##### <a name="-asterisk--manager--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -576,7 +630,7 @@ Set to `absent` to remove the manager.
 
 Default value: `present`
 
-##### `manager_name`
+##### <a name="-asterisk--manager--manager_name"></a>`manager_name`
 
 Data type: `String[1]`
 
@@ -585,7 +639,7 @@ name of the manager corresponds to `$name`.
 
 Default value: `$name`
 
-##### `deny`
+##### <a name="-asterisk--manager--deny"></a>`deny`
 
 Data type: `Array[String[1]]`
 
@@ -595,7 +649,7 @@ access to some IP addresses. Default value is to deny access to everybody.
 
 Default value: `['0.0.0.0/0.0.0.0']`
 
-##### `permit`
+##### <a name="-asterisk--manager--permit"></a>`permit`
 
 Data type: `Array[String[1]]`
 
@@ -604,7 +658,7 @@ Defaults to premitting only localhost.
 
 Default value: `['127.0.0.1/255.255.255.255']`
 
-##### `read`
+##### <a name="-asterisk--manager--read"></a>`read`
 
 Data type: `Array[Asterisk::ManagerPerms]`
 
@@ -613,7 +667,7 @@ configuration. Defaults to `system` and `call`.
 
 Default value: `['system', 'call']`
 
-##### `write`
+##### <a name="-asterisk--manager--write"></a>`write`
 
 Data type: `Array[Asterisk::ManagerPerms]`
 
@@ -622,7 +676,7 @@ information or configuration. Defaults to `system` and `call`.
 
 Default value: `['system', 'call']`
 
-##### `writetimeout`
+##### <a name="-asterisk--manager--writetimeout"></a>`writetimeout`
 
 Data type: `Integer`
 
@@ -631,16 +685,16 @@ connection for this user.
 
 Default value: `100`
 
-##### `displayconnects`
+##### <a name="-asterisk--manager--displayconnects"></a>`displayconnects`
 
 Data type: `Boolean`
 
 Set this to no to avoid reporting connections to the AMI as verbose
 messages printed to the Asterisk console.
 
-Default value: ``true``
+Default value: `true`
 
-##### `eventfilter`
+##### <a name="-asterisk--manager--eventfilter"></a>`eventfilter`
 
 Data type: `Optional[String]`
 
@@ -649,9 +703,9 @@ delivered to the AMI client application. Filters are specified using a
 regular expression. A specified filter is a whitelist filter unless
 preceded by an exclamation point.
 
-Default value: ``undef``
+Default value: `undef`
 
-### `asterisk::queue`
+### <a name="asterisk--queue"></a>`asterisk::queue`
 
 This resource presents a multitude of options, corresponding to different
 options that can be configured for queues.
@@ -678,9 +732,61 @@ asterisk::queue { 'shortq':
 
 #### Parameters
 
-The following parameters are available in the `asterisk::queue` defined type.
+The following parameters are available in the `asterisk::queue` defined type:
 
-##### `ensure`
+* [`ensure`](#-asterisk--queue--ensure)
+* [`strategy`](#-asterisk--queue--strategy)
+* [`context`](#-asterisk--queue--context)
+* [`defaultrule`](#-asterisk--queue--defaultrule)
+* [`maxlen`](#-asterisk--queue--maxlen)
+* [`musicclass`](#-asterisk--queue--musicclass)
+* [`servicelevel`](#-asterisk--queue--servicelevel)
+* [`members`](#-asterisk--queue--members)
+* [`memberdelay`](#-asterisk--queue--memberdelay)
+* [`penaltymemberslimit`](#-asterisk--queue--penaltymemberslimit)
+* [`membermacro`](#-asterisk--queue--membermacro)
+* [`membergosub`](#-asterisk--queue--membergosub)
+* [`setinterfacevar`](#-asterisk--queue--setinterfacevar)
+* [`setqueuevar`](#-asterisk--queue--setqueuevar)
+* [`setqueueentryvar`](#-asterisk--queue--setqueueentryvar)
+* [`weight`](#-asterisk--queue--weight)
+* [`reportholdtime`](#-asterisk--queue--reportholdtime)
+* [`ringinuse`](#-asterisk--queue--ringinuse)
+* [`wrapuptime`](#-asterisk--queue--wrapuptime)
+* [`timeout`](#-asterisk--queue--timeout)
+* [`timeoutrestart`](#-asterisk--queue--timeoutrestart)
+* [`timeoutpriority`](#-asterisk--queue--timeoutpriority)
+* [`retry`](#-asterisk--queue--retry)
+* [`autopause`](#-asterisk--queue--autopause)
+* [`joinempty`](#-asterisk--queue--joinempty)
+* [`leavewhenempty`](#-asterisk--queue--leavewhenempty)
+* [`eventwhencalled`](#-asterisk--queue--eventwhencalled)
+* [`eventmemberstatus`](#-asterisk--queue--eventmemberstatus)
+* [`monitor_type`](#-asterisk--queue--monitor_type)
+* [`monitor_format`](#-asterisk--queue--monitor_format)
+* [`autofill`](#-asterisk--queue--autofill)
+* [`announce`](#-asterisk--queue--announce)
+* [`announce_frequency`](#-asterisk--queue--announce_frequency)
+* [`min_announce_frequency`](#-asterisk--queue--min_announce_frequency)
+* [`announce_holdtime`](#-asterisk--queue--announce_holdtime)
+* [`announce_position`](#-asterisk--queue--announce_position)
+* [`announce_position_limit`](#-asterisk--queue--announce_position_limit)
+* [`announce_round_seconds`](#-asterisk--queue--announce_round_seconds)
+* [`periodic_announce`](#-asterisk--queue--periodic_announce)
+* [`periodic_announce_frequency`](#-asterisk--queue--periodic_announce_frequency)
+* [`random_periodic_announce`](#-asterisk--queue--random_periodic_announce)
+* [`relative_periodic_announce`](#-asterisk--queue--relative_periodic_announce)
+* [`queue_youarenext`](#-asterisk--queue--queue_youarenext)
+* [`queue_thereare`](#-asterisk--queue--queue_thereare)
+* [`queue_callswaiting`](#-asterisk--queue--queue_callswaiting)
+* [`queue_holdtime`](#-asterisk--queue--queue_holdtime)
+* [`queue_minute`](#-asterisk--queue--queue_minute)
+* [`queue_minutes`](#-asterisk--queue--queue_minutes)
+* [`queue_seconds`](#-asterisk--queue--queue_seconds)
+* [`queue_thankyou`](#-asterisk--queue--queue_thankyou)
+* [`queue_reporthold`](#-asterisk--queue--queue_reporthold)
+
+##### <a name="-asterisk--queue--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -688,7 +794,7 @@ Set this to `absent` in order to remove a queue.
 
 Default value: `present`
 
-##### `strategy`
+##### <a name="-asterisk--queue--strategy"></a>`strategy`
 
 Data type: `Optional[String[1]]`
 
@@ -696,9 +802,9 @@ Name of the queue strategy that determines which member phones are ringing
 when there is a call in the queue that needs answering. If this parameter
 is not defined, the strategy defaults to 'ringall'.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `context`
+##### <a name="-asterisk--queue--context"></a>`context`
 
 Data type: `Optional[String[1]]`
 
@@ -707,9 +813,9 @@ single DTMF digit. If a context is specified and the caller enters a
 number, that digit will attempt to be matched in the context specified, and
 dialplan execution will continue there.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `defaultrule`
+##### <a name="-asterisk--queue--defaultrule"></a>`defaultrule`
 
 Data type: `Optional[String[1]]`
 
@@ -717,18 +823,18 @@ Associates a queue rule as defined in queuerules.conf to this queue, which
 is used to dynamically change the minimum and maximum penalties, which are
 then used to select an available agent.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `maxlen`
+##### <a name="-asterisk--queue--maxlen"></a>`maxlen`
 
 Data type: `Optional[Integer]`
 
 Maximum number of allowed callers in the queue. A value of 0 allows an
 unlimited number of callers in the queue. If unspecified, defaults to 0.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `musicclass`
+##### <a name="-asterisk--queue--musicclass"></a>`musicclass`
 
 Data type: `Optional[String[1]]`
 
@@ -736,9 +842,9 @@ Name of a music class as defined in `musiconhold.conf` to be used for this
 particular queue. You can also override this value with the
 CHANNEL(musicclass) channel variable.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `servicelevel`
+##### <a name="-asterisk--queue--servicelevel"></a>`servicelevel`
 
 Data type: `Optional[String[1]]`
 
@@ -746,9 +852,9 @@ Threshold in seconds for queue waiting time. This can be then used in
 statistics to determine the number of calls that have passed the
 `servicelevel` threshold.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `members`
+##### <a name="-asterisk--queue--members"></a>`members`
 
 Data type: `Array[String[1]]`
 
@@ -757,43 +863,43 @@ List of static members of this queue. Each member should be specified a
 
 Default value: `[]`
 
-##### `memberdelay`
+##### <a name="-asterisk--queue--memberdelay"></a>`memberdelay`
 
 Data type: `Optional[Integer]`
 
 Optional number of seconds to add as delay before the caller and member get
 connected to each other.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `penaltymemberslimit`
+##### <a name="-asterisk--queue--penaltymemberslimit"></a>`penaltymemberslimit`
 
 Data type: `Optional[String[1]]`
 
 Optional lower bound to start disregarding penalty if number of members in
 the queue is lower than this number.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `membermacro`
+##### <a name="-asterisk--queue--membermacro"></a>`membermacro`
 
 Data type: `Optional[String[1]]`
 
 Name of a macro to be executed just prior to bridging the caller and the
 queue member.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `membergosub`
+##### <a name="-asterisk--queue--membergosub"></a>`membergosub`
 
 Data type: `Optional[String[1]]`
 
 If set, run this gosub when connected to the queue member you can override
 this gosub by setting the gosub option on the queue application
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `setinterfacevar`
+##### <a name="-asterisk--queue--setinterfacevar"></a>`setinterfacevar`
 
 Data type: `Optional[String[1]]`
 
@@ -802,9 +908,9 @@ If set to `yes`, the channel variables `MEMBERINTERFACE`, `MEMBERNAME`,
 `MEMBERREALTIME` will be set just prior to connecting the caller with the
 queue member.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `setqueuevar`
+##### <a name="-asterisk--queue--setqueuevar"></a>`setqueuevar`
 
 Data type: `Optional[String[1]]`
 
@@ -813,36 +919,36 @@ If set to `yes`, the channel variables `QUEUENAME`, `QUEUEMAX`,
 `QUEUEABANDONED`, `QUEUESRVLEVEL` and `QUEUESRVLEVELPERF` will be set just
 prior to the call being bridged.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `setqueueentryvar`
+##### <a name="-asterisk--queue--setqueueentryvar"></a>`setqueueentryvar`
 
 Data type: `Optional[String[1]]`
 
 If set to `yes`, the channel variables `QEHOLDTIME` and `QEORIGINALPOS`
 will be set just prior to the call being bridged.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `weight`
+##### <a name="-asterisk--queue--weight"></a>`weight`
 
 Data type: `Optional[Integer]`
 
 The weight of a queue. A queue with a higher weight defined will get first
 priority when members are associated with multiple queues.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `reportholdtime`
+##### <a name="-asterisk--queue--reportholdtime"></a>`reportholdtime`
 
 Data type: `Optional[String[1]]`
 
 If set to `yes`, enables reporting of the caller’s hold time to the queue
 member prior to bridging.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `ringinuse`
+##### <a name="-asterisk--queue--ringinuse"></a>`ringinuse`
 
 Data type: `Optional[String[1]]`
 
@@ -850,26 +956,26 @@ If set to `no`, avoid sending calls to members whose status is `In Use`.
 Only the SIP channel driver is currently able to accurately report this
 status.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `wrapuptime`
+##### <a name="-asterisk--queue--wrapuptime"></a>`wrapuptime`
 
 Data type: `Optional[Integer]`
 
 Number of seconds to keep a member unavailable in a queue after completing
 a call.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `timeout`
+##### <a name="-asterisk--queue--timeout"></a>`timeout`
 
 Data type: `Optional[Integer]`
 
 Number of seconds to ring a member’s device. Also see `timeoutpriority`.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `timeoutrestart`
+##### <a name="-asterisk--queue--timeoutrestart"></a>`timeoutrestart`
 
 Data type: `Optional[String[1]]`
 
@@ -877,9 +983,9 @@ If set to `yes`, resets the timeout for an agent to answer if either a
 `BUSY` or `CONGESTION` status is received from the channel. This can be
 useful if the agent is allowed to reject or cancel a call.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `timeoutpriority`
+##### <a name="-asterisk--queue--timeoutpriority"></a>`timeoutpriority`
 
 Data type: `Optional[String[1]]`
 
@@ -888,9 +994,9 @@ to `conf` to have the value configured with `timeout` on this resource take
 precedence. Defaults to `app`, which means the `timeout` value from the
 `Queue()` application will take precedence.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `retry`
+##### <a name="-asterisk--queue--retry"></a>`retry`
 
 Data type: `Optional[String[1]]`
 
@@ -898,9 +1004,9 @@ Number of seconds to wait before attempting the next member in the queue if
 the `timeout` value is exhausted while attempting to ring a member of the
 queue.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `autopause`
+##### <a name="-asterisk--queue--autopause"></a>`autopause`
 
 Data type: `Optional[String[1]]`
 
@@ -908,9 +1014,9 @@ Set this to `yes` to enable the automatic pausing of members who fail to
 answer a call. A value of `all` causes this member to be paused in all
 queues they are a member of.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `joinempty`
+##### <a name="-asterisk--queue--joinempty"></a>`joinempty`
 
 Data type: `Array[String[1]]`
 
@@ -921,7 +1027,7 @@ of options` to see what possible values this can take and what they mean.
 
 Default value: `[]`
 
-##### `leavewhenempty`
+##### <a name="-asterisk--queue--leavewhenempty"></a>`leavewhenempty`
 
 Data type: `Array[String[1]]`
 
@@ -931,7 +1037,7 @@ longer available to take calls. This can take values similar to
 
 Default value: `[]`
 
-##### `eventwhencalled`
+##### <a name="-asterisk--queue--eventwhencalled"></a>`eventwhencalled`
 
 Data type: `Optional[String[1]]`
 
@@ -940,18 +1046,18 @@ and `AgentComplete` will be sent to the Asterisk Manager Interface (AMI).
 If set to vars, all channel variables associated with the agent will also
 be sent to the AMI. Defaults to `no`.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `eventmemberstatus`
+##### <a name="-asterisk--queue--eventmemberstatus"></a>`eventmemberstatus`
 
 Data type: `Optional[String[1]]`
 
 If set to `yes`, the QueueMemberStatus event will be sent to AMI. Note that
 this may generate a lot of manager events.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `monitor_type`
+##### <a name="-asterisk--queue--monitor_type"></a>`monitor_type`
 
 Data type: `Optional[String[1]]`
 
@@ -960,9 +1066,9 @@ recording calls within the queue. If not specified, the `Monitor()`
 application will be used instead. This setting applies specifically for
 this queue and overrides the general option with the same name.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `monitor_format`
+##### <a name="-asterisk--queue--monitor_format"></a>`monitor_format`
 
 Data type: `Array[String[1]]`
 
@@ -971,7 +1077,7 @@ recorded.
 
 Default value: `[]`
 
-##### `autofill`
+##### <a name="-asterisk--queue--autofill"></a>`autofill`
 
 Data type: `Optional[String[1]]`
 
@@ -982,9 +1088,9 @@ agents until that caller is connected to an agent. If set to `yes`, callers
 are distributed to available agents simultaneously. This value overrides
 the value from the general section for this particular queue.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `announce`
+##### <a name="-asterisk--queue--announce"></a>`announce`
 
 Data type: `Optional[String[1]]`
 
@@ -993,9 +1099,9 @@ typically to let them know what queue the caller is coming from. Useful
 when the agent is in multiple queues, especially when set to auto-answer
 the queue.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `announce_frequency`
+##### <a name="-asterisk--queue--announce_frequency"></a>`announce_frequency`
 
 Data type: `Optional[Integer]`
 
@@ -1003,9 +1109,9 @@ Number of seconds to wait for before we should announce the caller’s
 position and/or estimated hold time in the queue. Set this value to zero or
 let the parameter unspecified to disable.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `min_announce_frequency`
+##### <a name="-asterisk--queue--min_announce_frequency"></a>`min_announce_frequency`
 
 Data type: `Optional[Integer]`
 
@@ -1014,9 +1120,9 @@ caller’s position in the queue again. This is used when the caller’s
 position may change frequently, to prevent the caller hearing multiple
 updates in a short period of time.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `announce_holdtime`
+##### <a name="-asterisk--queue--announce_holdtime"></a>`announce_holdtime`
 
 Data type: `Optional[String[1]]`
 
@@ -1024,9 +1130,9 @@ Set to `yes` to play the estimated hold time along with the periodic
 announcements. If set to `once`, the estimated hold time will be played
 only once. Defaults to `no`.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `announce_position`
+##### <a name="-asterisk--queue--announce_position"></a>`announce_position`
 
 Data type: `Optional[String[1]]`
 
@@ -1037,27 +1143,27 @@ position in the queue if it is within the limit defined by
 mention the position in the queue if it is beyond the number in
 `announce_position_limit`. Defaults to `no`.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `announce_position_limit`
+##### <a name="-asterisk--queue--announce_position_limit"></a>`announce_position_limit`
 
 Data type: `Optional[Integer]`
 
 Position in the queue that represents a threshold for announcements if
 `announce_position` was set to `limit` or `more`.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `announce_round_seconds`
+##### <a name="-asterisk--queue--announce_round_seconds"></a>`announce_round_seconds`
 
 Data type: `Optional[Integer]`
 
 If set to a non-zero value, announcements will mention seconds as well,
 rounded to the value specified in this parameter.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `periodic_announce`
+##### <a name="-asterisk--queue--periodic_announce"></a>`periodic_announce`
 
 Data type: `Array[String[1]]`
 
@@ -1067,24 +1173,24 @@ played in the order they are defined. If unset, defaults to
 
 Default value: `[]`
 
-##### `periodic_announce_frequency`
+##### <a name="-asterisk--queue--periodic_announce_frequency"></a>`periodic_announce_frequency`
 
 Data type: `Optional[Integer]`
 
 Time in seconds between periodic announcements to the caller.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `random_periodic_announce`
+##### <a name="-asterisk--queue--random_periodic_announce"></a>`random_periodic_announce`
 
 Data type: `Optional[String[1]]`
 
 If set to `yes`, will play the defined periodic announcements in a random
 order.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `relative_periodic_announce`
+##### <a name="-asterisk--queue--relative_periodic_announce"></a>`relative_periodic_announce`
 
 Data type: `Optional[String[1]]`
 
@@ -1092,9 +1198,9 @@ If set to `yes`, the periodic_announce_frequency timer will start from when
 the end of the file being played back is reached, instead of from the
 beginning. Defaults to `no`.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `queue_youarenext`
+##### <a name="-asterisk--queue--queue_youarenext"></a>`queue_youarenext`
 
 Data type: `Optional[String]`
 
@@ -1102,9 +1208,9 @@ Filename of a prompt to play when caller reaches first position in queue.
 If not defined, will play the default value (“You are now first in line”).
 If set to an empty value, the prompt will not be played at all.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `queue_thereare`
+##### <a name="-asterisk--queue--queue_thereare"></a>`queue_thereare`
 
 Data type: `Optional[String]`
 
@@ -1113,9 +1219,9 @@ people are before the caller. If not defined, will play the default value
 (“There are”). If set to an empty value, the prompt will not be played at
 all.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `queue_callswaiting`
+##### <a name="-asterisk--queue--queue_callswaiting"></a>`queue_callswaiting`
 
 Data type: `Optional[String]`
 
@@ -1123,9 +1229,9 @@ Filename of a prompt to play in announcements after saying number of calls
 before caller. If not defined, will play the default value (“calls
 waiting”). If set to an empty value, the prompt will not be played at all.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `queue_holdtime`
+##### <a name="-asterisk--queue--queue_holdtime"></a>`queue_holdtime`
 
 Data type: `Optional[String]`
 
@@ -1133,9 +1239,9 @@ Filename of a prompt to play when starting to announce estimated wait time.
 If not defined, will play the default value (“The current estimated hold
 time is”). If set to an empty value, the prompt will not be played at all.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `queue_minute`
+##### <a name="-asterisk--queue--queue_minute"></a>`queue_minute`
 
 Data type: `Optional[String]`
 
@@ -1143,18 +1249,18 @@ Filename of a prompt to play after stating number of estimated minutes, if
 the number is 1. If not defined, will play the default value (“minute”). If
 set to an empty value, the prompt will not be played at all.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `queue_minutes`
+##### <a name="-asterisk--queue--queue_minutes"></a>`queue_minutes`
 
 Data type: `Optional[String]`
 
 Filename of a prompt. This is the same as `queue_minute` but for when the
 number of minutes is more than 1.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `queue_seconds`
+##### <a name="-asterisk--queue--queue_seconds"></a>`queue_seconds`
 
 Data type: `Optional[String]`
 
@@ -1162,9 +1268,9 @@ Filename of a prompt to play after stating number of estimated seconds. If
 not defined, will play the default value (“seconds”). If set to an empty
 value, the prompt will not be played at all.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `queue_thankyou`
+##### <a name="-asterisk--queue--queue_thankyou"></a>`queue_thankyou`
 
 Data type: `Optional[String]`
 
@@ -1172,45 +1278,50 @@ Filename of a prompt. If not defined, will play the default value (“Thank
 you for your patience”). If set to an empty value, the prompt will not be
 played at all.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `queue_reporthold`
+##### <a name="-asterisk--queue--queue_reporthold"></a>`queue_reporthold`
 
 Data type: `Optional[String]`
 
 Filename of a prompt. If not defined, will play the default value (“Hold
 time”). If set to an empty value, the prompt will not be played at all.
 
-Default value: ``undef``
+Default value: `undef`
 
-### `asterisk::registry::iax`
+### <a name="asterisk--registry--iax"></a>`asterisk::registry::iax`
 
 This makes it possible to register to an IAX2 peer for authenticated
 connections.
 
 #### Parameters
 
-The following parameters are available in the `asterisk::registry::iax` defined type.
+The following parameters are available in the `asterisk::registry::iax` defined type:
 
-##### `server`
+* [`server`](#-asterisk--registry--iax--server)
+* [`user`](#-asterisk--registry--iax--user)
+* [`password`](#-asterisk--registry--iax--password)
+* [`ensure`](#-asterisk--registry--iax--ensure)
+
+##### <a name="-asterisk--registry--iax--server"></a>`server`
 
 Data type: `Stdlib::Host`
 
 Hostname or IP address of the server to which Asterisk should register.
 
-##### `user`
+##### <a name="-asterisk--registry--iax--user"></a>`user`
 
 Data type: `String[1]`
 
 User name used for authenticating with the distant server.
 
-##### `password`
+##### <a name="-asterisk--registry--iax--password"></a>`password`
 
 Data type: `Sensitive[String[1]]`
 
 Password used for authenticating.
 
-##### `ensure`
+##### <a name="-asterisk--registry--iax--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -1218,28 +1329,36 @@ Set to `absent` in order to remove the registry.
 
 Default value: `present`
 
-### `asterisk::registry::sip`
+### <a name="asterisk--registry--sip"></a>`asterisk::registry::sip`
 
 This makes it possible to register to a SIP peer for authenticated
 connections.
 
 #### Parameters
 
-The following parameters are available in the `asterisk::registry::sip` defined type.
+The following parameters are available in the `asterisk::registry::sip` defined type:
 
-##### `server`
+* [`server`](#-asterisk--registry--sip--server)
+* [`user`](#-asterisk--registry--sip--user)
+* [`ensure`](#-asterisk--registry--sip--ensure)
+* [`password`](#-asterisk--registry--sip--password)
+* [`authuser`](#-asterisk--registry--sip--authuser)
+* [`port`](#-asterisk--registry--sip--port)
+* [`extension`](#-asterisk--registry--sip--extension)
+
+##### <a name="-asterisk--registry--sip--server"></a>`server`
 
 Data type: `Stdlib::Host`
 
 Hostname or IP address of the server to which Asterisk should register.
 
-##### `user`
+##### <a name="-asterisk--registry--sip--user"></a>`user`
 
 Data type: `String[1]`
 
 User id for the local server.
 
-##### `ensure`
+##### <a name="-asterisk--registry--sip--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -1247,43 +1366,43 @@ Set to `absent` in order to remove the registry.
 
 Default value: `present`
 
-##### `password`
+##### <a name="-asterisk--registry--sip--password"></a>`password`
 
 Data type: `Optional[Sensitive[String[1]]]`
 
 Optional password used for authenticating. This is required if our peer
 does not match connections only on IP/port.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `authuser`
+##### <a name="-asterisk--registry--sip--authuser"></a>`authuser`
 
 Data type: `Optional[String[1]]`
 
 Optional user name used for authenticating with the remote server. This is
 required if our peer does not match connections only on IP/port.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `port`
+##### <a name="-asterisk--registry--sip--port"></a>`port`
 
 Data type: `Optional[Integer]`
 
 Numerical port with which a connection will be established to the remote
 server.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `extension`
+##### <a name="-asterisk--registry--sip--extension"></a>`extension`
 
 Data type: `Optional[String[1]]`
 
 Extension that is used when calls are received from the remote server. When
 not set, extension will be 's'.
 
-Default value: ``undef``
+Default value: `undef`
 
-### `asterisk::sip`
+### <a name="asterisk--sip"></a>`asterisk::sip`
 
 Configure a SIP peer, a user or a template for the previous.
 
@@ -1311,9 +1430,47 @@ asterisk::sip { 'providerZ':
 
 #### Parameters
 
-The following parameters are available in the `asterisk::sip` defined type.
+The following parameters are available in the `asterisk::sip` defined type:
 
-##### `ensure`
+* [`ensure`](#-asterisk--sip--ensure)
+* [`template_name`](#-asterisk--sip--template_name)
+* [`account_type`](#-asterisk--sip--account_type)
+* [`username`](#-asterisk--sip--username)
+* [`defaultuser`](#-asterisk--sip--defaultuser)
+* [`secret`](#-asterisk--sip--secret)
+* [`md5secret`](#-asterisk--sip--md5secret)
+* [`remotesecret`](#-asterisk--sip--remotesecret)
+* [`context`](#-asterisk--sip--context)
+* [`canreinvite`](#-asterisk--sip--canreinvite)
+* [`directmedia`](#-asterisk--sip--directmedia)
+* [`directrtpsetup`](#-asterisk--sip--directrtpsetup)
+* [`directmediadeny`](#-asterisk--sip--directmediadeny)
+* [`directmediapermit`](#-asterisk--sip--directmediapermit)
+* [`host`](#-asterisk--sip--host)
+* [`insecure`](#-asterisk--sip--insecure)
+* [`language`](#-asterisk--sip--language)
+* [`nat`](#-asterisk--sip--nat)
+* [`qualify`](#-asterisk--sip--qualify)
+* [`vmexten`](#-asterisk--sip--vmexten)
+* [`callerid`](#-asterisk--sip--callerid)
+* [`call_limit`](#-asterisk--sip--call_limit)
+* [`callgroup`](#-asterisk--sip--callgroup)
+* [`mailbox`](#-asterisk--sip--mailbox)
+* [`pickupgroup`](#-asterisk--sip--pickupgroup)
+* [`fromdomain`](#-asterisk--sip--fromdomain)
+* [`fromuser`](#-asterisk--sip--fromuser)
+* [`outboundproxy`](#-asterisk--sip--outboundproxy)
+* [`t38pt_udptl`](#-asterisk--sip--t38pt_udptl)
+* [`disallow`](#-asterisk--sip--disallow)
+* [`allow`](#-asterisk--sip--allow)
+* [`dtmfmode`](#-asterisk--sip--dtmfmode)
+* [`transports`](#-asterisk--sip--transports)
+* [`encryption`](#-asterisk--sip--encryption)
+* [`access`](#-asterisk--sip--access)
+* [`trustrpid`](#-asterisk--sip--trustrpid)
+* [`sendrpid`](#-asterisk--sip--sendrpid)
+
+##### <a name="-asterisk--sip--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -1321,16 +1478,16 @@ Set this to `absent` in order to remove SIP configuration.
 
 Default value: `present`
 
-##### `template_name`
+##### <a name="-asterisk--sip--template_name"></a>`template_name`
 
 Data type: `Optional[String[1]]`
 
 Set this to `!` if you are creating a template. Set this to any name of a
 template section to inherit options from it.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `account_type`
+##### <a name="-asterisk--sip--account_type"></a>`account_type`
 
 Data type: `Optional[String[1]]`
 
@@ -1343,32 +1500,32 @@ outbound calls where inbound calls are matched by `authname` and `secret`
 
 Default value: `'friend'`
 
-##### `username`
+##### <a name="-asterisk--sip--username"></a>`username`
 
 Data type: `Optional[String[1]]`
 
 Deprecated option in asterisk. You probably want to use `defaultuser`
 instead.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `defaultuser`
+##### <a name="-asterisk--sip--defaultuser"></a>`defaultuser`
 
 Data type: `Optional[String[1]]`
 
 Authentication user name.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `secret`
+##### <a name="-asterisk--sip--secret"></a>`secret`
 
 Data type: `Optional[Sensitive[String[1]]]`
 
 Authentication secret for inbound connections.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `md5secret`
+##### <a name="-asterisk--sip--md5secret"></a>`md5secret`
 
 Data type: `Optional[String[1]]`
 
@@ -1376,27 +1533,27 @@ MD5-Hash of `<user>:==SIP_realm==:<secret>` (can be used instead of
 `secret`). Default for authenticating to an Asterisk server when SIP realm
 is not explicitly declared is `<user>:asterisk:<secret>`.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `remotesecret`
+##### <a name="-asterisk--sip--remotesecret"></a>`remotesecret`
 
 Data type: `Optional[Sensitive[String[1]]]`
 
 Authentication secret for outbound connections. If this is not set,
 `$secret` is used for outbound connections.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `context`
+##### <a name="-asterisk--sip--context"></a>`context`
 
 Data type: `Optional[String[1]]`
 
 Name of the dialplan context that is used as starting point when an inbound
 call is received through this peer/user.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `canreinvite`
+##### <a name="-asterisk--sip--canreinvite"></a>`canreinvite`
 
 Data type: `Optional[String[1]]`
 
@@ -1409,7 +1566,7 @@ use `UPDATE` instead of `INVITE`.
 
 Default value: `'no'`
 
-##### `directmedia`
+##### <a name="-asterisk--sip--directmedia"></a>`directmedia`
 
 Data type: `Optional[String[1]]`
 
@@ -1427,7 +1584,7 @@ redirect media. `update` can also be combined with `nonat` with the value
 
 Default value: `'no'`
 
-##### `directrtpsetup`
+##### <a name="-asterisk--sip--directrtpsetup"></a>`directrtpsetup`
 
 Data type: `Optional[Boolean]`
 
@@ -1437,9 +1594,9 @@ not work for video and cases where the callee sends RTP payloads and fmtp
 headers in the 200 OK that does not match the callers INVITE. This will
 also fail if directmedia is enabled when the device is actually behind NAT.
 
-Default value: ``true``
+Default value: `true`
 
-##### `directmediadeny`
+##### <a name="-asterisk--sip--directmediadeny"></a>`directmediadeny`
 
 Data type: `Array[String[1]]`
 
@@ -1451,7 +1608,7 @@ always flow through asterisk in such cases. See also `directmediapermit`.
 
 Default value: `[]`
 
-##### `directmediapermit`
+##### <a name="-asterisk--sip--directmediapermit"></a>`directmediapermit`
 
 Data type: `Array[String[1]]`
 
@@ -1460,7 +1617,7 @@ peers. See `directmediadeny`.
 
 Default value: `[]`
 
-##### `host`
+##### <a name="-asterisk--sip--host"></a>`host`
 
 Data type: `Optional[String[1]]`
 
@@ -1470,7 +1627,7 @@ or IP address.
 
 Default value: `'dynamic'`
 
-##### `insecure`
+##### <a name="-asterisk--sip--insecure"></a>`insecure`
 
 Data type: `Optional[String[1]]`
 
@@ -1481,7 +1638,7 @@ of port or IP address.  Defaults to `no`.
 
 Default value: `'no'`
 
-##### `language`
+##### <a name="-asterisk--sip--language"></a>`language`
 
 Data type: `Optional[String[1]]`
 
@@ -1489,7 +1646,7 @@ Language code to define prompts for this peer/user.
 
 Default value: `'en'`
 
-##### `nat`
+##### <a name="-asterisk--sip--nat"></a>`nat`
 
 Data type: `Optional[String[1]]`
 
@@ -1500,9 +1657,9 @@ this to `force_rport` fore RFC 3581 behavior and disable symmetric RTP
 support. Set this to `comedia` to enable RFC 3581 behavior if the remote
 side requests it and enables symmetric RTP support.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `qualify`
+##### <a name="-asterisk--sip--qualify"></a>`qualify`
 
 Data type: `Optional[String[1]]`
 
@@ -1514,67 +1671,67 @@ with `type` set to `peer`.
 
 Default value: `'no'`
 
-##### `vmexten`
+##### <a name="-asterisk--sip--vmexten"></a>`vmexten`
 
 Data type: `Optional[String[1]]`
 
 Name of dialplan extension to reach mailbox. When unspecified, defaults to
 `asterisk`. Valid only with `type` set to `peer`.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `callerid`
+##### <a name="-asterisk--sip--callerid"></a>`callerid`
 
 Data type: `Optional[String[1]]`
 
 Caller ID information used when nothing else is available. When
 unspecified, defaults to `asterisk`.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `call_limit`
+##### <a name="-asterisk--sip--call_limit"></a>`call_limit`
 
 Data type: `Optional[Integer]`
 
 Number of simultaneous calls through this user/peer.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `callgroup`
+##### <a name="-asterisk--sip--callgroup"></a>`callgroup`
 
 Data type: `Optional[String[1]]`
 
 Call groups for calls to this device.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `mailbox`
+##### <a name="-asterisk--sip--mailbox"></a>`mailbox`
 
 Data type: `Optional[String[1]]`
 
 Voicemail extension (for message waiting indications). Not valid for `type`
 set to `user`.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `pickupgroup`
+##### <a name="-asterisk--sip--pickupgroup"></a>`pickupgroup`
 
 Data type: `Optional[String[1]]`
 
 Group that can pickup fellow workers’ calls using `*8` and the `Pickup()`
 application on the `*8` extension.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `fromdomain`
+##### <a name="-asterisk--sip--fromdomain"></a>`fromdomain`
 
 Data type: `Optional[String[1]]`
 
 Default `From:` domain in SIP messages when acting as a SIP UAC (client).
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `fromuser`
+##### <a name="-asterisk--sip--fromuser"></a>`fromuser`
 
 Data type: `Optional[String[1]]`
 
@@ -1582,18 +1739,18 @@ User to put in `from` instead of `$CALLERID(number)` (overrides the
 callerid) when placing calls _to_ a peer (another SIP proxy). Valid only
 with `type` set to `peer`.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `outboundproxy`
+##### <a name="-asterisk--sip--outboundproxy"></a>`outboundproxy`
 
 Data type: `Optional[String[1]]`
 
 SRV name (excluding the _sip._udp prefix), hostname, or IP address of the
 outbound SIP Proxy. Valid only with `type` set to `peer`.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `t38pt_udptl`
+##### <a name="-asterisk--sip--t38pt_udptl"></a>`t38pt_udptl`
 
 Data type: `Optional[String[1]]`
 
@@ -1603,9 +1760,9 @@ enables redundancy error correction. `none` disables error correction.
 `maxdatagram=NN` overrides the maximum datagram value to NN bytes (useful
 for some problematic cases like Cisco media gateways).
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `disallow`
+##### <a name="-asterisk--sip--disallow"></a>`disallow`
 
 Data type: `Array[String[1]]`
 
@@ -1616,7 +1773,7 @@ a narrow number of codecs.
 
 Default value: `[]`
 
-##### `allow`
+##### <a name="-asterisk--sip--allow"></a>`allow`
 
 Data type: `Array[String[1]]`
 
@@ -1626,16 +1783,16 @@ this setting, so this can be used to blacklist only a narrow set of codecs.
 
 Default value: `[]`
 
-##### `dtmfmode`
+##### <a name="-asterisk--sip--dtmfmode"></a>`dtmfmode`
 
 Data type: `Optional[String[1]]`
 
 How the client handles DTMF signalling. Defaults to `rfc2833`. Warning:
 `inband` leads to very high CPU load.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `transports`
+##### <a name="-asterisk--sip--transports"></a>`transports`
 
 Data type: `Array[String[1]]`
 
@@ -1644,7 +1801,7 @@ with the order defining which is set as default (first value is default).
 
 Default value: `[]`
 
-##### `encryption`
+##### <a name="-asterisk--sip--encryption"></a>`encryption`
 
 Data type: `Optional[String]`
 
@@ -1654,7 +1811,7 @@ peer does not support SRTP. Defaults to `no`.
 
 Default value: `''`
 
-##### `access`
+##### <a name="-asterisk--sip--access"></a>`access`
 
 Data type: `Array[Asterisk::Access]`
 
@@ -1667,23 +1824,23 @@ the one used. If no rule matches, then the connection is permitted.
 
 Default value: `[]`
 
-##### `trustrpid`
+##### <a name="-asterisk--sip--trustrpid"></a>`trustrpid`
 
 Data type: `Optional[Enum['yes', 'no']]`
 
 If a Remote-Party-ID SIP header should be sent. Defaults to `no`.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `sendrpid`
+##### <a name="-asterisk--sip--sendrpid"></a>`sendrpid`
 
 Data type: `Optional[Enum['yes', 'no', 'pai', 'rpid']]`
 
 If Remote-Party-ID SIP header should be trusted. Defaults to `no`.
 
-Default value: ``undef``
+Default value: `undef`
 
-### `asterisk::voicemail`
+### <a name="asterisk--voicemail"></a>`asterisk::voicemail`
 
 Configure a voicemail
 
@@ -1701,15 +1858,23 @@ asterisk::voicemail { 'taro':
 
 #### Parameters
 
-The following parameters are available in the `asterisk::voicemail` defined type.
+The following parameters are available in the `asterisk::voicemail` defined type:
 
-##### `context`
+* [`context`](#-asterisk--voicemail--context)
+* [`password`](#-asterisk--voicemail--password)
+* [`ensure`](#-asterisk--voicemail--ensure)
+* [`user_name`](#-asterisk--voicemail--user_name)
+* [`email`](#-asterisk--voicemail--email)
+* [`pager_email`](#-asterisk--voicemail--pager_email)
+* [`options`](#-asterisk--voicemail--options)
+
+##### <a name="-asterisk--voicemail--context"></a>`context`
 
 Data type: `String[1]`
 
 Name of the context in which the voicemail is assigned.
 
-##### `password`
+##### <a name="-asterisk--voicemail--password"></a>`password`
 
 Data type: `Sensitive[String[1]]`
 
@@ -1717,7 +1882,7 @@ Authentication password set for accessing the voicemail. This is usually a
 series of numbers so that phones can dial the password, but it can be a
 textual password as well.
 
-##### `ensure`
+##### <a name="-asterisk--voicemail--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -1725,31 +1890,31 @@ Set to `absent` to remove the voicemail.
 
 Default value: `present`
 
-##### `user_name`
+##### <a name="-asterisk--voicemail--user_name"></a>`user_name`
 
 Data type: `Optional[String[1]]`
 
 Name assigned to the voicemail, usually the name of the person using it.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `email`
+##### <a name="-asterisk--voicemail--email"></a>`email`
 
 Data type: `Optional[String[1]]`
 
 Email address to which voicemail message sounds will be sent.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `pager_email`
+##### <a name="-asterisk--voicemail--pager_email"></a>`pager_email`
 
 Data type: `Optional[String[1]]`
 
 Email address to which a page will be sent upon receiving a voicemail.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `options`
+##### <a name="-asterisk--voicemail--options"></a>`options`
 
 Data type: `Hash[String,String]`
 
@@ -1761,7 +1926,7 @@ Default value: `{}`
 
 ## Data types
 
-### `Asterisk::Access`
+### <a name="Asterisk--Access"></a>`Asterisk::Access`
 
 A couple of configuration files let administrators configure accesses. They
 are usually order-dependent so one can interleave permit and deny lines to
@@ -1769,13 +1934,13 @@ create complex permissions.
 
 Alias of `Hash[Enum['permit','deny'], String[1], 1, 1]`
 
-### `Asterisk::ExtGlobalVars`
+### <a name="Asterisk--ExtGlobalVars"></a>`Asterisk::ExtGlobalVars`
 
 A hash of global variables for the dialplan
 
 Alias of `Hash[String, Variant[String,Sensitive]]`
 
-### `Asterisk::Featuremap`
+### <a name="Asterisk--Featuremap"></a>`Asterisk::Featuremap`
 
 Those are the possible values that one could find in the `[featuremap]`
 section of `features.conf`.
@@ -1784,16 +1949,20 @@ section of `features.conf`.
   * http://asteriskdocs.org/en/3rd_Edition/asterisk-book-html-chunk/AdditionalConfig_id256654.html#AdditionalConfig_id243783
   * List of featuremaps and their meangings
 
-Alias of `Struct[{
+Alias of
+
+```puppet
+Struct[{
   Optional[blindxfer]  => String[1],
   Optional[disconnect] => String[1],
   Optional[automon]    => String[1],
   Optional[atxfer]     => String[1],
   Optional[parkcall]   => String[1],
   Optional[automixmon] => String[1],
-}]`
+}]
+```
 
-### `Asterisk::Featuresgeneral`
+### <a name="Asterisk--Featuresgeneral"></a>`Asterisk::Featuresgeneral`
 
 Possible values for the `[general]` section of features.conf
 
@@ -1801,7 +1970,10 @@ Possible values for the `[general]` section of features.conf
   * http://asteriskdocs.org/en/3rd_Edition/asterisk-book-html-chunk/AdditionalConfig_id256654.html#AdditionalConfig_id244340
   * List of options and their meaning
 
-Alias of `Struct[{
+Alias of
+
+```puppet
+Struct[{
   Optional[parkext]               => String[1],
   Optional[parkpos]               => String[1],
   Optional[context]               => String[1],
@@ -1829,25 +2001,30 @@ Alias of `Struct[{
   Optional[atxferdropcall]        => Enum['yes','no'],
   Optional[atxferloopdelay]       => Integer,
   Optional[atxfercallbackretries] => Integer,
-}]`
+}]
+```
 
-### `Asterisk::Logfile`
+### <a name="Asterisk--Logfile"></a>`Asterisk::Logfile`
 
 Options that can be set for a log file
 
 * **See also**
   * https://wiki.asterisk.org/wiki/display/AST/Logging+Configuration
 
-Alias of `Struct[{
+Alias of
+
+```puppet
+Struct[{
   Optional[formatter] => Enum['default','json'],
   levels => Array[
             Variant[
               Enum['debug','notice','warning','error','dtmf','fax','security','verbose'],
               Pattern[/^verbose\([1-9]\d*\)$/]]
             ,1],
-}]`
+}]
+```
 
-### `Asterisk::ManagerPerms`
+### <a name="Asterisk--ManagerPerms"></a>`Asterisk::ManagerPerms`
 
 Possible permissions given to AMI users
 
