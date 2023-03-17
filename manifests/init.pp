@@ -10,7 +10,7 @@
 #   for each type with create_resource. This can be useful for pushing data out
 #   to hiera.
 # @todo make it possible to manage dialplan with the two other methods (e.g.
-  # AEL and Lua)
+#   AEL and Lua)
 # @todo overhaul README file before release. lots of things have changed
 #
 # @param manage_service
@@ -108,61 +108,43 @@
 #   binding to localhost.
 #
 class asterisk (
-  Boolean                        $manage_service          = true,
-  Boolean                        $manage_package          = true,
-  Variant[String, Array[String]] $package_name            = $asterisk::params::package_name,
-  String                         $service_name            = 'asterisk',
-  Stdlib::Absolutepath           $confdir                 = '/etc/asterisk',
-  Hash                           $iax_general             = {},
-  Hash                           $sip_general             = {},
-  Hash                           $voicemail_general       = {},
-  Hash                           $extensions_general      = {},
-  Asterisk::ExtGlobalVars        $extensions_globals      = {},
-  Boolean                        $agents_multiplelogin    = true,
-  Hash                           $agents_global           = {},
-  Asterisk::FeaturesGeneral      $features_general        = $asterisk::params::features_general,
-  Asterisk::Featuremap           $features_featuremap     = {},
-  Hash[String,String]            $features_applicationmap = {},
-  Hash[String,String]            $logger_general          = $asterisk::params::logger_general,
-  Hash[String,Asterisk::Logfile] $log_files               = $asterisk::params::log_files,
-  Hash                           $queues_general          = {},
-  Boolean                        $modules_autoload        = true,
-  Array[String]                  $modules_noload          = $asterisk::params::modules_noload,
-  Array[String]                  $modules_load            = $asterisk::params::modules_load,
-  Hash                           $modules_global          = {},
-  Boolean                        $manager_enable          = true,
-  Integer                        $manager_port            = 5038,
-  String                         $manager_bindaddr        = '127.0.0.1',
-) inherits asterisk::params {
+  Boolean                        $manage_service,
+  Boolean                        $manage_package,
+  Variant[String, Array[String]] $package_name,
+  String                         $service_name,
+  Stdlib::Absolutepath           $confdir,
+  Hash                           $iax_general,
+  Hash                           $sip_general,
+  Hash                           $voicemail_general,
+  Hash                           $extensions_general,
+  Asterisk::ExtGlobalVars        $extensions_globals,
+  Boolean                        $agents_multiplelogin,
+  Hash                           $agents_global,
+  Asterisk::FeaturesGeneral      $features_general,
+  Asterisk::Featuremap           $features_featuremap,
+  Hash[String,String]            $features_applicationmap,
+  Hash[String,String]            $logger_general,
+  Hash[String,Asterisk::Logfile] $log_files,
+  Hash                           $queues_general,
+  Boolean                        $modules_autoload,
+  Array[String]                  $modules_noload,
+  Array[String]                  $modules_load,
+  Hash                           $modules_global,
+  Boolean                        $manager_enable,
+  Integer                        $manager_port,
+  String                         $manager_bindaddr,
+) {
 
-  # We'll only ensure the type of some of the *_general on which templates iterate
+  # We'll only ensure the type of some of the *_general on which templates
+  # iterate. There's no complex data type that can let us be this flexible
+  # (e.g. everything should be a string, but those handful of keys.
+  assert_type(Array[String], $iax_general['allow'])
+  assert_type(Array[String], $iax_general['disallow'])
 
-  $real_iax_general = merge($asterisk::params::iax_general, $iax_general)
-  assert_type(Array[String], $real_iax_general['allow'])
-  assert_type(Array[String], $real_iax_general['disallow'])
-  $real_sip_general = merge($asterisk::params::sip_general, $sip_general)
-  assert_type(Array[String], $real_sip_general['allow'])
-  assert_type(Array[String], $real_sip_general['disallow'])
-  assert_type(Array[String], $real_sip_general['domain'])
-  assert_type(Array[String], $real_sip_general['localnet'])
-  $real_voicemail_general = merge(
-    $asterisk::params::voicemail_general, $voicemail_general
-  )
-  $real_extensions_general = merge(
-    $asterisk::params::extensions_general,
-    $extensions_general
-  )
-  $real_agents_multiplelogin = bool2str($agents_multiplelogin, 'yes', 'no')
-  $real_features_general = merge(
-    $asterisk::params::features_general,
-    $features_general
-  )
-  $real_queues_general = merge(
-    $asterisk::params::queues_general,
-    $queues_general
-  )
-  $real_modules_autoload = bool2str($modules_autoload, 'yes', 'no')
-  $real_manager_enable = bool2str($manager_enable, 'yes', 'no')
+  assert_type(Array[String], $sip_general['allow'])
+  assert_type(Array[String], $sip_general['disallow'])
+  assert_type(Array[String], $sip_general['domain'])
+  assert_type(Array[String], $sip_general['localnet'])
 
   contain asterisk::install
   contain asterisk::config

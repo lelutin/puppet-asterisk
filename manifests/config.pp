@@ -26,25 +26,25 @@ class asterisk::config {
     ],
   }
 
-  $iax_general = $asterisk::real_iax_general
+  $iax_general = $asterisk::iax_general
   asterisk::dotd { '/etc/asterisk/iax':
     additional_paths => ['/etc/asterisk/iax.registry.d'],
     content          => template('asterisk/iax.conf.erb'),
   }
 
-  $sip_general = $asterisk::real_sip_general
+  $sip_general = $asterisk::sip_general
   asterisk::dotd { '/etc/asterisk/sip':
     additional_paths => ['/etc/asterisk/sip.registry.d'],
     content          => template('asterisk/sip.conf.erb'),
   }
 
-  $voicemail_general = $asterisk::real_voicemail_general
+  $voicemail_general = $asterisk::voicemail_general
   asterisk::dotd { '/etc/asterisk/voicemail':
     content => template('asterisk/voicemail.conf.erb'),
   }
 
   $ext_context = {
-    general => $asterisk::real_extensions_general,
+    general => $asterisk::extensions_general,
     globals => $asterisk::extensions_globals,
   }
   asterisk::dotd { '/etc/asterisk/extensions':
@@ -56,12 +56,12 @@ class asterisk::config {
     content => template('asterisk/agents.conf.erb'),
   }
 
-  $features_general = $asterisk::real_features_general
+  $features_general = $asterisk::features_general
   asterisk::dotd { '/etc/asterisk/features':
     content          => template('asterisk/features.conf.erb'),
   }
 
-  $queues_general = $asterisk::real_queues_general
+  $queues_general = $asterisk::queues_general
   asterisk::dotd { '/etc/asterisk/queues':
     content => template('asterisk/queues.conf.erb'),
   }
