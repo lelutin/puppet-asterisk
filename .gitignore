@@ -1,5 +1,8 @@
+.bundle
 .vagrant
 /pkg
 spec/fixtures
 /doc
+Gemfile.lock
 /.yardoc
+/vendor
