@@ -8,24 +8,6 @@ class asterisk::config {
 
   assert_private()
 
-  case $facts['os']['family'] {
-    'RedHat': {
-      $service_settings_path = "/etc/sysconfig/${asterisk::service_name}"
-    }
-    'Debian': {
-      $service_settings_path = "/etc/default/${asterisk::service_name}"
-    }
-    default: {
-      fail("Unsupported system '${facts['os']['name']}'.")
-    }
-  }
-
-  augeas { 'run_asterisk':
-    changes => [
-      "set /files/${service_settings_path}/RUNASTERISK yes",
-    ],
-  }
-
   $iax_general = $asterisk::iax_general
   asterisk::dotd { '/etc/asterisk/iax':
     additional_paths => ['/etc/asterisk/iax.registry.d'],
@@ -51,7 +33,7 @@ class asterisk::config {
     content => epp('asterisk/extensions.conf.epp', $ext_context),
   }
 
-  $agents_multiplelogin = $asterisk::real_agents_multiplelogin
+  $agents_multiplelogin = bool2str($asterisk::agents_multiplelogin, 'yes', 'no')
   asterisk::dotd { '/etc/asterisk/agents':
     content => template('asterisk/agents.conf.erb'),
   }
@@ -76,14 +58,14 @@ class asterisk::config {
     mode    => '0640',
   }
 
-  $manager_enable = $asterisk::real_manager_enable
+  $manager_enable = bool2str($asterisk::manager_enable, 'yes', 'no')
   $manager_port = $asterisk::manager_port
   $manager_bindaddr = $asterisk::manager_bindaddr
   asterisk::dotd { '/etc/asterisk/manager':
     content => template('asterisk/manager.conf.erb'),
   }
 
-  $modules_autoload = $asterisk::real_modules_autoload
+  $modules_autoload = bool2str($asterisk::modules_autoload, 'yes', 'no')
   file { '/etc/asterisk/modules.conf' :
     ensure  => present,
     content => template('asterisk/modules.conf.erb'),
