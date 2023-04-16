@@ -39,19 +39,31 @@
 #   = value` in the `[general]` section of the `extensions.conf` file.
 # @param extensions_globals
 #   Hash of global variables for the dialplan, placed in the `[globals]`
-#   section of the `extensions.conf` file. The variables defined here can be
-#   accessed throughout the dialplan with the `GLOBAL()` function. Global
-#   variables can make dialplans reusable by different servers with different
-#   use cases. They also make dialplans easier to maintain by concentrating
-#   certain information in one location (e.g. to avoid having to modify the
-#   same value through many contexts and macros). Global variables can also be
-#   used for hiding passwords from Asterisk logs, for example for `register`
-#   lines or calls to `Dial()` where information about the provider is combined
-#   with username and password: when using a global variable, the variable name
-#   will be shown in logs, not the actual password. Variables are set in the
-#   file as `key = value`. If you pass in a Sensitive type as the value, it
-#   will be unwrapped for outputting in the configuration file: this can avoid
-#   showing certain sensitive information (as passwords) in puppet logs.
+#   section of the `extensions.conf` file.
+#
+#   WARNING: If you load any other extension configuration engine, such as
+#   pbx_ael.so, your global variables may be overridden by that file. Please
+#   take care to use only one location to set global variables, and you will
+#   likely save yourself a ton of grief.
+#
+#   The variables defined here can be accessed throughout the dialplan with the
+#   `GLOBAL()` function. Global variables can make dialplans reusable by
+#   different servers with different use cases.
+#
+#   They also make dialplans easier to maintain by concentrating certain
+#   information in one location (e.g. to avoid having to modify the same value
+#   through many contexts and macros).
+#
+#   Global variables can also be used for hiding passwords from Asterisk logs,
+#   for example for `register` lines or calls to `Dial()` where information
+#   about the provider is combined with username and password: when using a
+#   global variable, the variable name will be shown in logs, not the actual
+#   password.
+#
+#   Variables are set in the file as `key=value`. If you pass in a Sensitive
+#   type as the value, it will be unwrapped for outputting in the configuration
+#   file: this can avoid showing certain sensitive information (as passwords)
+#   in puppet logs.
 # @param agents_global
 #   Global configurations for agents. Options are set in the file as `key =
 #   value` in the `[agents]` section of the `agents.conf` file.
@@ -62,8 +74,8 @@
 #   Global feature maps. Options are set in the file as `key => value` in the
 #   `[featuremap]` section of `features.conf`.
 # @param features_applicationmap
-#   Global application feature maps. Options are set in the file as `key =>
-#   value` in the `[applicationmap]` section of `features.conf`.
+#   Global application feature maps. Options are set in the file as
+#   `key => value` in the `[applicationmap]` section of `features.conf`.
 # @param logger_general
 #   Global configurations for asterisk logging. Options are set in the file as
 #   `key=value` in the `[general]` section of `logger.conf`.
