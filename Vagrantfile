@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure('2') do |config|
-  config.vm.box = 'debian-10-amd64'
+  config.vm.box = 'debian/bullseye64'
 
   config.vm.define :test do |test|
     # This shell script will make sure that you have your module copied in
