@@ -89,6 +89,8 @@ asterisk::modules_noload:
   - 'chan_modem_i4l.so'
   - 'chan_capi.so'
   - 'chan_alsa.so'
+  - 'chan_console.so'
+  - 'chan_oss.so'
   - 'cdr_sqlite.so'
   - 'app_directory_odbc.so'
   - 'res_config_odbc.so'
