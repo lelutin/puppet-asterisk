@@ -1,0 +1,53 @@
+;             THIS FILE IS MANAGED BY PUPPET
+;          all local modifications will be lost
+;
+; To change values found in this file, see the parameters related to
+; <%= $config_name %> on the asterisk module's main class.
+;
+<%
+$sections.each |String $sect_name, Hash $section_options| {
+-%>
+[<%= $sect_name %>]
+<%
+  # Weird case where options in the same section use two different assignment
+  # delimiters. The weird case comes in first in the config file.
+  if $section_options['oddball_options'] !~ Undef {
+    $odb_delimiter = $section_options['oddball_delimiter']
+    $section_options['oddball_options'].each |String $odb_opt_name, String $odb_value| {
+-%>
+<%= $odb_opt_name %><%= $odb_delimiter %><%= $odb_value %>
+<%
+    }
+    # Add a blank line to the config file to better see the difference in the
+    # two forms of assignments.
+-%>
+
+<%
+  }
+  $delimiter = $section_options['delimiter']
+  $section_options['options'].each |String $opt_name, Any $value| {
+    if $value =~ Array {
+      $value.each |String $v| {
+-%>
+<%= $opt_name -%><%= $delimiter %><%= $v %>
+<%
+      }
+    }
+    else {
+-%>
+<%= $opt_name -%><%= $delimiter %><%= $value %>
+<%
+    }
+  }
+-%>
+
+<%
+}
+-%>
+<%
+$include_dirs.each |String $dir_path| {
+-%>
+#include "<%= $dir_path %>/*.conf"
+<%
+}
+-%>
