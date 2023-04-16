@@ -92,7 +92,7 @@ class asterisk::config {
     agents => {
       general => {
         delimiter => '=',
-        options   => { multiplelogin => $asterisk::agents_multiplelogin },
+        options   => {},
       },
       agents => {
         delimiter => '=',

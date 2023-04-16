@@ -55,7 +55,6 @@ asterisk::extensions_general:
   writeprotect: 'no'
   clearglobalvars: 'no'
 asterisk::extensions_globals: {}
-asterisk::agents_multiplelogin: true
 asterisk::agents_global: {}
 # defines the default parkinglot
 asterisk::features_general:

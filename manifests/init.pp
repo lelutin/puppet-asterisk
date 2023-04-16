@@ -52,10 +52,6 @@
 #   file as `key = value`. If you pass in a Sensitive type as the value, it
 #   will be unwrapped for outputting in the configuration file: this can avoid
 #   showing certain sensitive information (as passwords) in puppet logs.
-# @param agents_multiplelogin
-#   Set this to false to disable possibility for agents to be logged in
-#   multiple times. This option is set in the `[general]` section of the
-#   `agents.conf` file.
 # @param agents_global
 #   Global configurations for agents. Options are set in the file as `key =
 #   value` in the `[agents]` section of the `agents.conf` file.
@@ -118,7 +114,6 @@ class asterisk (
   Hash                           $voicemail_general,
   Hash                           $extensions_general,
   Asterisk::ExtGlobalVars        $extensions_globals,
-  Boolean                        $agents_multiplelogin,
   Hash                           $agents_global,
   Asterisk::FeaturesGeneral      $features_general,
   Asterisk::Featuremap           $features_featuremap,

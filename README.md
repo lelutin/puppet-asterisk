@@ -76,7 +76,6 @@ how general configuration is set.
   * `$extensions_general` is a hash of global options for extensions. See
     section Extensions Options.
 
-  * `$agents_multiplelogin` and `$agents_global` are detailed in the Agents
     Options section.
 
   * `$features_general` and `$featuremap` are detailed in the Features Options
@@ -425,10 +424,6 @@ on how to setup dynamic agents, see:
  * [https://www.voip-info.org/asterisk-cmd-removequeuemember](https://www.voip-info.org/asterisk-cmd-removequeuemember)
 
 ### Agents Options ###
-
-Some global options can be set for agents. One option in the `[general]`
-context, `multiplelogin`, can be set via the `agents_multiplelogin` parameter
-to the `asterisk class` with a boolean value.
 
 Global options in the `[agents]` context can be set by passing a hash to the
 `agents_global` parameter to the `asterisk` class. By default this parameter
