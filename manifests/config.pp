@@ -151,8 +151,9 @@ class asterisk::config {
           autoload => bool2str($asterisk::modules_autoload, 'yes', 'no'),
         },
         options           => {
-          load     => $asterisk::modules_load,
-          noload   => $asterisk::modules_noload,
+          preload => $asterisk::modules_preload,
+          load    => $asterisk::modules_load,
+          noload  => $asterisk::modules_noload,
         },
       },
       global => {

@@ -97,6 +97,10 @@
 #   Set this to false to avoid having asterisk load modules automatically on an
 #   as-needed basis. This can be used to configure modules in a more
 #   restrictive manner.
+# @param modules_preload
+#   List of modules that asterisk should load before asterisk core has been
+#   initialized. This can be useful if you wish to map all module configuration
+#   files into Realtime storage.
 # @param modules_noload
 #   List of modules that asterisk should not load. This can be useful if
 #   `modules_autoload` is set to `true`.
@@ -134,6 +138,7 @@ class asterisk (
   Hash[String,Asterisk::Logfile] $log_files,
   Hash                           $queues_general,
   Boolean                        $modules_autoload,
+  Array[String]                  $modules_preload,
   Array[String]                  $modules_noload,
   Array[String]                  $modules_load,
   Hash                           $modules_global,

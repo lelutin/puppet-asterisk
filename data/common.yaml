@@ -79,6 +79,7 @@ asterisk::queues_general:
   persistentmembers: 'yes'
   monitor-type: 'MixMonitor'
 asterisk::modules_autoload: true
+asterisk::modules_preload: []
 asterisk::modules_noload:
   - 'pbx_gtkconsole.so'
   - 'pbx_kdeconsole.so'
