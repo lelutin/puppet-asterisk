@@ -3,12 +3,15 @@
 # @example simple install
 #   class { 'asterisk': }
 #
-# @see http://www.asteriskdocs.org/en/3rd_Edition/asterisk-book-html-chunk/ACD_id288901.html#options_general_queues_id001 General queues options
+# @see https://wiki.asterisk.org/wiki/display/AST/Asterisk+Queues
 #
 # @todo make it possible to manage dialplan with the two other methods (e.g.
 #   AEL and Lua)
 # @todo overhaul README file before release. lots of things have changed
 # @todo write spec tests for all the code
+# @todo manage pjsip.conf
+# @todo manage cdr*.conf
+# @todo manage musiconhold.conf
 #
 # @param manage_service
 #   Set this to false to avoid managing the asterisk service. By default puppet
