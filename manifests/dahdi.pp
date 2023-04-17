@@ -4,7 +4,15 @@
 # Asterisk PBX to a card, Digium and some other models, that bridges calls with
 # the POTS.
 #
-# @todo This class is possibly incomplete and it needs to be finished and tested.
+# @see https://wiki.asterisk.org/wiki/display/DAHDI/DAHDI
+#
+# @see https://wiki.asterisk.org/wiki/display/AST/chan_dahdi+Channel+Variables
+#
+# @todo This class could be merged into config.pp and used conditionally to a
+#   boolean parameter that enables/disables (off by default) dahdi.
+#
+# @todo The module would also need to template out chan_dahdi.conf -- changes
+#   to that file need to trigger a full restart of asterisk, not just a reload.
 #
 class asterisk::dahdi {
 
