@@ -5,7 +5,6 @@
 # @api private
 #
 class asterisk::service {
-
   assert_private()
 
   if $asterisk::manage_service {
@@ -13,5 +12,4 @@ class asterisk::service {
       ensure  => running,
     }
   }
-
 }

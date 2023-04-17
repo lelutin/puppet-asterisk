@@ -5,7 +5,6 @@
 # @api private
 #
 class asterisk::install {
-
   assert_private()
 
   if $asterisk::manage_package {
@@ -13,5 +12,4 @@ class asterisk::install {
       ensure => installed,
     }
   }
-
 }

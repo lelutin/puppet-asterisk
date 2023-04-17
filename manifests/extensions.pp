@@ -20,12 +20,11 @@
 #   `$source`.
 #
 define asterisk::extensions (
-  $ensure  = present,
-  $source  = undef,
+  Stdlib::Ensure::File::File   $ensure  = file,
+  Optional[Stdlib::Filesource] $source  = undef,
   # Only enforcing type for this param since we're using its value
-  Optional[String] $content = undef
+  Optional[String]             $content = undef,
 ) {
-
   if $content !~ Undef {
     $real_content = "[${name}]\n${content}"
   }
@@ -40,5 +39,4 @@ define asterisk::extensions (
     content  => $real_content,
     filename => "${name}.conf",
   }
-
 }

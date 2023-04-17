@@ -20,7 +20,7 @@
 #
 define asterisk::dotd::file (
   String                       $dotd_dir,
-  Enum['present', 'absent']    $ensure   = present,
+  Stdlib::Ensure::File::File   $ensure   = file,
   Optional[String]             $content  = undef,
   Optional[Stdlib::Filesource] $source   = undef,
   String                       $filename = $name,

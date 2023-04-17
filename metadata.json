@@ -8,7 +8,7 @@
   "project_page": "https://github.com/lelutin/puppet-asterisk",
   "issues_url": "https://github.com/lelutin/puppet-asterisk/issues",
   "dependencies": [
-    {"name":"puppetlabs/stdlib","version_requirement":">= 4.25.0"}
+    {"name":"puppetlabs/stdlib","version_requirement":">= 8.5.0"}
   ],
   "requirements": [
     {

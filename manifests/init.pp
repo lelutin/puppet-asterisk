@@ -158,26 +158,26 @@ class asterisk (
   Boolean                        $purge_confdir,
   # Asterisk modules and applications
   Hash                           $iax_general,
-  Hash                           $iax_contexts,
-  Hash                           $iax_registries,
+  Stdlib::CreateResources        $iax_contexts,
+  Stdlib::CreateResources        $iax_registries,
   Hash                           $sip_general,
-  Hash                           $sip_peers,
-  Hash                           $sip_registries,
+  Stdlib::CreateResources        $sip_peers,
+  Stdlib::CreateResources        $sip_registries,
   Hash                           $voicemail_general,
-  Hash                           $voicemails,
+  Stdlib::CreateResources        $voicemails,
   Hash                           $extensions_general,
   Asterisk::ExtGlobalVars        $extensions_globals,
-  Hash                           $extension_contexts,
+  Stdlib::CreateResources        $extension_contexts,
   Hash                           $agents_global,
-  Hash                           $agents,
+  Stdlib::CreateResources        $agents,
   Asterisk::FeaturesGeneral      $features_general,
   Asterisk::Featuremap           $features_featuremap,
   Hash[String,String]            $features_applicationmap,
-  Hash                           $features,
+  Stdlib::CreateResources        $features,
   Hash[String,String]            $logger_general,
   Hash[String,Asterisk::Logfile] $log_files,
   Hash                           $queues_general,
-  Hash                           $queues,
+  Stdlib::CreateResources        $queues,
   Boolean                        $modules_autoload,
   Array[String]                  $modules_preload,
   Array[String]                  $modules_noload,
@@ -186,9 +186,8 @@ class asterisk (
   Boolean                        $manager_enable,
   Integer                        $manager_port,
   String                         $manager_bindaddr,
-  Hash                           $manager_accounts,
+  Stdlib::CreateResources        $manager_accounts,
 ) {
-
   # We'll only ensure the type of some of the *_general on which templates
   # iterate. There's no complex data type that can let us be this flexible
   # (e.g. everything should be a string, but those handful of keys.
@@ -219,5 +218,4 @@ class asterisk (
   Class['asterisk::install']
   -> Class['asterisk::config']
   ~> Class['asterisk::service']
-
 }

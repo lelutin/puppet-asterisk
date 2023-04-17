@@ -19,7 +19,7 @@ define asterisk::language {
     'it-menardi-gsm',
     'it-menardi-wav',
     'se',
-    'es'
+    'es',
   ]
   $allowed_core_languages = [
     'core-sounds-en',

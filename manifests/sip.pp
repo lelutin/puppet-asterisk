@@ -170,7 +170,8 @@
 #   If Remote-Party-ID SIP header should be trusted. Defaults to `no`.
 #
 define asterisk::sip (
-  $ensure                                                       = present,
+  Stdlib::Ensure::File::File                 $ensure            = file,
+  # lint:ignore:optional_default
   Optional[String[1]]                        $template_name     = undef,
   Optional[String[1]]                        $account_type      = 'friend',
   Optional[String[1]]                        $username          = undef,
@@ -207,8 +208,8 @@ define asterisk::sip (
   Array[Asterisk::Access]                    $access            = [],
   Optional[Enum['yes', 'no']]                $trustrpid         = undef,
   Optional[Enum['yes', 'no', 'pai', 'rpid']] $sendrpid          = undef
+  # lint:endignore
 ) {
-
   if $directrtpsetup =~ Boolean {
     $real_directrtpsetup = bool2str($directrtpsetup, 'yes', 'no')
   }

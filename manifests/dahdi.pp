@@ -15,15 +15,14 @@
 #   to that file need to trigger a full restart of asterisk, not just a reload.
 #
 class asterisk::dahdi {
-
   package { [
-    'asterisk-dahdi',
-    'dahdi',
-    'dahdi-dkms', # dahdi autokompile ubuntu
-    'dahdi-linux', # dahdi linux kernel module
-    'dahdi-source', # dahdi sources
-  ]:
-    ensure => installed
+      'asterisk-dahdi',
+      'dahdi',
+      'dahdi-dkms', # dahdi autokompile ubuntu
+      'dahdi-linux', # dahdi linux kernel module
+      'dahdi-source', # dahdi sources
+    ]:
+      ensure => installed,
   }
 
 #  User['asterisk'] {

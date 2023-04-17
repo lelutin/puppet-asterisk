@@ -27,19 +27,17 @@
 #   'tz' option. Options are set in the file as `key = value`.
 #
 define asterisk::voicemail (
-  String[1]            $context,
-  Sensitive[String[1]] $password,
-  $ensure                           = present,
-  Optional[String[1]]  $user_name   = undef,
-  Optional[String[1]]  $email       = undef,
-  Optional[String[1]]  $pager_email = undef,
-  Hash[String,String]  $options     = {}
+  String[1]                  $context,
+  Sensitive[String[1]]       $password,
+  Stdlib::Ensure::File::File $ensure      = file,
+  Optional[String[1]]        $user_name   = undef,
+  Optional[String[1]]        $email       = undef,
+  Optional[String[1]]        $pager_email = undef,
+  Hash[String,String]        $options     = {}
 ) {
-
-  asterisk::dotd::file{ "${context}-${name}.conf":
+  asterisk::dotd::file { "${context}-${name}.conf":
     ensure   => $ensure,
     content  => template('asterisk/snippet/voicemail.erb'),
     dotd_dir => 'voicemail.d',
   }
-
 }

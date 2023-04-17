@@ -34,11 +34,11 @@ class asterisk::config {
   $directories = $cf_with_directory + ['iax.registry', 'sip.registry']
 
   $directories.each |String $dir| {
-    file { "${asterisk::confdir}/${dir}.d" :
-      ensure  => directory,
-      owner   => 'asterisk',
-      group   => 'asterisk',
-      mode    => '0750',
+    file { "${asterisk::confdir}/${dir}.d":
+      ensure => directory,
+      owner  => 'asterisk',
+      group  => 'asterisk',
+      mode   => '0750',
     }
 
     # lint:ignore:140chars
@@ -48,7 +48,7 @@ class asterisk::config {
     # [Nov 19 16:09:48] ERROR[3364] config.c: Future versions of Asterisk will treat a #include of a file that does not exist as an error, and will fail to load that configuration file.  Please ensure that the file '/etc/asterisk/iax.conf.d/*.conf' exists, even if it is empty.
     # lint:endignore
     file { "${asterisk::confdir}/${dir}.d/null.conf":
-      ensure  => present,
+      ensure  => file,
       owner   => 'asterisk',
       group   => 'asterisk',
       mode    => '0640',
@@ -64,13 +64,13 @@ class asterisk::config {
       $formatter = "[${options['formatter']}]"
     }
     else {
-      $formatter = ""
+      $formatter = ''
     }
 
     $return_value = {
-      $section => "${formatter}${options['levels'].join(',')}"
+      $section => "${formatter}${options['levels'].join(',')}",
     }
-  }.reduce( {} ) |$result, $value| { $result + $value }
+  }.reduce({}) |$result, $value| { $result + $value }
 
   $configs_with_registry = ['iax', 'sip']
   $config_sections = {
@@ -200,7 +200,7 @@ class asterisk::config {
       sections     => $config_sections[$filename],
     }
     file { "${asterisk::confdir}/${filename}.conf":
-      ensure  => present,
+      ensure  => file,
       owner   => 'asterisk',
       group   => 'asterisk',
       mode    => '0640',

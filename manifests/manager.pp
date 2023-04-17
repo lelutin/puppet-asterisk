@@ -43,7 +43,7 @@
 #
 define asterisk::manager (
   Sensitive[String[1]]          $secret,
-  $ensure                                        = present,
+  Stdlib::Ensure::File::File    $ensure          = file,
   String[1]                     $manager_name    = $name,
   Array[String[1]]              $deny            = ['0.0.0.0/0.0.0.0'],
   Array[String[1]]              $permit          = ['127.0.0.1/255.255.255.255'],
@@ -53,7 +53,6 @@ define asterisk::manager (
   Boolean                       $displayconnects = true,
   Optional[String]              $eventfilter     = undef,
 ) {
-
   $wo_rights = ['config','command','originate']
   $wo_rights.each |String $right| {
     if $right in $read {
@@ -76,5 +75,4 @@ define asterisk::manager (
     content  => template('asterisk/snippet/manager.erb'),
     filename => "${name}.conf",
   }
-
 }

@@ -13,17 +13,15 @@
 #   Set to `absent` in order to remove the registry.
 #
 define asterisk::registry::iax (
-  Stdlib::Host         $server,
-  String[1]            $user,
-  Sensitive[String[1]] $password,
-  $ensure = present,
+  Stdlib::Host               $server,
+  String[1]                  $user,
+  Sensitive[String[1]]       $password,
+  Stdlib::Ensure::File::File $ensure = file,
 ) {
-
   asterisk::dotd::file { "registry__iax_${name}.conf":
     ensure   => $ensure,
     dotd_dir => 'iax.registry.d',
     content  => template('asterisk/registry/iax.erb'),
     filename => "${name}.conf",
   }
-
 }

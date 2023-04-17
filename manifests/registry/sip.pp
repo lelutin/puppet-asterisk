@@ -25,13 +25,12 @@
 define asterisk::registry::sip (
   Stdlib::Host                   $server,
   String[1]                      $user,
-  $ensure                                   = present,
+  Stdlib::Ensure::File::File     $ensure    = file,
   Optional[Sensitive[String[1]]] $password  = undef,
   Optional[String[1]]            $authuser  = undef,
   Optional[Integer]              $port      = undef,
   Optional[String[1]]            $extension = undef
 ) {
-
   if $password =~ Undef and $authuser !~ Undef {
     fail('authuser was specified but no value was given for password. You need both to authenticate.')
   }
@@ -42,5 +41,4 @@ define asterisk::registry::sip (
     content  => template('asterisk/registry/sip.erb'),
     filename => "${name}.conf",
   }
-
 }

@@ -27,15 +27,13 @@
 #   Set this to `absent` to remove the feature.
 #
 define asterisk::feature (
-  Hash $options,
-  $ensure = present
+  Hash                       $options,
+  Stdlib::Ensure::File::File $ensure = file,
 ) {
-
   asterisk::dotd::file { "featuremap_group_${name}.conf":
     ensure   => $ensure,
     dotd_dir => 'features.d',
     content  => template('asterisk/snippet/feature.erb'),
     filename => "${name}.conf",
   }
-
 }
