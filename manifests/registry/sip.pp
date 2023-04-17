@@ -35,10 +35,18 @@ define asterisk::registry::sip (
     fail('authuser was specified but no value was given for password. You need both to authenticate.')
   }
 
+  $sip_variables = {
+    user      => $user,
+    password  => $password,
+    authuser  => $authuser,
+    server    => $server,
+    port      => $port,
+    extension => $extension,
+  }
   asterisk::dotd::file { "registry__sip_${name}.conf":
     ensure   => $ensure,
     dotd_dir => 'sip.registry.d',
-    content  => template('asterisk/registry/sip.erb'),
+    content  => epp('asterisk/registry/sip.epp', $sip_variables),
     filename => "${name}.conf",
   }
 }

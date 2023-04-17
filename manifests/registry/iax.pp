@@ -18,10 +18,15 @@ define asterisk::registry::iax (
   Sensitive[String[1]]       $password,
   Stdlib::Ensure::File::File $ensure = file,
 ) {
+  $iax_variables = {
+    user     => $user,
+    password => $password,
+    server   => $server,
+  }
   asterisk::dotd::file { "registry__iax_${name}.conf":
     ensure   => $ensure,
     dotd_dir => 'iax.registry.d',
-    content  => template('asterisk/registry/iax.erb'),
+    content  => epp('asterisk/registry/iax.epp', $iax_variables),
     filename => "${name}.conf",
   }
 }

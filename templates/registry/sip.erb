@@ -1,4 +1,0 @@
-; THIS FILE IS MANAGED BY PUPPET
-; all local modifications will be lost
-register => <%= @user %><% if @password -%>:<%= @password.unwrap %><% if @authuser -%>:<%= @authuser %><% end; end -%>@<%= @server %><% if @port -%>:<%= @port %><% end; if @extension -%>/<%= @extension %><% end -%>
-

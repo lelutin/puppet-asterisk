@@ -1,0 +1,4 @@
+; THIS FILE IS MANAGED BY PUPPET
+; all local modifications will be lost
+register => <%= $user %><% if $password { -%>:<%= $password.unwrap %><% if $authuser { -%>:<%= $authuser %><% } } -%>@<%= $server %><% if $port { -%>:<%= $port %><% } if $extension { -%>/<%= $extension %><% } -%>
+
