@@ -300,16 +300,25 @@ Global configurations for asterisk logging. Options are set in the file as
 
 Data type: `Hash[String,Asterisk::Logfile]`
 
-A hash defining log files. Keys set log filenames and values should be
-hashes containing at least one key `levels` that has an associated list of
-strings for levels that'll be output in that log file and an optional key
-`formatter` which has a string value of either `default` or `json` and
-defines which format will be output to the log. If the `formatter` key is
-omitted, the default format is used. Log files can be the special names
-`console` or `syslog` to determine what output is sent to the asterisk CLI
-console and syslog, respectively, or it can be a file name. File names can
+A hash defining log files.
+
+Top-level keys set log file names.
+
+Log files can use the special names `console` or `syslog` to determine
+what output is sent to the asterisk CLI console and syslog, respectively.
+
+All other top-level keys represent a file name. File names can
 be either relative to the `asterisk.conf` setting `astlogdir` or an
 absolute path.
+
+Values associated to the top-level keys should be a hash that
+contains at least one key, `levels`. The value for `levels` should be an
+array listing logging levels for this log file.
+
+As well as `levels`, there can be an optional key, `formatter`. Its value
+should be a string containing either `default` or `json` and it defines
+which format will be output to the log. If the `formatter` key is
+omitted, asterisk's default log format is used.
 
 ##### <a name="-asterisk--queues_general"></a>`queues_general`
 
@@ -1617,7 +1626,7 @@ as the common Cisco ATA 186. Setting this to `nonat` will allow reinvite
 when local, deny reinvite when NAT. Finally setting this to `update` will
 use `UPDATE` instead of `INVITE`.
 
-Default value: `'no'`
+Default value: `undef`
 
 ##### <a name="-asterisk--sip--directmedia"></a>`directmedia`
 
