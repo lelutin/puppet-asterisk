@@ -7,6 +7,7 @@ asterisk::package_name:
   - 'asterisk-core-sounds-en-gsm'
 asterisk::service_name: 'asterisk'
 asterisk::confdir: '/etc/asterisk'
+asterisk::purge_confdir: false
 asterisk::iax_general:
   allow: []
   disallow:

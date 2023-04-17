@@ -5,8 +5,21 @@
 # @api private
 #
 class asterisk::config {
-
   assert_private()
+
+  file { $asterisk::confdir:
+    ensure => directory,
+    owner  => 'asterisk',
+    group  => 'asterisk',
+    mode   => '0755',
+  }
+
+  if $asterisk::purge_confdir {
+    File[$asterisk::confdir] {
+      purge   => true,
+      recurse => true,
+    }
+  }
 
   $cf_with_directory = [
     'iax',

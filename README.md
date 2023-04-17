@@ -65,6 +65,10 @@ how general configuration is set.
   * `$confdir` can be used to override the path to the Asterisk configuration.
     Default value is "/etc/asterisk".
 
+  * `$purge_confdir` is a boolean that enables or disables (default) removal of
+    all files inside `confdir` that are not managed by puppet. This makes sure
+    that the state of your service is well known.
+
   * `$iax_general` is a hash of global options for IAX2. See section IAX2
     Options.
 

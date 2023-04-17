@@ -5,7 +5,6 @@
 #
 # @see http://www.asteriskdocs.org/en/3rd_Edition/asterisk-book-html-chunk/ACD_id288901.html#options_general_queues_id001 General queues options
 #
-# @todo Purge unmanaged configs by default. Add parameter to disable purging.
 # @todo Add hash-based params that can be used to create a set of resources
 #   for each type with create_resource. This can be useful for pushing data out
 #   to hiera.
@@ -24,6 +23,9 @@
 #   Name of the asterisk service.
 # @param confdir
 #   Absolute path to the asterisk configuration directory.
+# @param purge_confdir
+#   Set this to true to enable autoremoval of configuration files that are
+#   not managed by puppet inside of asterisk's `confdir`.
 #
 # @param iax_general
 #   Global configurations for IAX2. Options are set in the file as `key =
@@ -125,6 +127,7 @@ class asterisk (
   Variant[String, Array[String]] $package_name,
   String                         $service_name,
   Stdlib::Absolutepath           $confdir,
+  Boolean                        $purge_confdir,
   Hash                           $iax_general,
   Hash                           $sip_general,
   Hash                           $voicemail_general,
