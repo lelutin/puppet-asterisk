@@ -1,0 +1,6 @@
+; THIS FILE IS MANAGED BY PUPPET
+; all local modifications will be lost
+[<%= $context %>]
+<% $options.map |String $name, String $value| { -%>
+<%= $name -%> => <%= $value %>
+<% } -%>

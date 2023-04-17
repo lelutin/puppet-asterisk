@@ -1,0 +1,8 @@
+<% if ! empty($groups) { -%>
+group=<%= $groups.join(",") %>
+<% } -%>
+agent => <%= $ext %>,<%= $password.unwrap %>,<%= $agent_name %>
+<% if ! empty($groups) { -%>
+; Reset group to avoid having an impact on other config files.
+group=
+<% } -%>

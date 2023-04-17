@@ -1,0 +1,114 @@
+; THIS FILE IS MANAGED BY PUPPET
+; all local modifications will be lost
+[<%= $peer_name %>]<% if $template_name { %>(<%= $template_name %>)<% } %>
+<% if $account_type { -%>
+type=<%= $account_type %>
+<% } -%>
+<% if $username { -%>
+username=<%= $username %>
+<% } -%>
+<% if $defaultuser { -%>
+defaultuser=<%= $defaultuser %>
+<% } -%>
+<% if $secret { -%>
+secret=<%= $secret.unwrap %>
+<% } -%>
+<% if $md5secret { -%>
+md5secret=<%= $md5secret %>
+<% } -%>
+<% if $remotesecret { -%>
+secret=<%= $remotesecret.unwrap %>
+<% } -%>
+<% if $context { -%>
+context=<%= $context %>
+<% } -%>
+<% if $canreinvite { -%>
+canreinvite=<%= $canreinvite %>
+<% } -%>
+<% if $directmedia { -%>
+directmedia=<%= $directmedia %>
+<% } -%>
+<% if $real_directrtpsetup { -%>
+directrtpsetup=<%= $real_directrtpsetup %>
+<% } -%>
+<% $directmediadeny.each |$dmdeny| { -%>
+directmediadeny=<%= $dmdeny %>
+<% } -%>
+<% $directmediapermit.each |$dmpermit| { -%>
+directmediapermit=<%= dmpermit %>
+<% } -%>
+<% if $host { -%>
+host=<%= $host %>
+<% } -%>
+<% if $insecure { -%>
+insecure=<%= $insecure %>
+<% } -%>
+<% if $language { -%>
+language=<%= $language %>
+<% } -%>
+<% if $nat { -%>
+nat=<%= $nat %>
+<% } -%>
+<% if $qualify { -%>
+qualify=<%= $qualify %>
+<% } -%>
+<% if $vmexten { -%>
+vmexten=<%= $vmexten %>
+<% } -%>
+<% if $fromdomain { -%>
+fromdomain=<%= $fromdomain %>
+<% } -%>
+<% if $fromuser { -%>
+fromuser=<%= $fromuser %>
+<% } -%>
+<% if $account_type == 'peer' and $outboundproxy { -%>
+outboundproxy=<%= $outboundproxy %>
+<% } -%>
+<% if $callerid { -%>
+callerid=<%= $callerid %>
+<% } -%>
+<% if $call_limit { -%>
+call-limit=<%= $call_limit %>
+<% } -%>
+<% if $callgroup { -%>
+callgroup=<%= $callgroup %>
+<% } -%>
+<% if $t38pt_udptl { -%>
+t38pt_udptl=<%= $t38pt_udptl %>
+<% } -%>
+<% if $mailbox { -%>
+mailbox=<%= $mailbox %>
+<% } -%>
+<% if $pickupgroup { -%>
+pickupgroup=<%= $pickupgroup %>
+<% } -%>
+<% $disallow.each |$dproto| { -%>
+disallow=<%= $dproto %>
+<% } -%>
+<% $allow.each |$aproto| { -%>
+allow=<%= $aproto %>
+<% } -%>
+<% if $dtmfmode { -%>
+dtmfmode=<%= $dtmfmode %>
+<% } -%>
+<% if ! empty($transports) { -%>
+transport=<%= $transports.join(',') %>
+<% } -%>
+<% if $encryption { -%>
+encryption=<%= $encryption %>
+<% } -%>
+<% if $trustrpid { -%>
+trustrpid=<%= $trustrpid %>
+<% } -%>
+<% if $sendrpid { -%>
+sendrpid=<%= $sendrpid %>
+<% } -%>
+<%
+$access.each |$acc| {
+  $acc.each |$type, $spec| {
+-%>
+<%= $type %>=<%= $spec %>
+<%
+  }
+}
+-%>

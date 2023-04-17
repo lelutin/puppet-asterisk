@@ -1,8 +1,0 @@
-<% if ! @groups.empty? -%>
-group=<%= @groups.join(",") %>
-<% end -%>
-agent => <%= @ext %>,<%= @password.unwrap %>,<%= @agent_name %>
-<% if ! @groups.empty? -%>
-; Reset group to avoid having an impact on other config files.
-group=
-<% end -%>

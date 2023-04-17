@@ -1,0 +1,17 @@
+; THIS FILE IS MANAGED BY PUPPET
+; all local modifications will be lost
+[<%= $manager_name %>]
+secret = <%= $secret.unwrap %>
+<% $deny.each |$deny_rule| { -%>
+deny = <%= $deny_rule %>
+<% } -%>
+<% $permit.each |$permit_rule| { -%>
+permit = <%= $permit_rule %>
+<% } -%>
+read = <%= $read.join(",") %>
+write = <%= $write.join(",") %>
+writetimeout = <%= $writetimeout %>
+displayconnects = <%= $displayconnects %>
+<% if $eventfilter { -%>
+eventfilter = <%= $eventfilter %>
+<% } -%>

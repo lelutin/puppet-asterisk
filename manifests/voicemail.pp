@@ -35,9 +35,18 @@ define asterisk::voicemail (
   Optional[String[1]]        $pager_email = undef,
   Hash[String,String]        $options     = {}
 ) {
+  $voicemail_variables = {
+    context     => $context,
+    voicemail   => $name,
+    password    => $password,
+    user_name   => $user_name,
+    email       => $email,
+    pager_email => $pager_email,
+    options     => $options,
+  }
   asterisk::dotd::file { "${context}-${name}.conf":
     ensure   => $ensure,
-    content  => template('asterisk/snippet/voicemail.erb'),
+    content  => epp('asterisk/snippet/voicemail.epp', $voicemail_variables),
     dotd_dir => 'voicemail.d',
   }
 }

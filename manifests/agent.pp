@@ -29,10 +29,16 @@ define asterisk::agent (
   Stdlib::Ensure::File::File $ensure = file,
   Array[String[1]]           $groups = []
 ) {
+  $agent_variables = {
+    groups     => $groups,
+    ext        => $ext,
+    password   => $password,
+    agent_name => $agent_name,
+  }
   asterisk::dotd::file { "agent_${name}.conf":
     ensure   => $ensure,
     dotd_dir => 'agents.d',
-    content  => template('asterisk/snippet/agent.erb'),
+    content  => epp('asterisk/snippet/agent.epp', $agent_variables),
     filename => "${name}.conf",
   }
 }

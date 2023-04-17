@@ -1,0 +1,153 @@
+; THIS FILE IS MANAGED BY PUPPET
+; all local modifications will be lost
+[<%= $queue_name %>]
+<% if $strategy { -%>
+strategy=<%= $strategy %>
+<% } -%>
+<% $members.each |String $member| { -%>
+member=<%= $member %>
+<% } -%>
+<% if $memberdelay { -%>
+memberdelay=<%= $memberdelay %>
+<% } -%>
+<% if $penaltymemberslimit { -%>
+penaltymemberslimit=<%= $penaltymemberslimit %>
+<% } -%>
+<% if $membermacro { -%>
+membermacro=<%= $membermacro %>
+<% } -%>
+<% if $membergosub { -%>
+membergosub=<%= $membergosub %>
+<% } -%>
+<% if $context { -%>
+context=<%= $context %>
+<% } -%>
+<% if $defaultrule { -%>
+defaultrule=<%= $defaultrule %>
+<% } -%>
+<% if $maxlen { -%>
+maxlen=<%= $maxlen %>
+<% } -%>
+<% if $musicclass { -%>
+musicclass=<%= $musicclass %>
+<% } -%>
+<% if $servicelevel { -%>
+servicelevel=<%= $servicelevel %>
+<% } -%>
+<% if $weight { -%>
+weight=<%= $weight %>
+<% } -%>
+<% if ! empty($joinempty) { -%>
+joinempty=<%= $joinempty.join(',') %>
+<% } -%>
+<% if ! empty($leavewhenempty) { -%>
+leavewhenempty=<%= $leavewhenempty.join(',') %>
+<% } -%>
+<% if $eventwhencalled { -%>
+eventwhencalled=<%= $eventwhencalled %>
+<% } -%>
+<% if $eventmemberstatus { -%>
+eventmemberstatus=<%= $eventmemberstatus %>
+<% } -%>
+<% if $reportholdtime { -%>
+reportholdtime=<%= $reportholdtime %>
+<% } -%>
+<% if $ringinuse { -%>
+ringinuse=<%= $ringinuse %>
+<% } -%>
+<% if $monitor_type { -%>
+monitor-type=<%= $monitor_type %>
+<% } -%>
+<% if ! empty($monitor_format) { -%>
+monitor-format=<%= $monitor_format.join('|') %>
+<% } -%>
+<% if $announce { -%>
+announce=<%= $announce %>
+<% } -%>
+<% if $announce_frequency { -%>
+announce-frequency=<%= $announce_frequency %>
+<% } -%>
+<% if $min_announce_frequency { -%>
+min-announce-frequency=<%= $min_announce_frequency %>
+<% } -%>
+<% if $announce_holdtime { -%>
+announce-holdtime=<%= $announce_holdtime %>
+<% } -%>
+<% if $announce_position { -%>
+announce-position=<%= $announce_position %>
+<% } -%>
+<% if $announce_position_limit { -%>
+announce-position-limit=<%= $announce_position_limit %>
+<% } -%>
+<% if $announce_round_seconds { -%>
+announce-round-seconds=<%= $announce_round_seconds %>
+<% } -%>
+<% if ! empty($periodic_announce) { -%>
+periodic-announce=<%= $periodic_announce.join(',') %>
+<% } -%>
+<% if $periodic_announce_frequency { -%>
+periodic-announce-frequency=<%= $periodic_announce_frequency %>
+<% } -%>
+<% if $random_periodic_announce { -%>
+random-periodic-announce=<%= $random_periodic_announce %>
+<% } -%>
+<% if $relative_periodic_announce { -%>
+relative-periodic-announce=<%= $relative_periodic_announce %>
+<% } -%>
+<% if $queue_youarenext { -%>
+queue-youarenext=<%= $queue_youarenext %>
+<% } -%>
+<% if $queue_thereare { -%>
+queue-thereare=<%= $queue_thereare %>
+<% } -%>
+<% if $queue_callswaiting { -%>
+queue-callswaiting=<%= $queue_callswaiting %>
+<% } -%>
+<% if $queue_holdtime { -%>
+queue-holdtime=<%= $queue_holdtime %>
+<% } -%>
+<% if $queue_minute { -%>
+queue-minute=<%= $queue_minute %>
+<% } -%>
+<% if $queue_minutes { -%>
+queue-minutes=<%= $queue_minutes %>
+<% } -%>
+<% if $queue_seconds { -%>
+queue-seconds=<%= $queue_seconds %>
+<% } -%>
+<% if $queue_thankyou { -%>
+queue-thankyou=<%= $queue_thankyou %>
+<% } -%>
+<% if $queue_reporthold { -%>
+queue-reporthold=<%= $queue_reporthold %>
+<% } -%>
+<% if $wrapuptime { -%>
+wrapuptime=<%= $wrapuptime %>
+<% } -%>
+<% if $timeout { -%>
+timeout=<%= $timeout %>
+<% } -%>
+<% if $timeoutrestart { -%>
+timeoutrestart=<%= $timeoutrestart %>
+<% } -%>
+<% if $timeoutpriority { -%>
+timeoutpriority=<%= $timeoutpriority %>
+<% } -%>
+<% if $retry { -%>
+retry=<%= $retry %>
+<% } -%>
+<% if $autofill { -%>
+autofill=<%= $autofill %>
+<% } -%>
+<% if $autopause { -%>
+autopause=<%= $autopause %>
+<% } -%>
+<% if $setinterfacevar { -%>
+setinterfacevar=<%= $setinterfacevar %>
+<% } -%>
+<% if $setqueuevar { -%>
+setqueuevar=<%= $setqueuevar %>
+<% } -%>
+<% if $setqueueentryvar { -%>
+setqueueentryvar=<%= $setqueueentryvar %>
+<% } -%>

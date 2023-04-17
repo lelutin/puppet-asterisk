@@ -67,12 +67,21 @@ define asterisk::manager (
     }
   }
 
-  $real_displayconnects = bool2str($displayconnects, 'yes', 'no')
-
+  $manager_variables = {
+    manager_name    => $manager_name,
+    secret          => $secret,
+    deny            => $deny,
+    permit          => $permit,
+    read            => $read,
+    write           => $write,
+    writetimeout    => $writetimeout,
+    displayconnects => bool2str($displayconnects, 'yes', 'no'),
+    eventfilter     => $eventfilter,
+  }
   asterisk::dotd::file { "manager_${name}.conf":
     ensure   => $ensure,
     dotd_dir => 'manager.d',
-    content  => template('asterisk/snippet/manager.erb'),
+    content  => epp('asterisk/snippet/manager.epp', $manager_variables),
     filename => "${name}.conf",
   }
 }
