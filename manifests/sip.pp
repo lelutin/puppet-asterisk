@@ -180,7 +180,7 @@ define asterisk::sip (
   Optional[String[1]]                        $md5secret         = undef,
   Optional[Sensitive[String[1]]]             $remotesecret      = undef,
   Optional[String[1]]                        $context           = undef,
-  Optional[String[1]]                        $canreinvite       = 'no',
+  Optional[String[1]]                        $canreinvite       = undef,
   Optional[String[1]]                        $directmedia       = 'no',
   Optional[Boolean]                          $directrtpsetup    = true,
   Array[String[1]]                           $directmediadeny   = [],
@@ -210,6 +210,15 @@ define asterisk::sip (
   Optional[Enum['yes', 'no', 'pai', 'rpid']] $sendrpid          = undef
   # lint:endignore
 ) {
+  if $canreinvite !~ Undef {
+    deprecation(@(DEPRECATED_OPTION)
+      The option "canreinvite" was deprecated by asterisk and replaced with
+      directmedia. You should check asterisk documentation and use the new
+      option instead.
+      | DEPRECATED_OPTION
+      )
+  }
+
   if $directrtpsetup =~ Boolean {
     $real_directrtpsetup = bool2str($directrtpsetup, 'yes', 'no')
   }
