@@ -103,3 +103,14 @@ asterisk::modules_global: {}
 asterisk::manager_enable: true
 asterisk::manager_port: 5038
 asterisk::manager_bindaddr: '127.0.0.1'
+# resources created by create_resources. none by default
+asterisk::iax_contexts: {}
+asterisk::iax_registries: {}
+asterisk::sip_peers: {}
+asterisk::sip_registries: {}
+asterisk::voicemails: {}
+asterisk::extension_contexts: {}
+asterisk::agents: {}
+asterisk::features: {}
+asterisk::queues: {}
+asterisk::manager_accounts: {}

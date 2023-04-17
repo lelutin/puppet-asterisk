@@ -5,9 +5,6 @@
 #
 # @see http://www.asteriskdocs.org/en/3rd_Edition/asterisk-book-html-chunk/ACD_id288901.html#options_general_queues_id001 General queues options
 #
-# @todo Add hash-based params that can be used to create a set of resources
-#   for each type with create_resource. This can be useful for pushing data out
-#   to hiera.
 # @todo make it possible to manage dialplan with the two other methods (e.g.
 #   AEL and Lua)
 # @todo overhaul README file before release. lots of things have changed
@@ -30,12 +27,27 @@
 # @param iax_general
 #   Global configurations for IAX2. Options are set in the file as `key =
 #   value` in the `[general]` section of `iax.conf`.
+# @param iax_contexts
+#   Hash of resource_name => params used to instantiate `asterisk::iax`
+#   defined types.
+# @param iax_registries
+#   Hash of resource_name => params used to instantiate
+#   `asterisk::registry::iax` defined types.
 # @param sip_general
 #   Global configurations for SIP. Options are set in the file as `key = value`
 #   in the `[general]` section of the `sip.conf` file.
+# @param sip_peers
+#   Hash of resource_name => params used to instantiate `asterisk::sip`
+#   defined types.
+# @param sip_registries
+#   Hash of resource_name => params used to instantiate
+#   `asterisk::registry::sip` defined types.
 # @param voicemail_general
 #   Global configurations for voicemail. Options are set in the file as `key =
 #   value` in the `[general]` section of the `voicemail.conf` file.
+# @param voicemails
+#   Hash of resource_name => params used to instantiate `asterisk::voicemail`
+#   defined types.
 # @param extensions_general
 #   Global configurations for the dialplan. Options are set in the file as `key
 #   = value` in the `[general]` section of the `extensions.conf` file.
@@ -66,9 +78,15 @@
 #   type as the value, it will be unwrapped for outputting in the configuration
 #   file: this can avoid showing certain sensitive information (as passwords)
 #   in puppet logs.
+# @param extension_contexts
+#   Hash of resource_name => params used to instantiate `asterisk::extension`
+#   defined types.
 # @param agents_global
 #   Global configurations for agents. Options are set in the file as `key =
 #   value` in the `[agents]` section of the `agents.conf` file.
+# @param agents
+#   Hash of resource_name => params used to instantiate `asterisk::agent`
+#   defined types.
 # @param features_general
 #   Global call features. Options are set in the file as `key = value` in the
 #   `[general]` section of `features.conf`.
@@ -78,6 +96,9 @@
 # @param features_applicationmap
 #   Global application feature maps. Options are set in the file as
 #   `key => value` in the `[applicationmap]` section of `features.conf`.
+# @param features
+#   Hash of resource_name => params used to instantiate `asterisk::feature`
+#   defined types.
 # @param logger_general
 #   Global configurations for asterisk logging. Options are set in the file as
 #   `key=value` in the `[general]` section of `logger.conf`.
@@ -93,8 +114,11 @@
 #   be either relative to the `asterisk.conf` setting `astlogdir` or an
 #   absolute path.
 # @param queues_general
-#   Global configurations for queues. Options are set in the file as `key =
-#   value` in the `[general]` section of the `queues.conf` file.
+#   Global configurations for queues. Options are set in the file as
+#   `key => value` in the `[general]` section of the `queues.conf` file.
+# @param queues
+#   Hash of resource_name => params used to instantiate `asterisk::queue`
+#   defined types.
 # @param modules_autoload
 #   Set this to false to avoid having asterisk load modules automatically on an
 #   as-needed basis. This can be used to configure modules in a more
@@ -110,8 +134,8 @@
 #   List of modules that asterisk should load on startup. This is useful if
 #   you've set `modules_autoload` to `false`.
 # @param modules_global
-#   Global configurations for modules. Options are set in the file as `key =
-#   value` in the `[global]` section of the `modules.conf` file.
+#   Global configurations for modules. Options are set in the file as
+#   `key => value` in the `[global]` section of the `modules.conf` file.
 # @param manager_enable
 #   Set this to false to disable asterisk manager.
 # @param manager_port
@@ -120,26 +144,40 @@
 # @param manager_bindaddr
 #   IP address to have asterisk bind to for manager connections. Defaults to
 #   binding to localhost.
+# @param manager_accounts
+#   Hash of resource_name => params used to instantiate `asterisk::manager`
+#   defined types.
 #
 class asterisk (
+  # Global management options
   Boolean                        $manage_service,
   Boolean                        $manage_package,
   Variant[String, Array[String]] $package_name,
   String                         $service_name,
   Stdlib::Absolutepath           $confdir,
   Boolean                        $purge_confdir,
+  # Asterisk modules and applications
   Hash                           $iax_general,
+  Hash                           $iax_contexts,
+  Hash                           $iax_registries,
   Hash                           $sip_general,
+  Hash                           $sip_peers,
+  Hash                           $sip_registries,
   Hash                           $voicemail_general,
+  Hash                           $voicemails,
   Hash                           $extensions_general,
   Asterisk::ExtGlobalVars        $extensions_globals,
+  Hash                           $extension_contexts,
   Hash                           $agents_global,
+  Hash                           $agents,
   Asterisk::FeaturesGeneral      $features_general,
   Asterisk::Featuremap           $features_featuremap,
   Hash[String,String]            $features_applicationmap,
+  Hash                           $features,
   Hash[String,String]            $logger_general,
   Hash[String,Asterisk::Logfile] $log_files,
   Hash                           $queues_general,
+  Hash                           $queues,
   Boolean                        $modules_autoload,
   Array[String]                  $modules_preload,
   Array[String]                  $modules_noload,
@@ -148,6 +186,7 @@ class asterisk (
   Boolean                        $manager_enable,
   Integer                        $manager_port,
   String                         $manager_bindaddr,
+  Hash                           $manager_accounts,
 ) {
 
   # We'll only ensure the type of some of the *_general on which templates
@@ -164,6 +203,18 @@ class asterisk (
   contain asterisk::install
   contain asterisk::config
   contain asterisk::service
+
+  # create_resources:
+  create_resources('asterisk::iax', $iax_contexts)
+  create_resources('asterisk::registry::iax', $iax_registries)
+  create_resources('asterisk::sip', $sip_peers)
+  create_resources('asterisk::registry::sip', $sip_registries)
+  create_resources('asterisk::voicemail', $voicemails)
+  create_resources('asterisk::extension', $extension_contexts)
+  create_resources('asterisk::agent', $agents)
+  create_resources('asterisk::feature', $features)
+  create_resources('asterisk::queue', $queues)
+  create_resources('asterisk::manager', $manager_accounts)
 
   Class['asterisk::install']
   -> Class['asterisk::config']
