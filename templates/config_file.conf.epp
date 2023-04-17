@@ -4,6 +4,9 @@
 ; To change values found in this file, see the parameters related to
 ; <%= $config_name %> on the asterisk module's main class.
 ;
+; To see all comments that document each available option, on Debian
+; systems, refer to /usr/share/doc/asterisk-config/samples
+;
 <%
 $sections.each |String $sect_name, Hash $section_options| {
 -%>
