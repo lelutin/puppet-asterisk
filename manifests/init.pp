@@ -8,6 +8,7 @@
 # @todo make it possible to manage dialplan with the two other methods (e.g.
 #   AEL and Lua)
 # @todo overhaul README file before release. lots of things have changed
+# @todo write spec tests for all the code
 #
 # @param manage_service
 #   Set this to false to avoid managing the asterisk service. By default puppet
