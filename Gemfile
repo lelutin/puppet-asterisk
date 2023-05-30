@@ -15,7 +15,7 @@ group :tests do
   gem 'puppet-syntax', '~> 3.3'
   gem 'rspec-puppet', '>= 2.4.0'
   # This draws in rubocop and other useful gems for puppet tests
-  gem 'voxpupuli-test', '~> 5.6', require: false
+  gem 'voxpupuli-test', '~> 6.0', require: false
 end
 
 group :docs do
