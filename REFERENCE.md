@@ -56,8 +56,7 @@ Install and configure an asterisk server.
 AEL and Lua)
 
 * **See also**
-  * http://www.asteriskdocs.org/en/3rd_Edition/asterisk-book-html-chunk/ACD_id288901.html#options_general_queues_id001
-    * General queues options
+  * https://wiki.asterisk.org/wiki/display/AST/Asterisk+Queues
 
 #### Examples
 
