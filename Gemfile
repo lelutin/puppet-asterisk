@@ -11,7 +11,7 @@ group :tests do
   # Use info from metadata.json for tests
   gem 'puppetlabs_spec_helper', '>= 0.10.0'
   gem 'puppet-lint', '>= 2.3.0'
-  gem 'puppet_metadata', '~> 2.0', require: false
+  gem 'puppet_metadata', '~> 3.0', require: false
   gem 'puppet-syntax', '~> 3.3'
   gem 'rspec-puppet', '>= 2.4.0'
   # This draws in rubocop and other useful gems for puppet tests
