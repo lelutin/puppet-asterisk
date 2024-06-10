@@ -14,7 +14,7 @@ group :tests do
   gem 'puppet_metadata', '~> 4.0', require: false if Gem::Version.new(RUBY_VERSION.dup) >= Gem::Version.new('2.7.0')
   gem 'puppet_metadata', '~> 2.1', require: false if Gem::Version.new(RUBY_VERSION.dup) < Gem::Version.new('2.7.0')
   # rubocop:enable Bundler/DuplicatedGem
-  gem 'puppet-syntax', '~> 3.3'
+  gem 'puppet-syntax', '~> 4.0'
   gem 'rspec-puppet', '>= 2.4.0'
   # This draws in rubocop and other useful gems for puppet tests
   # rubocop:disable Bundler/DuplicatedGem
