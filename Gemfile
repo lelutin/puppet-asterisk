@@ -7,7 +7,7 @@ gem 'rake'
 
 group :tests do
   gem 'facter', '>= 2.4.0'
-  gem 'metadata-json-lint', '~> 3.0'
+  gem 'metadata-json-lint', '~> 4.0'
   # Use info from metadata.json for tests
   gem 'puppetlabs_spec_helper', '>= 0.10.0'
   gem 'puppet-lint', '>= 2.3.0'
