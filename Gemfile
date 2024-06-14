@@ -11,7 +11,6 @@ group :tests do
   gem 'puppetlabs_spec_helper', '>= 0.10.0'
   gem 'puppet-lint', '>= 2.3.0'
   gem 'puppet_metadata'
-  gem 'puppet_metadata'
   gem 'rspec-puppet', '>= 2.4.0'
   # This draws in rubocop and other useful gems for puppet tests
   gem 'voxpupuli-test'
