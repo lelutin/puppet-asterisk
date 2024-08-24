@@ -1,4 +1,0 @@
-forge 'https://forgeapi.puppetlabs.com'
-
-mod 'lelutin-asterisk',
-    git: '/vagrant/'
