@@ -8,7 +8,10 @@
   "project_page": "https://github.com/lelutin/puppet-asterisk",
   "issues_url": "https://github.com/lelutin/puppet-asterisk/issues",
   "dependencies": [
-    {"name":"puppetlabs/stdlib","version_requirement":">= 8.5.0"}
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 8.5.0"
+    }
   ],
   "requirements": [
     {
@@ -19,9 +22,18 @@
   "operatingsystem_support": [
     {
       "operatingsystem": "Debian",
-      "operatingsystemrelease":[ "10", "11" ]
+      "operatingsystemrelease": [
+        "11",
+        "12",
+        "13"
+      ]
     }
   ],
-  "tags": ["asterisk", "sip", "iax", "PBX", "VoIP"]
+  "tags": [
+    "asterisk",
+    "sip",
+    "iax",
+    "PBX",
+    "VoIP"
+  ]
 }
-
