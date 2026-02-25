@@ -212,11 +212,11 @@ define asterisk::sip (
 ) {
   if $canreinvite !~ Undef {
     deprecation(@(DEPRECATED_OPTION)
-      The option "canreinvite" was deprecated by asterisk and replaced with
-      directmedia. You should check asterisk documentation and use the new
-      option instead.
-      | DEPRECATED_OPTION
-      )
+        The option "canreinvite" was deprecated by asterisk and replaced with
+        directmedia. You should check asterisk documentation and use the new
+        option instead.
+        | DEPRECATED_OPTION
+    )
   }
 
   if $directrtpsetup =~ Boolean {

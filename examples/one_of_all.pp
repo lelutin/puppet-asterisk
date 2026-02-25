@@ -6,7 +6,7 @@ class { 'asterisk':
   extensions_globals => {
     'TRUNK'       => 'patate',
     'CHUNKAWOMBA' => Sensitive.new('megamega'),
-  }
+  },
 }
 
 asterisk::agent { 'smith':
@@ -22,7 +22,7 @@ asterisk::extensions { 'press_one':
 asterisk::feature { 'exclusivity':
   options => {
     phone => '555-555-5555',
-  }
+  },
 }
 
 asterisk::iax { 'meetingroom':
@@ -54,4 +54,3 @@ asterisk::registry::sip { 'myphone':
   server => 'sipphone.local',
   user   => 'line1',
 }
-
