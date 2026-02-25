@@ -12,7 +12,7 @@ jobs:
     env:
       BUNDLE_WITHOUT: development:release
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Setup ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -38,7 +38,7 @@ jobs:
       PUPPET_VERSION: "~> ${{ matrix.puppet }}.0"
     name: Puppet ${{ matrix.puppet }} (Ruby ${{ matrix.ruby }})
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Setup ruby
         uses: ruby/setup-ruby@v1
         with:
