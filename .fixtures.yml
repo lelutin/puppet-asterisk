@@ -1,7 +1,5 @@
 ---
 fixtures:
-  symlinks:
-    "asterisk": "#{source_dir}"
   forge_modules:
     "stdlib":
       repo: "puppetlabs/stdlib"
