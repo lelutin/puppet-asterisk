@@ -28,8 +28,8 @@ canreinvite=<%= $canreinvite %>
 <% if $directmedia { -%>
 directmedia=<%= $directmedia %>
 <% } -%>
-<% if $real_directrtpsetup { -%>
-directrtpsetup=<%= $real_directrtpsetup %>
+<% if $directrtpsetup { -%>
+directrtpsetup=<%= $directrtpsetup %>
 <% } -%>
 <% $directmediadeny.each |$dmdeny| { -%>
 directmediadeny=<%= $dmdeny %>

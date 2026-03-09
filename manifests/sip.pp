@@ -238,7 +238,7 @@ define asterisk::sip (
     context           => $context,
     canreinvite       => $canreinvite,
     directmedia       => $directmedia,
-    directrtpsetup    => $directrtpsetup,
+    directrtpsetup    => $real_directrtpsetup,
     directmediadeny   => $directmediadeny,
     directmediapermit => $directmediapermit,
     host              => $host,
