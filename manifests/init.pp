@@ -204,13 +204,17 @@ class asterisk (
   # We'll only ensure the type of some of the *_general on which templates
   # iterate. There's no complex data type that can let us be this flexible
   # (e.g. everything should be a string, but those handful of keys.
-  assert_type(Array[String], $iax_general['allow'])
-  assert_type(Array[String], $iax_general['disallow'])
+  ['allow', 'disallow'].each |$key| {
+    if $iax_general[$key] != undef {
+      assert_type(Array[String], $iax_general[$key])
+    }
+  }
 
-  assert_type(Array[String], $sip_general['allow'])
-  assert_type(Array[String], $sip_general['disallow'])
-  assert_type(Array[String], $sip_general['domain'])
-  assert_type(Array[String], $sip_general['localnet'])
+  ['allow', 'disallow', 'domain', 'localnet'].each |$key| {
+    if $sip_general[$key] != undef {
+      assert_type(Array[String], $sip_general[$key])
+    }
+  }
 
   contain asterisk::install
   contain asterisk::config
