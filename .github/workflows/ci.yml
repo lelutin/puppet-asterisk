@@ -45,4 +45,4 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
       - name: Run tests
-        run: bundle exec rake spec
+        run: bundle exec rake parallel_spec
