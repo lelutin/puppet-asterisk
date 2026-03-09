@@ -222,7 +222,7 @@ class asterisk (
   create_resources('asterisk::sip', $sip_peers)
   create_resources('asterisk::registry::sip', $sip_registries)
   create_resources('asterisk::voicemail', $voicemails)
-  create_resources('asterisk::extension', $extension_contexts)
+  create_resources('asterisk::extensions', $extension_contexts)
   create_resources('asterisk::agent', $agents)
   create_resources('asterisk::feature', $features)
   create_resources('asterisk::queue', $queues)
