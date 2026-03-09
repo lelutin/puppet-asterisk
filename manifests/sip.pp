@@ -211,7 +211,9 @@ define asterisk::sip (
   # lint:endignore
 ) {
   if $canreinvite !~ Undef {
-    deprecation(@(DEPRECATED_OPTION)
+    deprecation(
+      'asterisk::sip::canreinvite',
+      @(DEPRECATED_OPTION)
         The option "canreinvite" was deprecated by asterisk and replaced with
         directmedia. You should check asterisk documentation and use the new
         option instead.
