@@ -258,6 +258,15 @@ describe 'asterisk::sip' do
         end
       end
 
+      context 'with outboundproxy parameter set but account_type not peer' do
+        let(:params) { { account_type: 'friend', outboundproxy: 'proxy.example.com' } }
+
+        it do
+          is_expected.to contain_asterisk__dotd__file('sip_mypeer.conf')
+            .without_content(%r{^outboundproxy=})
+        end
+      end
+
       context 'with callerid parameter set' do
         let(:params) { { callerid: 'John Doe <1234>' } }
 
