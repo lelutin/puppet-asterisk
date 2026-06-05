@@ -173,7 +173,7 @@ If you are using the IAX2 protocol, you'll want to set some global
 configuration options. For passing in settings, you need to send a hash to the
 `asterisk` class with the `iax_general` parameter.
 
-Here is the default hash with the default values, as defined in params.pp:
+Here is the default hash with the default values, as defined in hiera:
 
 ```puppet
 $iax_general = {
@@ -254,7 +254,7 @@ If you are using the SIP protocol, you'll want to set some global
 configuration options. For passing in settings, you need to send a hash to the
 `asterisk` class with the `sip_general` parameter.
 
-Here is the default hash with the default values, as defined in params.pp:
+Here is the default hash with the default values, as defined in hiera:
 
 ```puppet
 $sip_general = {
@@ -330,7 +330,7 @@ Voicemail can be configured through a set of options in the `[general]`
 context. To set those options, you can pass values as a hash to the
 `voicemail_general` parameter to the main class.
 
-Here is the default hash with the default values, as defined in params.pp:
+Here is the default hash with the default values, as defined in hiera:
 
 ```puppet
 $voicemail_general = {
@@ -367,7 +367,7 @@ asterisk::extensions { 'incoming':
 Some global options can be set for extensions. You can achieve that by passing
 a hash to the `extensions_general` parameter to the `asterisk` class.
 
-Here is the default hash with the default values, as defined in params.pp:
+Here is the default hash with the default values, as defined in hiera:
 
 ```puppet
 $extensions_general = {
@@ -460,7 +460,7 @@ asterisk::feature::applicationmap { 'pausemonitor':
 Some global feature options can be configured, like the default parkinglot, via
 the `features_general` parameter to the `asterisk` class.
 
-Here is the default hash with the default values, as defined in params.pp:
+Here is the default hash with the default values, as defined in hiera:
 
 ```puppet
 $features_general = {
@@ -514,7 +514,7 @@ For queues some global configurations and default values can be set in the
 `[general]` context. You can set options by passing a hash to the
 `queues_general` parameter to the `asterisk` class.
 
-Here is the default hash with the default values, as defined in params.pp:
+Here is the default hash with the default values, as defined in hiera:
 
 ```puppet
 $queues_general = {
