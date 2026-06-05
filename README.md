@@ -109,9 +109,10 @@ $xyz_general = {
 In order to simplify the module, we're actually not validating that the options
 passed in are valid ones and expect this validation to be done by the user.
 
-We encourage users to use strings as hash keys as in the example above since
-some Asterisk options have dashes in their name and dashes are prohibited in
-puppet DSL symbols.
+We encourage users to use strings as hash keys as in the example above (in
+contrat to using puppet `bare-word` strings) since some Asterisk options have
+dashes in their name and dashes are prohibited in puppet DSL symbols and also
+don't get included in bare-word strings.
 
 Some options should always be arrays: the option can be specified in the
 configuration file more than once to declare more values. Those options will
