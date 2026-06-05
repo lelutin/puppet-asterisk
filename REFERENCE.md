@@ -114,11 +114,15 @@ Data type: `Boolean`
 Set this to false to avoid managing the asterisk service. By default puppet
 will enable the service and ensure that it is running.
 
+Default value: `true`
+
 ##### <a name="-asterisk--manage_package"></a>`manage_package`
 
 Data type: `Boolean`
 
 Set this to false to avoid installing the asterisk package.
+
+Default value: `true`
 
 ##### <a name="-asterisk--package_name"></a>`package_name`
 
@@ -126,17 +130,23 @@ Data type: `Variant[String, Array[String]]`
 
 Name or array of the package(s) being installed for asterisk.
 
+Default value: `['asterisk', 'asterisk-core-sounds-en', 'asterisk-core-sounds-en-gsm']`
+
 ##### <a name="-asterisk--service_name"></a>`service_name`
 
 Data type: `String`
 
 Name of the asterisk service.
 
+Default value: `'asterisk'`
+
 ##### <a name="-asterisk--confdir"></a>`confdir`
 
 Data type: `Stdlib::Absolutepath`
 
 Absolute path to the asterisk configuration directory.
+
+Default value: `'/etc/asterisk'`
 
 ##### <a name="-asterisk--purge_confdir"></a>`purge_confdir`
 
@@ -145,12 +155,16 @@ Data type: `Boolean`
 Set this to true to enable autoremoval of configuration files that are
 not managed by puppet inside of asterisk's `confdir`.
 
+Default value: `false`
+
 ##### <a name="-asterisk--iax_general"></a>`iax_general`
 
 Data type: `Hash`
 
 Global configurations for IAX2. Options are set in the file as `key =
 value` in the `[general]` section of `iax.conf`.
+
+Default value: `{ 'allow' => [], 'disallow' => ['lpc10'], 'bandwidth' => 'low', 'jitterbuffer' => 'no', 'forcejitterbuffer' => 'no', 'autokill' => 'yes', 'delayreject' => 'yes' }`
 
 ##### <a name="-asterisk--iax_contexts"></a>`iax_contexts`
 
@@ -159,12 +173,16 @@ Data type: `Stdlib::CreateResources`
 Hash of resource_name => params used to instantiate `asterisk::iax`
 defined types.
 
+Default value: `{}`
+
 ##### <a name="-asterisk--iax_registries"></a>`iax_registries`
 
 Data type: `Stdlib::CreateResources`
 
 Hash of resource_name => params used to instantiate
 `asterisk::registry::iax` defined types.
+
+Default value: `{}`
 
 ##### <a name="-asterisk--sip_general"></a>`sip_general`
 
@@ -173,12 +191,16 @@ Data type: `Hash`
 Global configurations for SIP. Options are set in the file as `key = value`
 in the `[general]` section of the `sip.conf` file.
 
+Default value: `{ 'disallow' => [], 'allow' => [], 'domain' => [], 'localnet' => [], 'context' => 'default', 'allowoverlap' => 'no', 'udpbindaddr' => '0.0.0.0', 'tcpenable' => 'no', 'tcpbindaddr' => '0.0.0.0', 'transport' => 'udp', 'srvlookup' => 'yes', 'allowguest' => 'no', 'alwaysauthreject' => 'yes' }`
+
 ##### <a name="-asterisk--sip_peers"></a>`sip_peers`
 
 Data type: `Stdlib::CreateResources`
 
 Hash of resource_name => params used to instantiate `asterisk::sip`
 defined types.
+
+Default value: `{}`
 
 ##### <a name="-asterisk--sip_registries"></a>`sip_registries`
 
@@ -187,12 +209,16 @@ Data type: `Stdlib::CreateResources`
 Hash of resource_name => params used to instantiate
 `asterisk::registry::sip` defined types.
 
+Default value: `{}`
+
 ##### <a name="-asterisk--voicemail_general"></a>`voicemail_general`
 
 Data type: `Hash`
 
 Global configurations for voicemail. Options are set in the file as `key =
 value` in the `[general]` section of the `voicemail.conf` file.
+
+Default value: `{ 'format' => 'wav49|gsm|wav', 'serveremail' => 'asterisk', 'attach' => 'yes', 'skipms' => 3000, 'maxsilence' => 10, 'silencethreshold' => 128, 'maxlogins' => 3, 'emailbody' => 'Dear ${VM_NAME}:\n\n\tjust wanted to let you know you were just ${IF($["${VM_CIDNUM}" = "${ORIG_VM_CIDNUM}"]?left:forwarded)} a ${VM_DUR} long message (number ${VM_MSGNUM})\nin mailbox ${VM_MAILBOX} from ${VM_CALLERID} <${VM_CIDNUM}>, on ${VM_DATE},\n${IF($["${VM_CIDNUM}" = "${ORIG_VM_CIDNUM}"]?so:(originally sent by ${ORIG_VM_CALLERID} on ${ORIG_VM_DATE})\nso)} you might want to check it when you get a chance.  Thanks!\n\n\t\t\t\t--Asterisk\n', 'emaildateformat' => '%A, %B %d, %Y at %r', 'pagerdateformat' => '%A, %B %d, %Y at %r', 'sendvoicemail' => 'yes' }`
 
 ##### <a name="-asterisk--voicemails"></a>`voicemails`
 
@@ -201,12 +227,16 @@ Data type: `Stdlib::CreateResources`
 Hash of resource_name => params used to instantiate `asterisk::voicemail`
 defined types.
 
+Default value: `{}`
+
 ##### <a name="-asterisk--extensions_general"></a>`extensions_general`
 
 Data type: `Hash`
 
 Global configurations for the dialplan. Options are set in the file as `key
 = value` in the `[general]` section of the `extensions.conf` file.
+
+Default value: `{ 'static' => 'yes', 'writeprotect' => 'no', 'clearglobalvars' => 'no' }`
 
 ##### <a name="-asterisk--extensions_globals"></a>`extensions_globals`
 
@@ -239,12 +269,16 @@ type as the value, it will be unwrapped for outputting in the configuration
 file: this can avoid showing certain sensitive information (as passwords)
 in puppet logs.
 
+Default value: `{}`
+
 ##### <a name="-asterisk--extension_contexts"></a>`extension_contexts`
 
 Data type: `Stdlib::CreateResources`
 
 Hash of resource_name => params used to instantiate `asterisk::extension`
 defined types.
+
+Default value: `{}`
 
 ##### <a name="-asterisk--agents_global"></a>`agents_global`
 
@@ -253,12 +287,16 @@ Data type: `Hash`
 Global configurations for agents. Options are set in the file as `key =
 value` in the `[agents]` section of the `agents.conf` file.
 
+Default value: `{}`
+
 ##### <a name="-asterisk--agents"></a>`agents`
 
 Data type: `Stdlib::CreateResources`
 
 Hash of resource_name => params used to instantiate `asterisk::agent`
 defined types.
+
+Default value: `{}`
 
 ##### <a name="-asterisk--features_general"></a>`features_general`
 
@@ -267,12 +305,16 @@ Data type: `Asterisk::FeaturesGeneral`
 Global call features. Options are set in the file as `key = value` in the
 `[general]` section of `features.conf`.
 
+Default value: `{ 'parkext' => '700', 'parkpos' => '701-720', 'context' => 'parkedcalls' }`
+
 ##### <a name="-asterisk--features_featuremap"></a>`features_featuremap`
 
 Data type: `Asterisk::Featuremap`
 
 Global feature maps. Options are set in the file as `key => value` in the
 `[featuremap]` section of `features.conf`.
+
+Default value: `{}`
 
 ##### <a name="-asterisk--features_applicationmap"></a>`features_applicationmap`
 
@@ -281,6 +323,8 @@ Data type: `Hash[String,String]`
 Global application feature maps. Options are set in the file as
 `key => value` in the `[applicationmap]` section of `features.conf`.
 
+Default value: `{}`
+
 ##### <a name="-asterisk--features"></a>`features`
 
 Data type: `Stdlib::CreateResources`
@@ -288,12 +332,16 @@ Data type: `Stdlib::CreateResources`
 Hash of resource_name => params used to instantiate `asterisk::feature`
 defined types.
 
+Default value: `{}`
+
 ##### <a name="-asterisk--logger_general"></a>`logger_general`
 
 Data type: `Hash[String,String]`
 
 Global configurations for asterisk logging. Options are set in the file as
 `key=value` in the `[general]` section of `logger.conf`.
+
+Default value: `{}`
 
 ##### <a name="-asterisk--log_files"></a>`log_files`
 
@@ -319,6 +367,8 @@ should be a string containing either `default` or `json` and it defines
 which format will be output to the log. If the `formatter` key is
 omitted, asterisk's default log format is used.
 
+Default value: `{ 'console' => { 'levels' => ['notice', 'warning', 'error'] }, 'messages' => { 'levels' => ['notice', 'warning', 'error'] } }`
+
 ##### <a name="-asterisk--queues_general"></a>`queues_general`
 
 Data type: `Hash`
@@ -326,12 +376,16 @@ Data type: `Hash`
 Global configurations for queues. Options are set in the file as
 `key => value` in the `[general]` section of the `queues.conf` file.
 
+Default value: `{ 'persistentmembers' => 'yes', 'monitor-type' => 'MixMonitor' }`
+
 ##### <a name="-asterisk--queues"></a>`queues`
 
 Data type: `Stdlib::CreateResources`
 
 Hash of resource_name => params used to instantiate `asterisk::queue`
 defined types.
+
+Default value: `{}`
 
 ##### <a name="-asterisk--modules_autoload"></a>`modules_autoload`
 
@@ -341,6 +395,8 @@ Set this to false to avoid having asterisk load modules automatically on an
 as-needed basis. This can be used to configure modules in a more
 restrictive manner.
 
+Default value: `true`
+
 ##### <a name="-asterisk--modules_preload"></a>`modules_preload`
 
 Data type: `Array[String]`
@@ -349,12 +405,16 @@ List of modules that asterisk should load before asterisk core has been
 initialized. This can be useful if you wish to map all module configuration
 files into Realtime storage.
 
+Default value: `[]`
+
 ##### <a name="-asterisk--modules_noload"></a>`modules_noload`
 
 Data type: `Array[String]`
 
 List of modules that asterisk should not load. This can be useful if
 `modules_autoload` is set to `true`.
+
+Default value: `['pbx_gtkconsole.so', 'pbx_kdeconsole.so', 'app_intercom.so', 'chan_modem.so', 'chan_modem_aopen.so', 'chan_modem_bestdata.so', 'chan_modem_i4l.so', 'chan_capi.so', 'chan_alsa.so', 'chan_console.so', 'chan_oss.so', 'cdr_sqlite.so', 'app_directory_odbc.so', 'res_config_odbc.so', 'res_config_pgsql.so']`
 
 ##### <a name="-asterisk--modules_load"></a>`modules_load`
 
@@ -363,6 +423,8 @@ Data type: `Array[String]`
 List of modules that asterisk should load on startup. This is useful if
 you've set `modules_autoload` to `false`.
 
+Default value: `['res_musiconhold.so']`
+
 ##### <a name="-asterisk--modules_global"></a>`modules_global`
 
 Data type: `Hash`
@@ -370,11 +432,15 @@ Data type: `Hash`
 Global configurations for modules. Options are set in the file as
 `key => value` in the `[global]` section of the `modules.conf` file.
 
+Default value: `{}`
+
 ##### <a name="-asterisk--manager_enable"></a>`manager_enable`
 
 Data type: `Boolean`
 
 Set this to false to disable asterisk manager.
+
+Default value: `true`
 
 ##### <a name="-asterisk--manager_port"></a>`manager_port`
 
@@ -383,6 +449,8 @@ Data type: `Integer`
 Port number on which asterisk will listen to for manager connections.
 Defaults to 5038.
 
+Default value: `5038`
+
 ##### <a name="-asterisk--manager_bindaddr"></a>`manager_bindaddr`
 
 Data type: `String`
@@ -390,12 +458,16 @@ Data type: `String`
 IP address to have asterisk bind to for manager connections. Defaults to
 binding to localhost.
 
+Default value: `'127.0.0.1'`
+
 ##### <a name="-asterisk--manager_accounts"></a>`manager_accounts`
 
 Data type: `Stdlib::CreateResources`
 
 Hash of resource_name => params used to instantiate `asterisk::manager`
 defined types.
+
+Default value: `{}`
 
 ### <a name="asterisk--dahdi"></a>`asterisk::dahdi`
 
