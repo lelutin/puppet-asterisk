@@ -226,7 +226,7 @@ asterisk::sip { 'hakim':
 ```
 
 The defined type `asterisk::registry::sip` lets you configure a SIP registry.
-The `server` and `user` paramters are mandatory.
+The `server` and `user` parameters are mandatory.
 
 ```puppet
 asterisk::registry::sip { 'providerX':
@@ -533,10 +533,10 @@ taken from the default config file in Debian.
 
  * `modules_autoload`: a boolean value (defaults to `true`) that decides
    whether or not Asterisk will try to automatically load required modules even
-   though they are not explicitely marked as needing to be loaded in the
+   though they are not explicitly marked as needing to be loaded in the
    modules.conf file.
 
- * `modules_noload`: an array of strings of explicitely unwanted modules that
+ * `modules_noload`: an array of strings of explicitly unwanted modules that
    won't load even though `modules_autoload` is true. Specifying an array to
    this parameter overrides the default list so make sure to include all
    unwanted modules. The default array is the following:
@@ -559,7 +559,7 @@ taken from the default config file in Debian.
    ]
    ```
 
- * `modules_load`: an array of strings of explicitely wanted modules.
+ * `modules_load`: an array of strings of explicitly wanted modules.
    Specifying an array to this parameter overrides the default list so make
    sure to include all wanted modules. The default array is the following:
 
@@ -701,8 +701,8 @@ feeding it to a device):
  * The module used to manage files under /etc/asterisk/file.conf.d
    for all values of "file" that were managed. Things have been moved to
    /etc/asterisk/file.d, so before upgrading you should remove all .conf.d
-   directories (all files under the old dirs will be automatically recreated in
-   the new directories).
+   directories (all files under the old directories will be automatically
+   recreated in the new directories).
 
  * The defines that were previously named `asterisk::context::xyz` (or
    transitorily `asterisk::snippet::xyz`) are now named `asterisk::xyz`. Users
