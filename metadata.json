@@ -1,6 +1,6 @@
 {
   "name": "LeLutin-asterisk",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "author": "LeLutin",
   "summary": "Install and configure the Asterisk PBX service",
   "license": "GPL-3.0+",
