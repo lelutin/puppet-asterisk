@@ -1,5 +1,4 @@
-Puppet module for Asterisk
-==========================
+# Puppet module for Asterisk
 
 To install Asterisk on a server, simply use the following:
 
@@ -13,8 +12,7 @@ features enabled.
 Users that are upgrading (e.g. switching or merging to current master) should
 consult the section named [Upgrade notices](#upgrade-notices) near the end.
 
-Requirements
-------------
+## Requirements
 
 In order to use this module, you need the stdlib module from:
 
@@ -23,8 +21,7 @@ https://github.com/puppetlabs/puppetlabs-stdlib
 You should also make sure that augeas is installed since it is used to enable
 the service in `/etc/default/asterisk`.
 
-Reference reading
------------------
+## Reference reading
 
 Some good references to consult when it comes to Asterisk configuration are:
 
@@ -41,11 +38,9 @@ Some good references to consult when it comes to Asterisk configuration are:
    http://www.voip-info.org/
  * The Asterisk project wiki: https://wiki.asterisk.org/
 
-Configuring Asterisk
-====================
+## Configuring Asterisk
 
-Parameters to the asterisk class
---------------------------------
+### Parameters to the asterisk class
 
 The main class has a couple of parameters that determine what is managed and
 how general configuration is set.
@@ -93,7 +88,7 @@ how general configuration is set.
   * `$manager_enable`, `$manager_port` and `$manager_bindaddr` are detailed in
     the Manager Options section.
 
-### Setting options with the $xyz_general or $xyz_global parameters ###
+### Setting options with the $xyz_general or $xyz_global parameters
 
 Asterisk has lots and lots of configuration variables that can be set in
 different files.
@@ -126,15 +121,15 @@ module enforces that those options be arrays since it needs to iterate over them
 in templates. Empty arrays mean that the option should not appear in the
 configuration file.
 
-Default values are taken from Debian's default configuration files.
+Default values are taken from Debian's default configuration files which usually
+reflect the upstream defaults.
 
-Keys that are present in the option hash paramters to the `asterisk` class will
+Keys that are present in the option hash parameters to the `asterisk` class will
 override the default options (or set new ones for options that are not present
 in the default option hash). This lets you use all the default values but
 change only a couple of values.
 
-Source or content
------------------
+### Source or content
 
 Most of the defined types that drop a configuration file in a .d directory can
 either take a puppet source specification (of the form 'puppet:///modules/...'
@@ -150,8 +145,7 @@ line of the form '[section]').
 
 `source` and `content` are always mutually exclusive.
 
-IAX2
-----
+### IAX2
 
 The `asterisk::iax` defined type helps you configure an IAX2 channel. `source`
 or `content` can be used with this type.
@@ -173,7 +167,7 @@ asterisk::registry::iax { 'providerX':
 }
 ```
 
-### IAX2 Options ###
+#### IAX2 Options
 
 If you are using the IAX2 protocol, you'll want to set some global
 configuration options. For passing in settings, you need to send a hash to the
@@ -193,8 +187,7 @@ $iax_general = {
 }
 ```
 
-SIP
----
+### SIP
 
 You can configure SIP channels with the `asterisk::sip` defined type. `source`
 and `content` can be used with this type.
@@ -255,8 +248,7 @@ asterisk::registry::sip { 'friends_home':
 }
 ```
 
-
-### SIP Options ###
+#### SIP Options
 
 If you are using the SIP protocol, you'll want to set some global
 configuration options. For passing in settings, you need to send a hash to the
@@ -282,7 +274,7 @@ $sip_general = {
 }
 ```
 
-### SIP encryption ###
+#### SIP encryption
 
 If you want to enable SIP encryption, you can set the following settings in the
 `sip_general` parameter to the `asterisk` class:
@@ -304,8 +296,7 @@ $sip_option = {
 Note: the 'transports' option needs to be an array, so even though you only
 enable 'tls' as a transport, you need to enclose the string inside an array.
 
-Voicemail
----------
+### Voicemail
 
 With the defined type `asterisk::voicemail` you can configure a voicemail. The
 `context` and `password` parameters are mandatory:
@@ -333,7 +324,7 @@ asterisk::voicemail { '3001':
 }
 ```
 
-### Voicemail Options ###
+#### Voicemail Options
 
 Voicemail can be configured through a set of options in the `[general]`
 context. To set those options, you can pass values as a hash to the
@@ -359,8 +350,7 @@ $voicemail_general = {
 }
 ```
 
-Extensions
-----------
+### Extensions
 
 Extensions can be set with the `asterisk::extensions` defined type. `source` or
 `content` can be used with this type.
@@ -372,7 +362,7 @@ asterisk::extensions { 'incoming':
 }
 ```
 
-### Extensions Options ###
+#### Extensions Options
 
 Some global options can be set for extensions. You can achieve that by passing
 a hash to the `extensions_general` parameter to the `asterisk` class.
@@ -391,8 +381,7 @@ Note that by default no global variables (e.g. values set in the `[globals]`
 context) are set. To set global variables, you can use an
 `asterisk::extensions` resource with a context value of "globals".
 
-Agents
-------
+### Agents
 
 To define an agent you can use the `asterisk::agent` defined type. The `ext`,
 `password` and `agent_name` parameters are mandatory.
@@ -427,7 +416,7 @@ on how to setup dynamic agents, see:
  * [https://www.voip-info.org/asterisk-cmd-addqueuemember](https://www.voip-info.org/asterisk-cmd-addqueuemember)
  * [https://www.voip-info.org/asterisk-cmd-removequeuemember](https://www.voip-info.org/asterisk-cmd-removequeuemember)
 
-### Agents Options ###
+#### Agents Options
 
 Global options in the `[agents]` context can be set by passing a hash to the
 `agents_global` parameter to the `asterisk` class. By default this parameter
@@ -436,8 +425,7 @@ doesn't define any global options.
 For creating agents, it is recommended to use the `asterisk::agent` defined
 type.
 
-Features
---------
+### Features
 
 Features let you configure call parking and special numbers that trigger
 special functionality. The `asterisk::feature` defined type helps you
@@ -467,7 +455,7 @@ asterisk::feature::applicationmap { 'pausemonitor':
 }
 ```
 
-### Features global configurations ###
+#### Features global configurations
 
 Some global feature options can be configured, like the default parkinglot, via
 the `features_general` parameter to the `asterisk` class.
@@ -496,8 +484,7 @@ features enabled in the channel, separated by '#'.
 To configure additional feature contexts, you can use the `asterisk::feature`
 defined type.
 
-Queues
-------
+### Queues
 
 Asterisk can put call in queues, for example when all agents are busy and the call cannot get connected. To create a queue, you can use the `asterisk::queue` defined type:
 
@@ -521,7 +508,7 @@ manifests/queue.pp file for the complete list of supported parameters. Also,
 for an in-depth coverage of call queueing, see:
 http://www.asteriskdocs.org/en/3rd_Edition/asterisk-book-html-chunk/asterisk-ACD.html
 
-### Queues Options ###
+#### Queues Options
 
 For queues some global configurations and default values can be set in the
 `[general]` context. You can set options by passing a hash to the
@@ -536,8 +523,7 @@ $queues_general = {
 }
 ```
 
-Modules
--------
+### Modules
 
 Configuring Asterisk modules is key to implementing your features right. Four
 parameter to the `asterisk` class offer you the possibility to customize what
@@ -584,8 +570,7 @@ taken from the default config file in Debian.
    `[global]` context. These options let you customize behaviours for modules
    that are loaded.
 
-Managers
---------
+### Managers
 
 Asterisk can expose an interface for managing the PBX. This interface can be
 offered to different users with different permissions. You can configure read
@@ -636,7 +621,7 @@ asterisk::manager { 'sysadmin':
 }
 ```
 
-### Manager Options ###
+#### Manager Options
 
 Asterisk maintains a service on a port through which you can inspect asterisk's
 state and issue commands to the PBX. You can control on which IP and port it
@@ -656,8 +641,7 @@ By default, no user access is configured. If you want to enable users to
 interact with the manager, you should declare `asterisk::manager`
 resources.
 
-Dahdi
------
+### Dahdi
 
 Dahdi is a set of kernel modules combined with an asterisk module that let
 people interact with Digium cards to send and receive calls from the POTS. To
@@ -667,8 +651,7 @@ enable dahdi, use the following:
   include 'asterisk::dahdi'
 ```
 
-Language sounds
----------------
+### Language sounds
 
 To include any language sounds, you can use the following (in this example,
 we're installing french and spanish sounds):
@@ -712,8 +695,7 @@ to a device):
  * core-sounds-ru-gsm
  * core-sounds-ru-wav
 
-Upgrade notices
-===============
+## Upgrade notices
 
  * The module used to manage files under /etc/asterisk/file.conf.d
    for all values of "file" that were managed. Things have been moved to
@@ -737,8 +719,7 @@ Upgrade notices
    to default Debian config files. You should verify that new values or
    variables that disappear won't have an impact on your setup.
 
-Patches and Testing
-===================
+## Patches and Testing
 
 Contributions are highly welcomed, more so are those which contribute patches
 with tests. Or just more tests! We have
@@ -753,15 +734,13 @@ patches pass tests:
     36 examples, 0 failures
 
 
-Still not implemented !
------------------------
+## Still not implemented !
 
 Types:
 
   * `asterisk::mwi`
 
-License
-=======
+## License
 
 This module is licensed under the GPLv3+, feel free to redistribute, modify and
 contribute changes.
