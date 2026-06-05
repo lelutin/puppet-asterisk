@@ -487,7 +487,9 @@ defined type.
 
 ### Queues
 
-Asterisk can put call in queues, for example when all agents are busy and the call cannot get connected. To create a queue, you can use the `asterisk::queue` defined type:
+Asterisk can put call in queues, for example when all agents are busy and the
+call cannot get connected. To create a queue, you can use the `asterisk::queue`
+defined type:
 
 ```puppet
 asterisk::queue { 'frontline':
@@ -730,7 +732,7 @@ patches pass tests:
 
     user@host01 ~/src/bw/puppet-composer (git)-[master] % rake tests
     ....................................
-
+    
     Finished in 2.29 seconds
     36 examples, 0 failures
 
