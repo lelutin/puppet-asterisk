@@ -294,8 +294,8 @@ $sip_option = {
 }
 ```
 
-Note: the 'transports' option needs to be an array, so even though you only
-enable 'tls' as a transport, you need to enclose the string inside an array.
+Note: the `transports` option needs to be an array, so even though you only
+enable `tls` as a transport, you need to enclose the string inside an array.
 
 ### Voicemail
 
@@ -432,7 +432,7 @@ Features let you configure call parking and special numbers that trigger
 special functionality. The `asterisk::feature` defined type helps you
 configuring such features. The `options` parameter is mandatory.
 
-Define features that are contained within feature group "myfeaturegroup":
+Define features that are contained within feature group `myfeaturegroup`:
 
 ```puppet
 $ft_options = {
@@ -458,8 +458,8 @@ asterisk::feature::applicationmap { 'pausemonitor':
 
 #### Features global configurations
 
-Some global feature options can be configured, like the default parkinglot, via
-the `features_general` parameter to the `asterisk` class.
+Some global feature options can be configured, like the default `parkinglot`,
+via the `features_general` parameter to the `asterisk` class.
 
 Here is the default hash with the default values, as defined in hiera:
 
@@ -664,10 +664,10 @@ we're installing french and spanish sounds):
 ```
 
 Valid languages strings are the following (these are all based on debian
-package names for now -- either asterisk-prompt-X or asterisk-Y. the language
-strings that start with core-sounds enable you to install language sounds in a
-specific encoding to avoid the need for asterisk to recode it while feeding it
-to a device):
+package names for now -- either `asterisk-prompt-X` or `asterisk-Y`. The
+language strings that start with `core-sounds` enable you to install language
+sounds in a specific encoding to avoid the need for asterisk to recode it while
+feeding it to a device):
 
  * de
  * es-co
@@ -704,15 +704,15 @@ to a device):
    directories (all files under the old dirs will be automatically recreated in
    the new directories).
 
- * The defines that were previously named asterisk::context::xyz (or
-   transitorily asterisk::snippet::xyz) are now named asterisk::xyz. Users will
-   need to adjust their manifests to upgrade.
+ * The defines that were previously named `asterisk::context::xyz` (or
+   transitorily `asterisk::snippet::xyz`) are now named `asterisk::xyz`. Users
+   will need to adjust their manifests to upgrade.
 
  * The `queues_monitor_type` and `queues_monitor_format` parameters to the
    default class were removed in favor of using quoted strings in the options
    array. Users who used those two options need to place their values in the
-   `$queues_general` hash with 'monitor-type' and 'monitor-format' strings as
-   keys, respectively. To ensure that 'monitor-type' is not present in the
+   `$queues_general` hash with `monitor-type` and `monitor-format` strings as
+   keys, respectively. To ensure that `monitor-type` is not present in the
    config file, simply leave it out (as opposed to the previous behaviour of
    the option that required an empty string for this).
 
